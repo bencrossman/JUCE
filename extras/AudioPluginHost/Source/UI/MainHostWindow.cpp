@@ -102,11 +102,9 @@ MainHostWindow::MainHostWindow()
     centreWithSize (1024, 720);
    #endif
 
-    m_forte = new Forte();
-    setContentNonOwned(m_forte, false);
+    graphHolder.reset (new GraphDocumentComponent (formatManager, deviceManager, knownPluginList));
 
-    //graphHolder.reset (new GraphDocumentComponent (formatManager, deviceManager, knownPluginList));
-    //setContentNonOwned (graphHolder.get(), false);
+    setContentNonOwned (graphHolder.get(), false);
 
     restoreWindowStateFromString (getAppProperties().getUserSettings()->getValue ("mainWindowPos"));
 
@@ -128,8 +126,8 @@ MainHostWindow::MainHostWindow()
 
     knownPluginList.addChangeListener (this);
 
-    //if (auto* filterGraph = graphHolder->graph.get())
-    //    filterGraph->addChangeListener (this);
+    if (auto* filterGraph = graphHolder->graph.get())
+        filterGraph->addChangeListener (this);
 
     addKeyListener (getCommandManager().getKeyMappings());
 
@@ -153,13 +151,8 @@ MainHostWindow::~MainHostWindow()
     pluginListWindow = nullptr;
     knownPluginList.removeChangeListener (this);
 
-    if (graphHolder != NULL)
-    {
-        if (auto* filterGraph = graphHolder->graph.get())
-            filterGraph->removeChangeListener(this);
-    }
-
-    delete m_forte;
+    if (auto* filterGraph = graphHolder->graph.get())
+        filterGraph->removeChangeListener (this);
 
     getAppProperties().getUserSettings()->setValue ("mainWindowPos", getWindowStateAsString());
     clearContentComponent();
@@ -196,7 +189,7 @@ struct AsyncQuitRetrier  : private Timer
 
 void MainHostWindow::tryToQuitApplication()
 {
-    if (graphHolder && graphHolder->closeAnyOpenPluginWindows())
+    if (graphHolder->closeAnyOpenPluginWindows())
     {
         // Really important thing to note here: if the last call just deleted any plugin windows,
         // we won't exit immediately - instead we'll use our AsyncQuitRetrier to let the message
@@ -217,8 +210,7 @@ void MainHostWindow::tryToQuitApplication()
     {
         // Some plug-ins do not want [NSApp stop] to be called
         // before the plug-ins are not deallocated.
-        if (graphHolder)
-            graphHolder->releaseGraph();
+        graphHolder->releaseGraph();
 
         JUCEApplication::quit();
     }
@@ -270,8 +262,9 @@ PopupMenu MainHostWindow::getMenuForIndex (int topLevelMenuIndex, const String& 
     {
         // "File" menu
        #if ! (JUCE_IOS || JUCE_ANDROID)
-        menu.addCommandItem (&getCommandManager(), CommandIDs::newFile);
-        menu.addCommandItem (&getCommandManager(), CommandIDs::open);
+		menu.addCommandItem(&getCommandManager(), CommandIDs::newFile);
+		menu.addCommandItem(&getCommandManager(), CommandIDs::import);
+		menu.addCommandItem (&getCommandManager(), CommandIDs::open);
        #endif
 
         RecentlyOpenedFilesList recentFiles;
@@ -418,8 +411,9 @@ void MainHostWindow::getAllCommands (Array<CommandID>& commands)
     const CommandID ids[] = {
                              #if ! (JUCE_IOS || JUCE_ANDROID)
                               CommandIDs::newFile,
-                              CommandIDs::open,
-                              CommandIDs::save,
+							  CommandIDs::open,
+							  CommandIDs::import,
+							  CommandIDs::save,
                               CommandIDs::saveAs,
                              #endif
                               CommandIDs::showPluginListEditor,
@@ -440,23 +434,28 @@ void MainHostWindow::getCommandInfo (const CommandID commandID, ApplicationComma
     {
    #if ! (JUCE_IOS || JUCE_ANDROID)
     case CommandIDs::newFile:
-        result.setInfo ("New", "Creates a new filter graph file", category, 0);
+        result.setInfo ("New", "Creates a new Performer file", category, 0);
         result.defaultKeypresses.add(KeyPress('n', ModifierKeys::commandModifier, 0));
         break;
 
     case CommandIDs::open:
-        result.setInfo ("Open...", "Opens a filter graph file", category, 0);
+        result.setInfo ("Open...", "Opens a Performer file", category, 0);
         result.defaultKeypresses.add (KeyPress ('o', ModifierKeys::commandModifier, 0));
         break;
 
+	case CommandIDs::import:
+		result.setInfo("Import...", "Imports a Brainspawn Forte rcf file", category, 0);
+		result.defaultKeypresses.add(KeyPress('o', ModifierKeys::commandModifier, 0));
+		break;
+
     case CommandIDs::save:
-        result.setInfo ("Save", "Saves the current graph to a file", category, 0);
+        result.setInfo ("Save", "Saves the current Performer to a file", category, 0);
         result.defaultKeypresses.add (KeyPress ('s', ModifierKeys::commandModifier, 0));
         break;
 
     case CommandIDs::saveAs:
         result.setInfo ("Save As...",
-                        "Saves a copy of the current graph to a file",
+                        "Saves a copy of the current Performer to a file",
                         category, 0);
         result.defaultKeypresses.add (KeyPress ('s', ModifierKeys::shiftModifier | ModifierKeys::commandModifier, 0));
         break;
@@ -504,6 +503,11 @@ bool MainHostWindow::perform (const InvocationInfo& info)
         if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
             graphHolder->graph->loadFromUserSpecifiedFile (true);
         break;
+
+	case CommandIDs::import:
+		if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
+			graphHolder->graph->loadFromUserSpecifiedFile(true);
+		break;
 
     case CommandIDs::save:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)
