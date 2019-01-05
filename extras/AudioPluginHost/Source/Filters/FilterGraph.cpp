@@ -65,16 +65,6 @@ void FilterGraph::changeListenerCallback (ChangeBroadcaster*)
             activePluginWindows.remove (i);
 }
 
-AudioProcessorGraph::Node::Ptr FilterGraph::getNodeForName (const String& name) const
-{
-    for (auto* node : graph.getNodes())
-        if (auto p = node->getProcessor())
-            if (p->getName().equalsIgnoreCase (name))
-                return node;
-
-    return nullptr;
-}
-
 void FilterGraph::addPlugin (const PluginDescription& desc, Point<double> p)
 {
     struct AsyncCallback : public AudioPluginFormat::InstantiationCompletionCallback
@@ -118,23 +108,6 @@ void FilterGraph::addFilterCallback (AudioPluginInstance* instance, const String
     }
 }
 
-void FilterGraph::setNodePosition (NodeID nodeID, Point<double> pos)
-{
-    if (auto* n = graph.getNodeForId (nodeID))
-    {
-        n->properties.set ("x", jlimit (0.0, 1.0, pos.x));
-        n->properties.set ("y", jlimit (0.0, 1.0, pos.y));
-    }
-}
-
-Point<double> FilterGraph::getNodePosition (NodeID nodeID) const
-{
-    if (auto* n = graph.getNodeForId (nodeID))
-        return { static_cast<double> (n->properties ["x"]),
-                 static_cast<double> (n->properties ["y"]) };
-
-    return {};
-}
 
 //==============================================================================
 void FilterGraph::clear()
@@ -208,10 +181,9 @@ void FilterGraph::newDocument()
     graph.removeChangeListener (this);
 
     InternalPluginFormat internalFormat;
-
-    addPlugin (internalFormat.audioInDesc,  { 0.5,  0.1 });
-    addPlugin (internalFormat.midiInDesc,   { 0.25, 0.1 });
-    addPlugin (internalFormat.audioOutDesc, { 0.5,  0.9 });
+    String errorMessage;
+    m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
     MessageManager::callAsync ([this] () {
         setChangedFlag (false);
@@ -224,13 +196,19 @@ Result FilterGraph::loadDocument (const File& file)
     clear();
 
     InternalPluginFormat internalFormat;
-    addPlugin(internalFormat.midiInDesc, { 0,0 });
-    addPlugin(internalFormat.audioOutDesc, { 0,0 });
+    String errorMessage;
+    m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
     graph.removeChangeListener (this);
 
     XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
-    for (int i = 0; i < 1/*m_performer.Root.Racks.Rack.size()*/; ++i)
+    m_performer.ResolveIDs();
+
+    if (m_performer.Root.Racks.Rack.size() == 0)
+        return Result::fail("No racks");
+
+    for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
         auto &rack = m_performer.Root.Racks.Rack[i];
 
@@ -240,17 +218,9 @@ Result FilterGraph::loadDocument (const File& file)
         pd.isInstrument = true;
         pd.fileOrIdentifier = rack.PluginFile;
 
-        String errorMessage;
 
         if (auto* instance = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage))
         {
-            // not sure about this stuff, dont need the addBus for VST
-            //auto layout = instance->getBusesLayout();
-            //layout.inputBuses.add(instance->getChannelLayoutOfBus(true, 0));
-            //layout.outputBuses.add(instance->getChannelLayoutOfBus(false, 0));
-            //layout.outputBuses.add(instance->getChannelLayoutOfBus(false, 1));
-            //instance->setBusesLayout(layout);
-
             auto node = graph.addNode(instance, (NodeID)rack.ID);
 
             // State stuff for later
@@ -258,19 +228,15 @@ Result FilterGraph::loadDocument (const File& file)
             //m.fromBase64Encoding(char*);
             //node->getProcessor()->setStateInformation(m.getData(), (int)m.getSize());
 
-            //node->properties.set("x", 0);
-            //node->properties.set("y", 0);
+            rack.m_node = (void*)node.get();
 
-            if (auto w = getOrCreateWindowFor(node, PluginWindow::Type::normal))
-                w->toFront(true);
+            graph.addConnection({ { m_midiInNode->nodeID, 4096 },{ (NodeID)rack.ID, 4096 } });
+            graph.addConnection({ { (NodeID)rack.ID, 0 },{ m_audioOutNode->nodeID, 0 } });
+            graph.addConnection({ { (NodeID)rack.ID, 1 },{ m_audioOutNode->nodeID, 1 } });
         }
     }
 
     changed();
-
-    auto test = graph.addConnection({ { (NodeID)m_performer.Root.Racks.Rack[0].ID, 0 }, { 0, 0 } });
-
-    //graph.addConnection({ { (NodeID)e->getIntAttribute("srcFilter"), e->getIntAttribute("srcChannel") }, { (NodeID)e->getIntAttribute("dstFilter"), e->getIntAttribute("dstChannel") } });
 
     MessageManager::callAsync ([this] () {
         setChangedFlag (false);
@@ -307,9 +273,3 @@ void FilterGraph::setLastDocumentOpened (const File& file)
         ->setValue ("recentFilterGraphFiles", recentFiles.toString());
 }
 
-
-File FilterGraph::getDefaultGraphDocumentOnMobile()
-{
-    auto persistantStorageLocation = File::getSpecialLocation (File::userApplicationDataDirectory);
-    return persistantStorageLocation.getChildFile ("state.filtergraph");
-}
