@@ -99,6 +99,10 @@ MainHostWindow::MainHostWindow()
     centreWithSize (1024, 720);
    #endif
 
+    graphHolder.reset (new GraphDocumentComponent (formatManager, deviceManager, knownPluginList));
+
+    setContentNonOwned (graphHolder.get(), false);
+
     restoreWindowStateFromString (getAppProperties().getUserSettings()->getValue ("mainWindowPos"));
 
     setVisible (true);
@@ -118,10 +122,6 @@ MainHostWindow::MainHostWindow()
                             ->getIntValue ("pluginSortMethod", KnownPluginList::sortByManufacturer);
 
     knownPluginList.addChangeListener (this);
-
-    // move this here so we have plugins
-    graphHolder.reset(new GraphDocumentComponent(formatManager, deviceManager, knownPluginList));
-    setContentNonOwned(graphHolder.get(), false);
 
     if (auto* filterGraph = graphHolder->graph.get())
         filterGraph->addChangeListener (this);
@@ -259,9 +259,9 @@ PopupMenu MainHostWindow::getMenuForIndex (int topLevelMenuIndex, const String& 
     {
         // "File" menu
        #if ! (JUCE_IOS || JUCE_ANDROID)
-		menu.addCommandItem(&getCommandManager(), CommandIDs::newFile);
-		menu.addCommandItem(&getCommandManager(), CommandIDs::import);
-		menu.addCommandItem (&getCommandManager(), CommandIDs::open);
+        menu.addCommandItem (&getCommandManager(), CommandIDs::newFile);
+        menu.addCommandItem (&getCommandManager(), CommandIDs::open);
+        menu.addCommandItem(&getCommandManager(), CommandIDs::import);
        #endif
 
         RecentlyOpenedFilesList recentFiles;
@@ -397,9 +397,9 @@ void MainHostWindow::getAllCommands (Array<CommandID>& commands)
     const CommandID ids[] = {
                              #if ! (JUCE_IOS || JUCE_ANDROID)
                               CommandIDs::newFile,
-							  CommandIDs::open,
-							  CommandIDs::import,
-							  CommandIDs::save,
+                              CommandIDs::open,
+                              CommandIDs::import,
+                              CommandIDs::save,
                               CommandIDs::saveAs,
                              #endif
                               CommandIDs::showPluginListEditor,
