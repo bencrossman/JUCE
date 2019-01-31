@@ -60,7 +60,7 @@ public:
     void SetSoloMode(bool mode);
     bool IsSolo() { return m_solo->getToggleState(); }
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
-    static void SetTempo(int tempo) { m_tempo = tempo; }
+    static void SetTempo(float tempo) { m_tempo = tempo; }
     //[/UserMethods]
 
     void paint (Graphics& g) override;
@@ -90,7 +90,7 @@ private:
     int m_arpeggiatorBeat;
     int m_lastNote;
     float m_arpeggiatorTimer;
-    static int m_tempo;
+    static float m_tempo;
     //[/UserVariables]
 
     //==============================================================================

@@ -31,7 +31,7 @@
 #include "../Filters/InternalFilters.h"
 String FormatKey(int note);
 int ParseNote(const char *str);
-int RackRow::m_tempo = 120;
+float RackRow::m_tempo = 120;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -265,7 +265,8 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_m_mute] -- add your button handler code here..
         m_current->Mute = buttonThatWasClicked->getToggleState();
         repaint(); // to change background of row
-        ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+        if (m_current->Device->m_node)
+            ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
         m_program->setEnabled(!m_current->Mute);
         m_bank->setEnabled(!m_current->Mute);
         //[/UserButtonCode_m_mute]
@@ -524,7 +525,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                                 output.addEvent(MidiMessage::noteOff(m_current->Device->Channel, m_lastNote), sample_number);
                                 m_lastNote = -1;
                             }
-                            m_arpeggiatorBeat = 0.f;
+                            m_arpeggiatorTimer = 0.f;
                         }
                     }
                     else
@@ -624,7 +625,8 @@ void RackRow::Setup(Device &device, FilterGraph &filterGraph, GraphEditorPanel &
     auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".png"));
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
-    InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)device.m_midiFilterNode, this);
+    if (device.m_midiFilterNode)
+        InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)device.m_midiFilterNode, this);
 
     m_id = device.ID;
 
@@ -647,7 +649,7 @@ void RackRow::Setup(Device &device, FilterGraph &filterGraph, GraphEditorPanel &
         for (int i = 0; i<lines.size(); ++i)
             m_program->addItem(lines[i], i + 1);
     }
-    else if (!m_bank->isVisible())
+    else if (!m_bank->isVisible() && device.m_node)
     {
         auto processor = ((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
 

@@ -45,7 +45,7 @@ public:
         // initialise our settings file..
 
         PropertiesFile::Options options;
-        options.applicationName     = "Juce Audio Plugin Host";
+        options.applicationName     = "Performer";
         options.filenameSuffix      = "settings";
         options.osxLibrarySubFolder = "Preferences";
 
