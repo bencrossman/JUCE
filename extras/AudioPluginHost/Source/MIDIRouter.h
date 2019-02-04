@@ -107,7 +107,6 @@ protected:
     static void ArpegiatorUpdateStatic(union sigval arg);
     timer_t m_appegiatorTimer;
 #endif
-    int         m_shutdownPressCount;
 
 };
 

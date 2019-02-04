@@ -200,6 +200,7 @@ void GraphEditorPanel::timerCallback()
     showPopupMenu (originalTouchPos);
 }
 
+// Does this need to move into FilterGraph?
 void GraphEditorPanel::SetPerformance(int performanceIndex)
 {
     auto performer = graph.GetPerformer();

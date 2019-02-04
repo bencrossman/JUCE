@@ -28,7 +28,7 @@
 
 #include "../UI/PluginWindow.h"
 #include "../Performer.h"
-
+#include "InternalFilters.h"
 
 //==============================================================================
 /**
@@ -36,7 +36,8 @@
 */
 class FilterGraph   : public FileBasedDocument,
                       public AudioProcessorListener,
-                      private ChangeListener
+                      private ChangeListener,
+                      public MidiFilterCallback
 {
 public:
     //==============================================================================
@@ -72,8 +73,8 @@ public:
     void setLastDocumentOpened (const File& file) override;
 
     void Import(const char *filename);
-
     Performer *GetPerformer() { return &m_performer; }
+    void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
 
     //==============================================================================
     AudioProcessorGraph graph;
@@ -87,6 +88,10 @@ private:
     Performer m_performer;
     AudioProcessorGraph::Node::Ptr m_midiInNode;
     AudioProcessorGraph::Node::Ptr m_audioOutNode;
+    AudioProcessorGraph::Node::Ptr m_midiControlNode;
+    AudioProcessorGraph::Node::Ptr m_masterGainNode;
+    int       m_shutdownPressCount;
+
 
     NodeID lastUID;
     NodeID getNextUID() noexcept;
