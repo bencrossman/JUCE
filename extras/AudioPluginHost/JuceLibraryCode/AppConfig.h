@@ -145,15 +145,15 @@
 #endif
 
 #ifndef    JUCE_PLUGINHOST_VST3
- #define   JUCE_PLUGINHOST_VST3 1
+ #define   JUCE_PLUGINHOST_VST3 0
 #endif
 
 #ifndef    JUCE_PLUGINHOST_AU
- #define   JUCE_PLUGINHOST_AU 1
+ #define   JUCE_PLUGINHOST_AU 0
 #endif
 
 #ifndef    JUCE_PLUGINHOST_LADSPA
- #define   JUCE_PLUGINHOST_LADSPA 1
+ #define   JUCE_PLUGINHOST_LADSPA 0
 #endif
 
 //==============================================================================
@@ -284,6 +284,7 @@
 #ifndef    JUCE_SYNC_VIDEO_VOLUME_WITH_OS_MEDIA_VOLUME
  //#define JUCE_SYNC_VIDEO_VOLUME_WITH_OS_MEDIA_VOLUME 1
 #endif
+
 //==============================================================================
 #ifndef    JUCE_STANDALONE_APPLICATION
  #if defined(JucePlugin_Name) && defined(JucePlugin_Build_Standalone)
