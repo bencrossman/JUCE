@@ -373,15 +373,15 @@ public:
             buffer.clear(ch, 0, buffer.getNumSamples());
     }
 
-    void SetGain(float gain) { m_gain = (float)pow(10, gain / 10.0); }
+    void SetGain(float gain) { m_gain = gain; }
 
 private:
     float m_gain;
 };
 
-void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain)
+void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels)
 {
-    (static_cast<GainFilter*>(node->getProcessor()))->SetGain(gain);
+    (static_cast<GainFilter*>(node->getProcessor()))->SetGain(useDecibels ? (float)pow(10, gain / 10.0) : gain);
 }
 
 //==============================================================================
@@ -444,6 +444,11 @@ InternalPluginFormat::InternalPluginFormat()
     }
 
     {
+        AudioProcessorGraph::AudioGraphIOProcessor p(AudioProcessorGraph::AudioGraphIOProcessor::midiOutputNode);
+        p.fillInPluginDescription(midiOutDesc);
+    }
+
+    {
         gainDesc = GainFilter::getPluginDescription();
     }
 
@@ -457,6 +462,7 @@ AudioPluginInstance* InternalPluginFormat::createInstance (const String& name)
     if (name == audioOutDesc.name) return new AudioProcessorGraph::AudioGraphIOProcessor (AudioProcessorGraph::AudioGraphIOProcessor::audioOutputNode);
     if (name == audioInDesc.name)  return new AudioProcessorGraph::AudioGraphIOProcessor (AudioProcessorGraph::AudioGraphIOProcessor::audioInputNode);
     if (name == midiInDesc.name)   return new AudioProcessorGraph::AudioGraphIOProcessor (AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
+    if (name == midiOutDesc.name)  return new AudioProcessorGraph::AudioGraphIOProcessor (AudioProcessorGraph::AudioGraphIOProcessor::midiOutputNode);
 
 
     if (name == SineWaveSynth::getIdentifier()) return new SineWaveSynth (SineWaveSynth::getPluginDescription());

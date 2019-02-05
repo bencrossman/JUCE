@@ -41,6 +41,7 @@ FilterGraph::FilterGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
 {
     newDocument();
     graph.addListener (this);
+    m_shutdownPressCount = 0;
 }
 
 FilterGraph::~FilterGraph()
@@ -183,11 +184,18 @@ void FilterGraph::newDocument()
     InternalPluginFormat internalFormat;
     String errorMessage;
     m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiControlNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_masterGainNode = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    
+
+    InternalPluginFormat::SetFilterCallback(m_midiSysexNode, &m_nonSysexFilter);
+    InternalPluginFormat::SetFilterCallback(m_midiControlNode, this);
+
     graph.addConnection({ { m_midiInNode->nodeID, 4096 },{ m_midiControlNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ m_midiSysexNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiSysexNode->nodeID, 4096 },{ m_midiOutNode->nodeID, 4096 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 0 },{ m_audioOutNode->nodeID, 0 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
 
@@ -204,16 +212,24 @@ Result FilterGraph::loadDocument (const File& file)
     InternalPluginFormat internalFormat;
     String errorMessage;
     m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiControlNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_masterGainNode = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
+    InternalPluginFormat::SetFilterCallback(m_midiSysexNode, &m_nonSysexFilter);
+    InternalPluginFormat::SetFilterCallback(m_midiControlNode, this);
+
     graph.addConnection({ { m_midiInNode->nodeID, 4096 },{ m_midiControlNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ m_midiSysexNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiSysexNode->nodeID, 4096 },{ m_midiOutNode->nodeID, 4096 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 0 },{ m_audioOutNode->nodeID, 0 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
 
     graph.removeChangeListener (this);
 
+    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
     XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
     m_performer.ResolveIDs();
 
@@ -312,68 +328,117 @@ int m_currentSong = 0;
 int m_pendingSong = 0;
 int m_pendingSet = 0;
 
-void PrintLCDScreen(const char *text1, const char *text2)
+void FilterGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2)
 {
-    if (m_midiOutLCD)
+    std::string ip;
+
+    if (strcmp(text1, " ") == 0 && strcmp(text2, " ") == 0)
     {
-        std::string ip;
-
-        if (strcmp(text1, " ") == 0 && strcmp(text2, " ") == 0)
-        {
 #ifdef WIN32
-            WSADATA wsa;
-            WSAStartup(MAKEWORD(2, 2), &wsa);
+        WSADATA wsa;
+        WSAStartup(MAKEWORD(2, 2), &wsa);
 #endif
-            char szHostName[255];
-            gethostname(szHostName, 255);
-            struct hostent *host_entry;
-            host_entry = gethostbyname(szHostName);
-            text1 = szHostName;
-            ip = inet_ntoa(*(struct in_addr *)*host_entry->h_addr_list);
-            if (ip.length() <= 13)
-                ip = "IP:" + ip;
-            text2 = ip.c_str();
+        char szHostName[255];
+        gethostname(szHostName, 255);
+        struct hostent *host_entry;
+        host_entry = gethostbyname(szHostName);
+        text1 = szHostName;
+        ip = inet_ntoa(*(struct in_addr *)*host_entry->h_addr_list);
+        if (ip.length() <= 13)
+            ip = "IP:" + ip;
+        text2 = ip.c_str();
 #ifdef WIN32
-            WSACleanup();
+        WSACleanup();
 #endif
-        }
-
-        unsigned char mes[14 + 16 * 2];
-        int meslen = 0;
-        memcpy(mes, "\xF0\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 10); meslen += 10;
-        memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += strlen(text1) + 1;
-        mes[meslen++] = 0x02;
-        memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += strlen(text2) + 1;
-        mes[meslen++] = 0xF7;
-
-        // send to lcd
-        vector<unsigned char> message(meslen);
-        memcpy(message.data(), mes, meslen);
-        m_midiOutLCD->sendMessage(&message);
     }
+
+    unsigned char mes[14 + 16 * 2];
+    int meslen = 0;
+    memcpy(mes, "\xF0\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 10); meslen += 10;
+    memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += strlen(text1) + 1;
+    mes[meslen++] = 0x02;
+    memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += strlen(text2) + 1;
+    mes[meslen++] = 0xF7;
+
+    // send to lcd
+    output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
 }
 
 
-void UpdateLCDScreen()
+
+
+void OptimizeLines(string &songName1, string &songName2)
 {
-    if (m_setList.size()>0)
-        PrintLCDScreen(m_setList[m_pendingSong].m_line[0].c_str(), m_setList[m_pendingSong].m_line[1].c_str());
-    else
-        PrintLCDScreen("No set loaded", " ");
+    bool line2free = (songName2 == "");
+    while (songName1.size()>16 && line2free) // nothing on line 2 and line 1 is too long, try putting it to next line
+    {
+        if (char* ptr = (char*)strrchr(songName1.c_str(), ' '))
+        {
+            songName2 = std::string(ptr + 1) + " " + songName2;
+            songName1.resize(ptr - songName1.c_str());
+        }
+    }
+
+    TrimRight(songName2); // procedure above may have added space
+
+                          // if still not fit, remove spaces
+    if (songName1.size()>16 || songName2.size()>16)
+    {
+        Replace(songName1, " ", "");
+        if (line2free)
+            Replace(songName2, " ", "");
+    }
+
+    // oh well trunc
+    if (songName1.size()>16)
+        songName1.resize(16);
+    if (songName2.size()>16)
+        songName2.resize(16);
+    if (songName1 == "")
+        songName1 = " ";
+    if (songName2 == "")
+        songName2 = " ";
 }
 
-void UpdateCurrentRouting()
+void FilterGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
+{
+    string songName1, songName2;
+    songName1 = m_performer.Root.Songs.Song[m_currentSong].Name;
+    songName2 = m_performer.Root.Songs.Song[m_currentSong].PerformancePtr[0]->Name; // TODO some sort of index into songs & performances
+
+    size_t found = songName2.find("|");
+    if (found != -1)
+        songName2 = string(songName2.c_str() + found + 1);
+    TrimRight(songName2);
+
+    if (songName1 == songName2)
+        songName2 = "";
+
+
+    OptimizeLines(songName1, songName2);
+
+
+
+    if (m_performer.Root.SetLists.SetList.size()>0)
+        PrintLCDScreen(output, sample_number, songName1.c_str(), songName2.c_str());
+    else
+        PrintLCDScreen(output, sample_number, "No set loaded", " ");
+}
+
+void FilterGraph::UpdateCurrentRouting()
 {
     // this code is in GraphEditorPanel at the moment
 }
 
-void LoadSet(int setIndex)
+void FilterGraph::LoadSet(int setIndex)
 {
-
+    setIndex;
 }
 
 void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
+    samples;
+    sampleRate;
     if (!midiBuffer.isEmpty())
     {
         MidiMessage midi_message(0xf0);
@@ -388,10 +453,10 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (midi_message.getControllerValue() == 127)
                     m_shutdownPressCount++;
                 if (m_shutdownPressCount == 1)
-                    PrintLCDScreen("Are you sure?", " ");
+                    PrintLCDScreen(output, sample_number, "Are you sure?", " ");
                 if (m_shutdownPressCount>1)
                 {
-                    PrintLCDScreen("Shutting Down", " ");
+                    PrintLCDScreen(output, sample_number, "Shutting Down", " ");
                     system("shutdown /t 0 /s");
                 }
             }
@@ -400,9 +465,9 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (m_shutdownPressCount) // to remove confirm text
                 {
                     if (m_performer.Root.SetLists.SetList.size()>0)
-                        UpdateLCDScreen();
+                        UpdateLCDScreen(output, sample_number);
                     else
-                        PrintLCDScreen(" ", " ");
+                        PrintLCDScreen(output, sample_number, " ", " ");
                 }
                 m_shutdownPressCount = 0;
 
@@ -430,7 +495,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             //}
             else if (midi_message.isControllerOfType(0x09))
             {
-                InternalPluginFormat::SetGain(m_masterGainNode, ((float)midi_message.getControllerValue()) / 127.f);
+                InternalPluginFormat::SetGain(m_masterGainNode, ((float)midi_message.getControllerValue()) / 127.f, false);
             }
             else if (midi_message.isProgramChange())
             {
@@ -455,7 +520,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen();
+                    UpdateLCDScreen(output, sample_number);
 
             }
             else if (midi_message.isControllerOfType(116)) // forward
@@ -469,7 +534,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen();
+                    UpdateLCDScreen(output, sample_number);
 
             }
             else if (midi_message.isControllerOfType(115))
@@ -480,7 +545,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen(); // just redraw
+                    UpdateLCDScreen(output, sample_number); // just redraw
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x3f) // anticlockwise
             {
@@ -489,24 +554,24 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     m_pendingSong = m_performer.Root.SetLists.SetList.size() - 1;
                 if (m_pendingSong<0)
                     m_pendingSong = 0;
-                UpdateLCDScreen();
+                UpdateLCDScreen(output, sample_number);
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x41) // clockwise
             {
                 m_pendingSong++;
                 if (m_pendingSong >= (int)m_performer.Root.SetLists.SetList.size())
                     m_pendingSong = 0;
-                UpdateLCDScreen();
+                UpdateLCDScreen(output, sample_number);
             }
             else if (midi_message.isControllerOfType(113))
             {
                 if (midi_message.getControllerValue() > 0)
                 {
                     LoadSet(m_pendingSet);
-                    UpdateLCDScreen();
+                    UpdateLCDScreen(output, sample_number);
                 }
                 else
-                    UpdateLCDScreen(); // just redraw
+                    UpdateLCDScreen(output, sample_number); // just redraw
             }
             else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x3f) // category anticlockwise
             {
@@ -516,7 +581,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (m_pendingSet<0)
                     m_pendingSet = 0;
                 if (m_performer.Root.SetLists.SetList.size()>0)
-                    PrintLCDScreen(m_performer.Root.SetLists.SetList[m_pendingSet].m_shortFile.c_str(), m_sets[m_pendingSet].m_setListName.c_str());
+                    PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
             }
             else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x41) // category clockwise
             {
@@ -524,7 +589,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (m_pendingSet >= (int)m_performer.Root.SetLists.SetList.size())
                     m_pendingSet = 0;
                 if (m_performer.Root.SetLists.SetList.size()>0)
-                    PrintLCDScreen(m_performer.Root.SetLists.SetList[m_pendingSet].m_shortFile.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].m_setListName.c_str());
+                    PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
             }
             else if (midi_message.isNoteOn() && midi_message.getVelocity() == 0)
                 output.addEvent(MidiMessage::noteOff(midi_message.getChannel(), midi_message.getNoteNumber()), sample_number);
@@ -534,3 +599,25 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         midiBuffer = output;
     }
 }
+
+void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
+{
+    samples;
+    sampleRate;
+    if (!midiBuffer.isEmpty())
+    {
+        MidiMessage midi_message(0xf0);
+        MidiBuffer output;
+        int sample_number;
+
+        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
+        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
+        {
+            if (midi_message.isSysEx())
+                output.addEvent(midi_message, sample_number);
+        }
+        midiBuffer = output;
+    }
+}
+
+

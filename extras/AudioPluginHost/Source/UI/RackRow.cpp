@@ -306,7 +306,7 @@ void RackRow::sliderValueChanged (Slider* sliderThatWasMoved)
     {
         //[UserSliderCode_m_volume] -- add your slider handling code here..
         m_current->Volume = (float)sliderThatWasMoved->getValue();
-        InternalPluginFormat::SetGain((AudioProcessorGraph::Node *)m_current->Device->m_gainNode, m_current->Volume);
+        InternalPluginFormat::SetGain((AudioProcessorGraph::Node *)m_current->Device->m_gainNode, m_current->Volume, true);
         //[/UserSliderCode_m_volume]
     }
 

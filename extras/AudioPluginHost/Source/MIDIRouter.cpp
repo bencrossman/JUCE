@@ -30,27 +30,6 @@
 
 
 
-
-
-void stringreplace(string &str, string src, string dst)
-{
-    while (str.find(src) != -1)
-        str.replace(str.find(src), src.length(), dst);
-}
-
-void TrimRight(std::string& str, const char* chars2remove = " ")
-{
-    if (!str.empty())
-    {
-        std::string::size_type pos = str.find_last_not_of(chars2remove);
-
-        if (pos != std::string::npos)
-            str.erase(pos + 1);
-        else
-            str.erase(str.begin(), str.end()); // make empty
-    }
-}
-
 void MIDIRouter::SetupKeylab()
 {
     for (int m = 0; m<60; ++m)

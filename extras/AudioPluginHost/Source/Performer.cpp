@@ -15,7 +15,7 @@ void Replace(std::string &result, const std::string& replaceWhat, const std::str
 
 
 
-void TrimRight(std::string& str, const char* chars2remove = " ")
+void TrimRight(std::string& str, const char* chars2remove)
 {
     if (!str.empty())
     {

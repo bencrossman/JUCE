@@ -30,6 +30,15 @@
 #include "../Performer.h"
 #include "InternalFilters.h"
 
+
+class NonSysexFilter : public MidiFilterCallback
+{
+    void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
+};
+
+
+
+
 //==============================================================================
 /**
     A collection of filters and some connections between them.
@@ -75,6 +84,10 @@ public:
     void Import(const char *filename);
     Performer *GetPerformer() { return &m_performer; }
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
+    void PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2);
+    void UpdateLCDScreen(MidiBuffer &output, int sample_number);
+    void UpdateCurrentRouting();
+    void LoadSet(int setIndex);
 
     //==============================================================================
     AudioProcessorGraph graph;
@@ -86,11 +99,16 @@ private:
     OwnedArray<PluginWindow> activePluginWindows;
 
     Performer m_performer;
+    string m_performerFilename;
     AudioProcessorGraph::Node::Ptr m_midiInNode;
+    AudioProcessorGraph::Node::Ptr m_midiOutNode;
     AudioProcessorGraph::Node::Ptr m_audioOutNode;
     AudioProcessorGraph::Node::Ptr m_midiControlNode;
     AudioProcessorGraph::Node::Ptr m_masterGainNode;
+    AudioProcessorGraph::Node::Ptr m_midiSysexNode;
+
     int       m_shutdownPressCount;
+    NonSysexFilter m_nonSysexFilter;
 
 
     NodeID lastUID;

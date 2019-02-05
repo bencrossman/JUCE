@@ -6,6 +6,9 @@
 
 using namespace std;
 
+extern void TrimRight(std::string& str, const char* chars2remove = " ");
+extern void Replace(std::string &result, const std::string& replaceWhat, const std::string& replaceWithWhat);
+
 class Device
 {
 public:
