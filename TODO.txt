@@ -1,10 +1,9 @@
-Keylab setup
+Keylab sysex not working
 Maybe some refactoring
-
-M1 needs to share VST instance
 Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
 Check sampler supports octave mode
 Mono switch (simply doesn't mix TruePianos)
+M1 needs to share VST instance
 
 Import command hooked up - Reimport, make sure unused banks are -1
 Song change - Check resends Bank/Program

@@ -328,6 +328,105 @@ int m_currentSong = 0;
 int m_pendingSong = 0;
 int m_pendingSet = 0;
 
+void FilterGraph::SetupKeylab(MidiBuffer &output, int sample_number)
+{
+    for (int m = 0; m<60; ++m)
+    {
+        unsigned char mes[10];
+        int meslen = 0;
+        memcpy(mes, "\x00\x20\x6B\x7F\x42\x02\x00", 7); meslen += 7;
+        unsigned char parameter = 3;
+        unsigned char control = 0;
+        unsigned char value = 0;
+        // order volume / knob 1 #3 / 9 disable knobs / Slider 1 #9 / 8 disable sliders / 16 pads (midi and note) / rewind (mode and cc) / forward (mode and cc) / stop (mode and cc)
+        if (m == 0)
+        {
+            control = 0x30;
+            value = 9;
+        }
+        else if (m == 1)
+        {
+            control = 1;
+            value = 3;
+        }
+        else if (m<2 + 9)
+        {
+            parameter = 1; // mode
+            control = (unsigned char)m; // knob 2 to knob 10
+            value = 0; // disable
+        }
+        else if (m == 2 + 9)
+        {
+            control = 0x0b; // slider 1
+            value = 9; // also setup slider 1 like volume
+        }
+        else if (m<2 + 9 + 1 + 8)
+        {
+            parameter = 5; // max val
+            control = (unsigned char)((m<2 + 1 + 8 + 4) ? m : (m + 0x3c));
+            value = 0; // another way of disable (didn't work other way)
+        }
+        else if (m<2 + 9 + 1 + 8 + 16)
+        {
+            parameter = 2; // midi channel (defaults to 10 on pads)
+            control = (unsigned char)(0x70 + (m - 2 - 9 - 1 - 8));
+            value = 0; // midi channel 1
+        }
+        else if (m<2 + 9 + 1 + 8 + 16 * 2)
+        {
+            control = (unsigned char)(0x70 + (m - 2 - 9 - 1 - 8 - 16));
+            value = (unsigned char)(0x15 + (m - 2 - 9 - 1 - 8 - 16)); // Low A up
+        }
+        else if (m == 54)
+        {
+            parameter = 1;
+            control = 0x5b; // rewind
+            value = 8; // for some reason this mode value instead of 3
+        }
+        else if (m == 55)
+        {
+            parameter = 3;
+            control = 0x5b;
+            value = 111;
+        }
+        else if (m == 56)
+        {
+            parameter = 1;
+            control = 0x5c; // forward
+            value = 8;
+        }
+        else if (m == 57)
+        {
+            parameter = 3;
+            control = 0x5c;
+            value = 116;
+        }
+        else if (m == 58)
+        {
+            parameter = 1;
+            control = 0x59; // stop
+            value = 8;
+        }
+        else if (m == 59)
+        {
+            parameter = 3;
+            control = 0x59;
+            value = 117;
+        }
+
+
+        mes[meslen++] = parameter;
+        mes[meslen++] = control;
+        mes[meslen++] = value;
+
+        // send to lcd
+        vector<unsigned char> message(meslen);
+        memcpy(message.data(), mes, meslen);
+        output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
+    }
+}
+
+
 void FilterGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2)
 {
     std::string ip;
@@ -352,13 +451,12 @@ void FilterGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const ch
 #endif
     }
 
-    unsigned char mes[14 + 16 * 2];
+    unsigned char mes[12 + 16 * 2];
     int meslen = 0;
-    memcpy(mes, "\xF0\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 10); meslen += 10;
+    memcpy(mes, "\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 9); meslen += 9;
     memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += strlen(text1) + 1;
     mes[meslen++] = 0x02;
     memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += strlen(text2) + 1;
-    mes[meslen++] = 0xF7;
 
     // send to lcd
     output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
@@ -435,8 +533,15 @@ void FilterGraph::LoadSet(int setIndex)
     setIndex;
 }
 
+bool m_keylabNeedsSettingup = true;
+
 void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
+    if (m_keylabNeedsSettingup)
+    {
+        m_keylabNeedsSettingup = false;
+        SetupKeylab(midiBuffer, 0);
+    }
     samples;
     sampleRate;
     if (!midiBuffer.isEmpty())
