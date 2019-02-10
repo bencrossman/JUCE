@@ -494,6 +494,7 @@ void InternalPluginFormat::getAllTypes (OwnedArray<PluginDescription>& results)
     results.add (new PluginDescription (audioInDesc));
     results.add (new PluginDescription (audioOutDesc));
     results.add (new PluginDescription (midiInDesc));
+    results.add (new PluginDescription (midiOutDesc));
     results.add (new PluginDescription (SineWaveSynth::getPluginDescription()));
     results.add (new PluginDescription (ReverbFilter::getPluginDescription()));
     results.add (new PluginDescription (GainFilter::getPluginDescription()));

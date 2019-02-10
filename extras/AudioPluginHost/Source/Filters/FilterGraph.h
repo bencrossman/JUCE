@@ -89,6 +89,7 @@ public:
     void UpdateCurrentRouting();
     void LoadSet(int setIndex);
     void SetupKeylab(MidiBuffer &output, int sample_number);
+    void CreateDefaultNodes();
 
     //==============================================================================
     AudioProcessorGraph graph;

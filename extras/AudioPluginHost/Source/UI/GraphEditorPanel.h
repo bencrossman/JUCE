@@ -138,7 +138,7 @@ private:
     AudioDeviceManager& deviceManager;
     KnownPluginList& pluginList;
 
-    AudioProcessorPlayer graphPlayer;
+    AudioProcessorPlayer graphPlayer; // This needs upgrading to support MIDI Output
     MidiKeyboardState keyState;
 
     struct TooltipBar;

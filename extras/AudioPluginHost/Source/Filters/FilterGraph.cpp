@@ -174,12 +174,9 @@ String FilterGraph::getDocumentTitle()
     return getFile().getFileNameWithoutExtension();
 }
 
-void FilterGraph::newDocument()
+void FilterGraph::CreateDefaultNodes()
 {
     clear();
-    setFile ({});
-
-    graph.removeChangeListener (this);
 
     InternalPluginFormat internalFormat;
     String errorMessage;
@@ -198,6 +195,15 @@ void FilterGraph::newDocument()
     graph.addConnection({ { m_midiSysexNode->nodeID, 4096 },{ m_midiOutNode->nodeID, 4096 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 0 },{ m_audioOutNode->nodeID, 0 } });
     graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
+}
+
+void FilterGraph::newDocument()
+{
+    setFile ({});
+
+    graph.removeChangeListener (this);
+
+    CreateDefaultNodes();
 
     MessageManager::callAsync ([this] () {
         setChangedFlag (false);
@@ -207,25 +213,9 @@ void FilterGraph::newDocument()
 
 Result FilterGraph::loadDocument (const File& file)
 {
-    clear();
-
     InternalPluginFormat internalFormat;
     String errorMessage;
-    m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    m_midiOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    m_midiControlNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-    m_masterGainNode = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-
-    InternalPluginFormat::SetFilterCallback(m_midiSysexNode, &m_nonSysexFilter);
-    InternalPluginFormat::SetFilterCallback(m_midiControlNode, this);
-
-    graph.addConnection({ { m_midiInNode->nodeID, 4096 },{ m_midiControlNode->nodeID, 4096 } });
-    graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ m_midiSysexNode->nodeID, 4096 } });
-    graph.addConnection({ { m_midiSysexNode->nodeID, 4096 },{ m_midiOutNode->nodeID, 4096 } });
-    graph.addConnection({ { m_masterGainNode->nodeID, 0 },{ m_audioOutNode->nodeID, 0 } });
-    graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
+    CreateDefaultNodes();
 
     graph.removeChangeListener (this);
 
@@ -718,7 +708,7 @@ void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
         while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
         {
-            if (midi_message.isSysEx())
+            //if (midi_message.isSysEx())
                 output.addEvent(midi_message, sample_number);
         }
         midiBuffer = output;
