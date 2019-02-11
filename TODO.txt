@@ -1,5 +1,5 @@
-Keylab sysex not working
 Maybe some refactoring
+Song/Scene index?
 Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
 Check sampler supports octave mode
 Mono switch (simply doesn't mix TruePianos)

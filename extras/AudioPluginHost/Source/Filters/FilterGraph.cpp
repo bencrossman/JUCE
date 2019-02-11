@@ -531,12 +531,13 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     {
         m_keylabNeedsSettingup = false;
         SetupKeylab(midiBuffer, 0);
+        PrintLCDScreen(midiBuffer, 0, "Engine Loaded", "Select setlist");
     }
     samples;
     sampleRate;
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message(0xf0);
+        MidiMessage midi_message;
         MidiBuffer output;
         int sample_number;
 
@@ -688,7 +689,7 @@ void FilterGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isNoteOn() && midi_message.getVelocity() == 0)
                 output.addEvent(MidiMessage::noteOff(midi_message.getChannel(), midi_message.getNoteNumber()), sample_number);
-            else   
+            else
                 output.addEvent(midi_message, sample_number);
         }
         midiBuffer = output;
@@ -701,14 +702,14 @@ void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     sampleRate;
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message(0xf0);
+        MidiMessage midi_message;
         MidiBuffer output;
         int sample_number;
 
         MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
         while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
         {
-            //if (midi_message.isSysEx())
+            if (midi_message.isSysEx())
                 output.addEvent(midi_message, sample_number);
         }
         midiBuffer = output;

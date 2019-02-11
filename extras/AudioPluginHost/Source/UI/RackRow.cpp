@@ -465,13 +465,15 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message(0xf0);
+        MidiMessage midi_message;
         MidiBuffer output;
         int sample_number;
 
         MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
         while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
         {
+            if (m_current == NULL)
+                continue; // whilst I test the song knobs
             midi_message.setChannel(m_current->Device->Channel + 1);
             if (midi_message.isNoteOnOrOff() && midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
             {

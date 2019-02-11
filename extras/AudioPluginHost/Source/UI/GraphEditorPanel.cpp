@@ -459,6 +459,7 @@ void GraphDocumentComponent::init()
     graphPanel.reset (new GraphEditorPanel (*graph));
     addAndMakeVisible (graphPanel.get());
     graphPlayer.setProcessor (&graph->graph);
+    graphPlayer.setMidiOutput(deviceManager.getDefaultMidiOutput());
     keyState.addListener (&graphPlayer.getMidiMessageCollector());
 
     keyboardComp.reset (new MidiKeyboardComponent (keyState, MidiKeyboardComponent::horizontalKeyboard));
@@ -498,6 +499,8 @@ void GraphDocumentComponent::init()
 
 GraphDocumentComponent::~GraphDocumentComponent()
 {
+    graphPlayer.setMidiOutput(NULL);
+
     releaseGraph();
 
     keyState.removeListener (&graphPlayer.getMidiMessageCollector());
