@@ -64,10 +64,11 @@ public:
     {
         minimiseButton = 1,
         maximiseButton = 2,
-        closeButton = 4,
+        closeButton    = 4,
+        customButton   = 8,
 
         /** A combination of all the buttons above. */
-        allButtons = 7
+        allButtons     = 7
     };
 
     //==============================================================================
@@ -202,6 +203,8 @@ public:
     */
     virtual void maximiseButtonPressed();
 
+    virtual void customButtonPressed() {}
+
     //==============================================================================
     /** Returns the close button, (or nullptr if there isn't one). */
     Button* getCloseButton() const noexcept;
@@ -211,6 +214,8 @@ public:
 
     /** Returns the maximise button, (or nullptr if there isn't one). */
     Button* getMaximiseButton() const noexcept;
+
+    Button* getCustomButton() const noexcept;
 
     //==============================================================================
     /** A set of colour IDs to use to change the colour of various aspects of the window.
@@ -280,7 +285,7 @@ private:
     //==============================================================================
     int titleBarHeight = 26, menuBarHeight = 24, requiredButtons;
     bool positionTitleBarButtonsOnLeft, drawTitleTextCentred = true;
-    std::unique_ptr<Button> titleBarButtons [3];
+    std::unique_ptr<Button> titleBarButtons [4];
     Image titleBarIcon;
     std::unique_ptr<Component> menuBar;
     MenuBarModel* menuBarModel = nullptr;

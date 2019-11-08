@@ -188,6 +188,13 @@ Button* LookAndFeel_V4::createDocumentWindowButton (int buttonType)
         return new LookAndFeel_V4_DocumentWindowButton ("maximise", Colour (0xff0A830A), shape, fullscreenShape);
     }
 
+    if (buttonType == DocumentWindow::customButton)
+    {
+        shape.addLineSegment({ 0.0f, 0.5f, 1.0f, 0.5f }, crossThickness);
+
+        return new LookAndFeel_V4_DocumentWindowButton("custom", Colour(0xffaa8811), shape, shape);
+    }
+
     jassertfalse;
     return nullptr;
 }

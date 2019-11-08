@@ -37,6 +37,7 @@ public:
         if      (button == owner.getMinimiseButton())  owner.minimiseButtonPressed();
         else if (button == owner.getMaximiseButton())  owner.maximiseButtonPressed();
         else if (button == owner.getCloseButton())     owner.closeButtonPressed();
+        else if (button == owner.getCustomButton())     owner.customButtonPressed();
     }
 
 private:
@@ -273,6 +274,7 @@ Rectangle<int> DocumentWindow::getTitleBarArea()
 Button* DocumentWindow::getCloseButton()    const noexcept  { return titleBarButtons[2].get(); }
 Button* DocumentWindow::getMinimiseButton() const noexcept  { return titleBarButtons[0].get(); }
 Button* DocumentWindow::getMaximiseButton() const noexcept  { return titleBarButtons[1].get(); }
+Button* DocumentWindow::getCustomButton()   const noexcept  { return titleBarButtons[3].get(); }
 
 int DocumentWindow::getDesktopWindowStyleFlags() const
 {
@@ -297,6 +299,7 @@ void DocumentWindow::lookAndFeelChanged()
         if ((requiredButtons & minimiseButton) != 0)  titleBarButtons[0].reset (lf.createDocumentWindowButton (minimiseButton));
         if ((requiredButtons & maximiseButton) != 0)  titleBarButtons[1].reset (lf.createDocumentWindowButton (maximiseButton));
         if ((requiredButtons & closeButton)    != 0)  titleBarButtons[2].reset (lf.createDocumentWindowButton (closeButton));
+        if ((requiredButtons & customButton)   != 0)  titleBarButtons[3].reset (lf.createDocumentWindowButton (customButton));
 
         for (auto& b : titleBarButtons)
         {
