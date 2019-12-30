@@ -34,6 +34,12 @@
 
 #pragma once
 
+class MidiFilterCallback
+{
+public:
+    virtual void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) = 0;
+};
+
 #include "PluginGraph.h"
 
 
@@ -48,6 +54,7 @@ public:
     InternalPluginFormat();
 
     //==============================================================================
+    PluginDescription audioInDesc, audioOutDesc, midiInDesc;
     const std::vector<PluginDescription>& getAllTypes() const;
 
     //==============================================================================
@@ -62,6 +69,8 @@ public:
     String getNameOfPluginFromIdentifier (const String& fileOrIdentifier) override      { return fileOrIdentifier; }
     bool pluginNeedsRescanning (const PluginDescription&) override                      { return false; }
     StringArray searchPathsForPlugins (const FileSearchPath&, bool, bool) override      { return {}; }
+
+	static void SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback);
 
 private:
     class InternalPluginFactory

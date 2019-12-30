@@ -1094,7 +1094,7 @@ public:
     virtual void refreshParameterList();
 
     /** Returns a flat list of the parameters in the current tree. */
-    const Array<AudioProcessorParameter*>& getParameters() const;
+    virtual const Array<AudioProcessorParameter*>& getParameters() const;
 
     //==============================================================================
     /** Returns the number of preset programs the processor supports.

@@ -155,8 +155,10 @@ public:
 
         // initialise our settings file..
 
+		system("pskill auxhost.exe");
+
         PropertiesFile::Options options;
-        options.applicationName     = "Juce Audio Plugin Host";
+        options.applicationName     = "Performer";
         options.filenameSuffix      = "settings";
         options.osxLibrarySubFolder = "Preferences";
 
@@ -244,7 +246,7 @@ public:
         return true;
     }
 
-    const String getApplicationName() override       { return "Juce Plug-In Host"; }
+    const String getApplicationName() override       { return "Performer"; }
     const String getApplicationVersion() override    { return ProjectInfo::versionString; }
     bool moreThanOneInstanceAllowed() override       { return true; }
 
