@@ -1,0 +1,30 @@
+Rebase: maybe remove panel->updateComponents();
+
+Maybe some refactoring
+Song/Scene index? (This might be a import to xml thing?)
+Import chunk data
+Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
+Check sampler supports octave mode
+Mono switch (simply doesn't mix TruePianos)
+M1 needs to share VST instance
+
+Import command hooked up - Reimport, make sure unused banks are -1
+Song change - Check resends Bank/Program
+Saving - Check muted zones dont save
+Setlist manager
+
+Scoops/Falls for disco strings
+TruePianos crash
+Maybe support for M1 Combi (Show must go on)
+
+MainHostWindow
++graphholder---->GraphDocumentComponent
+                 +pluginList              
+                 +graph------------------>FilterGraph : FileBasedDocument
+                                          +m_performer
+                                          +graph------------------------------->AudioProcessorGraph  
+                                          +knownPluginList(added for auto dll)               
+                 +graphPanel------------->GraphEditorPanel
+                                          +m_rackDevice------------------------>RackRow's
+                                                                                +graph
+                                                                                +panel(added so we can notify of solo)

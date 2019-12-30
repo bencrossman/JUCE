@@ -29,6 +29,7 @@
 #include "../Plugins/PluginGraph.h"
 
 class MainHostWindow;
+class Performer;
 
 //==============================================================================
 /**
@@ -59,29 +60,26 @@ public:
     //==============================================================================
     void showPopupMenu (Point<int> position);
 
-    //==============================================================================
-    void beginConnectorDrag (AudioProcessorGraph::NodeAndChannel source,
-                             AudioProcessorGraph::NodeAndChannel dest,
-                             const MouseEvent&);
-    void dragConnector (const MouseEvent&);
-    void endDraggingConnector (const MouseEvent&);
+    void SoloChange();
 
     //==============================================================================
     PluginGraph& graph;
 
 private:
-    struct PluginComponent;
-    struct ConnectorComponent;
-    struct PinComponent;
 
-    OwnedArray<PluginComponent> nodes;
-    OwnedArray<ConnectorComponent> connectors;
-    std::unique_ptr<ConnectorComponent> draggingConnector;
+    std::unique_ptr<TabbedComponent> m_tabs;
+    std::unique_ptr<Label> m_transposeColumn;
+    std::unique_ptr<Label> m_bankProgramColumn;
+    std::unique_ptr<Label> m_rangeColumn;
+    std::unique_ptr<Label> m_volumeColumn;
+    std::unique_ptr<Component> m_rackTopUI;
+    std::unique_ptr<Viewport> m_rackUIViewport;
+    std::unique_ptr<Component> m_rackUI;
+    std::vector<std::unique_ptr<Component>> m_rackDevice;
+
+    void SetPerformance(int performanceIndex = 2);
+
     std::unique_ptr<PopupMenu> menu;
-
-    PluginComponent* getComponentForPlugin (AudioProcessorGraph::NodeID) const;
-    ConnectorComponent* getComponentForConnection (const AudioProcessorGraph::Connection&) const;
-    PinComponent* findPinAt (Point<float>) const;
 
     //==============================================================================
     Point<int> originalTouchPos;

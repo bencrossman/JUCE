@@ -29,18 +29,20 @@
 #include "PluginGraph.h"
 #include "InternalPlugins.h"
 #include "../UI/GraphEditorPanel.h"
+#include <windows.h>
 
 
 //==============================================================================
-PluginGraph::PluginGraph (AudioPluginFormatManager& fm)
+PluginGraph::PluginGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
     : FileBasedDocument (getFilenameSuffix(),
                          getFilenameWildcard(),
-                         "Load a graph",
-                         "Save a graph"),
-      formatManager (fm)
+                         "Load a filter graph",
+                         "Save a filter graph"),
+      formatManager (fm), knownPluginList(kpl)
 {
     newDocument();
     graph.addListener (this);
+    m_shutdownPressCount = 0;
 }
 
 PluginGraph::~PluginGraph()
@@ -65,15 +67,7 @@ void PluginGraph::changeListenerCallback (ChangeBroadcaster*)
             activePluginWindows.remove (i);
 }
 
-AudioProcessorGraph::Node::Ptr PluginGraph::getNodeForName (const String& name) const
-{
-    for (auto* node : graph.getNodes())
-        if (auto p = node->getProcessor())
-            if (p->getName().equalsIgnoreCase (name))
-                return node;
 
-    return nullptr;
-}
 
 void PluginGraph::addPlugin (const PluginDescription& desc, Point<double> pos)
 {
@@ -108,23 +102,6 @@ void PluginGraph::addPluginCallback (std::unique_ptr<AudioPluginInstance> instan
     }
 }
 
-void PluginGraph::setNodePosition (NodeID nodeID, Point<double> pos)
-{
-    if (auto* n = graph.getNodeForId (nodeID))
-    {
-        n->properties.set ("x", jlimit (0.0, 1.0, pos.x));
-        n->properties.set ("y", jlimit (0.0, 1.0, pos.y));
-    }
-}
-
-Point<double> PluginGraph::getNodePosition (NodeID nodeID) const
-{
-    if (auto* n = graph.getNodeForId (nodeID))
-        return { static_cast<double> (n->properties ["x"]),
-                 static_cast<double> (n->properties ["y"]) };
-
-    return {};
-}
 
 //==============================================================================
 void PluginGraph::clear()
@@ -192,16 +169,11 @@ String PluginGraph::getDocumentTitle()
 
 void PluginGraph::newDocument()
 {
-    clear();
     setFile ({});
 
     graph.removeChangeListener (this);
 
-    InternalPluginFormat internalFormat;
-
-    addPlugin (internalFormat.audioInDesc,  { 0.5,  0.1 });
-    addPlugin (internalFormat.midiInDesc,   { 0.25, 0.1 });
-    addPlugin (internalFormat.audioOutDesc, { 0.5,  0.9 });
+    CreateDefaultNodes();
 
     MessageManager::callAsync ([this] () {
         setChangedFlag (false);
@@ -211,30 +183,78 @@ void PluginGraph::newDocument()
 
 Result PluginGraph::loadDocument (const File& file)
 {
-    if (auto xml = parseXMLIfTagMatches (file, "FILTERGRAPH"))
+    InternalPluginFormat internalFormat;
+    String errorMessage;
+    CreateDefaultNodes();
+
+    graph.removeChangeListener (this);
+
+    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
+    XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
+    m_performer.ResolveIDs();
+
+    if (m_performer.Root.Racks.Rack.size() == 0)
+        return Result::fail("No racks");
+
+    for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
-        graph.removeChangeListener (this);
-        restoreFromXml (*xml);
+        auto &rack = m_performer.Root.Racks.Rack[i];
 
-        MessageManager::callAsync ([this]
+        PluginDescription pd;
+        pd.name = rack.PluginName;
+        pd.pluginFormatName = "VST";
+        pd.isInstrument = true;
+        for (auto j = 0U; j < (unsigned)knownPluginList.getNumTypes(); ++j)
         {
-            setChangedFlag (false);
-            graph.addChangeListener (this);
-        });
+            auto name = knownPluginList.getType(j)->name;
+            if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
+            {
+                pd.fileOrIdentifier = knownPluginList.getType(j)->fileOrIdentifier;
+            }
+        }
 
-        return Result::ok();
+        auto node = graph.addNode(formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage), (NodeID)rack.ID);
+        if (node.get())
+        {
+            auto midi = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+
+            auto gain = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+
+            // State stuff for later
+            //MemoryBlock m;
+            //m.fromBase64Encoding(char*);
+            //node->getProcessor()->setStateInformation(m.getData(), (int)m.getSize()); 
+
+            rack.m_node = (void*)node.get();
+            rack.m_gainNode = (void*)gain.get();
+            rack.m_midiFilterNode = (void*)midi.get();
+
+            graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ midi->nodeID, 4096 } });
+            graph.addConnection({ { midi->nodeID, 4096 },{ node->nodeID, 4096 } });
+
+            graph.addConnection({ { node->nodeID, 0 },{ gain->nodeID, 0 } });
+            graph.addConnection({ { node->nodeID, 1 },{ gain->nodeID, 1 } });
+
+            graph.addConnection({ { gain->nodeID, 0 },{ m_masterGainNode->nodeID, 0 } });
+            graph.addConnection({ { gain->nodeID, 1 },{ m_masterGainNode->nodeID, 1 } });
+        }
+        else
+            graph.removeNode((NodeID)rack.ID);
     }
 
-    return Result::fail ("Not a valid graph file");
+    changed();
+
+    MessageManager::callAsync ([this] () {
+        setChangedFlag (false);
+        graph.addChangeListener (this);
+    } );
+
+    return Result::ok();
 }
 
 Result PluginGraph::saveDocument (const File& file)
 {
-    auto xml = createXml();
-
-    if (! xml->writeTo (file, {}))
-        return Result::fail ("Couldn't write to the file");
-
+    XmlArchive::Save(file.getFullPathName().getCharPointer(), m_performer);
     return Result::ok();
 }
 
@@ -259,222 +279,434 @@ void PluginGraph::setLastDocumentOpened (const File& file)
         ->setValue ("recentFilterGraphFiles", recentFiles.toString());
 }
 
-//==============================================================================
-static void readBusLayoutFromXml (AudioProcessor::BusesLayout& busesLayout, AudioProcessor& plugin,
-                                  const XmlElement& xml, bool isInput)
+void PluginGraph::Import(const char *filename)
 {
-    auto& targetBuses = (isInput ? busesLayout.inputBuses
-                                 : busesLayout.outputBuses);
-    int maxNumBuses = 0;
+    m_performer.Import(filename);
+}
 
-    if (auto* buses = xml.getChildByName (isInput ? "INPUTS" : "OUTPUTS"))
+
+int m_currentSong = 0;
+int m_pendingSong = 0;
+int m_pendingSet = 0;
+
+void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
+{
+    for (int m = 0; m<60; ++m)
     {
-        forEachXmlChildElementWithTagName (*buses, e, "BUS")
+        unsigned char mes[10];
+        int meslen = 0;
+        memcpy(mes, "\x00\x20\x6B\x7F\x42\x02\x00", 7); meslen += 7;
+        unsigned char parameter = 3;
+        unsigned char control = 0;
+        unsigned char value = 0;
+        // order volume / knob 1 #3 / 9 disable knobs / Slider 1 #9 / 8 disable sliders / 16 pads (midi and note) / rewind (mode and cc) / forward (mode and cc) / stop (mode and cc)
+        if (m == 0)
         {
-            const int busIdx = e->getIntAttribute ("index");
-            maxNumBuses = jmax (maxNumBuses, busIdx + 1);
-
-            // the number of buses on busesLayout may not be in sync with the plugin after adding buses
-            // because adding an input bus could also add an output bus
-            for (int actualIdx = plugin.getBusCount (isInput) - 1; actualIdx < busIdx; ++actualIdx)
-                if (! plugin.addBus (isInput))
-                    return;
-
-            for (int actualIdx = targetBuses.size() - 1; actualIdx < busIdx; ++actualIdx)
-                targetBuses.add (plugin.getChannelLayoutOfBus (isInput, busIdx));
-
-            auto layout = e->getStringAttribute ("layout");
-
-            if (layout.isNotEmpty())
-                targetBuses.getReference (busIdx) = AudioChannelSet::fromAbbreviatedString (layout);
+            control = 0x30;
+            value = 9;
         }
-    }
+        else if (m == 1)
+        {
+            control = 1;
+            value = 3;
+        }
+        else if (m<2 + 9)
+        {
+            parameter = 1; // mode
+            control = (unsigned char)m; // knob 2 to knob 10
+            value = 0; // disable
+        }
+        else if (m == 2 + 9)
+        {
+            control = 0x0b; // slider 1
+            value = 9; // also setup slider 1 like volume
+        }
+        else if (m<2 + 9 + 1 + 8)
+        {
+            parameter = 5; // max val
+            control = (unsigned char)((m<2 + 1 + 8 + 4) ? m : (m + 0x3c));
+            value = 0; // another way of disable (didn't work other way)
+        }
+        else if (m<2 + 9 + 1 + 8 + 16)
+        {
+            parameter = 2; // midi channel (defaults to 10 on pads)
+            control = (unsigned char)(0x70 + (m - 2 - 9 - 1 - 8));
+            value = 0; // midi channel 1
+        }
+        else if (m<2 + 9 + 1 + 8 + 16 * 2)
+        {
+            control = (unsigned char)(0x70 + (m - 2 - 9 - 1 - 8 - 16));
+            value = (unsigned char)(0x15 + (m - 2 - 9 - 1 - 8 - 16)); // Low A up
+        }
+        else if (m == 54)
+        {
+            parameter = 1;
+            control = 0x5b; // rewind
+            value = 8; // for some reason this mode value instead of 3
+        }
+        else if (m == 55)
+        {
+            parameter = 3;
+            control = 0x5b;
+            value = 111;
+        }
+        else if (m == 56)
+        {
+            parameter = 1;
+            control = 0x5c; // forward
+            value = 8;
+        }
+        else if (m == 57)
+        {
+            parameter = 3;
+            control = 0x5c;
+            value = 116;
+        }
+        else if (m == 58)
+        {
+            parameter = 1;
+            control = 0x59; // stop
+            value = 8;
+        }
+        else if (m == 59)
+        {
+            parameter = 3;
+            control = 0x59;
+            value = 117;
+        }
 
-    // if the plugin has more buses than specified in the xml, then try to remove them!
-    while (maxNumBuses < targetBuses.size())
-    {
-        if (! plugin.removeBus (isInput))
-            return;
 
-        targetBuses.removeLast();
+        mes[meslen++] = parameter;
+        mes[meslen++] = control;
+        mes[meslen++] = value;
+
+        // send to lcd
+        vector<unsigned char> message(meslen);
+        memcpy(message.data(), mes, meslen);
+        output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
     }
 }
 
-//==============================================================================
-static XmlElement* createBusLayoutXml (const AudioProcessor::BusesLayout& layout, const bool isInput)
+
+void PluginGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2)
 {
-    auto& buses = isInput ? layout.inputBuses
-                          : layout.outputBuses;
+    std::string ip;
 
-    auto* xml = new XmlElement (isInput ? "INPUTS" : "OUTPUTS");
-
-    for (int busIdx = 0; busIdx < buses.size(); ++busIdx)
+    if (strcmp(text1, " ") == 0 && strcmp(text2, " ") == 0)
     {
-        auto& set = buses.getReference (busIdx);
-
-        auto* bus = xml->createNewChildElement ("BUS");
-        bus->setAttribute ("index", busIdx);
-        bus->setAttribute ("layout", set.isDisabled() ? "disabled" : set.getSpeakerArrangementAsString());
+#ifdef WIN32
+        WSADATA wsa;
+        WSAStartup(MAKEWORD(2, 2), &wsa);
+#endif
+        char szHostName[255];
+        gethostname(szHostName, 255);
+        struct hostent *host_entry;
+        host_entry = gethostbyname(szHostName);
+        text1 = szHostName;
+        ip = inet_ntoa(*(struct in_addr *)*host_entry->h_addr_list);
+        if (ip.length() <= 13)
+            ip = "IP:" + ip;
+        text2 = ip.c_str();
+#ifdef WIN32
+        WSACleanup();
+#endif
     }
 
-    return xml;
+    unsigned char mes[12 + 16 * 2];
+    int meslen = 0;
+    memcpy(mes, "\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 9); meslen += 9;
+    memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += strlen(text1) + 1;
+    mes[meslen++] = 0x02;
+    memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += strlen(text2) + 1;
+
+    // send to lcd
+    output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
 }
 
-static XmlElement* createNodeXml (AudioProcessorGraph::Node* const node) noexcept
+
+
+
+void OptimizeLines(string &songName1, string &songName2)
 {
-    if (auto* plugin = dynamic_cast<AudioPluginInstance*> (node->getProcessor()))
+    bool line2free = (songName2 == "");
+    while (songName1.size()>16 && line2free) // nothing on line 2 and line 1 is too long, try putting it to next line
     {
-        auto e = new XmlElement ("FILTER");
-
-        e->setAttribute ("uid",      (int) node->nodeID.uid);
-        e->setAttribute ("x",        node->properties ["x"].toString());
-        e->setAttribute ("y",        node->properties ["y"].toString());
-       #if JUCE_WINDOWS && JUCE_WIN_PER_MONITOR_DPI_AWARE
-        e->setAttribute ("DPIAware", node->properties["DPIAware"].toString());
-       #endif
-
-        for (int i = 0; i < (int) PluginWindow::Type::numTypes; ++i)
+        if (char* ptr = (char*)strrchr(songName1.c_str(), ' '))
         {
-            auto type = (PluginWindow::Type) i;
-
-            if (node->properties.contains (PluginWindow::getOpenProp (type)))
-            {
-                e->setAttribute (PluginWindow::getLastXProp (type), node->properties[PluginWindow::getLastXProp (type)].toString());
-                e->setAttribute (PluginWindow::getLastYProp (type), node->properties[PluginWindow::getLastYProp (type)].toString());
-                e->setAttribute (PluginWindow::getOpenProp (type),  node->properties[PluginWindow::getOpenProp (type)].toString());
-            }
+            songName2 = std::string(ptr + 1) + " " + songName2;
+            songName1.resize(ptr - songName1.c_str());
         }
-
-        {
-            PluginDescription pd;
-            plugin->fillInPluginDescription (pd);
-            e->addChildElement (pd.createXml().release());
-        }
-
-        {
-            MemoryBlock m;
-            node->getProcessor()->getStateInformation (m);
-            e->createNewChildElement ("STATE")->addTextElement (m.toBase64Encoding());
-        }
-
-        auto layout = plugin->getBusesLayout();
-
-        auto layouts = e->createNewChildElement ("LAYOUT");
-        layouts->addChildElement (createBusLayoutXml (layout, true));
-        layouts->addChildElement (createBusLayoutXml (layout, false));
-
-        return e;
     }
 
-    jassertfalse;
-    return nullptr;
+    TrimRight(songName2); // procedure above may have added space
+
+                          // if still not fit, remove spaces
+    if (songName1.size()>16 || songName2.size()>16)
+    {
+        Replace(songName1, " ", "");
+        if (line2free)
+            Replace(songName2, " ", "");
+    }
+
+    // oh well trunc
+    if (songName1.size()>16)
+        songName1.resize(16);
+    if (songName2.size()>16)
+        songName2.resize(16);
+    if (songName1 == "")
+        songName1 = " ";
+    if (songName2 == "")
+        songName2 = " ";
 }
 
-void PluginGraph::createNodeFromXml (const XmlElement& xml)
+void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
 {
-    PluginDescription pd;
+    string songName1, songName2;
+    songName1 = m_performer.Root.Songs.Song[m_currentSong].Name;
+    songName2 = m_performer.Root.Songs.Song[m_currentSong].PerformancePtr[0]->Name; // TODO some sort of index into songs & performances
 
-    forEachXmlChildElement (xml, e)
+    size_t found = songName2.find("|");
+    if (found != -1)
+        songName2 = string(songName2.c_str() + found + 1);
+    TrimRight(songName2);
+
+    if (songName1 == songName2)
+        songName2 = "";
+
+
+    OptimizeLines(songName1, songName2);
+
+
+
+    if (m_performer.Root.SetLists.SetList.size()>0)
+        PrintLCDScreen(output, sample_number, songName1.c_str(), songName2.c_str());
+    else
+        PrintLCDScreen(output, sample_number, "No set loaded", " ");
+}
+
+void PluginGraph::UpdateCurrentRouting()
+{
+    // this code is in GraphEditorPanel at the moment
+}
+
+void PluginGraph::LoadSet(int setIndex)
+{
+    setIndex;
+}
+
+bool m_keylabNeedsSettingup = true;
+
+void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
+{
+    if (m_keylabNeedsSettingup)
     {
-        if (pd.loadFromXml (*e))
-            break;
+        m_keylabNeedsSettingup = false;
+        SetupKeylab(midiBuffer, 0);
+        PrintLCDScreen(midiBuffer, 0, "Engine Loaded", "Select setlist");
     }
-
-    String errorMessage;
-
-    if (auto instance = formatManager.createPluginInstance (pd, graph.getSampleRate(),
-                                                            graph.getBlockSize(), errorMessage))
+    samples;
+    sampleRate;
+    if (!midiBuffer.isEmpty())
     {
-        if (auto* layoutEntity = xml.getChildByName ("LAYOUT"))
+        MidiMessage midi_message;
+        MidiBuffer output;
+        int sample_number;
+
+        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
+        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
         {
-            auto layout = instance->getBusesLayout();
-
-            readBusLayoutFromXml (layout, *instance, *layoutEntity, true);
-            readBusLayoutFromXml (layout, *instance, *layoutEntity, false);
-
-            instance->setBusesLayout (layout);
-        }
-
-        if (auto node = graph.addNode (std::move (instance), NodeID ((uint32) xml.getIntAttribute ("uid"))))
-        {
-            if (auto* state = xml.getChildByName ("STATE"))
+            if (midi_message.isControllerOfType(117)) // power off
             {
-                MemoryBlock m;
-                m.fromBase64Encoding (state->getAllSubText());
-
-                node->getProcessor()->setStateInformation (m.getData(), (int) m.getSize());
-            }
-
-            node->properties.set ("x",        xml.getDoubleAttribute ("x"));
-            node->properties.set ("y",        xml.getDoubleAttribute ("y"));
-           #if JUCE_WINDOWS && JUCE_WIN_PER_MONITOR_DPI_AWARE
-            node->properties.set ("DPIAware", xml.getDoubleAttribute ("DPIAware"));
-           #endif
-
-            for (int i = 0; i < (int) PluginWindow::Type::numTypes; ++i)
-            {
-                auto type = (PluginWindow::Type) i;
-
-                if (xml.hasAttribute (PluginWindow::getOpenProp (type)))
+                if (midi_message.getControllerValue() == 127)
+                    m_shutdownPressCount++;
+                if (m_shutdownPressCount == 1)
+                    PrintLCDScreen(output, sample_number, "Are you sure?", " ");
+                if (m_shutdownPressCount>1)
                 {
-                    node->properties.set (PluginWindow::getLastXProp (type), xml.getIntAttribute (PluginWindow::getLastXProp (type)));
-                    node->properties.set (PluginWindow::getLastYProp (type), xml.getIntAttribute (PluginWindow::getLastYProp (type)));
-                    node->properties.set (PluginWindow::getOpenProp  (type), xml.getIntAttribute (PluginWindow::getOpenProp (type)));
-
-                    if (node->properties[PluginWindow::getOpenProp (type)])
-                    {
-                        jassert (node->getProcessor() != nullptr);
-
-                        if (auto w = getOrCreateWindowFor (node, type))
-                            w->toFront (true);
-                    }
+                    PrintLCDScreen(output, sample_number, "Shutting Down", " ");
+                    system("shutdown /t 0 /s");
                 }
             }
+            else
+            {
+                if (m_shutdownPressCount) // to remove confirm text
+                {
+                    if (m_performer.Root.SetLists.SetList.size()>0)
+                        UpdateLCDScreen(output, sample_number);
+                    else
+                        PrintLCDScreen(output, sample_number, " ", " ");
+                }
+                m_shutdownPressCount = 0;
+
+            }
+
+            if (midi_message.isControllerOfType(0) || midi_message.isControllerOfType(0x20))
+            {
+                // ignore bank change 
+            }
+            else if (midi_message.isAftertouch() || midi_message.isChannelPressure())
+            {
+                //ignore aftertouch
+            } 
+            //else if (midi_message.isPitchWheel())
+            //{
+            //  //ignore pitch bend
+            //}
+            else if (midi_message.isControllerOfType(0x07))
+            {
+                //ignore volume changes
+            }
+            //else if (midi_message.isControllerOfType(0x01))
+            //{
+            //  //ignore modulation
+            //}
+            else if (midi_message.isControllerOfType(0x09))
+            {
+                InternalPluginFormat::SetGain(m_masterGainNode, ((float)midi_message.getControllerValue()) / 127.f, false);
+            }
+            else if (midi_message.isProgramChange())
+            {
+                if (m_performer.Root.SetLists.SetList.size())
+                {
+                    m_currentSong = midi_message.getProgramChangeNumber() % (int)m_performer.Root.SetLists.SetList.size();
+                    m_pendingSong = m_currentSong;
+                }
+
+                UpdateCurrentRouting();
+            }
+            else if (midi_message.isControllerOfType(111)) // backward
+            {
+                if (midi_message.getControllerValue()>0)
+                {
+                    m_currentSong--;
+                    if (m_currentSong<0)
+                        m_currentSong = m_performer.Root.SetLists.SetList.size() - 1;
+                    if (m_currentSong<0)
+                        m_currentSong = 0;
+                    m_pendingSong = m_currentSong;
+                    UpdateCurrentRouting();
+                }
+                else
+                    UpdateLCDScreen(output, sample_number);
+
+            }
+            else if (midi_message.isControllerOfType(116)) // forward
+            {
+                if (midi_message.getControllerValue()>0)
+                {
+                    m_currentSong++;
+                    if (m_currentSong >= (int)m_performer.Root.SetLists.SetList.size())
+                        m_currentSong = 0;
+                    m_pendingSong = m_currentSong;
+                    UpdateCurrentRouting();
+                }
+                else
+                    UpdateLCDScreen(output, sample_number);
+
+            }
+            else if (midi_message.isControllerOfType(115))
+            {
+                if (midi_message.getControllerValue()>0)
+                {
+                    m_currentSong = m_pendingSong;
+                    UpdateCurrentRouting();
+                }
+                else
+                    UpdateLCDScreen(output, sample_number); // just redraw
+            }
+            else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x3f) // anticlockwise
+            {
+                m_pendingSong--;
+                if (m_pendingSong<0)
+                    m_pendingSong = m_performer.Root.SetLists.SetList.size() - 1;
+                if (m_pendingSong<0)
+                    m_pendingSong = 0;
+                UpdateLCDScreen(output, sample_number);
+            }
+            else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x41) // clockwise
+            {
+                m_pendingSong++;
+                if (m_pendingSong >= (int)m_performer.Root.SetLists.SetList.size())
+                    m_pendingSong = 0;
+                UpdateLCDScreen(output, sample_number);
+            }
+            else if (midi_message.isControllerOfType(113))
+            {
+                if (midi_message.getControllerValue() > 0)
+                {
+                    LoadSet(m_pendingSet);
+                    UpdateLCDScreen(output, sample_number);
+                }
+                else
+                    UpdateLCDScreen(output, sample_number); // just redraw
+            }
+            else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x3f) // category anticlockwise
+            {
+                m_pendingSet--;
+                if (m_pendingSet<0)
+                    m_pendingSet = m_performer.Root.SetLists.SetList.size() - 1;
+                if (m_pendingSet<0)
+                    m_pendingSet = 0;
+                if (m_performer.Root.SetLists.SetList.size()>0)
+                    PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
+            }
+            else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x41) // category clockwise
+            {
+                m_pendingSet++;
+                if (m_pendingSet >= (int)m_performer.Root.SetLists.SetList.size())
+                    m_pendingSet = 0;
+                if (m_performer.Root.SetLists.SetList.size()>0)
+                    PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
+            }
+            else if (midi_message.isNoteOn() && midi_message.getVelocity() == 0)
+                output.addEvent(MidiMessage::noteOff(midi_message.getChannel(), midi_message.getNoteNumber()), sample_number);
+            else
+                output.addEvent(midi_message, sample_number);
         }
+        midiBuffer = output;
     }
 }
 
-std::unique_ptr<XmlElement> PluginGraph::createXml() const
+void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
-    auto xml = std::make_unique<XmlElement> ("FILTERGRAPH");
-
-    for (auto* node : graph.getNodes())
-        xml->addChildElement (createNodeXml (node));
-
-    for (auto& connection : graph.getConnections())
+    samples;
+    sampleRate;
+    if (!midiBuffer.isEmpty())
     {
-        auto e = xml->createNewChildElement ("CONNECTION");
+        MidiMessage midi_message;
+        MidiBuffer output;
+        int sample_number;
 
-        e->setAttribute ("srcFilter", (int) connection.source.nodeID.uid);
-        e->setAttribute ("srcChannel", connection.source.channelIndex);
-        e->setAttribute ("dstFilter", (int) connection.destination.nodeID.uid);
-        e->setAttribute ("dstChannel", connection.destination.channelIndex);
+        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
+        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
+        {
+            if (midi_message.isSysEx())
+                output.addEvent(midi_message, sample_number);
+        }
+        midiBuffer = output;
     }
-
-    return xml;
 }
 
-void PluginGraph::restoreFromXml (const XmlElement& xml)
+void PluginGraph::CreateDefaultNodes()
 {
     clear();
 
-    forEachXmlChildElementWithTagName (xml, e, "FILTER")
-    {
-        createNodeFromXml (*e);
-        changed();
-    }
+    InternalPluginFormat internalFormat;
+    String errorMessage;
+    m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_audioOutNode = graph.addNode(formatManager.createPluginInstance(internalFormat.audioOutDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiControlNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_masterGainNode = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
-    forEachXmlChildElementWithTagName (xml, e, "CONNECTION")
-    {
-        graph.addConnection ({ { NodeID ((uint32) e->getIntAttribute ("srcFilter")), e->getIntAttribute ("srcChannel") },
-                               { NodeID ((uint32) e->getIntAttribute ("dstFilter")), e->getIntAttribute ("dstChannel") } });
-    }
+    InternalPluginFormat::SetFilterCallback(m_midiSysexNode, &m_nonSysexFilter);
+    InternalPluginFormat::SetFilterCallback(m_midiControlNode, this);
 
-    graph.removeIllegalConnections();
+    graph.addConnection({ { m_midiInNode->nodeID, 4096 },{ m_midiControlNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ m_midiSysexNode->nodeID, 4096 } });
+    graph.addConnection({ { m_midiSysexNode->nodeID, 4096 },{ m_midiOutNode->nodeID, 4096 } });
+    graph.addConnection({ { m_masterGainNode->nodeID, 0 },{ m_audioOutNode->nodeID, 0 } });
+    graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
 }
 
-File PluginGraph::getDefaultGraphDocumentOnMobile()
-{
-    auto persistantStorageLocation = File::getSpecialLocation (File::userApplicationDataDirectory);
-    return persistantStorageLocation.getChildFile ("state.filtergraph");
-}

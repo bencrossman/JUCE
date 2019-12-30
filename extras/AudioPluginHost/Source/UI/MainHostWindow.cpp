@@ -47,7 +47,7 @@ public:
                                                   deadMansPedalFile,
                                                   getAppProperties().getUserSettings(), true), true);
 
-        setResizable (true, false);
+        setResizable (false, false);
         setResizeLimits (300, 400, 800, 1500);
         setTopLeftPosition (60, 60);
 
@@ -94,7 +94,7 @@ MainHostWindow::MainHostWindow()
    #else
     setResizable (true, false);
     setResizeLimits (500, 400, 10000, 10000);
-    centreWithSize (800, 600);
+    centreWithSize (1024, 720);
    #endif
 
     graphHolder.reset (new GraphDocumentComponent (formatManager, deviceManager, knownPluginList));
@@ -255,6 +255,7 @@ PopupMenu MainHostWindow::getMenuForIndex (int topLevelMenuIndex, const String& 
        #if ! (JUCE_IOS || JUCE_ANDROID)
         menu.addCommandItem (&getCommandManager(), CommandIDs::newFile);
         menu.addCommandItem (&getCommandManager(), CommandIDs::open);
+        menu.addCommandItem(&getCommandManager(), CommandIDs::import);
        #endif
 
         RecentlyOpenedFilesList recentFiles;
@@ -366,7 +367,8 @@ void MainHostWindow::createPlugin (const PluginDescription& desc, Point<int> pos
 
 void MainHostWindow::addPluginsToMenu (PopupMenu& m)
 {
-    if (graphHolder != nullptr)
+    // Dont need this for some reason
+    /*if (graphHolder != nullptr)
     {
         int i = 0;
 
@@ -375,7 +377,7 @@ void MainHostWindow::addPluginsToMenu (PopupMenu& m)
                        graphHolder->graph->getNodeForName (t.name) == nullptr);
     }
 
-    m.addSeparator();
+    m.addSeparator();*/
 
     pluginDescriptions = knownPluginList.getTypes();
     KnownPluginList::addToMenu (m, pluginDescriptions, pluginSortMethod);
@@ -402,6 +404,7 @@ void MainHostWindow::getAllCommands (Array<CommandID>& commands)
                              #if ! (JUCE_IOS || JUCE_ANDROID)
                               CommandIDs::newFile,
                               CommandIDs::open,
+                              CommandIDs::import,
                               CommandIDs::save,
                               CommandIDs::saveAs,
                              #endif
@@ -423,23 +426,28 @@ void MainHostWindow::getCommandInfo (const CommandID commandID, ApplicationComma
     {
    #if ! (JUCE_IOS || JUCE_ANDROID)
     case CommandIDs::newFile:
-        result.setInfo ("New", "Creates a new filter graph file", category, 0);
+        result.setInfo ("New", "Creates a new Performer file", category, 0);
         result.defaultKeypresses.add(KeyPress('n', ModifierKeys::commandModifier, 0));
         break;
 
     case CommandIDs::open:
-        result.setInfo ("Open...", "Opens a filter graph file", category, 0);
+        result.setInfo ("Open...", "Opens a Performer file", category, 0);
         result.defaultKeypresses.add (KeyPress ('o', ModifierKeys::commandModifier, 0));
         break;
 
+	case CommandIDs::import:
+		result.setInfo("Import...", "Imports a Brainspawn Forte rcf file", category, 0);
+		result.defaultKeypresses.add(KeyPress('o', ModifierKeys::commandModifier, 0));
+		break;
+
     case CommandIDs::save:
-        result.setInfo ("Save", "Saves the current graph to a file", category, 0);
+        result.setInfo ("Save", "Saves the current Performer to a file", category, 0);
         result.defaultKeypresses.add (KeyPress ('s', ModifierKeys::commandModifier, 0));
         break;
 
     case CommandIDs::saveAs:
         result.setInfo ("Save As...",
-                        "Saves a copy of the current graph to a file",
+                        "Saves a copy of the current Performer to a file",
                         category, 0);
         result.defaultKeypresses.add (KeyPress ('s', ModifierKeys::shiftModifier | ModifierKeys::commandModifier, 0));
         break;
@@ -487,6 +495,16 @@ bool MainHostWindow::perform (const InvocationInfo& info)
         if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
             graphHolder->graph->loadFromUserSpecifiedFile (true);
         break;
+
+	case CommandIDs::import:
+        if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
+        {
+            graphHolder->graph->newDocument();
+            FileChooser fc("Select Forte RCF File to import",File(),"*.rcf");
+            if (fc.browseForFileToOpen())
+                graphHolder->graph->Import(fc.getResult().getFullPathName().getCharPointer());
+        }
+		break;
 
     case CommandIDs::save:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)

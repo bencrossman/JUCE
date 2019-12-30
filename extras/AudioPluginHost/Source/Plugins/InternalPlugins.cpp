@@ -340,6 +340,86 @@ private:
     Reverb reverb;
 };
 
+
+
+class GainFilter : public InternalPlugin
+{
+public:
+    GainFilter(const PluginDescription& descr) : InternalPlugin(descr), m_gain(1)
+    {}
+
+    static String getIdentifier()
+    {
+        return "Gain";
+    }
+
+    void prepareToPlay(double newSampleRate, int) override
+    {
+        newSampleRate;
+    }
+
+    void releaseResources() override {}
+
+    static PluginDescription getPluginDescription()
+    {
+        return InternalPlugin::getPluginDescription(getIdentifier(), false, false);
+    }
+
+    void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override
+    {
+        auto numChannels = buffer.getNumChannels();
+        buffer.applyGain(m_gain);
+        for (int ch = 2; ch < numChannels; ++ch)
+            buffer.clear(ch, 0, buffer.getNumSamples());
+    }
+
+    void SetGain(float gain) { m_gain = gain; }
+
+private:
+    float m_gain;
+};
+
+void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels)
+{
+    (static_cast<GainFilter*>(node->getProcessor()))->SetGain(useDecibels ? (float)pow(10, gain / 10.0) : gain);
+}
+
+//==============================================================================
+class MidiFilter : public InternalPlugin
+{
+public:
+    MidiFilter(const PluginDescription& descr) : InternalPlugin(descr), m_callback(NULL) {}
+
+    static String getIdentifier()
+    {
+        return "MidiFilter";
+    }
+
+    void prepareToPlay(double newSampleRate, int) override
+    {
+        newSampleRate;
+    }
+
+    void releaseResources() override {}
+
+    static PluginDescription getPluginDescription()
+    {
+        return InternalPlugin::getPluginDescription(getIdentifier(), true, true);
+    }
+
+    void processBlock(AudioBuffer<float>& buffer, MidiBuffer&midiBuffer) override
+    {
+        if (m_callback)
+            m_callback->Filter(buffer.getNumSamples(), (int)getSampleRate(), midiBuffer);
+    }
+
+    void SetCallback(MidiFilterCallback *callback) { m_callback = callback; }
+
+private:
+    MidiFilterCallback * m_callback;
+};
+
+
 //==============================================================================
 InternalPluginFormat::InternalPluginFormat()
 {
@@ -357,6 +437,19 @@ InternalPluginFormat::InternalPluginFormat()
         AudioProcessorGraph::AudioGraphIOProcessor p (AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
         p.fillInPluginDescription (midiInDesc);
     }
+
+    {
+        AudioProcessorGraph::AudioGraphIOProcessor p (AudioProcessorGraph::AudioGraphIOProcessor::midiOutputNode);
+        p.fillInPluginDescription(midiOutDesc);
+    }
+
+    {
+        gainDesc = GainFilter::getPluginDescription();
+    }
+
+    {
+        midiFilterDesc = MidiFilter::getPluginDescription();
+    }
 }
 
 std::unique_ptr<AudioPluginInstance> InternalPluginFormat::createInstance (const String& name)
@@ -364,10 +457,13 @@ std::unique_ptr<AudioPluginInstance> InternalPluginFormat::createInstance (const
     if (name == audioOutDesc.name) return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::audioOutputNode);
     if (name == audioInDesc.name)  return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::audioInputNode);
     if (name == midiInDesc.name)   return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
+    if (name == midiOutDesc.name)  return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::midiOutputNode);
 
     if (name == SineWaveSynth::getIdentifier()) return std::make_unique<SineWaveSynth> (SineWaveSynth::getPluginDescription());
     if (name == ReverbPlugin::getIdentifier())  return std::make_unique<ReverbPlugin>  (ReverbPlugin::getPluginDescription());
-
+    if (name == GainFilter::getIdentifier())  return std::make_unique<GainFilter>      (GainFilter::getPluginDescription());
+    if (name == MidiFilter::getIdentifier())  return std::make_unique<MidiFilter>      (MidiFilter::getPluginDescription());
+    
     return {};
 }
 
@@ -388,7 +484,15 @@ bool InternalPluginFormat::requiresUnblockedMessageThreadDuringCreation (const P
 
 void InternalPluginFormat::getAllTypes (Array<PluginDescription>& results)
 {
-    results.add (audioInDesc, audioOutDesc, midiInDesc,
+    results.add (audioInDesc, audioOutDesc, midiInDesc, midiOutDesc,
                  SineWaveSynth::getPluginDescription(),
-                 ReverbPlugin::getPluginDescription());
+                 ReverbPlugin::getPluginDescription(),
+                 GainFilter::getPluginDescription(),
+                 MidiFilter::getPluginDescription());
 }
+
+void InternalPluginFormat::SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback)
+{
+    (static_cast<MidiFilter*>(node->getProcessor()))->SetCallback(callback);
+}
+
