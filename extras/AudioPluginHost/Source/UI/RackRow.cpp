@@ -44,6 +44,7 @@ RackRow::RackRow ()
     m_lastNote = -1;
     m_arpeggiatorBeat = 0;
     m_notesDown.reserve(128);
+    m_pendingChunkSave = true;
     m_pendingProgram = false;
     m_pendingProgramNames = 0.f;
     m_arpeggiatorTimer = 0.f;
@@ -544,6 +545,17 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
         }
         midiBuffer = output;
+    }
+
+    if (m_pendingChunkSave)
+    {
+        m_pendingChunkSave = false;
+        auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+
+        MemoryBlock data;
+        processor->getStateInformation(data);
+        m_current->Data = data.toBase64Encoding().getCharPointer();
+        
     }
 
     if (m_pendingProgram)

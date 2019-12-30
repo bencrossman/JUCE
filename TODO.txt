@@ -1,5 +1,6 @@
 Maybe some refactoring
-Song/Scene index?
+Song/Scene index? (This might be a import to xml thing?)
+Import chunk data
 Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
 Check sampler supports octave mode
 Mono switch (simply doesn't mix TruePianos)
