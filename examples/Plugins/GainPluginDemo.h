@@ -60,7 +60,8 @@ public:
                                            .withOutput ("Output", AudioChannelSet::stereo()))
     {
         addParameter (gain = new AudioParameterFloat ({ "gain", 1 }, "Gain", 0.0f, 1.0f, 0.5f));
-    }
+		addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
+	}
 
     //==============================================================================
     void prepareToPlay (double, int) override {}
@@ -69,11 +70,33 @@ public:
     void processBlock (AudioBuffer<float>& buffer, MidiBuffer&) override
     {
         buffer.applyGain (*gain);
+
+		if (m_mixDownMode->get() == 0.5f)
+		{
+			buffer.applyGain(0.5f);
+			buffer.addFrom(0, 0, buffer, 1, 0, buffer.getNumSamples()); // mix
+			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
+		}
+		if (m_mixDownMode->get() == 1.f)
+		{
+			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
+		}
     }
 
     void processBlock (AudioBuffer<double>& buffer, MidiBuffer&) override
     {
         buffer.applyGain ((float) *gain);
+
+		if (m_mixDownMode->get() == 0.5f)
+		{
+			buffer.applyGain(0.5f);
+			buffer.addFrom(0, 0, buffer, 1, 0, buffer.getNumSamples()); // mix
+			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
+		}
+		if (m_mixDownMode->get() == 1.f)
+		{
+			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
+		}
     }
 
     //==============================================================================
@@ -116,7 +139,7 @@ public:
 private:
     //==============================================================================
     AudioParameterFloat* gain;
-
+	AudioParameterFloat* m_mixDownMode;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainProcessor)
 };

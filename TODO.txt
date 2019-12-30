@@ -1,0 +1,42 @@
+Continue:
+- Setlist use (same as performance use)
+- song use (same as performance use)
+- song performance use (same as performance use)
+- Performance use
+- Performance new
+
+For covers / Blondie
+~~~~~~~~~~~~~~~~~~~~
+Append onto Queen
+Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
+Implement 16th
+Tempo edit
+
+Bonus with no benefit - Upgrade to JUCE 6
+- Use their midi output
+- Use their gain plugin
+
+Future
+~~~~~~
+Integrate for Access database with edit?
+Implement right click menu item "Delete rack"
+Add new rack
+Handle missing devices
+Implement scoops / falls for disco strings
+Jupiter 8
+Support JV1080 - script presses button and saves out all patch states (This would give me a lot of new sounds)
+Would be good to get Triton too
+
+MainHostWindow
++graphholder---->GraphDocumentComponent
+                 +pluginList              
+                 +graph------------------>PluginGraph : FileBasedDocument (Sets up rack nodes)
+                                          +m_performer
+                                          +graph------------------------------->AudioProcessorGraph  
+                                          +knownPluginList(added for auto dll)               
+                                          
+                 +graphPanel------------->GraphEditorPanel
+                                          +m_rackDevice------------------------>RackRow's (UI but responsible for MIDI/State too)
+                                                                                +graph(Needed to open plugin window and also using for shared chunk send function)
+                                                                                +panel(added so we can notify of solo)
+
