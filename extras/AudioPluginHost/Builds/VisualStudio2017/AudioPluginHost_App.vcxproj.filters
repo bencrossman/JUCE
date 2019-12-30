@@ -2,6 +2,15 @@
 
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml">
+      <UniqueIdentifier>{A06A6DA7-93DE-7B21-5026-CCCF41402183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\ForteEmulator\ForteSDK">
+      <UniqueIdentifier>{038B4CF6-7BB0-91B8-2E60-9E6515C20147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\ForteEmulator">
+      <UniqueIdentifier>{EFB891B5-0D63-68DC-9270-4CE1482C0D58}</UniqueIdentifier>
+    </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins">
       <UniqueIdentifier>{346E906D-8A2B-A93A-4C90-BCD3C60D2FD0}</UniqueIdentifier>
     </Filter>
@@ -487,6 +496,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinystr.cpp">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxml.cpp">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlerror.cpp">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlparser.cpp">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\InternalPlugins.cpp">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
     </ClCompile>
@@ -496,6 +517,15 @@
     <ClCompile Include="..\..\Source\Plugins\PluginGraph.cpp">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\SetlistManager.cpp">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\RackTitleBar.cpp">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\RackRow.cpp">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\GraphEditorPanel.cpp">
       <Filter>AudioPluginHost\Source\UI</Filter>
     </ClCompile>
@@ -503,6 +533,9 @@
       <Filter>AudioPluginHost\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\HostStartup.cpp">
+      <Filter>AudioPluginHost\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Performer.cpp">
       <Filter>AudioPluginHost\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
@@ -2712,6 +2745,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinystr.h">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxml.h">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\ForteTypes.h">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\XmlArchive.h">
+      <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\InternalPlugins.h">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
     </ClInclude>
@@ -2721,6 +2766,15 @@
     <ClInclude Include="..\..\Source\Plugins\PluginGraph.h">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\SetlistManager.h">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\RackTitleBar.h">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\RackRow.h">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\GraphEditorPanel.h">
       <Filter>AudioPluginHost\Source\UI</Filter>
     </ClInclude>
@@ -2729,6 +2783,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\PluginWindow.h">
       <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Performer.h">
+      <Filter>AudioPluginHost\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>

@@ -27,8 +27,13 @@
 #include "GraphEditorPanel.h"
 #include "../Plugins/InternalPlugins.h"
 #include "MainHostWindow.h"
+#include "RackRow.h"
+#include "SetlistManager.h"
+#include "RackTitleBar.h"
+#include "../Performer.h"
 
 //==============================================================================
+/*
 #if JUCE_IOS
  class AUScanner
  {
@@ -699,21 +704,39 @@ struct GraphEditorPanel::ConnectorComponent   : public Component,
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ConnectorComponent)
 };
+*/
 
 
 //==============================================================================
 GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 {
+	LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Impact");
+
     graph.addChangeListener (this);
     setOpaque (true);
+
+    m_rackUIViewport.reset(new Viewport());
+    m_rackUI.reset(new Component());
+    m_rackTopUI.reset(new RackTitleBar());
+	m_setlistUI.reset(new SetlistManager());
+
+    m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
+	m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
+    m_tabs->addTab(TRANS("SetLists"), Colours::darkblue, m_setlistUI.get(), false);
+    m_tabs->addTab(TRANS("Performances"), Colours::darkgrey, m_rackUIViewport.get(), false);
+	//m_tabs->setTabBarDepth(30);
+	m_tabs->setCurrentTabIndex(1);
+    addAndMakeVisible(m_tabs.get());
+
+    m_rackUIViewport->setScrollBarsShown(true, false);
+    m_rackUIViewport->setViewedComponent(m_rackUI.get());
+
+    m_titleHeight = m_rackTopUI->getHeight();
 }
 
 GraphEditorPanel::~GraphEditorPanel()
 {
     graph.removeChangeListener (this);
-    draggingConnector = nullptr;
-    nodes.clear();
-    connectors.clear();
 }
 
 void GraphEditorPanel::paint (Graphics& g)
@@ -721,70 +744,13 @@ void GraphEditorPanel::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 }
 
-void GraphEditorPanel::mouseDown (const MouseEvent& e)
-{
-    if (isOnTouchDevice())
-    {
-        originalTouchPos = e.position.toInt();
-        startTimer (750);
-    }
-
-    if (e.mods.isPopupMenu())
-        showPopupMenu (e.position.toInt());
-}
-
-void GraphEditorPanel::mouseUp (const MouseEvent&)
-{
-    if (isOnTouchDevice())
-    {
-        stopTimer();
-        callAfterDelay (250, []() { PopupMenu::dismissAllActiveMenus(); });
-    }
-}
-
-void GraphEditorPanel::mouseDrag (const MouseEvent& e)
-{
-    if (isOnTouchDevice() && e.getDistanceFromDragStart() > 5)
-        stopTimer();
-}
 
 void GraphEditorPanel::createNewPlugin (const PluginDescription& desc, Point<int> position)
 {
     graph.addPlugin (desc, position.toDouble() / Point<double> ((double) getWidth(), (double) getHeight()));
 }
 
-GraphEditorPanel::PluginComponent* GraphEditorPanel::getComponentForPlugin (AudioProcessorGraph::NodeID nodeID) const
-{
-    for (auto* fc : nodes)
-       if (fc->pluginID == nodeID)
-            return fc;
 
-    return nullptr;
-}
-
-GraphEditorPanel::ConnectorComponent* GraphEditorPanel::getComponentForConnection (const AudioProcessorGraph::Connection& conn) const
-{
-    for (auto* cc : connectors)
-        if (cc->connection == conn)
-            return cc;
-
-    return nullptr;
-}
-
-GraphEditorPanel::PinComponent* GraphEditorPanel::findPinAt (Point<float> pos) const
-{
-    for (auto* fc : nodes)
-    {
-        // NB: A Visual Studio optimiser error means we have to put this Component* in a local
-        // variable before trying to cast it, or it gets mysteriously optimised away..
-        auto* comp = fc->getComponentAt (pos.toInt() - fc->getPosition());
-
-        if (auto* pin = dynamic_cast<PinComponent*> (comp))
-            return pin;
-    }
-
-    return nullptr;
-}
 
 void GraphEditorPanel::resized()
 {
@@ -798,158 +764,39 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
 void GraphEditorPanel::updateComponents()
 {
-    for (int i = nodes.size(); --i >= 0;)
-        if (graph.graph.getNodeForId (nodes.getUnchecked(i)->pluginID) == nullptr)
-            nodes.remove (i);
+	// Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
+    // both of these are about to be added to in for loop below
 
-    for (int i = connectors.size(); --i >= 0;)
-        if (! graph.graph.isConnected (connectors.getUnchecked(i)->connection))
-            connectors.remove (i);
 
-    for (auto* fc : nodes)
-        fc->update();
+	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
 
-    for (auto* cc : connectors)
-        cc->update();
+    m_rackDevice.clear();
+    m_rackUI->removeAllChildren();
 
-    for (auto* f : graph.graph.getNodes())
+    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
+
+    auto performer = graph.GetPerformer();
+    int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
+    int deviceHeight = 20;
+    for (int i = 0; i < devicesOnScreen; ++i)
     {
-        if (getComponentForPlugin (f->nodeID) == nullptr)
-        {
-            auto* comp = nodes.add (new PluginComponent (*this, f->nodeID));
-            addAndMakeVisible (comp);
-            comp->update();
-        }
+        m_rackDevice.push_back(std::make_unique<RackRow>());
+        auto newRackRow = (RackRow*)m_rackDevice.back().get();
+        newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
+        deviceHeight = newRackRow->getHeight();
+        m_rackUI->addAndMakeVisible(newRackRow);
+        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, newRackRow->getWidth(), newRackRow->getHeight());
     }
+	int deviceWidth = 946;
 
-    for (auto& c : graph.graph.getConnections())
-    {
-        if (getComponentForConnection (c) == nullptr)
-        {
-            auto* comp = connectors.add (new ConnectorComponent (*this));
-            addAndMakeVisible (comp);
+    m_tabs->setBounds(10, 10, deviceWidth, 671); // include tab bar
+    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
+    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
+    m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
-            comp->setInput (c.source);
-            comp->setOutput (c.destination);
-        }
-    }
-}
+    SetPerformance();
 
-void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
-{
-    menu.reset (new PopupMenu);
-
-    if (auto* mainWindow = findParentComponentOfClass<MainHostWindow>())
-    {
-        mainWindow->addPluginsToMenu (*menu);
-
-        menu->showMenuAsync ({},
-                             ModalCallbackFunction::create ([this, mousePos] (int r)
-                                                            {
-                                                                if (r > 0)
-                                                                    if (auto* mainWin = findParentComponentOfClass<MainHostWindow>())
-                                                                        createNewPlugin (mainWin->getChosenType (r), mousePos);
-                                                            }));
-    }
-}
-
-void GraphEditorPanel::beginConnectorDrag (AudioProcessorGraph::NodeAndChannel source,
-                                           AudioProcessorGraph::NodeAndChannel dest,
-                                           const MouseEvent& e)
-{
-    auto* c = dynamic_cast<ConnectorComponent*> (e.originalComponent);
-    connectors.removeObject (c, false);
-    draggingConnector.reset (c);
-
-    if (draggingConnector == nullptr)
-        draggingConnector.reset (new ConnectorComponent (*this));
-
-    draggingConnector->setInput (source);
-    draggingConnector->setOutput (dest);
-
-    addAndMakeVisible (draggingConnector.get());
-    draggingConnector->toFront (false);
-
-    dragConnector (e);
-}
-
-void GraphEditorPanel::dragConnector (const MouseEvent& e)
-{
-    auto e2 = e.getEventRelativeTo (this);
-
-    if (draggingConnector != nullptr)
-    {
-        draggingConnector->setTooltip ({});
-
-        auto pos = e2.position;
-
-        if (auto* pin = findPinAt (pos))
-        {
-            auto connection = draggingConnector->connection;
-
-            if (connection.source.nodeID == AudioProcessorGraph::NodeID() && ! pin->isInput)
-            {
-                connection.source = pin->pin;
-            }
-            else if (connection.destination.nodeID == AudioProcessorGraph::NodeID() && pin->isInput)
-            {
-                connection.destination = pin->pin;
-            }
-
-            if (graph.graph.canConnect (connection))
-            {
-                pos = (pin->getParentComponent()->getPosition() + pin->getBounds().getCentre()).toFloat();
-                draggingConnector->setTooltip (pin->getTooltip());
-            }
-        }
-
-        if (draggingConnector->connection.source.nodeID == AudioProcessorGraph::NodeID())
-            draggingConnector->dragStart (pos);
-        else
-            draggingConnector->dragEnd (pos);
-    }
-}
-
-void GraphEditorPanel::endDraggingConnector (const MouseEvent& e)
-{
-    if (draggingConnector == nullptr)
-        return;
-
-    draggingConnector->setTooltip ({});
-
-    auto e2 = e.getEventRelativeTo (this);
-    auto connection = draggingConnector->connection;
-
-    draggingConnector = nullptr;
-
-    if (auto* pin = findPinAt (e2.position))
-    {
-        if (connection.source.nodeID == AudioProcessorGraph::NodeID())
-        {
-            if (pin->isInput)
-                return;
-
-            connection.source = pin->pin;
-        }
-        else
-        {
-            if (! pin->isInput)
-                return;
-
-            connection.destination = pin->pin;
-        }
-
-        graph.graph.addConnection (connection);
-    }
-}
-
-void GraphEditorPanel::timerCallback()
-{
-    // this should only be called on touch devices
-    jassert (isOnTouchDevice());
-
-    stopTimer();
-    showPopupMenu (originalTouchPos);
+	((SetlistManager*)m_setlistUI.get())->SetData(performer);
 }
 
 //==============================================================================
@@ -1157,7 +1004,7 @@ struct GraphDocumentComponent::PluginListBoxModel    : public ListBoxModel,
 GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& fm,
                                                 AudioDeviceManager& dm,
                                                 KnownPluginList& kpl)
-    : graph (new PluginGraph (fm)),
+    : graph (new PluginGraph (fm, kpl)),
       deviceManager (dm),
       pluginList (kpl),
       graphPlayer (getAppProperties().getUserSettings()->getBoolValue ("doublePrecisionProcessing", false))
@@ -1175,12 +1022,16 @@ void GraphDocumentComponent::init()
     updateMidiOutput();
 
     graphPanel.reset (new GraphEditorPanel (*graph));
+    graphPanel->init();
     addAndMakeVisible (graphPanel.get());
     graphPlayer.setProcessor (&graph->graph);
+    graphPlayer.setMidiOutput(deviceManager.getDefaultMidiOutput());
 
     keyState.addListener (&graphPlayer.getMidiMessageCollector());
 
     keyboardComp.reset (new MidiKeyboardComponent (keyState, MidiKeyboardComponent::horizontalKeyboard));
+    keyboardComp->setAvailableRange(21, 21 + 88 - 1);
+
     addAndMakeVisible (keyboardComp.get());
     statusBar.reset (new TooltipBar());
     addAndMakeVisible (statusBar.get());
@@ -1275,20 +1126,8 @@ bool GraphDocumentComponent::isInterestedInDragSource (const SourceDetails& deta
             && details.description.toString().startsWith ("PLUGIN"));
 }
 
-void GraphDocumentComponent::itemDropped (const SourceDetails& details)
+void GraphDocumentComponent::itemDropped (const SourceDetails&)
 {
-    // don't allow items to be dropped behind the sidebar
-    if (pluginListSidePanel.getBounds().contains (details.localPosition))
-        return;
-
-    auto pluginTypeIndex = details.description.toString()
-                                 .fromFirstOccurrenceOf ("PLUGIN: ", false, false)
-                                 .getIntValue();
-
-    // must be a valid index!
-    jassert (isPositiveAndBelow (pluginTypeIndex, pluginList.getNumTypes()));
-
-    createNewPlugin (pluginList.getTypes()[pluginTypeIndex], details.localPosition);
 }
 
 void GraphDocumentComponent::showSidePanel (bool showSettingsPanel)
@@ -1352,3 +1191,76 @@ void GraphDocumentComponent::updateMidiOutput()
         graphPlayer.setMidiOutput (midiOutput);
     }
 }
+
+void GraphEditorPanel::init()
+{
+    graph.m_onProgramChange = [this]()
+    {
+        SetPerformance();
+    };
+
+	((RackTitleBar*)m_rackTopUI.get())->m_onMonoChanged = [this](bool mono)
+	{
+		graph.SetMono(mono);
+	};
+
+}
+
+void GraphEditorPanel::SetPerformance()
+{
+    auto performer = graph.GetPerformer();
+
+    if (performer->Root.SetLists.SetList.size() == 0)
+        return; 
+
+    PerformanceType* performance = NULL;
+    Song *song = NULL;
+
+    performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
+    
+    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performance->Name);
+
+    ((RackTitleBar*)m_rackTopUI.get())->Assign(song, performance);
+
+    auto &zones = performance->Zone;
+
+	// Some globals
+    RackRow::SetTempo(performance->Tempo);
+	graph.SetTempo(performance->Tempo);
+
+    for (auto i = 0U; i < zones.size(); ++i)
+    {
+        for (auto d = 0U; d < m_rackDevice.size(); d++)
+        {
+            auto rackDevice = ((RackRow*)m_rackDevice[d].get());
+            if (rackDevice->ID() == zones[i].DeviceID)
+            {
+                rackDevice->Assign(&(zones[i]));
+                break;
+            }
+        }
+    }
+}
+
+void GraphEditorPanel::SoloChange()
+{
+    bool anySolos = false;
+    for (auto i = 0U; i < m_rackDevice.size(); ++i)
+        if (((RackRow*)(m_rackDevice[i].get()))->IsSolo())
+            anySolos = true;
+    for (auto i = 0U; i < m_rackDevice.size(); ++i)
+        ((RackRow*)(m_rackDevice[i].get()))->SetSoloMode(anySolos);
+}
+
+bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
+{
+    if (key == KeyPress::spaceKey)
+    {
+        auto performer = graph.GetPerformer();
+        performer->m_currentPerformanceIndex++;
+        SetPerformance();
+    }
+    return true;
+}
+
+

@@ -93,6 +93,8 @@ public:
     void updateTrackProperties (const TrackProperties& p) override                { inner->updateTrackProperties (p); }
     bool isBusesLayoutSupported (const BusesLayout& layout) const override        { return inner->checkBusesLayoutSupported (layout); }
 
+	const Array<AudioProcessorParameter*>& getParameters() const override         { return inner->getParameters(); }
+
     bool canAddBus (bool) const override                                          { return true; }
     bool canRemoveBus (bool) const override                                       { return true; }
 
@@ -101,6 +103,8 @@ public:
     {
         description = getPluginDescription (*inner);
     }
+
+	std::unique_ptr<AudioProcessor> &GetInner() { return inner; }
 
 private:
     static PluginDescription getPluginDescription (const AudioProcessor& proc)
@@ -382,12 +386,73 @@ private:
     Reverb reverb;
 };
 
+
 //==============================================================================
+class MidiFilter : public AudioProcessor
+{
+public:
+	MidiFilter() : AudioProcessor() {}
+
+	static String getIdentifier()
+    {
+        return "Midi Filter";
+    }
+
+    void prepareToPlay(double newSampleRate, int) override
+    {
+        newSampleRate;
+    }
+
+	void releaseResources() override { }
+
+
+    void processBlock(AudioBuffer<float>& buffer, MidiBuffer&midiBuffer) override
+    {
+        if (m_callback)
+            m_callback->Filter(buffer.getNumSamples(), (int)getSampleRate(), midiBuffer);
+    }
+
+	void processBlock(AudioBuffer<double>& buffer, MidiBuffer&midiBuffer) override
+	{
+		if (m_callback)
+			m_callback->Filter(buffer.getNumSamples(), (int)getSampleRate(), midiBuffer);
+	}
+
+    void SetCallback(MidiFilterCallback *callback)
+	{ 
+		m_callback = callback; 
+	}
+
+	const String getName() const override { return getIdentifier(); }
+	double getTailLengthSeconds() const override { return 0.0; }
+	bool acceptsMidi() const override { return true; }
+	bool producesMidi() const override { return true; }
+	AudioProcessorEditor* createEditor() override { return nullptr; }
+	bool hasEditor() const override { return false; }
+	int getNumPrograms() override { return 1; }
+	int getCurrentProgram() override { return 0; }
+	void setCurrentProgram(int) override {}
+	const String getProgramName(int) override { return {}; }
+	void changeProgramName(int, const String&) override {}
+	void getStateInformation(juce::MemoryBlock&) override {}
+	void setStateInformation(const void*, int) override {}
+
+private:
+    MidiFilterCallback * m_callback = nullptr;
+};
+
+
+void InternalPluginFormat::SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback)
+{
+    static_cast<MidiFilter*>(((InternalPlugin*)(node->getProcessor()))->GetInner().get())->SetCallback(callback);
+}
+
+
 
 InternalPluginFormat::InternalPluginFactory::InternalPluginFactory (const std::initializer_list<Constructor>& constructorsIn)
     : constructors (constructorsIn),
       descriptions ([&]
-      {
+    {
           std::vector<PluginDescription> result;
 
           for (const auto& constructor : constructors)
@@ -421,13 +486,14 @@ InternalPluginFormat::InternalPluginFormat()
         [] { return std::make_unique<InternalPlugin> (std::make_unique<SineWaveSynth>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<ReverbPlugin>()); },
 
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<AUv3SynthProcessor>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<AUv3SynthProcessor>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<Arpeggiator>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<DspModulePluginDemoAudioProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<GainProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<JuceDemoPluginAudioProcessor>()); },
+		[] { return std::make_unique<InternalPlugin> (std::make_unique<GainProcessor>()); },
+		[] { return std::make_unique<InternalPlugin> (std::make_unique<MidiFilter>()); },
+		[] { return std::make_unique<InternalPlugin> (std::make_unique<JuceDemoPluginAudioProcessor>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<MidiLoggerPluginDemoProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<MultiOutSynth>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<MultiOutSynth>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<NoiseGate>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<SamplerAudioProcessor>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); }
