@@ -79,10 +79,11 @@
       </MODULEPATHS>
     </VS2017>
     <VS2019 targetFolder="Builds/VisualStudio2019" smallIcon="c97aUr" bigIcon="c97aUr"
-            extraCompilerFlags="/w44265 /w45038 /w44062">
+            extraCompilerFlags="/w44265 /w45038 /w44062" extraLinkerFlags="/NXCOMPAT:NO">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost"/>
-        <CONFIGURATION name="Release" isDebug="0" targetName="AudioPluginHost" debugInformationFormat="ProgramDatabase"/>
+        <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
+        <CONFIGURATION name="Release" isDebug="0" targetName="AudioPluginHost" debugInformationFormat="ProgramDatabase"
+                       winArchitecture="x64" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../modules"/>
@@ -181,6 +182,22 @@
   </EXPORTFORMATS>
   <MAINGROUP id="YdWL7hi7p" name="AudioPluginHost">
     <GROUP id="{CFED5B3D-D1D8-0F3F-4D67-B2A810D057EF}" name="Source">
+      <GROUP id="{F273BBDC-080B-3D0E-E7A7-72C6B840830E}" name="ForteEmulator">
+        <GROUP id="{FF89E7B6-F0E5-18FE-A181-6290786638A4}" name="ForteSDK">
+          <GROUP id="{8C2741D1-654D-29D4-9D86-B2F5C4C5903B}" name="tinyxml">
+            <FILE id="J23WyQ" name="tinystr.cpp" compile="1" resource="0" file="Source/ForteEmulator/ForteSDK/tinyxml/tinystr.cpp"/>
+            <FILE id="F2RB8Y" name="tinystr.h" compile="0" resource="0" file="Source/ForteEmulator/ForteSDK/tinyxml/tinystr.h"/>
+            <FILE id="GaPToS" name="tinyxml.cpp" compile="1" resource="0" file="Source/ForteEmulator/ForteSDK/tinyxml/tinyxml.cpp"/>
+            <FILE id="O0x0Ga" name="tinyxml.h" compile="0" resource="0" file="Source/ForteEmulator/ForteSDK/tinyxml/tinyxml.h"/>
+            <FILE id="C44rFx" name="tinyxmlerror.cpp" compile="1" resource="0"
+                  file="Source/ForteEmulator/ForteSDK/tinyxml/tinyxmlerror.cpp"/>
+            <FILE id="iJ9L4J" name="tinyxmlparser.cpp" compile="1" resource="0"
+                  file="Source/ForteEmulator/ForteSDK/tinyxml/tinyxmlparser.cpp"/>
+          </GROUP>
+          <FILE id="HqVfQS" name="ForteTypes.h" compile="0" resource="0" file="Source/ForteEmulator/ForteSDK/ForteTypes.h"/>
+          <FILE id="MF1U3E" name="XmlArchive.h" compile="0" resource="0" file="Source/ForteEmulator/ForteSDK/XmlArchive.h"/>
+        </GROUP>
+      </GROUP>
       <GROUP id="{6F257CD6-CE86-9BBC-54C1-45E43249E414}" name="Plugins">
         <FILE id="rcuPqK" name="ARAPlugin.cpp" compile="1" resource="0" file="Source/Plugins/ARAPlugin.cpp"/>
         <FILE id="gR1tiA" name="ARAPlugin.h" compile="0" resource="0" file="Source/Plugins/ARAPlugin.h"/>
@@ -196,6 +213,15 @@
         <FILE id="cbvjhb" name="PluginGraph.h" compile="0" resource="0" file="Source/Plugins/PluginGraph.h"/>
       </GROUP>
       <GROUP id="{D892BFB2-FE85-B70F-10D3-450F407E2B3D}" name="UI">
+        <FILE id="kxZY3T" name="SetlistManager.cpp" compile="1" resource="0"
+              file="Source/UI/SetlistManager.cpp"/>
+        <FILE id="RKNskX" name="SetlistManager.h" compile="0" resource="0"
+              file="Source/UI/SetlistManager.h"/>
+        <FILE id="UbsNEE" name="RackTitleBar.cpp" compile="1" resource="0"
+              file="Source/UI/RackTitleBar.cpp"/>
+        <FILE id="nW3lB2" name="RackTitleBar.h" compile="0" resource="0" file="Source/UI/RackTitleBar.h"/>
+        <FILE id="gwNcpD" name="RackRow.cpp" compile="1" resource="0" file="Source/UI/RackRow.cpp"/>
+        <FILE id="NzRMXg" name="RackRow.h" compile="0" resource="0" file="Source/UI/RackRow.h"/>
         <FILE id="wPgLS9" name="GraphEditorPanel.cpp" compile="1" resource="0"
               file="Source/UI/GraphEditorPanel.cpp"/>
         <FILE id="BDMvfT" name="GraphEditorPanel.h" compile="0" resource="0"
@@ -208,6 +234,8 @@
       </GROUP>
       <FILE id="OmIhwQ" name="HostStartup.cpp" compile="1" resource="0" file="Source/HostStartup.cpp"/>
       <FILE id="c97aUr" name="JUCEAppIcon.png" compile="0" resource="0" file="Source/JUCEAppIcon.png"/>
+      <FILE id="TuhBFg" name="Performer.cpp" compile="1" resource="0" file="Source/Performer.cpp"/>
+      <FILE id="HPKay8" name="Performer.h" compile="0" resource="0" file="Source/Performer.h"/>
     </GROUP>
     <GROUP id="{63C773C8-4305-87DD-DB3F-6D1143EFEC61}" name="BinaryData">
       <FILE id="sId0Lj" name="cassette_recorder.wav" compile="0" resource="1"
@@ -220,12 +248,12 @@
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_WASAPI="1" JUCE_DIRECTSOUND="1" JUCE_ALSA="1" JUCE_USE_FLAC="0"
-               JUCE_USE_OGGVORBIS="1" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
+               JUCE_USE_OGGVORBIS="0" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
                JUCE_USE_CAMERA="0" JUCE_PLUGINHOST_AU="1" JUCE_WEB_BROWSER="0"
-               JUCE_PLUGINHOST_VST3="1" JUCE_PLUGINHOST_LADSPA="1" JUCE_PLUGINHOST_LV2="1"/>
+               JUCE_PLUGINHOST_VST3="0" JUCE_PLUGINHOST_LADSPA="0" JUCE_PLUGINHOST_LV2="1" JUCE_PLUGINHOST_VST="1" JUCE_ASIO="1" JUCE_WASAPI_EXCLUSIVE="1"/>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1"/>
-    <MODULE id="juce_audio_devices" showAllCode="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useGlobalPath="0"/>
     <MODULE id="juce_audio_formats" showAllCode="1"/>
     <MODULE id="juce_audio_processors" showAllCode="1"/>
     <MODULE id="juce_audio_utils" showAllCode="1"/>

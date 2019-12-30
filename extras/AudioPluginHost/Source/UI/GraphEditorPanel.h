@@ -28,6 +28,7 @@
 #include "../Plugins/PluginGraph.h"
 
 class MainHostWindow;
+class Performer;
 
 //==============================================================================
 /**
@@ -35,7 +36,8 @@ class MainHostWindow;
 */
 class GraphEditorPanel final : public Component,
                                public ChangeListener,
-                               private Timer
+                               private Timer,
+                               public KeyListener
 {
 public:
     //==============================================================================
@@ -47,46 +49,29 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-    void mouseDown (const MouseEvent&) override;
-    void mouseUp   (const MouseEvent&) override;
-    void mouseDrag (const MouseEvent&) override;
-
-    void changeListenerCallback (ChangeBroadcaster*) override;
+    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;    void changeListenerCallback (ChangeBroadcaster*) override;
 
     //==============================================================================
     void updateComponents();
 
-    //==============================================================================
-    void showPopupMenu (Point<int> position);
 
-    //==============================================================================
-    void beginConnectorDrag (AudioProcessorGraph::NodeAndChannel source,
-                             AudioProcessorGraph::NodeAndChannel dest,
-                             const MouseEvent&);
-    void dragConnector (const MouseEvent&);
-    void endDraggingConnector (const MouseEvent&);
+    void init();
+    void SoloChange();
 
     //==============================================================================
     PluginGraph& graph;
 
 private:
-    struct PluginComponent;
-    struct ConnectorComponent;
-    struct PinComponent;
 
-    OwnedArray<PluginComponent> nodes;
-    OwnedArray<ConnectorComponent> connectors;
-    std::unique_ptr<ConnectorComponent> draggingConnector;
-    std::unique_ptr<PopupMenu> menu;
+    std::unique_ptr<TabbedComponent> m_tabs;
+    std::unique_ptr<Component> m_rackTopUI;
+    std::unique_ptr<Viewport> m_rackUIViewport;
+	std::unique_ptr<Component> m_rackUI;
+	std::unique_ptr<Component> m_setlistUI;
+	std::vector<std::unique_ptr<Component>> m_rackDevice;
 
-    PluginComponent* getComponentForPlugin (AudioProcessorGraph::NodeID) const;
-    ConnectorComponent* getComponentForConnection (const AudioProcessorGraph::Connection&) const;
-    PinComponent* findPinAt (Point<float>) const;
-
-    //==============================================================================
-    Point<int> originalTouchPos;
-
-    void timerCallback() override;
+    void SetPerformance();
+    int m_titleHeight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphEditorPanel)
 };
