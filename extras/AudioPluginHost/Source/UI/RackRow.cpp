@@ -44,7 +44,7 @@ RackRow::RackRow ()
     m_lastNote = -1;
     m_arpeggiatorBeat = 0;
     m_notesDown.reserve(128);
-    m_pendingChunkSave = true;
+    m_pendingChunkSave = false;
     m_pendingProgram = false;
     m_pendingProgramNames = 0.f;
     m_arpeggiatorTimer = 0.f;
@@ -456,7 +456,9 @@ void RackRow::UpdateKeyboard()
     auto lowkey = ParseNote(m_lowKey->getTextValue().toString().getCharPointer());
     auto highkey = ParseNote(m_highKey->getTextValue().toString().getCharPointer());
     m_keyboardState->allNotesOff(1);
-    for(int i=lowkey;i<=highkey;++i)
+    for (int i = 0; i < lowkey; ++i)
+        m_keyboardState->noteOn(1, i, 1.0f);
+    for (int i = highkey + 1; i<128; ++i)
         m_keyboardState->noteOn(1, i, 1.0f);
 }
 

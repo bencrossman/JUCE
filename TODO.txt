@@ -1,26 +1,24 @@
-Rebase: maybe remove panel->updateComponents();
+-1 on claps program
 
-Maybe some refactoring
-Song/Scene index? (This might be a import to xml thing?)
 Import chunk data
+Song/Scene index? (This might be a import to xml thing? No because we'll add more songs during edit)
 Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
-Check sampler supports octave mode
-Mono switch (simply doesn't mix TruePianos)
-M1 needs to share VST instance
 
-Import command hooked up - Reimport, make sure unused banks are -1
+Check sampler supports octave mode
+Mono switch (simply takes left of TruePianos)
+M1 needs to share VST instance (Because defaults to Combi mode, Still will have two racks though)
 Song change - Check resends Bank/Program
-Saving - Check muted zones dont save
+Saving
 Setlist manager
+Maybe some refactoring
 
 Scoops/Falls for disco strings
-TruePianos crash
 Maybe support for M1 Combi (Show must go on)
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
                  +pluginList              
-                 +graph------------------>FilterGraph : FileBasedDocument
+                 +graph------------------>PluginGraph : FileBasedDocument
                                           +m_performer
                                           +graph------------------------------->AudioProcessorGraph  
                                           +knownPluginList(added for auto dll)               

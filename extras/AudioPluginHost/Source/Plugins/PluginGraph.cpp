@@ -181,7 +181,7 @@ void PluginGraph::newDocument()
     } );
 }
 
-Result PluginGraph::loadDocument (const File& file)
+void PluginGraph::setupPerformer()
 {
     InternalPluginFormat internalFormat;
     String errorMessage;
@@ -189,12 +189,8 @@ Result PluginGraph::loadDocument (const File& file)
 
     graph.removeChangeListener (this);
 
-    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
-    XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
-    m_performer.ResolveIDs();
 
-    if (m_performer.Root.Racks.Rack.size() == 0)
-        return Result::fail("No racks");
+
 
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
@@ -210,6 +206,8 @@ Result PluginGraph::loadDocument (const File& file)
             if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
             {
                 pd.fileOrIdentifier = knownPluginList.getType(j)->fileOrIdentifier;
+                auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(pd.name + "_Banks.txt");
+                rack.m_usesBanks = File(bankFile).exists();
             }
         }
 
@@ -249,6 +247,16 @@ Result PluginGraph::loadDocument (const File& file)
         graph.addChangeListener (this);
     } );
 
+}
+
+Result PluginGraph::loadDocument (const File& file)
+{
+    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
+    XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
+    m_performer.ResolveIDs();
+
+    setupPerformer();
+
     return Result::ok();
 }
 
@@ -282,6 +290,9 @@ void PluginGraph::setLastDocumentOpened (const File& file)
 void PluginGraph::Import(const char *filename)
 {
     m_performer.Import(filename);
+    m_performer.ResolveIDs();
+
+    setupPerformer();
 }
 
 

@@ -19,6 +19,7 @@ public:
     void *m_node;
     void *m_gainNode;
     void *m_midiFilterNode;
+    bool m_usesBanks;
 
 	template<class A>
 	void Serialize(A& ar)
@@ -26,7 +27,7 @@ public:
 		AR(ID, XmlAttribute);
         AR(Name, XmlAttribute);
         AR(PluginName, XmlAttribute);
-        AR(Channel, XmlAttribute, 1);
+        AR(Channel, XmlAttribute | XmlOptional, 1);
     }
 };
 
@@ -50,24 +51,23 @@ public:
 	template<class A>
 	void Serialize(A& ar)
 	{
-        if (ar.IsSaving() && Mute)
-            return; // dont save the muted zones
-
         if (ar.IsSaving())
             Solo = false;
 
 		AR(DeviceID, XmlAttribute);
-		AR(Bank, XmlAttribute);
+        if (!ar.IsSaving() || Device->m_usesBanks)
+		    AR(Bank, XmlAttribute | XmlOptional, -1);
+
         AR(Program, XmlAttribute);
         AR(Data);
-		AR(Volume, XmlAttribute);
-        AR(Solo, XmlAttribute);
-        AR(Mute, XmlAttribute);
-        AR(DoubleOctave, XmlAttribute);
-		AR(Arpeggiator, XmlAttribute);
-		AR(Transpose, XmlAttribute);
-		AR(LowKey, XmlAttribute);
-		AR(HighKey, XmlAttribute, 127);
+		AR(Volume, XmlAttribute | XmlOptional);
+        AR(Solo, XmlAttribute | XmlOptional);
+        AR(Mute, XmlAttribute | XmlOptional);
+        AR(DoubleOctave, XmlAttribute | XmlOptional);
+		AR(Arpeggiator, XmlAttribute | XmlOptional);
+		AR(Transpose, XmlAttribute | XmlOptional);
+		AR(LowKey, XmlAttribute | XmlOptional);
+		AR(HighKey, XmlAttribute | XmlOptional, 127);
 	}
 };
 
@@ -85,7 +85,22 @@ public:
 		AR(ID, XmlAttribute);
 		AR(Name, XmlAttribute);
 		AR(Tempo, XmlAttribute);
+        
+        auto oldZone = Zone;
+        if (ar.IsSaving()) 
+        {
+            for (unsigned int i = 0; i < Zone.size(); ++i)
+            {
+                if (Zone[i].Mute)
+                {
+                    swap(Zone[i], Zone.back());
+                    Zone.pop_back();
+                    i--;
+                }
+            }
+        }
 		AR(Zone);
+        Zone = oldZone;
 	}
 };
 

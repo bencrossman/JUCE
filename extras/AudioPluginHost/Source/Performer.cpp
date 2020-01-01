@@ -43,6 +43,7 @@ void Performer::Import(const char *fileToLoad)
 		auto group = file.Rack.MixerScene[0].Mixer.Group.InputGroup[d];
 		Device newDevice;
 		newDevice.ID = group.ID;
+        newDevice.Channel = 1;
 		newDevice.Name = group.Name;
         newDevice.PluginName = group.PluginChain.PlugIn[0].Name;
 		if (newDevice.Name == "Arpeggiator")
@@ -169,10 +170,6 @@ void Performer::Import(const char *fileToLoad)
         }
         Root.Performances.Performance.push_back(performance);
     }
-
-    ResolveIDs();
-
-    XmlArchive::Save("Test.performer", *this);
 }
 
 void Performer::ResolveIDs()

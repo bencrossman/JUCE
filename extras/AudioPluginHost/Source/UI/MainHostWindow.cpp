@@ -437,7 +437,7 @@ void MainHostWindow::getCommandInfo (const CommandID commandID, ApplicationComma
 
 	case CommandIDs::import:
 		result.setInfo("Import...", "Imports a Brainspawn Forte rcf file", category, 0);
-		result.defaultKeypresses.add(KeyPress('o', ModifierKeys::commandModifier, 0));
+		result.defaultKeypresses.add(KeyPress('i', ModifierKeys::commandModifier, 0));
 		break;
 
     case CommandIDs::save:

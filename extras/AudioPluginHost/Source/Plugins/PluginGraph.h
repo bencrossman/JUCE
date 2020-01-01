@@ -80,6 +80,7 @@ public:
     Result saveDocument (const File& file) override;
     File getLastDocumentOpened() override;
     void setLastDocumentOpened (const File& file) override;
+    void setupPerformer();
 
     void Import(const char *filename);
     Performer *GetPerformer() { return &m_performer; }
