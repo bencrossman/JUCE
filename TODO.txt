@@ -14,6 +14,7 @@ Maybe some refactoring
 
 Scoops/Falls for disco strings
 Maybe support for M1 Combi (Show must go on)
+TruePianos crash
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent

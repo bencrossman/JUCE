@@ -199,6 +199,7 @@ RackRow::RackRow ()
 RackRow::~RackRow()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
+    InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode, NULL);
     delete m_keyboardState;
     //[/Destructor_pre]
 
@@ -678,10 +679,10 @@ void RackRow::Assign(Zone *zone)
 {
     m_current = zone;
     m_volume->setValue(zone->Volume);
-    m_solo->setToggleState(zone->Solo, sendNotificationSync);
-    m_mute->setToggleState(zone->Mute, sendNotificationSync);
-    m_doubleOctave->setToggleState(zone->DoubleOctave, sendNotificationSync);
-    m_arpeggiator->setToggleState(zone->Arpeggiator, sendNotificationSync);
+    m_solo->setToggleState(zone->Solo, sendNotification);
+    m_mute->setToggleState(zone->Mute, sendNotification);
+    m_doubleOctave->setToggleState(zone->DoubleOctave, sendNotification);
+    m_arpeggiator->setToggleState(zone->Arpeggiator, sendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));

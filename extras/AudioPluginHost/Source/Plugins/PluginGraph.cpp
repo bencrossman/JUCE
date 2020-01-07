@@ -183,14 +183,11 @@ void PluginGraph::newDocument()
 
 void PluginGraph::setupPerformer()
 {
+    graph.removeChangeListener(this);
+
     InternalPluginFormat internalFormat;
     String errorMessage;
     CreateDefaultNodes();
-
-    graph.removeChangeListener (this);
-
-
-
 
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
@@ -289,6 +286,7 @@ void PluginGraph::setLastDocumentOpened (const File& file)
 
 void PluginGraph::Import(const char *filename)
 {
+    clear();
     m_performer.Import(filename);
     m_performer.ResolveIDs();
 

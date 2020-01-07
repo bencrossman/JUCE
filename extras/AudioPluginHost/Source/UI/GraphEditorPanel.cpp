@@ -149,6 +149,9 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
 void GraphEditorPanel::updateComponents()
 {
+    m_rackDevice.clear();
+    m_rackUI->removeAllChildren();
+
     auto performer = graph.GetPerformer();
     int devicesOnScreen = performer->Root.Racks.Rack.size();
     int deviceWidth = 100;

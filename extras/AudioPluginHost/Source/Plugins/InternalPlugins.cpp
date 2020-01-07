@@ -416,7 +416,7 @@ public:
     void SetCallback(MidiFilterCallback *callback) { m_callback = callback; }
 
 private:
-    MidiFilterCallback * m_callback;
+    MidiFilterCallback * m_callback = NULL;
 };
 
 

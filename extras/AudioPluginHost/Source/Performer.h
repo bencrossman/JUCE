@@ -16,9 +16,9 @@ public:
     string Name;
     string PluginName;
     int Channel; // always 1 except in rare case of M1 two part
-    void *m_node;
-    void *m_gainNode;
-    void *m_midiFilterNode;
+    void *m_node = NULL;
+    void *m_gainNode = NULL;
+    void *m_midiFilterNode = NULL;
     bool m_usesBanks;
 
 	template<class A>
@@ -100,7 +100,8 @@ public:
             }
         }
 		AR(Zone);
-        Zone = oldZone;
+        if (ar.IsSaving())
+            Zone = oldZone;
 	}
 };
 

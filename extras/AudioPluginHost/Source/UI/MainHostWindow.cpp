@@ -502,7 +502,10 @@ bool MainHostWindow::perform (const InvocationInfo& info)
             graphHolder->graph->newDocument();
             FileChooser fc("Select Forte RCF File to import",File(),"*.rcf");
             if (fc.browseForFileToOpen())
+            {
                 graphHolder->graph->Import(fc.getResult().getFullPathName().getCharPointer());
+                graphHolder->graphPanel->updateComponents();
+            }
         }
 		break;
 
