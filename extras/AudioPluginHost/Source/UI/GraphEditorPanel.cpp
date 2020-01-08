@@ -149,6 +149,7 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
 void GraphEditorPanel::updateComponents()
 {
+    // both of these are about to be added to in for loop below
     m_rackDevice.clear();
     m_rackUI->removeAllChildren();
 

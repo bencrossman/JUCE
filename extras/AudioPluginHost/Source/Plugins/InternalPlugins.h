@@ -34,6 +34,7 @@ public:
 
 #include "PluginGraph.h"
 
+
 //==============================================================================
 /**
     Manages the internal plugin types.

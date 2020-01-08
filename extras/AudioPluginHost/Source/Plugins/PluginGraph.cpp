@@ -169,6 +169,7 @@ String PluginGraph::getDocumentTitle()
 
 void PluginGraph::newDocument()
 {
+    clear();
     setFile ({});
 
     graph.removeChangeListener (this);
@@ -181,9 +182,36 @@ void PluginGraph::newDocument()
     } );
 }
 
+Result PluginGraph::loadDocument (const File& file)
+{
+    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
+    XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
+    {
+        m_performer.ResolveIDs();
+        graph.removeChangeListener (this);
+        setupPerformer();
+        MessageManager::callAsync ([this]
+        {
+            setChangedFlag (false);
+            graph.addChangeListener (this);
+        });
+
+        return Result::ok();
+    }
+
+    return Result::fail ("Not a valid performer file");
+}
+
+Result PluginGraph::saveDocument (const File& file)
+{
+    XmlArchive::Save(file.getFullPathName().getCharPointer(), m_performer);
+    return Result::ok();
+}
+
+
 void PluginGraph::setupPerformer()
 {
-    graph.removeChangeListener(this);
+    clear(); // because was in restoreFromXml
 
     InternalPluginFormat internalFormat;
     String errorMessage;
@@ -236,31 +264,6 @@ void PluginGraph::setupPerformer()
         else
             graph.removeNode((NodeID)rack.ID);
     }
-
-    changed();
-
-    MessageManager::callAsync ([this] () {
-        setChangedFlag (false);
-        graph.addChangeListener (this);
-    } );
-
-}
-
-Result PluginGraph::loadDocument (const File& file)
-{
-    m_performerFilename = file.getFileNameWithoutExtension().toStdString();
-    XmlArchive::Load(file.getFullPathName().getCharPointer(), m_performer);
-    m_performer.ResolveIDs();
-
-    setupPerformer();
-
-    return Result::ok();
-}
-
-Result PluginGraph::saveDocument (const File& file)
-{
-    XmlArchive::Save(file.getFullPathName().getCharPointer(), m_performer);
-    return Result::ok();
 }
 
 File PluginGraph::getLastDocumentOpened()
@@ -289,8 +292,13 @@ void PluginGraph::Import(const char *filename)
     clear();
     m_performer.Import(filename);
     m_performer.ResolveIDs();
-
+    graph.removeChangeListener (this);
     setupPerformer();
+    MessageManager::callAsync ([this]
+        {
+            setChangedFlag (false);
+            graph.addChangeListener (this);
+        });
 }
 
 
@@ -698,8 +706,6 @@ void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
 void PluginGraph::CreateDefaultNodes()
 {
-    clear();
-
     InternalPluginFormat internalFormat;
     String errorMessage;
     m_midiInNode = graph.addNode(formatManager.createPluginInstance(internalFormat.midiInDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
