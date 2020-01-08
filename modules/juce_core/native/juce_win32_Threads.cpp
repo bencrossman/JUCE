@@ -288,7 +288,14 @@ bool juce_isRunningInWine()
 bool DynamicLibrary::open (const String& name)
 {
     close();
-    handle = LoadLibrary (name.toWideCharPointer());
+    __try
+    {
+        handle = LoadLibrary(name.toWideCharPointer());
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        handle = NULL;
+    }
     return handle != nullptr;
 }
 
