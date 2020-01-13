@@ -15,6 +15,7 @@ public:
     int ID;
     string Name;
     string PluginName;
+    string InitialState;
     int Channel; // always 1 except in rare case of M1 two part
     void *m_node = NULL;
     void *m_gainNode = NULL;
@@ -28,6 +29,7 @@ public:
         AR(Name, XmlAttribute);
         AR(PluginName, XmlAttribute);
         AR(Channel, XmlAttribute | XmlOptional, 1);
+        AR(InitialState);
     }
 };
 
@@ -38,7 +40,6 @@ public:
     Device *Device;
     int Bank;
     int Program;
-    string Data;
     float Volume;
     bool Solo;
     bool Mute;
@@ -59,7 +60,6 @@ public:
 		    AR(Bank, XmlAttribute | XmlOptional, -1);
 
         AR(Program, XmlAttribute);
-        AR(Data);
 		AR(Volume, XmlAttribute | XmlOptional);
         AR(Solo, XmlAttribute | XmlOptional);
         AR(Mute, XmlAttribute | XmlOptional);

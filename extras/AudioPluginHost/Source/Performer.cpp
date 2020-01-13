@@ -88,6 +88,22 @@ void Performer::Import(const char *fileToLoad)
     for (unsigned int mi = 0; mi<file.Rack.MixerScene.size(); ++mi)
     {
 		auto &mixer = file.Rack.MixerScene[mi];
+
+        if (mixer.Name == "SaveState")
+        {
+            for (int ig = 0; ig < (int)mixer.Mixer.Group.InputGroup.size(); ++ig)
+            {
+                auto &blobref = mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].SharedBlobRef;
+                auto &blobs = file.Rack.Global.SharedBlobs.SharedBlob;
+                for (unsigned int bi = 0; bi < blobs.size(); ++bi)
+                {
+                    if (blobs[bi].Key == blobref.Key)
+                    {
+                        Root.Racks.Rack[ig].InitialState = blobs[bi].contents;
+                    }
+                }
+            }
+        }
         if (mixer.Name == "SaveState" || mixer.Name == "Initial") // dont need these now
             continue;
 

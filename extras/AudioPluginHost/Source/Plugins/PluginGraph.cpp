@@ -208,6 +208,11 @@ Result PluginGraph::saveDocument (const File& file)
     return Result::ok();
 }
 
+static bool compareMagic(int32 magic, const char* name) noexcept
+{
+    return magic == (int32)ByteOrder::littleEndianInt(name)
+        || magic == (int32)ByteOrder::bigEndianInt(name);
+}
 
 void PluginGraph::setupPerformer()
 {
@@ -236,17 +241,88 @@ void PluginGraph::setupPerformer()
             }
         }
 
-        auto node = graph.addNode(formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage), (NodeID)rack.ID);
-        if (node.get())
+        auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
+        if (processor)
         {
+            MemoryBlock mb,mb2;
+            VSTPluginFormat::getChunkData(processor.get(), mb, true);
+            VSTPluginFormat::getChunkData(processor.get(), mb2, false);
+
+            MemoryOutputStream output;
+            Base64::convertFromBase64(output, rack.InitialState);
+
+            MemoryInputStream compressedInput(output.getData(), output.getDataSize(), false);
+            GZIPDecompressorInputStream unzipper(compressedInput);
+            MemoryOutputStream output2;
+            output2 << unzipper;
+
+            auto progAtBeginning = (memcmp(output2.getData(), "Prog", 4) == 0);
+
+            struct fxSet
+            {
+                int32 chunkMagic;    // 'CcnK'
+                int32 byteSize;      // of this chunk, excl. magic + byteSize
+                int32 fxMagic;       // 'FxBk'
+            };
+
+            struct fxChunkSet
+            {
+                int32 chunkMagic;    // 'CcnK'
+                int32 byteSize;      // of this chunk, excl. magic + byteSize
+                int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
+                int32 version;
+                int32 fxID;          // fx unique id
+                int32 fxVersion;
+                int32 numPrograms;
+                char future[128];
+                int32 chunkSize;
+                char chunk[8];          // variable
+            };
+
+            struct fxProgramSet
+            {
+                int32 chunkMagic;    // 'CcnK'
+                int32 byteSize;      // of this chunk, excl. magic + byteSize
+                int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
+                int32 version;
+                int32 fxID;          // fx unique id
+                int32 fxVersion;
+                int32 numPrograms;
+                char name[28];
+                int32 chunkSize;
+                char chunk[8];          // variable
+            };
+
+            auto set = (const fxSet*)((uint64_t)output2.getData() + (progAtBeginning ? 16 : 0));
+
+            // setStateInformation sets program name so don't want that
+            if (compareMagic(set->fxMagic, "FBCh"))
+            {
+                // non-preset chunk
+                auto cset = (const fxChunkSet*)set;
+                VSTPluginFormat::setChunkData(processor.get(), cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), false);
+            }
+            else if (compareMagic(set->fxMagic, "FPCh"))
+            {
+                auto cset = (const fxProgramSet*)set;
+                VSTPluginFormat::setChunkData(processor.get(), cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), true);
+            }
+
+
+
+
+
+
+
+            auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
+
             auto midi = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
             auto gain = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
-            // State stuff for later
-            //MemoryBlock m;
-            //m.fromBase64Encoding(char*);
-            //node->getProcessor()->setStateInformation(m.getData(), (int)m.getSize()); 
+
+
+            
 
             rack.m_node = (void*)node.get();
             rack.m_gainNode = (void*)gain.get();
@@ -261,8 +337,6 @@ void PluginGraph::setupPerformer()
             graph.addConnection({ { gain->nodeID, 0 },{ m_masterGainNode->nodeID, 0 } });
             graph.addConnection({ { gain->nodeID, 1 },{ m_masterGainNode->nodeID, 1 } });
         }
-        else
-            graph.removeNode((NodeID)rack.ID);
     }
 }
 

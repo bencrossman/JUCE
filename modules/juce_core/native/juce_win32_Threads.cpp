@@ -290,7 +290,8 @@ bool DynamicLibrary::open (const String& name)
     close();
     __try
     {
-        handle = LoadLibrary(name.toWideCharPointer());
+        if (!name.contains("TruePianos"))
+            handle = LoadLibrary(name.toWideCharPointer());
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {

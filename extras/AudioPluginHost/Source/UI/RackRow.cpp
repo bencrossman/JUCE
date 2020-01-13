@@ -199,7 +199,8 @@ RackRow::RackRow ()
 RackRow::~RackRow()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
-    InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode, NULL);
+    if (m_current->Device->m_midiFilterNode)
+        InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode, NULL);
     delete m_keyboardState;
     //[/Destructor_pre]
 
@@ -277,8 +278,9 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_m_deviceSettings] -- add your button handler code here..
 
-        if (auto w = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal))
-            w->toFront(true);
+        if (m_current->Device->m_node)
+            if (auto w = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal))
+                w->toFront(true);
 
         //[/UserButtonCode_m_deviceSettings]
     }
@@ -557,7 +559,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
         MemoryBlock data;
         processor->getStateInformation(data);
-        m_current->Data = data.toBase64Encoding().getCharPointer();
+        //m_current->Data = data.toBase64Encoding().getCharPointer();
         
     }
 
@@ -671,7 +673,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         auto processor = ((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
 
         for (int i = 0; i < processor->getNumPrograms(); ++i)
-            m_program->addItem(processor->getProgramName(i), i + 1);
+            m_program->addItem(processor->getProgramName(i).isNotEmpty() ? processor->getProgramName(i) : String(i+1), i + 1);
     }
 }
 
