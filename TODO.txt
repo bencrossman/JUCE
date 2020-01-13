@@ -1,6 +1,7 @@
 -1 on claps program
 
-Import chunk data - Sampler not working
+Import chunk data - Need to test JUCE state save on OPX is whole bank
+
 Song/Scene index? (This might be a import to xml thing? No because we'll add more songs during edit)
 Chunk saving (M1 users presets especially Two Part, OPX Famous bank, DirectWave setup, Wavstreamer setup)
 

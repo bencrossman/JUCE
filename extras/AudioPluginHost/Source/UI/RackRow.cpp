@@ -280,6 +280,7 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
 
         if (m_current->Device->m_node)
             if (auto w = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal))
+                // need to setup callback to save state on close
                 w->toFront(true);
 
         //[/UserButtonCode_m_deviceSettings]

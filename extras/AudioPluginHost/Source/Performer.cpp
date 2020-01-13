@@ -94,12 +94,26 @@ void Performer::Import(const char *fileToLoad)
             for (int ig = 0; ig < (int)mixer.Mixer.Group.InputGroup.size(); ++ig)
             {
                 auto &blobref = mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].SharedBlobRef;
-                auto &blobs = file.Rack.Global.SharedBlobs.SharedBlob;
-                for (unsigned int bi = 0; bi < blobs.size(); ++bi)
+                auto pluginName = mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].Name;
+                if (pluginName != "TruePianos" &&
+                    pluginName != "WAVESTATION" &&
+                    pluginName != "FM7" &&
+                    pluginName != "SUPERWAVE P8" &&
+                    pluginName != "GuitarStrummer")
                 {
-                    if (blobs[bi].Key == blobref.Key)
+                    for (int r = 0; r < (int)Root.Racks.Rack.size(); ++r)
                     {
-                        Root.Racks.Rack[ig].InitialState = blobs[bi].contents;
+                        if (Root.Racks.Rack[r].PluginName == mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].Name)
+                        {
+                            auto &blobs = file.Rack.Global.SharedBlobs.SharedBlob;
+                            for (unsigned int bi = 0; bi < blobs.size(); ++bi)
+                            {
+                                if (blobs[bi].Key == blobref.Key)
+                                {
+                                    Root.Racks.Rack[r].InitialState = blobs[bi].contents;
+                                }
+                            }
+                        }
                     }
                 }
             }
