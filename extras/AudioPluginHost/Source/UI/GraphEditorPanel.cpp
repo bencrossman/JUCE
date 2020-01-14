@@ -154,7 +154,7 @@ void GraphEditorPanel::updateComponents()
     m_rackUI->removeAllChildren();
 
     auto performer = graph.GetPerformer();
-    int devicesOnScreen = performer->Root.Racks.Rack.size();
+    int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
     int deviceWidth = 100;
     int deviceHeight = 20;
     int titleHeight = m_volumeColumn->getHeight() - 4;

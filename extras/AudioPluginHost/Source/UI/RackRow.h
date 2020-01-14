@@ -85,7 +85,6 @@ private:
     GraphEditorPanel* panel;
     bool m_soloMode;
     bool m_pendingProgram;
-    bool m_pendingChunkSave;
     float m_pendingProgramNames;
 
     vector<int> m_notesDown;

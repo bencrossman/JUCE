@@ -44,7 +44,6 @@ RackRow::RackRow ()
     m_lastNote = -1;
     m_arpeggiatorBeat = 0;
     m_notesDown.reserve(128);
-    m_pendingChunkSave = false;
     m_pendingProgram = false;
     m_pendingProgramNames = 0.f;
     m_arpeggiatorTimer = 0.f;
@@ -193,6 +192,7 @@ RackRow::RackRow ()
     m_transpose->addListener(this);
     m_lowKey->addListener(this);
     m_highKey->addListener(this);
+    m_deviceSettings->setTriggeredOnMouseDown(true);
     //[/Constructor]
 }
 
@@ -277,11 +277,38 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_deviceSettings.get())
     {
         //[UserButtonCode_m_deviceSettings] -- add your button handler code here..
+        auto modifiers = ModifierKeys::getCurrentModifiers();
+        if (modifiers.isRightButtonDown())
+        {
+            PopupMenu menu;
+            menu.addItem(1, "Save State");
+            menu.addItem(2, "Delete Rack");
+            auto res = menu.show();
+            if (res == 1)
+            {
+                MemoryBlock mb;
+                ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
+                MemoryInputStream uncompressedInput(mb.getData(), mb.getSize(), false);
+                MemoryOutputStream output;
+                GZIPCompressorOutputStream zipper(&output);
+                zipper.writeFromInputStream(uncompressedInput, -1);
+                zipper.flush();
+                MemoryOutputStream output2;
+                Base64::convertToBase64(output2, output.getData(),output.getDataSize());
+                m_current->Device->InitialState = (const char*)output2.getData();
+            }
+            if (res == 2)
+            {
+                
+            }
+        }
+        else
+        {
+            if (m_current->Device->m_node)
+                if (auto w = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal))
+                    w->toFront(true);
+        }
 
-        if (m_current->Device->m_node)
-            if (auto w = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal))
-                // need to setup callback to save state on close
-                w->toFront(true);
 
         //[/UserButtonCode_m_deviceSettings]
     }
@@ -551,17 +578,6 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
         }
         midiBuffer = output;
-    }
-
-    if (m_pendingChunkSave)
-    {
-        m_pendingChunkSave = false;
-        auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-
-        MemoryBlock data;
-        processor->getStateInformation(data);
-        //m_current->Data = data.toBase64Encoding().getCharPointer();
-        
     }
 
     if (m_pendingProgram)
