@@ -1,16 +1,19 @@
-Song/Scene index? (This might be a import to xml thing? No because we'll add more songs during edit)
+M1 can save in program mode state. Do we want two instances or share (still two racks though), Maybe support for M1 Combi (Show must go on)
+Controller Index to Song/Scene index
+Song change - Check resends Bank/Program
+
+Delete rack
+Add new rack
 
 Check sampler supports octave mode
 Mono switch (simply takes left of TruePianos)
-M1 needs to share VST instance (Because defaults to Combi mode, Still will have two racks though)
-Song change - Check resends Bank/Program
-Saving
+
 Setlist manager
 Maybe some refactoring
 
+
 Scoops/Falls for disco strings
-Maybe support for M1 Combi (Show must go on)
-TruePianos crash
+
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
