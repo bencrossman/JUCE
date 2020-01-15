@@ -98,7 +98,7 @@ void AlertWindow::exitAlert (Button* button)
 }
 
 //==============================================================================
-void AlertWindow::addButton (const String& name,
+TextButton *AlertWindow::addButton (const String& name,
                              const int returnValue,
                              const KeyPress& shortcutKey1,
                              const KeyPress& shortcutKey2)
@@ -127,6 +127,7 @@ void AlertWindow::addButton (const String& name,
 
     addAndMakeVisible (b, 0);
     updateLayout (false);
+    return b;
 }
 
 int AlertWindow::getNumButtons() const

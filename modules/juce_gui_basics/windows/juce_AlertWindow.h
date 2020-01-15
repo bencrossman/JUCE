@@ -99,7 +99,7 @@ public:
         @param shortcutKey1 an optional key that can be pressed to trigger this button
         @param shortcutKey2 a second optional key that can be pressed to trigger this button
     */
-    void addButton (const String& name,
+    TextButton *addButton (const String& name,
                     int returnValue,
                     const KeyPress& shortcutKey1 = KeyPress(),
                     const KeyPress& shortcutKey2 = KeyPress());
