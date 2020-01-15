@@ -1,4 +1,8 @@
-M1 can save in program mode state. Do we want two instances or share (still two racks though), Maybe support for M1 Combi (Show must go on)
+Share M1 InitialState
+Add combi banks (use BinStringExtractor)
+If combi then send on channel 16 else set to "Two Part" and then use channel 1 (or do combi/program state compare and use to change mode, can ditch channel 16 then)
+On import translate channel 16 to Combi banks
+
 Controller Index to Song/Scene index
 Song change - Check resends Bank/Program
 
