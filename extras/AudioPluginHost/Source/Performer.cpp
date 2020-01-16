@@ -7,7 +7,7 @@ void Replace(std::string &result, const std::string& replaceWhat, const std::str
 {
     while (1)
     {
-        const int pos = result.find(replaceWhat);
+        auto pos = result.find(replaceWhat);
         if (pos == -1) break;
         result.replace(pos, replaceWhat.size(), replaceWithWhat);
     }
@@ -43,19 +43,12 @@ void Performer::Import(const char *fileToLoad)
 		auto group = file.Rack.MixerScene[0].Mixer.Group.InputGroup[d];
 		Device newDevice;
 		newDevice.ID = group.ID;
-        newDevice.Channel = 1;
 		newDevice.Name = group.Name;
         newDevice.PluginName = group.PluginChain.PlugIn[0].Name;
 		if (newDevice.Name == "Arpeggiator")
 			continue;
 
 		Root.Racks.Rack.push_back(newDevice);
-		if (newDevice.Name == "Korg M1")
-		{
-			newDevice.ID+=3;
-            newDevice.Channel++;
-            Root.Racks.Rack.push_back(newDevice);
-		}
 	}
 
     // Setlists

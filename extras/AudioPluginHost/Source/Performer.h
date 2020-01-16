@@ -16,7 +16,6 @@ public:
     string Name;
     string PluginName;
     string InitialState;
-    int Channel; // always 1 except in rare case of M1 two part
     void *m_node = NULL;
     void *m_gainNode = NULL;
     void *m_midiFilterNode = NULL;
@@ -28,7 +27,6 @@ public:
 		AR(ID, XmlAttribute);
         AR(Name, XmlAttribute);
         AR(PluginName, XmlAttribute);
-        AR(Channel, XmlAttribute | XmlOptional, 1);
         AR(InitialState);
     }
 };
@@ -48,6 +46,7 @@ public:
     int Transpose;
     int LowKey;
     int HighKey;
+    string OverrideState;
 
 	template<class A>
 	void Serialize(A& ar)
@@ -67,8 +66,9 @@ public:
 		AR(Arpeggiator, XmlAttribute | XmlOptional);
 		AR(Transpose, XmlAttribute | XmlOptional);
 		AR(LowKey, XmlAttribute | XmlOptional);
-		AR(HighKey, XmlAttribute | XmlOptional, 127);
-	}
+        AR(HighKey, XmlAttribute | XmlOptional, 127);
+        AR(OverrideState);
+    }
 };
 
 class PerformanceType

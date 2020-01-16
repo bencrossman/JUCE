@@ -494,9 +494,9 @@ void PluginGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const ch
     unsigned char mes[12 + 16 * 2];
     int meslen = 0;
     memcpy(mes, "\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 9); meslen += 9;
-    memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += strlen(text1) + 1;
+    memcpy(mes + meslen, text1, strlen(text1) + 1); meslen += (int)strlen(text1) + 1;
     mes[meslen++] = 0x02;
-    memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += strlen(text2) + 1;
+    memcpy(mes + meslen, text2, strlen(text2) + 1); meslen += (int)strlen(text2) + 1;
 
     // send to lcd
     output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
@@ -659,7 +659,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 {
                     m_currentSong--;
                     if (m_currentSong<0)
-                        m_currentSong = m_performer.Root.SetLists.SetList.size() - 1;
+                        m_currentSong = (int)m_performer.Root.SetLists.SetList.size() - 1;
                     if (m_currentSong<0)
                         m_currentSong = 0;
                     m_pendingSong = m_currentSong;
@@ -697,7 +697,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 m_pendingSong--;
                 if (m_pendingSong<0)
-                    m_pendingSong = m_performer.Root.SetLists.SetList.size() - 1;
+                    m_pendingSong = (int)m_performer.Root.SetLists.SetList.size() - 1;
                 if (m_pendingSong<0)
                     m_pendingSong = 0;
                 UpdateLCDScreen(output, sample_number);
@@ -723,7 +723,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 m_pendingSet--;
                 if (m_pendingSet<0)
-                    m_pendingSet = m_performer.Root.SetLists.SetList.size() - 1;
+                    m_pendingSet = (int)m_performer.Root.SetLists.SetList.size() - 1;
                 if (m_pendingSet<0)
                     m_pendingSet = 0;
                 if (m_performer.Root.SetLists.SetList.size()>0)

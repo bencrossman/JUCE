@@ -281,10 +281,11 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
         if (modifiers.isRightButtonDown())
         {
             PopupMenu menu;
-            menu.addItem(1, "Save State");
-            menu.addItem(2, "Delete Rack");
+            menu.addItem(1, "Save global rack state");
+            menu.addItem(2, "Save performance override state");
+            menu.addItem(3, "Delete Rack");
             auto res = menu.show();
-            if (res == 1)
+            if (res == 1 || res == 2)
             {
                 MemoryBlock mb;
                 ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
@@ -295,9 +296,12 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
                 zipper.flush();
                 MemoryOutputStream output2;
                 Base64::convertToBase64(output2, output.getData(),output.getDataSize());
-                m_current->Device->InitialState = (const char*)output2.getData();
+                if (res == 1)
+                    m_current->Device->InitialState = (const char*)output2.getData();
+                else
+                    m_current->OverrideState = (const char*)output2.getData();
             }
-            if (res == 2)
+            if (res == 3)
             {
                 
             }
@@ -508,7 +512,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         {
             if (m_current == NULL)
                 continue; // whilst I test the song knobs
-            midi_message.setChannel(m_current->Device->Channel + 1);
+            midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff() && midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
             {
                 int note = midi_message.getNoteNumber() + m_current->Transpose;
@@ -558,7 +562,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                             // cancel last note
                             if (m_lastNote >= 0)
                             {
-                                output.addEvent(MidiMessage::noteOff(m_current->Device->Channel, m_lastNote), sample_number);
+                                output.addEvent(MidiMessage::noteOff(1, m_lastNote), sample_number);
                                 m_lastNote = -1;
                             }
                             m_arpeggiatorTimer = 0.f;
@@ -584,20 +588,13 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     {
         m_pendingProgram = false;
 
-        if (m_current->Device->PluginName == "M1" && m_current->Device->Channel == 1) // if Channel 2's then should come later
-        {
-            midiBuffer.addEvent(MidiMessage(0xBF, 0x00, 0), 0);
-            midiBuffer.addEvent(MidiMessage(0xBF, 0x20, 22), 0);
-            midiBuffer.addEvent(MidiMessage(0xCF, 49), 0); // Use MIDI channel 16 to put into two part mode (have to use this Combi mode since no way to Sysex it to Program mode with KLC)
-        }
-
         if (m_bank->isVisible())
         {
-            midiBuffer.addEvent(MidiMessage(0xB0 + m_current->Device->Channel - 1, 0x00, 0), 0);
-            midiBuffer.addEvent(MidiMessage(0xB0 + m_current->Device->Channel - 1, 0x20, m_current->Bank), 0);
+            midiBuffer.addEvent(MidiMessage(0xB0, 0x00, 0), 0);
+            midiBuffer.addEvent(MidiMessage(0xB0, 0x20, m_current->Bank), 0);
         }
 
-        midiBuffer.addEvent(MidiMessage(0xC0 + m_current->Device->Channel - 1, m_current->Program), 0); // I think this is needed to trigger the bank change too
+        midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
     }
 
     if (m_pendingProgramNames > 0)
@@ -629,7 +626,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 // cancel last note
                 if (m_lastNote >= 0)
                 {
-                    midiBuffer.addEvent(MidiMessage::noteOff(m_current->Device->Channel, m_lastNote), nextarpeggiatorSample);
+                    midiBuffer.addEvent(MidiMessage::noteOff(1, m_lastNote), nextarpeggiatorSample);
                     m_lastNote = -1;
                 }
 
@@ -638,7 +635,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 {
                     m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % 3);
                     if (m_lastNote < 128)
-                        midiBuffer.addEvent(MidiMessage::noteOn(m_current->Device->Channel, m_lastNote, 1.0f), nextarpeggiatorSample);
+                        midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
                     m_arpeggiatorBeat++;
                 }
             }
