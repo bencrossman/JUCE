@@ -1,23 +1,16 @@
-Share M1 InitialState
-Add combi banks (use BinStringExtractor)
-If combi then send on channel 16 else set to "Two Part" and then use channel 1 (or do combi/program state compare and use to change mode, can ditch channel 16 then)
-On import translate channel 16 to Combi banks
+Ditch channel 16
+1) Use Combi mode, add to bank list (there is a branch for extraction), work out byte that changes mode, work on removing 2nd M1. On import translate channel 16 to Combi banks
+2) Use 2xM1's in Prog mode. Break down Show must go on. Share M1 InitialState
 
 Controller Index to Song/Scene index
 Song change - Check resends Bank/Program
-
 Delete rack
 Add new rack
-
 Check sampler supports octave mode
 Mono switch (simply takes left of TruePianos)
-
 Setlist manager
 Maybe some refactoring
-
-
 Scoops/Falls for disco strings
-
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
