@@ -37,7 +37,8 @@ class Performer;
 */
 class GraphEditorPanel   : public Component,
                            public ChangeListener,
-                           private Timer
+                           private Timer,
+                           public KeyListener
 {
 public:
     GraphEditorPanel (PluginGraph& graph);
@@ -53,6 +54,8 @@ public:
     void mouseDrag (const MouseEvent&) override;
 
     void changeListenerCallback (ChangeBroadcaster*) override;
+
+    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;
 
     //==============================================================================
     void updateComponents();
@@ -77,7 +80,8 @@ private:
     std::unique_ptr<Component> m_rackUI;
     std::vector<std::unique_ptr<Component>> m_rackDevice;
 
-    void SetPerformance(int performanceIndex = 2);
+    void SetPerformance(int performanceIndex);
+    int m_currentPerformanceIndex = 50;
 
     std::unique_ptr<PopupMenu> menu;
 

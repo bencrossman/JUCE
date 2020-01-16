@@ -123,6 +123,7 @@ MainHostWindow::MainHostWindow()
         g->addChangeListener (this);
 
     addKeyListener (getCommandManager().getKeyMappings());
+    addKeyListener(graphHolder->graphPanel.get());
 
     Process::setPriority (Process::HighPriority);
 

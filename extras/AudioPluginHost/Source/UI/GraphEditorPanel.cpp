@@ -173,7 +173,7 @@ void GraphEditorPanel::updateComponents()
     m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + titleHeight);
     m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
-    SetPerformance(0);
+    SetPerformance(m_currentPerformanceIndex);
 }
 
 void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
@@ -595,6 +595,9 @@ void GraphEditorPanel::SetPerformance(int performanceIndex)
         return;
 
     auto &performance = performer->Root.Performances.Performance[performanceIndex];
+
+    Logger::outputDebugString(String(performanceIndex) + ":" + performance.Name);
+
     auto &zones = performance.Zone;
     RackRow::SetTempo(performance.Tempo);
 
@@ -622,3 +625,9 @@ void GraphEditorPanel::SoloChange()
         ((RackRow*)(m_rackDevice[i].get()))->SetSoloMode(anySolos);
 }
 
+bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
+{
+    if (key == KeyPress::spaceKey)
+        SetPerformance(m_currentPerformanceIndex++);
+    return true;
+}
