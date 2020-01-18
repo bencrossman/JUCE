@@ -56,7 +56,7 @@ public:
 
 		AR(DeviceID, XmlAttribute);
         if (!ar.IsSaving() || Device->m_usesBanks)
-		    AR(Bank, XmlAttribute | XmlOptional, -1);
+		    AR(Bank, XmlAttribute | XmlOptional);
 
         AR(Program, XmlAttribute);
 		AR(Volume, XmlAttribute | XmlOptional);

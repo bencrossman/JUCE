@@ -1,5 +1,4 @@
 Controller Index to Song/Scene index
-Song change - Check resends Bank/Program
 Handle OverrideState, remember to restore to initial on next song.
 Delete rack
 Add new rack
@@ -20,3 +19,8 @@ MainHostWindow
                                           +m_rackDevice------------------------>RackRow's
                                                                                 +graph
                                                                                 +panel(added so we can notify of solo)
+
+
+Additional import tasks
+- Load my famous OPX bank
+- M1 set to prog mode, global midi channel 1

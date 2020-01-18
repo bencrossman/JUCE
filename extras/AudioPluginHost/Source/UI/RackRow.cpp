@@ -362,24 +362,7 @@ void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         m_current->Program = 0;
 
         m_pendingProgram = true;
-
-        m_program->clear();
-
-        auto patchFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + m_current->Device->PluginName + "_Bank" + String::formatted("%02d_Patches.txt", m_current->Bank);
-        if (File(patchFile).exists())
-        {
-            StringArray lines;
-            File(patchFile).readLines(lines);
-            if (lines[lines.size() - 1] == "")
-                lines.remove(lines.size() - 1);
-            for (int i = 0; i < lines.size(); ++i)
-                m_program->addItem(lines[i], i + 1);
-            m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
-        }
-        else
-        {
-            m_pendingProgramNames = 0.1f;
-        }
+        m_pendingProgramNames = 0.1f;
         //[/UserComboBoxCode_m_bank]
     }
     else if (comboBoxThatHasChanged == m_program.get())
@@ -605,6 +588,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             m_pendingProgramNames = 0;
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
             MessageManagerLock lock;
+            m_program->clear();
             for (int i = 0; i < processor->getNumPrograms(); ++i)
                 m_program->addItem(processor->getProgramName(i), i + 1);
             m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
@@ -677,6 +661,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt");
     if (File(programFile).exists())
     {
+        m_manualPatchNames = true;
         StringArray lines;
         File(programFile).readLines(lines);
         for (int i = 0; i<lines.size(); ++i)
@@ -695,18 +680,22 @@ void RackRow::Assign(Zone *zone)
 {
     m_current = zone;
     m_volume->setValue(zone->Volume);
-    m_solo->setToggleState(zone->Solo, sendNotification);
+    m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute, sendNotification);
-    m_doubleOctave->setToggleState(zone->DoubleOctave, sendNotification);
-    m_arpeggiator->setToggleState(zone->Arpeggiator, sendNotification);
+    m_doubleOctave->setToggleState(zone->DoubleOctave, dontSendNotification);
+    m_arpeggiator->setToggleState(zone->Arpeggiator, dontSendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));
 
     if (m_bank->isVisible())
-        m_bank->setSelectedId(zone->Bank + 1);
-    else
-        m_program->setSelectedId(zone->Program + 1);
+        m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
+    
+    m_program->setSelectedId(zone->Program + 1, dontSendNotification);
+
+    m_pendingProgram = true;
+    if (!m_manualPatchNames)
+        m_pendingProgramNames = 0.1f;
 
     UpdateKeyboard();
 }
