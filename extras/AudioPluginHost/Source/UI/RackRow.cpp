@@ -678,6 +678,23 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 
 void RackRow::Assign(Zone *zone)
 {
+    auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
+    if (!zone->OverrideState.empty())
+    {   
+        graph->SendChunkString(processor, zone->OverrideState);
+        m_lastZoneHadOverrideState = true;
+    }
+    else
+    {
+        if (m_lastZoneHadOverrideState)
+        {
+            graph->SendChunkString(processor, zone->Device->InitialState);
+            m_lastZoneHadOverrideState = false;
+        }
+        m_pendingProgram = true;
+        if (!m_manualPatchNames)
+            m_pendingProgramNames = 0.1f;
+    }
     m_current = zone;
     m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
@@ -693,9 +710,6 @@ void RackRow::Assign(Zone *zone)
     
     m_program->setSelectedId(zone->Program + 1, dontSendNotification);
 
-    m_pendingProgram = true;
-    if (!m_manualPatchNames)
-        m_pendingProgramNames = 0.1f;
 
     UpdateKeyboard();
 }

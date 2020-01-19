@@ -93,6 +93,7 @@ private:
     int m_lastNote;
     float m_arpeggiatorTimer;
     static float m_tempo;
+    bool m_lastZoneHadOverrideState = false;
     //[/UserVariables]
 
     //==============================================================================

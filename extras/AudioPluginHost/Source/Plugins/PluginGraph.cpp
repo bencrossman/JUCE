@@ -214,6 +214,71 @@ static bool compareMagic(int32 magic, const char* name) noexcept
         || magic == (int32)ByteOrder::bigEndianInt(name);
 }
 
+
+void PluginGraph::SendChunkString(AudioPluginInstance *processorPtr, StringRef str)
+{
+    MemoryOutputStream output;
+    Base64::convertFromBase64(output, str);
+
+    MemoryInputStream compressedInput(output.getData(), output.getDataSize(), false);
+    GZIPDecompressorInputStream unzipper(compressedInput);
+    MemoryOutputStream output2;
+    output2 << unzipper;
+
+    auto progAtBeginning = (memcmp(output2.getData(), "Prog", 4) == 0);
+
+    struct fxSet
+    {
+        int32 chunkMagic;    // 'CcnK'
+        int32 byteSize;      // of this chunk, excl. magic + byteSize
+        int32 fxMagic;       // 'FxBk'
+    };
+
+    struct fxChunkSet
+    {
+        int32 chunkMagic;    // 'CcnK'
+        int32 byteSize;      // of this chunk, excl. magic + byteSize
+        int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
+        int32 version;
+        int32 fxID;          // fx unique id
+        int32 fxVersion;
+        int32 numPrograms;
+        char future[128];
+        int32 chunkSize;
+        char chunk[8];          // variable
+    };
+
+    struct fxProgramSet
+    {
+        int32 chunkMagic;    // 'CcnK'
+        int32 byteSize;      // of this chunk, excl. magic + byteSize
+        int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
+        int32 version;
+        int32 fxID;          // fx unique id
+        int32 fxVersion;
+        int32 numPrograms;
+        char name[28];
+        int32 chunkSize;
+        char chunk[8];          // variable
+    };
+
+    auto set = (const fxSet*)((uint64_t)output2.getData() + (progAtBeginning ? 16 : 0));
+
+    // setStateInformation sets program name so don't want that
+    if (compareMagic(set->fxMagic, "FBCh"))
+    {
+        // non-preset chunk
+        auto cset = (const fxChunkSet*)set;
+        VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), false);
+    }
+    else if (compareMagic(set->fxMagic, "FPCh"))
+    {
+        auto cset = (const fxProgramSet*)set;
+        VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), true);
+    }
+}
+
+// shared code for load/import
 void PluginGraph::setupPerformer()
 {
     clear(); // because was in restoreFromXml
@@ -247,67 +312,8 @@ void PluginGraph::setupPerformer()
             auto processorPtr = processor.get();
 
             if (rack.InitialState.size())
-            {
-                MemoryOutputStream output;
-                Base64::convertFromBase64(output, rack.InitialState);
+                SendChunkString(processorPtr, rack.InitialState);
 
-                MemoryInputStream compressedInput(output.getData(), output.getDataSize(), false);
-                GZIPDecompressorInputStream unzipper(compressedInput);
-                MemoryOutputStream output2;
-                output2 << unzipper;
-
-                auto progAtBeginning = (memcmp(output2.getData(), "Prog", 4) == 0);
-
-                struct fxSet
-                {
-                    int32 chunkMagic;    // 'CcnK'
-                    int32 byteSize;      // of this chunk, excl. magic + byteSize
-                    int32 fxMagic;       // 'FxBk'
-                };
-
-                struct fxChunkSet
-                {
-                    int32 chunkMagic;    // 'CcnK'
-                    int32 byteSize;      // of this chunk, excl. magic + byteSize
-                    int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
-                    int32 version;
-                    int32 fxID;          // fx unique id
-                    int32 fxVersion;
-                    int32 numPrograms;
-                    char future[128];
-                    int32 chunkSize;
-                    char chunk[8];          // variable
-                };
-
-                struct fxProgramSet
-                {
-                    int32 chunkMagic;    // 'CcnK'
-                    int32 byteSize;      // of this chunk, excl. magic + byteSize
-                    int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
-                    int32 version;
-                    int32 fxID;          // fx unique id
-                    int32 fxVersion;
-                    int32 numPrograms;
-                    char name[28];
-                    int32 chunkSize;
-                    char chunk[8];          // variable
-                };
-
-                auto set = (const fxSet*)((uint64_t)output2.getData() + (progAtBeginning ? 16 : 0));
-
-                // setStateInformation sets program name so don't want that
-                if (compareMagic(set->fxMagic, "FBCh"))
-                {
-                    // non-preset chunk
-                    auto cset = (const fxChunkSet*)set;
-                    VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), false);
-                }
-                else if (compareMagic(set->fxMagic, "FPCh"))
-                {
-                    auto cset = (const fxProgramSet*)set;
-                    VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), true);
-                }
-            }
             auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
             auto midi = graph.addNode(formatManager.createPluginInstance(internalFormat.midiFilterDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));
             auto gain = graph.addNode(formatManager.createPluginInstance(internalFormat.gainDesc, graph.getSampleRate(), graph.getBlockSize(), errorMessage));         

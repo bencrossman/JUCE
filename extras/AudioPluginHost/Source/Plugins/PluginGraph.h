@@ -91,6 +91,7 @@ public:
     void LoadSet(int setIndex);
     void SetupKeylab(MidiBuffer &output, int sample_number);
     void CreateDefaultNodes();
+    void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 
     //==============================================================================
     AudioProcessorGraph graph;
