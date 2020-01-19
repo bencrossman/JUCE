@@ -586,20 +586,48 @@ bool GraphDocumentComponent::closeAnyOpenPluginWindows()
 }
 
 
-// Does this need to move into FilterGraph?
 void GraphEditorPanel::SetPerformance(int performanceIndex)
 {
+
     auto performer = graph.GetPerformer();
 
-    if (performanceIndex >= (int)performer->Root.Performances.Performance.size())
-        return;
+    if (performer->Root.SetLists.SetList.size() == 0)
+        return; 
 
-    auto &performance = performer->Root.Performances.Performance[performanceIndex];
+    PerformanceType* performance = NULL;
+    Song *song = NULL;
+    bool found = false;
+    int count = 0;
+    auto setlist = performer->Root.SetLists.SetList[0];
+    
+    int performanceIndices = 0;
+    for (int s = 0; s < setlist.SongPtr.size(); ++s)
+        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p) 
+            performanceIndices++;
 
-    Logger::outputDebugString(String(performanceIndex) + ":" + performance.Name);
+    performanceIndex = performanceIndex % performanceIndices;
 
-    auto &zones = performance.Zone;
-    RackRow::SetTempo(performance.Tempo);
+    for (int s = 0; s < setlist.SongPtr.size(); ++s)
+    {
+        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
+        {
+            if (count == performanceIndex)
+            {
+                found = true;
+                performance = setlist.SongPtr[s]->PerformancePtr[p];
+                song = setlist.SongPtr[s];
+                break;
+            }
+            count++;
+        }
+        if (found)
+            break;
+    }
+    
+    Logger::outputDebugString(String(performanceIndex) + ":" + song->Name + "|" + performance->Name);
+
+    auto &zones = performance->Zone;
+    RackRow::SetTempo(performance->Tempo);
 
     for (auto i = 0U; i < zones.size(); ++i)
     {

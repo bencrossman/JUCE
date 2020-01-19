@@ -1,22 +1,25 @@
-Controller Index to Song/Scene index
+CC3
+Check sampler supports octave mode
+
 Delete rack
 Add new rack
-Check sampler supports octave mode
 Mono switch (simply takes left of TruePianos)
 Setlist manager
 Maybe some refactoring
 Scoops/Falls for disco strings
 
+
 MainHostWindow
 +graphholder---->GraphDocumentComponent
                  +pluginList              
-                 +graph------------------>PluginGraph : FileBasedDocument
+                 +graph------------------>PluginGraph : FileBasedDocument (Sets up rack nodes)
                                           +m_performer
                                           +graph------------------------------->AudioProcessorGraph  
                                           +knownPluginList(added for auto dll)               
+                                          
                  +graphPanel------------->GraphEditorPanel
-                                          +m_rackDevice------------------------>RackRow's
-                                                                                +graph
+                                          +m_rackDevice------------------------>RackRow's (UI but responsible for MIDI/State too)
+                                                                                +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
 
 

@@ -81,7 +81,7 @@ private:
     std::vector<std::unique_ptr<Component>> m_rackDevice;
 
     void SetPerformance(int performanceIndex);
-    int m_currentPerformanceIndex = 50;
+    int m_currentPerformanceIndex = 0;
 
     std::unique_ptr<PopupMenu> menu;
 
