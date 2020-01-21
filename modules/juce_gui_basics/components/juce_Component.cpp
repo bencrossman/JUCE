@@ -1331,6 +1331,13 @@ void Component::setInterceptsMouseClicks (bool allowClicks,
     flags.allowChildMouseClicksFlag = allowClicksOnChildComponents;
 }
 
+void Component::setAlwaysHitTestOnDrag (bool alwaysHitTestOnDrag) noexcept
+{
+    flags.alwaysHitTestOnDrag = alwaysHitTestOnDrag;
+}
+
+
+
 void Component::getInterceptsMouseClicks (bool& allowsClicksOnThisComponent,
                                           bool& allowsClicksOnChildComponents) const noexcept
 {
@@ -1364,15 +1371,15 @@ bool Component::reallyContains (Point<int> point, bool returnTrueIfWithinAChild)
     return (compAtPosition == this) || (returnTrueIfWithinAChild && isParentOf (compAtPosition));
 }
 
-Component* Component::getComponentAt (Point<int> position)
+Component* Component::getComponentAt (Point<int> position, bool alwaysHitTest)
 {
-    if (flags.visibleFlag && ComponentHelpers::hitTest (*this, position))
+    if (flags.visibleFlag && ((flags.alwaysHitTestOnDrag && alwaysHitTest) || ComponentHelpers::hitTest (*this, position)))
     {
         for (int i = childComponentList.size(); --i >= 0;)
         {
             auto* child = childComponentList.getUnchecked(i);
 
-            child = child->getComponentAt (ComponentHelpers::convertFromParentSpace (*child, position));
+            child = child->getComponentAt (ComponentHelpers::convertFromParentSpace (*child, position), alwaysHitTest);
 
             if (child != nullptr)
                 return child;

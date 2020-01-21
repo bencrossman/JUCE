@@ -441,7 +441,7 @@ namespace DragHelpers
 
 bool ComponentPeer::handleDragMove (const ComponentPeer::DragInfo& info)
 {
-    auto* compUnderMouse = component.getComponentAt (info.position);
+    auto* compUnderMouse = component.getComponentAt (info.position, true);
     auto* lastTarget = dragAndDropTargetComponent.get();
     Component* newTarget = nullptr;
 

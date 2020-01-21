@@ -901,6 +901,8 @@ public:
                                    bool& allowsClicksOnChildComponents) const noexcept;
 
 
+    void setAlwaysHitTestOnDrag (bool alwaysHitTestOnDrag) noexcept;
+    
     /** Returns true if a given point lies within this component or one of its children.
 
         Never override this method! Use hitTest to create custom hit regions.
@@ -945,7 +947,7 @@ public:
                     instead call getComponentAt on the top-level parent of this component.
         @see hitTest, contains, reallyContains
     */
-    Component* getComponentAt (Point<int> position);
+    Component* getComponentAt (Point<int> position, bool alwaysHitTest = false);
 
     //==============================================================================
     /** Marks the whole component as needing to be redrawn.
@@ -2317,6 +2319,7 @@ private:
        #if JUCE_DEBUG
         bool isInsidePaintCall          : 1;
        #endif
+        bool alwaysHitTestOnDrag        : 1;
     };
 
     union
