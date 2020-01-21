@@ -1365,6 +1365,12 @@ Slider::Slider()
     init (LinearHorizontal, TextBoxLeft);
 }
 
+void Slider::SetRegion(int start, int size)
+{
+    pimpl->sliderRegionStart = start;
+    pimpl->sliderRegionSize = size;
+}
+
 Slider::Slider (const String& name)  : Component (name)
 {
     init (LinearHorizontal, TextBoxLeft);

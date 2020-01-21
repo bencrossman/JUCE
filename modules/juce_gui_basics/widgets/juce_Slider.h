@@ -127,6 +127,8 @@ public:
     /** Destructor. */
     ~Slider() override;
 
+    void SetRegion(int start, int size);
+
     //==============================================================================
     /** Changes the type of slider interface being used.
 
