@@ -370,8 +370,7 @@ void PluginGraph::Import(const char *filename)
 }
 
 
-int m_currentSong = 0;
-int m_pendingSong = 0;
+int m_pendingPerformanceIndex = 0;
 int m_pendingSet = 0;
 
 void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
@@ -547,8 +546,15 @@ void OptimizeLines(string &songName1, string &songName2)
 void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
 {
     string songName1, songName2;
-    songName1 = m_performer.Root.Songs.Song[m_currentSong].Name;
-    songName2 = m_performer.Root.Songs.Song[m_currentSong].PerformancePtr[0]->Name; // TODO some sort of index into songs & performances
+
+
+    PerformanceType* performance = NULL;
+    Song *song = NULL;
+
+    m_performer.GetPerformanceByIndex(performance, song);
+
+    songName1 = song->Name;
+    songName2 = performance->Name;
 
     size_t found = songName2.find("|");
     if (found != -1)
@@ -571,7 +577,7 @@ void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
 
 void PluginGraph::UpdateCurrentRouting()
 {
-    // this code is in GraphEditorPanel at the moment
+    m_onProgramChange();
 }
 
 void PluginGraph::LoadSet(int setIndex)
@@ -651,11 +657,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isProgramChange())
             {
-                if (m_performer.Root.SetLists.SetList.size())
-                {
-                    m_currentSong = midi_message.getProgramChangeNumber() % (int)m_performer.Root.SetLists.SetList.size();
-                    m_pendingSong = m_currentSong;
-                }
+                m_performer.m_currentPerformanceIndex = midi_message.getProgramChangeNumber();
+                m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
 
                 UpdateCurrentRouting();
             }
@@ -663,12 +666,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getControllerValue()>0)
                 {
-                    m_currentSong--;
-                    if (m_currentSong<0)
-                        m_currentSong = (int)m_performer.Root.SetLists.SetList.size() - 1;
-                    if (m_currentSong<0)
-                        m_currentSong = 0;
-                    m_pendingSong = m_currentSong;
+                    m_performer.m_currentPerformanceIndex--;
+                    m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
                     UpdateCurrentRouting();
                 }
                 else
@@ -679,10 +678,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getControllerValue()>0)
                 {
-                    m_currentSong++;
-                    if (m_currentSong >= (int)m_performer.Root.SetLists.SetList.size())
-                        m_currentSong = 0;
-                    m_pendingSong = m_currentSong;
+                    m_performer.m_currentPerformanceIndex++;
+                    m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
                     UpdateCurrentRouting();
                 }
                 else
@@ -693,7 +690,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getControllerValue()>0)
                 {
-                    m_currentSong = m_pendingSong;
+                    m_performer.m_currentPerformanceIndex = m_pendingPerformanceIndex;
                     UpdateCurrentRouting();
                 }
                 else
@@ -701,18 +698,12 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x3f) // anticlockwise
             {
-                m_pendingSong--;
-                if (m_pendingSong<0)
-                    m_pendingSong = (int)m_performer.Root.SetLists.SetList.size() - 1;
-                if (m_pendingSong<0)
-                    m_pendingSong = 0;
+                m_pendingPerformanceIndex--;
                 UpdateLCDScreen(output, sample_number);
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x41) // clockwise
             {
-                m_pendingSong++;
-                if (m_pendingSong >= (int)m_performer.Root.SetLists.SetList.size())
-                    m_pendingSong = 0;
+                m_pendingPerformanceIndex++;
                 UpdateLCDScreen(output, sample_number);
             }
             else if (midi_message.isControllerOfType(113))

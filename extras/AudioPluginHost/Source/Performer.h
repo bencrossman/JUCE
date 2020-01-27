@@ -220,6 +220,13 @@ public:
 class Performer
 {
 public:
+
+    int m_currentPerformanceIndex = 0;
+    int m_currentSetlistIndex = 0;
+
+    int GetTotalPerformances();
+    void GetPerformanceByIndex(PerformanceType*&, Song *&);
+
     void Import(const char *file);
     void ResolveIDs();
 

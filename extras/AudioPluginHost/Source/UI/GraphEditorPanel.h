@@ -68,6 +68,8 @@ public:
     //==============================================================================
     PluginGraph& graph;
 
+    void init();
+
 private:
 
     std::unique_ptr<TabbedComponent> m_tabs;
@@ -80,7 +82,7 @@ private:
     std::unique_ptr<Component> m_rackUI;
     std::vector<std::unique_ptr<Component>> m_rackDevice;
 
-    void SetPerformance(int performanceIndex);
+    void SetPerformance();
     int m_currentPerformanceIndex = 0;
 
     std::unique_ptr<PopupMenu> menu;

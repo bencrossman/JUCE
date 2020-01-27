@@ -1,3 +1,7 @@
+Message lock changing patchs on controller
+pending index sending sysex
+
+
 CC3
 Check sampler supports octave mode
 

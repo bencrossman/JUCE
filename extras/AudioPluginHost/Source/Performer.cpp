@@ -245,11 +245,38 @@ void Performer::ResolveIDs()
                 z--;
             }
         }
-
-
-
-
     }
+}
 
+int Performer::GetTotalPerformances()
+{
+    int performanceIndices = 0;
+    auto &setlist = Root.SetLists.SetList[m_currentSetlistIndex];
+    for (int s = 0; s < setlist.SongPtr.size(); ++s)
+        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
+            performanceIndices++;
+    return performanceIndices;
+}
 
+void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song)
+{ 
+    auto &setlist = Root.SetLists.SetList[m_currentSetlistIndex];
+    int count=0;
+    bool found = false;
+    for (int s = 0; s < setlist.SongPtr.size(); ++s)
+    {
+        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
+        {
+            if (count == m_currentPerformanceIndex)
+            {
+                found = true;
+                performance = setlist.SongPtr[s]->PerformancePtr[p];
+                song = setlist.SongPtr[s];
+                break;
+            }
+            count++;
+        }
+        if (found)
+            break;
+    }
 }

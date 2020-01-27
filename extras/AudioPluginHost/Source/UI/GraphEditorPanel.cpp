@@ -173,7 +173,7 @@ void GraphEditorPanel::updateComponents()
     m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + titleHeight);
     m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
-    SetPerformance(m_currentPerformanceIndex);
+    SetPerformance();
 }
 
 void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
@@ -425,6 +425,7 @@ GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& fm,
 void GraphDocumentComponent::init()
 {
     graphPanel.reset (new GraphEditorPanel (*graph));
+    graphPanel->init();
     addAndMakeVisible (graphPanel.get());
     graphPlayer.setProcessor (&graph->graph);
     graphPlayer.setMidiOutput(deviceManager.getDefaultMidiOutput());
@@ -585,10 +586,16 @@ bool GraphDocumentComponent::closeAnyOpenPluginWindows()
     return graphPanel->graph.closeAnyOpenPluginWindows();
 }
 
-
-void GraphEditorPanel::SetPerformance(int performanceIndex)
+void GraphEditorPanel::init()
 {
+    graph.m_onProgramChange = [this]()
+    {
+        SetPerformance();
+    };
+}
 
+void GraphEditorPanel::SetPerformance()
+{
     auto performer = graph.GetPerformer();
 
     if (performer->Root.SetLists.SetList.size() == 0)
@@ -596,35 +603,10 @@ void GraphEditorPanel::SetPerformance(int performanceIndex)
 
     PerformanceType* performance = NULL;
     Song *song = NULL;
-    bool found = false;
-    int count = 0;
-    auto setlist = performer->Root.SetLists.SetList[0];
-    
-    int performanceIndices = 0;
-    for (int s = 0; s < setlist.SongPtr.size(); ++s)
-        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p) 
-            performanceIndices++;
 
-    performanceIndex = performanceIndex % performanceIndices;
-
-    for (int s = 0; s < setlist.SongPtr.size(); ++s)
-    {
-        for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
-        {
-            if (count == performanceIndex)
-            {
-                found = true;
-                performance = setlist.SongPtr[s]->PerformancePtr[p];
-                song = setlist.SongPtr[s];
-                break;
-            }
-            count++;
-        }
-        if (found)
-            break;
-    }
+    performer->GetPerformanceByIndex(performance, song);
     
-    Logger::outputDebugString(String(performanceIndex) + ":" + song->Name + "|" + performance->Name);
+    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performance->Name);
 
     auto &zones = performance->Zone;
     RackRow::SetTempo(performance->Tempo);
@@ -656,6 +638,12 @@ void GraphEditorPanel::SoloChange()
 bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
 {
     if (key == KeyPress::spaceKey)
-        SetPerformance(m_currentPerformanceIndex++);
+    {
+        auto performer = graph.GetPerformer();
+        performer->m_currentPerformanceIndex++;
+        SetPerformance();
+    }
     return true;
 }
+
+
