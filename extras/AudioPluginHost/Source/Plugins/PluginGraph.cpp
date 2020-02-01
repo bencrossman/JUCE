@@ -657,6 +657,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isProgramChange())
             {
+                MessageManagerLock ms;
+
                 m_performer.m_currentPerformanceIndex = midi_message.getProgramChangeNumber();
                 m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
 

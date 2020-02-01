@@ -1,16 +1,20 @@
-Message lock changing patchs on controller
 pending index sending sysex
-
+Sustain broken
 
 CC3
-Check sampler supports octave mode
+Check sampler supports octave mode, not sure what this means
 
+When ready as backup, return laptops
+
+Setlist manager
+Mono switch (simply takes left of TruePianos)
 Delete rack
 Add new rack
-Mono switch (simply takes left of TruePianos)
-Setlist manager
+
 Maybe some refactoring
 Scoops/Falls for disco strings
+
+Support JV1080 - script presses button and saves out all patch states
 
 
 MainHostWindow
