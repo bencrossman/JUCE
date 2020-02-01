@@ -496,73 +496,78 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             if (m_current == NULL)
                 continue; // whilst I test the song knobs
             midi_message.setChannel(1);
-            if (midi_message.isNoteOnOrOff() && midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
+            if (midi_message.isNoteOnOrOff())
             {
-                int note = midi_message.getNoteNumber() + m_current->Transpose;
-                if (note >= 0 && note <= 127)
+                if (midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
                 {
-                    if (m_current->Arpeggiator && m_pendingProgramNames <= 0)
+                    int note = midi_message.getNoteNumber() + m_current->Transpose;
+                    if (note >= 0 && note <= 127)
                     {
-                        // See if new sequence
-                        if (m_notesDown.empty() && midi_message.isNoteOn())
+                        if (m_current->Arpeggiator && m_pendingProgramNames <= 0)
                         {
-                            m_arpeggiatorBeat = 0;
-                            m_arpeggiatorTimer = 0.001f; // 1ms for first one 
-                            arpeggiatorSample = sample_number;
-                        }
+                            // See if new sequence
+                            if (m_notesDown.empty() && midi_message.isNoteOn())
+                            {
+                                m_arpeggiatorBeat = 0;
+                                m_arpeggiatorTimer = 0.001f; // 1ms for first one 
+                                arpeggiatorSample = sample_number;
+                            }
 
-                        // Update m_notesDown with new info
-                        int found = -1;
-                        for (auto i = 0U; i < m_notesDown.size(); ++i)
-                            if (m_notesDown[i] == note)
-                                found = i;
-                        if (found == -1 && midi_message.isNoteOn())
-                        {
+                            // Update m_notesDown with new info
+                            int found = -1;
                             for (auto i = 0U; i < m_notesDown.size(); ++i)
-                            {
-                                if (m_notesDown[i] > note)
-                                {
+                                if (m_notesDown[i] == note)
                                     found = i;
-                                    break;
-                                }
-                            }
-                            if (found == -1)
-                                m_notesDown.push_back(note);
-                            else
-                                m_notesDown.insert(m_notesDown.begin() + found, note);
-                            m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
-                        }
-                        if (found != -1 && midi_message.isNoteOff())
-                        {
-                            swap(m_notesDown[found], m_notesDown[m_notesDown.size() - 1]);
-                            m_notesDown.pop_back();
-                            m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
-                        }
-
-                        // are we ending?
-                        if (midi_message.isNoteOff() && m_notesDown.empty())
-                        {
-                            // cancel last note
-                            if (m_lastNote >= 0)
+                            if (found == -1 && midi_message.isNoteOn())
                             {
-                                output.addEvent(MidiMessage::noteOff(1, m_lastNote), sample_number);
-                                m_lastNote = -1;
+                                for (auto i = 0U; i < m_notesDown.size(); ++i)
+                                {
+                                    if (m_notesDown[i] > note)
+                                    {
+                                        found = i;
+                                        break;
+                                    }
+                                }
+                                if (found == -1)
+                                    m_notesDown.push_back(note);
+                                else
+                                    m_notesDown.insert(m_notesDown.begin() + found, note);
+                                m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
                             }
-                            m_arpeggiatorTimer = 0.f;
+                            if (found != -1 && midi_message.isNoteOff())
+                            {
+                                swap(m_notesDown[found], m_notesDown[m_notesDown.size() - 1]);
+                                m_notesDown.pop_back();
+                                m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
+                            }
+
+                            // are we ending?
+                            if (midi_message.isNoteOff() && m_notesDown.empty())
+                            {
+                                // cancel last note
+                                if (m_lastNote >= 0)
+                                {
+                                    output.addEvent(MidiMessage::noteOff(1, m_lastNote), sample_number);
+                                    m_lastNote = -1;
+                                }
+                                m_arpeggiatorTimer = 0.f;
+                            }
                         }
-                    }
-                    else
-                    {
-                        midi_message.setNoteNumber(note); // transposed note
-                        output.addEvent(midi_message, sample_number);
-                        if (m_current->DoubleOctave && note < 128 - 12) // double octave
+                        else
                         {
-                            midi_message.setNoteNumber(note+12);
+                            midi_message.setNoteNumber(note); // transposed note
                             output.addEvent(midi_message, sample_number);
+                            if (m_current->DoubleOctave && note < 128 - 12) // double octave
+                            {
+                                midi_message.setNoteNumber(note + 12);
+                                output.addEvent(midi_message, sample_number);
+                            }
                         }
                     }
                 }
             }
+            else
+                output.addEvent(midi_message, sample_number); // other events like sustain
         }
         midiBuffer = output;
     }

@@ -1,7 +1,8 @@
 pending index sending sysex
-Sustain broken
+Display song on screen
 
-CC3
+WavStreamer not nice with WASAPI or maybe everything (Forte and Performer)
+
 Check sampler supports octave mode, not sure what this means
 
 When ready as backup, return laptops
@@ -32,6 +33,6 @@ MainHostWindow
 
 
 Additional import tasks
-- Load my famous OPX bank
+- Load my famous OPX bank, Learn #3 to Filter Envelope D 
 - M1 set to prog mode, global midi channel 1
 - Show must go on override including transpose

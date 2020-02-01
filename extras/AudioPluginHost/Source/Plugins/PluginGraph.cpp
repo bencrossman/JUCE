@@ -612,7 +612,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     m_shutdownPressCount++;
                 if (m_shutdownPressCount == 1)
                     PrintLCDScreen(output, sample_number, "Are you sure?", " ");
-                if (m_shutdownPressCount>1)
+                if (m_shutdownPressCount > 1)
                 {
                     PrintLCDScreen(output, sample_number, "Shutting Down", " ");
                     system("shutdown /t 0 /s");
@@ -622,7 +622,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (m_shutdownPressCount) // to remove confirm text
                 {
-                    if (m_performer.Root.SetLists.SetList.size()>0)
+                    if (m_performer.Root.SetLists.SetList.size() > 0)
                         UpdateLCDScreen(output, sample_number);
                     else
                         PrintLCDScreen(output, sample_number, " ", " ");
@@ -638,7 +638,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             else if (midi_message.isAftertouch() || midi_message.isChannelPressure())
             {
                 //ignore aftertouch
-            } 
+            }
             //else if (midi_message.isPitchWheel())
             //{
             //  //ignore pitch bend
@@ -666,7 +666,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isControllerOfType(111)) // backward
             {
-                if (midi_message.getControllerValue()>0)
+                if (midi_message.getControllerValue() > 0)
                 {
                     m_performer.m_currentPerformanceIndex--;
                     m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
@@ -678,7 +678,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isControllerOfType(116)) // forward
             {
-                if (midi_message.getControllerValue()>0)
+                if (midi_message.getControllerValue() > 0)
                 {
                     m_performer.m_currentPerformanceIndex++;
                     m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
@@ -690,7 +690,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isControllerOfType(115))
             {
-                if (midi_message.getControllerValue()>0)
+                if (midi_message.getControllerValue() > 0)
                 {
                     m_performer.m_currentPerformanceIndex = m_pendingPerformanceIndex;
                     UpdateCurrentRouting();
@@ -721,11 +721,11 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x3f) // category anticlockwise
             {
                 m_pendingSet--;
-                if (m_pendingSet<0)
+                if (m_pendingSet < 0)
                     m_pendingSet = (int)m_performer.Root.SetLists.SetList.size() - 1;
-                if (m_pendingSet<0)
+                if (m_pendingSet < 0)
                     m_pendingSet = 0;
-                if (m_performer.Root.SetLists.SetList.size()>0)
+                if (m_performer.Root.SetLists.SetList.size() > 0)
                     PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
             }
             else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x41) // category clockwise
@@ -733,7 +733,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 m_pendingSet++;
                 if (m_pendingSet >= (int)m_performer.Root.SetLists.SetList.size())
                     m_pendingSet = 0;
-                if (m_performer.Root.SetLists.SetList.size()>0)
+                if (m_performer.Root.SetLists.SetList.size() > 0)
                     PrintLCDScreen(output, sample_number, m_performerFilename.c_str(), m_performer.Root.SetLists.SetList[m_pendingSet].Name.c_str());
             }
             else if (midi_message.isNoteOn() && midi_message.getVelocity() == 0)
