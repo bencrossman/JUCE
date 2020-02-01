@@ -31,6 +31,33 @@ MainHostWindow
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
 
+Organize tabs - drag(itemorder/item)/delete(group/item)/new group, group names alphabetical
+
+Setlists
+~~~~~~~~
+Queen                  Song1
+- Song1                Song2
+- Song2                Song3
+Queen2
+- Song3
+
+Songs
+~~~~~
+Song1                  Performance1
+-Performance1          Performance2
+-Performance2          Performance3
+Song2
+-Performance3
+
+Performances
+~~~~~~~~~~~~
+Do we need, alphabetical? Just add/delete/name/setup
+
+
+
+
+
+
 
 Additional import tasks
 - Load my famous OPX bank, Learn #3 to Filter Envelope D 

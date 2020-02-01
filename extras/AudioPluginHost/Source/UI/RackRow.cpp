@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.3.2
+  Created with Projucer version: 5.4.5
 
   ------------------------------------------------------------------------------
 
@@ -116,7 +116,7 @@ RackRow::RackRow ()
                            TRANS("to")));
     addAndMakeVisible (m_to.get());
     m_to->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    m_to->setJustificationType (Justification::centredLeft);
+    m_to->setJustificationType (Justification::centred);
     m_to->setEditable (false, false, false);
     m_to->setColour (TextEditor::textColourId, Colours::black);
     m_to->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
@@ -303,7 +303,7 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
             }
             if (res == 3)
             {
-                
+
             }
         }
         else
@@ -509,7 +509,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                             if (m_notesDown.empty() && midi_message.isNoteOn())
                             {
                                 m_arpeggiatorBeat = 0;
-                                m_arpeggiatorTimer = 0.001f; // 1ms for first one 
+                                m_arpeggiatorTimer = 0.001f; // 1ms for first one
                                 arpeggiatorSample = sample_number;
                             }
 
@@ -599,7 +599,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
         }
     }
-    
+
 
     if (m_arpeggiatorTimer > 0) // arpeggiator active
     {
@@ -685,7 +685,7 @@ void RackRow::Assign(Zone *zone)
 {
     auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
     if (!zone->OverrideState.empty())
-    {   
+    {
         graph->SendChunkString(processor, zone->OverrideState);
         m_lastZoneHadOverrideState = true;
     }
@@ -712,7 +712,7 @@ void RackRow::Assign(Zone *zone)
 
     if (m_bank->isVisible())
         m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
-    
+
     m_program->setSelectedId(zone->Program + 1, dontSendNotification);
 
 
@@ -757,10 +757,9 @@ BEGIN_JUCER_METADATA
                 explicitFocusOrder="0" pos="160 14 72 24" buttonText="Mute" connectedEdges="0"
                 needsCallback="1" radioGroupId="0" state="0"/>
   <SLIDER name="" id="a0e2bc5a61933c6d" memberName="m_volume" virtualName=""
-          explicitFocusOrder="0" pos="96 43 128 24" min="-110.00000000000000000000"
-          max="12.00000000000000000000" int="0.50000000000000000000" style="LinearBar"
-          textBoxPos="TextBoxBelow" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1.00000000000000000000" needsCallback="1"/>
+          explicitFocusOrder="0" pos="96 43 128 24" min="-110.0" max="12.0"
+          int="0.5" style="LinearBar" textBoxPos="TextBoxBelow" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <COMBOBOX name="" id="90d63ca95a92a112" memberName="m_bank" virtualName=""
             explicitFocusOrder="0" pos="233 43 150 24" editable="0" layout="33"
             items="&#10;" textWhenNonSelected="" textWhenNoItems=""/>
@@ -773,8 +772,8 @@ BEGIN_JUCER_METADATA
   <LABEL name="" id="72d9777463cc6a85" memberName="m_to" virtualName=""
          explicitFocusOrder="0" pos="744 14 24 24" edTextCol="ff000000"
          edBkgCol="0" labelText="to" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15.00000000000000000000"
-         kerning="0.00000000000000000000" bold="0" italic="0" justification="33"/>
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
+         kerning="0.0" bold="0" italic="0" justification="36"/>
   <TEXTEDITOR name="" id="3d470180923a3d6f" memberName="m_lowKey" virtualName=""
               explicitFocusOrder="0" pos="712 14 32 24" initialText="" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="0" caret="1" popupmenu="1"/>
@@ -784,9 +783,9 @@ BEGIN_JUCER_METADATA
   <IMAGEBUTTON name="" id="31b2ae44720b5f47" memberName="m_deviceSettings" virtualName=""
                explicitFocusOrder="0" pos="8 14 76 57" buttonText="new button"
                connectedEdges="0" needsCallback="1" radioGroupId="0" keepProportions="1"
-               resourceNormal="" opacityNormal="1.00000000000000000000" colourNormal="0"
-               resourceOver="" opacityOver="1.00000000000000000000" colourOver="0"
-               resourceDown="" opacityDown="1.00000000000000000000" colourDown="0"/>
+               resourceNormal="" opacityNormal="1.0" colourNormal="0" resourceOver=""
+               opacityOver="1.0" colourOver="0" resourceDown="" opacityDown="1.0"
+               colourDown="0"/>
   <GENERICCOMPONENT name="" id="3a433662794e0409" memberName="m_keyboard" virtualName="MidiKeyboardComponent"
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
   <TOGGLEBUTTON name="" id="7a9e84b485ffe060" memberName="m_doubleOctave" virtualName=""
@@ -804,3 +803,4 @@ END_JUCER_METADATA
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
+

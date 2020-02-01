@@ -362,6 +362,7 @@ void MainHostWindow::menuBarActivated (bool isActivated)
 
 void MainHostWindow::createPlugin (const PluginDescription& desc, Point<int> pos)
 {
+    // Used by the add from menubar (maybe later refactor to not use pos)
     if (graphHolder != nullptr)
         graphHolder->createNewPlugin (desc, pos);
 }

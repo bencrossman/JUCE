@@ -29,6 +29,7 @@
 #include "../Plugins/InternalPlugins.h"
 #include "MainHostWindow.h"
 #include "RackRow.h"
+#include "RackTitleBar.h"
 #include "../Performer.h"
 
 //==============================================================================
@@ -37,58 +38,22 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
     graph.addChangeListener (this);
     setOpaque (true);
 
-    m_volumeColumn.reset(new Label(String(), TRANS("Volume")));
-    m_volumeColumn->setFont(Font(15.00f, Font::plain).withTypefaceStyle("Regular"));
-    m_volumeColumn->setJustificationType(Justification::centredLeft);
-    m_volumeColumn->setEditable(false, false, false);
-    m_volumeColumn->setColour(TextEditor::textColourId, Colours::black);
-    m_volumeColumn->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    m_volumeColumn->setBounds(144, 0, 64, 24);
-
-    m_rangeColumn.reset(new Label(String(), TRANS("Range")));
-    m_rangeColumn->setFont(Font(15.00f, Font::plain).withTypefaceStyle("Regular"));
-    m_rangeColumn->setJustificationType(Justification::centredLeft);
-    m_rangeColumn->setEditable(false, false, false);
-    m_rangeColumn->setColour(TextEditor::textColourId, Colours::black);
-    m_rangeColumn->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    m_rangeColumn->setBounds(736, 0, 56, 24);
-
-    m_bankProgramColumn.reset(new Label(String(), TRANS("Bank/Program\n")));
-    m_bankProgramColumn->setFont(Font(15.00f, Font::plain).withTypefaceStyle("Regular"));
-    m_bankProgramColumn->setJustificationType(Justification::centredLeft);
-    m_bankProgramColumn->setEditable(false, false, false);
-    m_bankProgramColumn->setColour(TextEditor::textColourId, Colours::black);
-    m_bankProgramColumn->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    m_bankProgramColumn->setBounds(264, 0, 104, 24);
-
-    m_transposeColumn.reset(new Label(String(), TRANS("Transpose")));
-    m_transposeColumn->setFont(Font(15.00f, Font::plain).withTypefaceStyle("Regular"));
-    m_transposeColumn->setJustificationType(Justification::centredLeft);
-    m_transposeColumn->setEditable(false, false, false);
-    m_transposeColumn->setColour(TextEditor::textColourId, Colours::black);
-    m_transposeColumn->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    m_transposeColumn->setBounds(632, 0, 80, 24);
-
     m_rackUIViewport.reset(new Viewport());
     m_rackUI.reset(new Component());
-    m_rackTopUI.reset(new Component());
+    m_rackTopUI.reset(new RackTitleBar());
 
     m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
     m_tabs->setTabBarDepth(30);
     m_tabs->addTab(TRANS("SetLists"), Colours::darkblue, 0, false);
     m_tabs->addTab(TRANS("Songs"), Colours::darkgreen, 0, false);
-    m_tabs->addTab(TRANS("Performances"), Colours::darkkhaki, 0, false);
-    m_tabs->addTab(TRANS("Rack"), Colours::darkgrey, m_rackUIViewport.get(), false);
-    m_tabs->setCurrentTabIndex(3);
+    m_tabs->addTab(TRANS("Performances"), Colours::darkgrey, m_rackUIViewport.get(), false);
+    m_tabs->setCurrentTabIndex(2);
     addAndMakeVisible(m_tabs.get());
-
-    m_rackTopUI->addAndMakeVisible(m_bankProgramColumn.get());
-    m_rackTopUI->addAndMakeVisible(m_transposeColumn.get());
-    m_rackTopUI->addAndMakeVisible(m_rangeColumn.get());
-    m_rackTopUI->addAndMakeVisible(m_volumeColumn.get());
 
     m_rackUIViewport->setScrollBarsShown(true, false);
     m_rackUIViewport->setViewedComponent(m_rackUI.get());
+
+    m_titleHeight = m_rackTopUI->getHeight() - 4;
 }
 
 GraphEditorPanel::~GraphEditorPanel()
@@ -101,32 +66,6 @@ void GraphEditorPanel::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 }
 
-void GraphEditorPanel::mouseDown (const MouseEvent& e)
-{
-    if (isOnTouchDevice())
-    {
-        originalTouchPos = e.position.toInt();
-        startTimer (750);
-    }
-
-    if (e.mods.isPopupMenu())
-        showPopupMenu (e.position.toInt());
-}
-
-void GraphEditorPanel::mouseUp (const MouseEvent&)
-{
-    if (isOnTouchDevice())
-    {
-        stopTimer();
-        callAfterDelay (250, []() { PopupMenu::dismissAllActiveMenus(); });
-    }
-}
-
-void GraphEditorPanel::mouseDrag (const MouseEvent& e)
-{
-    if (isOnTouchDevice() && e.getDistanceFromDragStart() > 5)
-        stopTimer();
-}
 
 void GraphEditorPanel::createNewPlugin (const PluginDescription& desc, Point<int> position)
 {
@@ -157,7 +96,6 @@ void GraphEditorPanel::updateComponents()
     int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
     int deviceWidth = 100;
     int deviceHeight = 20;
-    int titleHeight = m_volumeColumn->getHeight() - 4;
     for (int i = 0; i < devicesOnScreen; ++i)
     {
         m_rackDevice.push_back(std::make_unique<RackRow>());
@@ -166,43 +104,14 @@ void GraphEditorPanel::updateComponents()
         deviceWidth = newRackRow->getWidth() + 2;
         deviceHeight = newRackRow->getHeight();
         m_rackUI->addAndMakeVisible(newRackRow);
-        newRackRow->setBounds(0, i*deviceHeight + titleHeight, deviceWidth, deviceHeight);
+        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, deviceWidth, deviceHeight);
     }
     m_tabs->setBounds(10, 10, deviceWidth, 700); // include tab bar
-    m_rackTopUI->setBounds(0, 0, deviceWidth, titleHeight);
-    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + titleHeight);
+    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
+    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight);
     m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
     SetPerformance();
-}
-
-void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
-{
-    menu.reset (new PopupMenu);
-
-    if (auto* mainWindow = findParentComponentOfClass<MainHostWindow>())
-    {
-        mainWindow->addPluginsToMenu (*menu);
-
-        menu->showMenuAsync ({},
-                             ModalCallbackFunction::create ([this, mousePos] (int r)
-                                                            {
-                                                                if (r > 0)
-                                                                    if (auto* mainWin = findParentComponentOfClass<MainHostWindow>())
-                                                                        createNewPlugin (mainWin->getChosenType (r), mousePos);
-                                                            }));
-    }
-}
-
-
-
-void GraphEditorPanel::timerCallback()
-{
-    // this should only be called on touch devices
-    jassert (isOnTouchDevice());
-
-    stopTimer();
-    showPopupMenu (originalTouchPos);
 }
 
 //==============================================================================
@@ -528,20 +437,8 @@ bool GraphDocumentComponent::isInterestedInDragSource (const SourceDetails& deta
             && details.description.toString().startsWith ("PLUGIN"));
 }
 
-void GraphDocumentComponent::itemDropped (const SourceDetails& details)
+void GraphDocumentComponent::itemDropped (const SourceDetails&)
 {
-    // don't allow items to be dropped behind the sidebar
-    if (pluginListSidePanel.getBounds().contains (details.localPosition))
-        return;
-
-    auto pluginTypeIndex = details.description.toString()
-                                 .fromFirstOccurrenceOf ("PLUGIN: ", false, false)
-                                 .getIntValue();
-
-    // must be a valid index!
-    jassert (isPositiveAndBelow (pluginTypeIndex, pluginList.getNumTypes()));
-
-    createNewPlugin (pluginList.getTypes()[pluginTypeIndex], details.localPosition);
 }
 
 void GraphDocumentComponent::showSidePanel (bool showSettingsPanel)

@@ -149,6 +149,7 @@
     <ClCompile Include="..\..\Source\Plugins\InternalPlugins.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\IOConfigurationWindow.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\PluginGraph.cpp"/>
+    <ClCompile Include="..\..\Source\UI\RackTitleBar.cpp"/>
     <ClCompile Include="..\..\Source\UI\RackRow.cpp"/>
     <ClCompile Include="..\..\Source\UI\GraphEditorPanel.cpp"/>
     <ClCompile Include="..\..\Source\UI\MainHostWindow.cpp"/>
@@ -1939,6 +1940,7 @@
     <ClInclude Include="..\..\Source\Plugins\InternalPlugins.h"/>
     <ClInclude Include="..\..\Source\Plugins\IOConfigurationWindow.h"/>
     <ClInclude Include="..\..\Source\Plugins\PluginGraph.h"/>
+    <ClInclude Include="..\..\Source\UI\RackTitleBar.h"/>
     <ClInclude Include="..\..\Source\UI\RackRow.h"/>
     <ClInclude Include="..\..\Source\UI\GraphEditorPanel.h"/>
     <ClInclude Include="..\..\Source\UI\MainHostWindow.h"/>

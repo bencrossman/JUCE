@@ -37,7 +37,6 @@ class Performer;
 */
 class GraphEditorPanel   : public Component,
                            public ChangeListener,
-                           private Timer,
                            public KeyListener
 {
 public:
@@ -49,34 +48,21 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-    void mouseDown (const MouseEvent&) override;
-    void mouseUp   (const MouseEvent&) override;
-    void mouseDrag (const MouseEvent&) override;
-
-    void changeListenerCallback (ChangeBroadcaster*) override;
-
-    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;
+    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;    void changeListenerCallback (ChangeBroadcaster*) override;
 
     //==============================================================================
     void updateComponents();
 
-    //==============================================================================
-    void showPopupMenu (Point<int> position);
 
+    void init();
     void SoloChange();
 
     //==============================================================================
     PluginGraph& graph;
 
-    void init();
-
 private:
 
     std::unique_ptr<TabbedComponent> m_tabs;
-    std::unique_ptr<Label> m_transposeColumn;
-    std::unique_ptr<Label> m_bankProgramColumn;
-    std::unique_ptr<Label> m_rangeColumn;
-    std::unique_ptr<Label> m_volumeColumn;
     std::unique_ptr<Component> m_rackTopUI;
     std::unique_ptr<Viewport> m_rackUIViewport;
     std::unique_ptr<Component> m_rackUI;
@@ -84,13 +70,7 @@ private:
 
     void SetPerformance();
     int m_currentPerformanceIndex = 0;
-
-    std::unique_ptr<PopupMenu> menu;
-
-    //==============================================================================
-    Point<int> originalTouchPos;
-
-    void timerCallback() override;
+    int m_titleHeight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphEditorPanel)
 };

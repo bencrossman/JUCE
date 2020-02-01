@@ -62,6 +62,9 @@
         <FILE id="cbvjhb" name="PluginGraph.h" compile="0" resource="0" file="Source/Plugins/PluginGraph.h"/>
       </GROUP>
       <GROUP id="{D892BFB2-FE85-B70F-10D3-450F407E2B3D}" name="UI">
+        <FILE id="UbsNEE" name="RackTitleBar.cpp" compile="1" resource="0"
+              file="Source/UI/RackTitleBar.cpp"/>
+        <FILE id="nW3lB2" name="RackTitleBar.h" compile="0" resource="0" file="Source/UI/RackTitleBar.h"/>
         <FILE id="gwNcpD" name="RackRow.cpp" compile="1" resource="0" file="Source/UI/RackRow.cpp"/>
         <FILE id="NzRMXg" name="RackRow.h" compile="0" resource="0" file="Source/UI/RackRow.h"/>
         <FILE id="wPgLS9" name="GraphEditorPanel.cpp" compile="1" resource="0"
