@@ -87,8 +87,6 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
     m_rackTopUI->addAndMakeVisible(m_rangeColumn.get());
     m_rackTopUI->addAndMakeVisible(m_volumeColumn.get());
 
-    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
-
     m_rackUIViewport->setScrollBarsShown(true, false);
     m_rackUIViewport->setViewedComponent(m_rackUI.get());
 }
@@ -152,6 +150,8 @@ void GraphEditorPanel::updateComponents()
     // both of these are about to be added to in for loop below
     m_rackDevice.clear();
     m_rackUI->removeAllChildren();
+
+    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
 
     auto performer = graph.GetPerformer();
     int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
