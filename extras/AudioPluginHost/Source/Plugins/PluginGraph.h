@@ -86,7 +86,7 @@ public:
     Performer *GetPerformer() { return &m_performer; }
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
     void PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2);
-    void UpdateLCDScreen(MidiBuffer &output, int sample_number);
+    void UpdateLCDScreen(MidiBuffer &output, int sample_number, int index);
     void UpdateCurrentRouting();
     void LoadSet(int setIndex);
     void SetupKeylab(MidiBuffer &output, int sample_number);

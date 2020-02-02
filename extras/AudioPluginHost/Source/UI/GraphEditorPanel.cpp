@@ -501,7 +501,7 @@ void GraphEditorPanel::SetPerformance()
     PerformanceType* performance = NULL;
     Song *song = NULL;
 
-    performer->GetPerformanceByIndex(performance, song);
+    performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
     
     Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performance->Name);
 

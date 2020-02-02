@@ -1,21 +1,15 @@
-pending index sending sysex
-Crash going before Piano
+Check gains
 
-
-Check sampler supports octave mode, not sure what this means?
-
-When ready as backup, return laptops
+BACKUP READY! return laptops
 
 Setlist manager
 Mono switch (simply takes left of TruePianos)
 Delete rack
 Add new rack
 
-Maybe some refactoring
 Scoops/Falls for disco strings
-
+Check sampler supports octave mode, not sure what this means but maybe something to do with sampler trumpets?
 Support JV1080 - script presses button and saves out all patch states
-
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent

@@ -258,8 +258,9 @@ int Performer::GetTotalPerformances()
     return performanceIndices;
 }
 
-void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song)
+void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song, int index)
 { 
+    index = index % GetTotalPerformances();
     auto &setlist = Root.SetLists.SetList[m_currentSetlistIndex];
     int count=0;
     bool found = false;
@@ -267,7 +268,7 @@ void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song)
     {
         for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
         {
-            if (count == m_currentPerformanceIndex)
+            if (count == index)
             {
                 found = true;
                 performance = setlist.SongPtr[s]->PerformancePtr[p];

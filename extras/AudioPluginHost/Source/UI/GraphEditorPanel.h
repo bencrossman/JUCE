@@ -69,7 +69,6 @@ private:
     std::vector<std::unique_ptr<Component>> m_rackDevice;
 
     void SetPerformance();
-    int m_currentPerformanceIndex = 0;
     int m_titleHeight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphEditorPanel)

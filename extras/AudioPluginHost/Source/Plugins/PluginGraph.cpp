@@ -543,7 +543,7 @@ void OptimizeLines(string &songName1, string &songName2)
         songName2 = " ";
 }
 
-void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
+void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number, int index)
 {
     string songName1, songName2;
 
@@ -551,7 +551,7 @@ void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
     PerformanceType* performance = NULL;
     Song *song = NULL;
 
-    m_performer.GetPerformanceByIndex(performance, song);
+    m_performer.GetPerformanceByIndex(performance, song, index);
 
     songName1 = song->Name;
     songName2 = performance->Name;
@@ -577,12 +577,15 @@ void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number)
 
 void PluginGraph::UpdateCurrentRouting()
 {
+    MessageManagerLock ms;
     m_onProgramChange();
 }
 
 void PluginGraph::LoadSet(int setIndex)
 {
-    setIndex;
+    // TODO
+    setIndex; 
+    m_performer.m_currentPerformanceIndex = 0;
 }
 
 bool m_keylabNeedsSettingup = true;
@@ -623,7 +626,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (m_shutdownPressCount) // to remove confirm text
                 {
                     if (m_performer.Root.SetLists.SetList.size() > 0)
-                        UpdateLCDScreen(output, sample_number);
+                        UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
                     else
                         PrintLCDScreen(output, sample_number, " ", " ");
                 }
@@ -657,8 +660,6 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isProgramChange())
             {
-                MessageManagerLock ms;
-
                 m_performer.m_currentPerformanceIndex = midi_message.getProgramChangeNumber();
                 m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
 
@@ -673,7 +674,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen(output, sample_number);
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
 
             }
             else if (midi_message.isControllerOfType(116)) // forward
@@ -685,7 +686,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen(output, sample_number);
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
 
             }
             else if (midi_message.isControllerOfType(115))
@@ -696,27 +697,27 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateCurrentRouting();
                 }
                 else
-                    UpdateLCDScreen(output, sample_number); // just redraw
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x3f) // anticlockwise
             {
                 m_pendingPerformanceIndex--;
-                UpdateLCDScreen(output, sample_number);
+                UpdateLCDScreen(output, sample_number, m_pendingPerformanceIndex);
             }
             else if (midi_message.isControllerOfType(114) && midi_message.getControllerValue() == 0x41) // clockwise
             {
                 m_pendingPerformanceIndex++;
-                UpdateLCDScreen(output, sample_number);
+                UpdateLCDScreen(output, sample_number, m_pendingPerformanceIndex);
             }
             else if (midi_message.isControllerOfType(113))
             {
                 if (midi_message.getControllerValue() > 0)
                 {
                     LoadSet(m_pendingSet);
-                    UpdateLCDScreen(output, sample_number);
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
                 }
                 else
-                    UpdateLCDScreen(output, sample_number); // just redraw
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
             }
             else if (midi_message.isControllerOfType(112) && midi_message.getControllerValue() == 0x3f) // category anticlockwise
             {
