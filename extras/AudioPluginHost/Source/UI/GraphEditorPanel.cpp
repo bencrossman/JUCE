@@ -53,7 +53,7 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
     m_rackUIViewport->setScrollBarsShown(true, false);
     m_rackUIViewport->setViewedComponent(m_rackUI.get());
 
-    m_titleHeight = m_rackTopUI->getHeight() - 4;
+    m_titleHeight = m_rackTopUI->getHeight();
 }
 
 GraphEditorPanel::~GraphEditorPanel()
@@ -504,6 +504,8 @@ void GraphEditorPanel::SetPerformance()
     performer->GetPerformanceByIndex(performance, song);
     
     Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performance->Name);
+
+    ((RackTitleBar*)m_rackTopUI.get())->Assign(song, performance);
 
     auto &zones = performance->Zone;
     RackRow::SetTempo(performance->Tempo);

@@ -18,6 +18,7 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "../Performer.h"
 //[/Headers]
 
 #include "RackTitleBar.h"
@@ -41,7 +42,7 @@ RackTitleBar::RackTitleBar ()
     m_transposeColumn->setColour (TextEditor::textColourId, Colours::black);
     m_transposeColumn->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    m_transposeColumn->setBounds (628, 0, 72, 24);
+    m_transposeColumn->setBounds (628, 49, 72, 24);
 
     m_bankProgramColumn.reset (new Label (String(),
                                           TRANS("Bank/Program")));
@@ -52,7 +53,7 @@ RackTitleBar::RackTitleBar ()
     m_bankProgramColumn->setColour (TextEditor::textColourId, Colours::black);
     m_bankProgramColumn->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    m_bankProgramColumn->setBounds (233, 0, 150, 24);
+    m_bankProgramColumn->setBounds (233, 49, 150, 24);
 
     m_rangeColumn.reset (new Label (String(),
                                     TRANS("Range")));
@@ -63,7 +64,7 @@ RackTitleBar::RackTitleBar ()
     m_rangeColumn->setColour (TextEditor::textColourId, Colours::black);
     m_rangeColumn->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    m_rangeColumn->setBounds (724, 0, 64, 24);
+    m_rangeColumn->setBounds (724, 49, 64, 24);
 
     m_volumeColumn.reset (new Label (String(),
                                      TRANS("Volume")));
@@ -74,13 +75,59 @@ RackTitleBar::RackTitleBar ()
     m_volumeColumn->setColour (TextEditor::textColourId, Colours::black);
     m_volumeColumn->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    m_volumeColumn->setBounds (96, 0, 128, 24);
+    m_volumeColumn->setBounds (96, 49, 128, 24);
+
+    m_performanceLabel.reset (new Label (String(),
+                                         TRANS("Performance")));
+    addAndMakeVisible (m_performanceLabel.get());
+    m_performanceLabel->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    m_performanceLabel->setJustificationType (Justification::centredLeft);
+    m_performanceLabel->setEditable (false, false, false);
+    m_performanceLabel->setColour (TextEditor::textColourId, Colours::black);
+    m_performanceLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    m_performanceLabel->setBounds (0, 25, 150, 24);
+
+    m_performanceName.reset (new TextEditor (String()));
+    addAndMakeVisible (m_performanceName.get());
+    m_performanceName->setMultiLine (false);
+    m_performanceName->setReturnKeyStartsNewLine (false);
+    m_performanceName->setReadOnly (false);
+    m_performanceName->setScrollbarsShown (false);
+    m_performanceName->setCaretVisible (true);
+    m_performanceName->setPopupMenuEnabled (true);
+    m_performanceName->setText (String());
+
+    m_performanceName->setBounds (136, 26, 272, 22);
+
+    m_songLabel.reset (new Label (String(),
+                                  TRANS("Song")));
+    addAndMakeVisible (m_songLabel.get());
+    m_songLabel->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    m_songLabel->setJustificationType (Justification::centredLeft);
+    m_songLabel->setEditable (false, false, false);
+    m_songLabel->setColour (TextEditor::textColourId, Colours::black);
+    m_songLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    m_songLabel->setBounds (0, 1, 150, 24);
+
+    m_songName.reset (new TextEditor (String()));
+    addAndMakeVisible (m_songName.get());
+    m_songName->setMultiLine (false);
+    m_songName->setReturnKeyStartsNewLine (false);
+    m_songName->setReadOnly (false);
+    m_songName->setScrollbarsShown (false);
+    m_songName->setCaretVisible (true);
+    m_songName->setPopupMenuEnabled (true);
+    m_songName->setText (String());
+
+    m_songName->setBounds (136, 2, 272, 22);
 
 
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (816, 24);
+    setSize (816, 70);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -96,6 +143,10 @@ RackTitleBar::~RackTitleBar()
     m_bankProgramColumn = nullptr;
     m_rangeColumn = nullptr;
     m_volumeColumn = nullptr;
+    m_performanceLabel = nullptr;
+    m_performanceName = nullptr;
+    m_songLabel = nullptr;
+    m_songName = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -126,6 +177,20 @@ void RackTitleBar::resized()
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+void RackTitleBar::Assign(Song *song, PerformanceType *performance)
+{
+    m_current = performance;
+    m_currentSong = song;
+    m_performanceName->setText(performance->Name, false);
+    m_songName->setText(song->Name, false);
+
+}
+
+void RackTitleBar::textEditorTextChanged(TextEditor&)
+{
+    m_current->Name = m_performanceName->getText().toStdString();
+    m_currentSong->Name = m_songName->getText().toStdString();
+}
 //[/MiscUserCode]
 
 
@@ -139,30 +204,48 @@ void RackTitleBar::resized()
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="RackTitleBar" componentName=""
-                 parentClasses="public Component" constructorParams="" variableInitialisers=""
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="1" initialWidth="816" initialHeight="24">
+                 parentClasses="public Component, public TextEditor::Listener"
+                 constructorParams="" variableInitialisers="" snapPixels="8" snapActive="1"
+                 snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="816"
+                 initialHeight="70">
   <BACKGROUND backgroundColour="ff323e44"/>
   <LABEL name="" id="df98b892f707f559" memberName="m_transposeColumn"
-         virtualName="" explicitFocusOrder="0" pos="628 0 72 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="628 49 72 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Transpose" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
          kerning="0.0" bold="0" italic="0" justification="36"/>
   <LABEL name="" id="1ec7c2bf1356976c" memberName="m_bankProgramColumn"
-         virtualName="" explicitFocusOrder="0" pos="233 0 150 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="233 49 150 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Bank/Program" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <LABEL name="" id="45ccc111fb3f525b" memberName="m_rangeColumn" virtualName=""
-         explicitFocusOrder="0" pos="724 0 64 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="724 49 64 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Range" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
          kerning="0.0" bold="0" italic="0" justification="36"/>
   <LABEL name="" id="7f6211731f4b9927" memberName="m_volumeColumn" virtualName=""
-         explicitFocusOrder="0" pos="96 0 128 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="96 49 128 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Volume" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
          kerning="0.0" bold="0" italic="0" justification="36"/>
+  <LABEL name="" id="7c8e939d79f153c5" memberName="m_performanceLabel"
+         virtualName="" explicitFocusOrder="0" pos="0 25 150 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Performance" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
+  <TEXTEDITOR name="" id="fd21b0d2d8107be1" memberName="m_performanceName"
+              virtualName="" explicitFocusOrder="0" pos="136 26 272 22" initialText=""
+              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="0"
+              caret="1" popupmenu="1"/>
+  <LABEL name="" id="ab64af59d8be5fe3" memberName="m_songLabel" virtualName=""
+         explicitFocusOrder="0" pos="0 1 150 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Song" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
+         kerning="0.0" bold="0" italic="0" justification="33"/>
+  <TEXTEDITOR name="" id="21ef937502d210df" memberName="m_songName" virtualName=""
+              explicitFocusOrder="0" pos="136 2 272 22" initialText="" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="0" caret="1" popupmenu="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

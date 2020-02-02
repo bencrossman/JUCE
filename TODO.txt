@@ -1,9 +1,8 @@
 pending index sending sysex
-Display song on screen
 
 WavStreamer not nice with WASAPI or maybe everything (Forte and Performer)
 
-Check sampler supports octave mode, not sure what this means
+Check sampler supports octave mode, not sure what this means?
 
 When ready as backup, return laptops
 
@@ -30,34 +29,10 @@ MainHostWindow
                                           +m_rackDevice------------------------>RackRow's (UI but responsible for MIDI/State too)
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
-
-Organize tabs - drag(itemorder/item)/delete(group/item)/new group, group names alphabetical
-
-Setlists
-~~~~~~~~
-Queen                  Song1
-- Song1                Song2
-- Song2                Song3
-Queen2
-- Song3
-
-Songs
-~~~~~
-Song1                  Performance1
--Performance1          Performance2
--Performance2          Performance3
-Song2
--Performance3
-
-Performances
-~~~~~~~~~~~~
-Do we need, alphabetical? Just add/delete/name/setup
-
-
-
-
-
-
+Setlists/Songs
+~~~~~~~~~~~~~~
+Exactly like Forte but split 3 lists into two screen of 2 lists
+Have option to select any performance on rack screen (will say unassigned)
 
 Additional import tasks
 - Load my famous OPX bank, Learn #3 to Filter Envelope D 

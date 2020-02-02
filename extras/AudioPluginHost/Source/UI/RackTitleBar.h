@@ -21,6 +21,8 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../../JuceLibraryCode/JuceHeader.h"
+class PerformanceType;
+class Song;
 //[/Headers]
 
 
@@ -33,7 +35,8 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class RackTitleBar  : public Component
+class RackTitleBar  : public Component,
+                      public TextEditor::Listener
 {
 public:
     //==============================================================================
@@ -42,6 +45,8 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+    void Assign(Song *song, PerformanceType *performance);
+    void textEditorTextChanged(TextEditor&) override;
     //[/UserMethods]
 
     void paint (Graphics& g) override;
@@ -51,6 +56,8 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+    PerformanceType * m_current;
+    Song * m_currentSong;
     //[/UserVariables]
 
     //==============================================================================
@@ -58,6 +65,10 @@ private:
     std::unique_ptr<Label> m_bankProgramColumn;
     std::unique_ptr<Label> m_rangeColumn;
     std::unique_ptr<Label> m_volumeColumn;
+    std::unique_ptr<Label> m_performanceLabel;
+    std::unique_ptr<TextEditor> m_performanceName;
+    std::unique_ptr<Label> m_songLabel;
+    std::unique_ptr<TextEditor> m_songName;
 
 
     //==============================================================================
