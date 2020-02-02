@@ -76,7 +76,7 @@ void GraphEditorPanel::createNewPlugin (const PluginDescription& desc, Point<int
 
 void GraphEditorPanel::resized()
 {
-    updateComponents();
+    //updateComponents(); this will destroy racks and crash
 }
 
 void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
@@ -86,6 +86,7 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
 void GraphEditorPanel::updateComponents()
 {
+    // Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
     // both of these are about to be added to in for loop below
     m_rackDevice.clear();
     m_rackUI->removeAllChildren();

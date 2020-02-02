@@ -381,7 +381,7 @@ private:
 
 void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels)
 {
-    (static_cast<GainFilter*>(node->getProcessor()))->SetGain(useDecibels ? (float)pow(10, gain / 10.0) : gain);
+    (static_cast<GainFilter*>(node->getProcessor()))->SetGain(useDecibels ? Decibels::decibelsToGain(gain) : gain);
 }
 
 //==============================================================================
