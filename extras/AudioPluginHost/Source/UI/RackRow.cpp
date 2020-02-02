@@ -45,7 +45,7 @@ RackRow::RackRow ()
     m_arpeggiatorBeat = 0;
     m_notesDown.reserve(128);
     m_pendingProgram = false;
-    m_pendingProgramNames = 0.f;
+    m_pendingProgramNames = false;
     m_arpeggiatorTimer = 0.f;
     //[/Constructor_pre]
 
@@ -362,7 +362,7 @@ void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         m_current->Program = 0;
 
         m_pendingProgram = true;
-        m_pendingProgramNames = 0.1f;
+        m_pendingProgramNames = true;
         //[/UserComboBoxCode_m_bank]
     }
     else if (comboBoxThatHasChanged == m_program.get())
@@ -503,7 +503,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
                     if (note >= 0 && note <= 127)
                     {
-                        if (m_current->Arpeggiator && m_pendingProgramNames <= 0)
+                        if (m_current->Arpeggiator)
                         {
                             // See if new sequence
                             if (m_notesDown.empty() && midi_message.isNoteOn())
@@ -572,32 +572,29 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         midiBuffer = output;
     }
 
+    if (!m_pendingProgram && m_pendingProgramNames) // need bank to be set and midi processed before we can query program names
+    {
+        m_pendingProgramNames = false;
+
+        auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+        MessageManagerLock lock;
+        m_program->clear(dontSendNotification);
+        for (int i = 0; i < processor->getNumPrograms(); ++i)
+            m_program->addItem(processor->getProgramName(i), i + 1);
+        m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
+    }
+
     if (m_pendingProgram)
     {
         m_pendingProgram = false;
 
-        if (m_bank->isVisible())
+        if (m_current->Device->m_usesBanks)
         {
             midiBuffer.addEvent(MidiMessage(0xB0, 0x00, 0), 0);
             midiBuffer.addEvent(MidiMessage(0xB0, 0x20, m_current->Bank), 0);
         }
 
         midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
-    }
-
-    if (m_pendingProgramNames > 0)
-    {
-        m_pendingProgramNames -= samples / (float)sampleRate;
-        if (m_pendingProgramNames <= 0)
-        {
-            m_pendingProgramNames = 0;
-            auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-            MessageManagerLock lock;
-            m_program->clear();
-            for (int i = 0; i < processor->getNumPrograms(); ++i)
-                m_program->addItem(processor->getProgramName(i), i + 1);
-            m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
-        }
     }
 
 
@@ -698,7 +695,7 @@ void RackRow::Assign(Zone *zone)
         }
         m_pendingProgram = true;
         if (!m_manualPatchNames)
-            m_pendingProgramNames = 0.1f;
+            m_pendingProgramNames = true;
     }
     m_current = zone;
     m_volume->setValue(zone->Volume);

@@ -1,6 +1,6 @@
 pending index sending sysex
+Crash going before Piano
 
-WavStreamer not nice with WASAPI or maybe everything (Forte and Performer)
 
 Check sampler supports octave mode, not sure what this means?
 
