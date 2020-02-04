@@ -1,6 +1,7 @@
 I want it all appegiator
+Appegiator getting stuck
 Patches changes noted for weekend
-When pads get bypassed they continue the last notes they played before when unmuted. Perhaps need a "all notes off"?
+Guitar doesnt respect all sound off
 
 BACKUP READY! return laptops
 

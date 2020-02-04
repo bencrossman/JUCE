@@ -63,6 +63,8 @@ public:
     bool IsSolo() { return m_solo->getToggleState(); }
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
     static void SetTempo(float tempo) { m_tempo = tempo; }
+    void handleCommandMessage(int id) override;
+    enum {CommandUpdateProgramList = 1, CommandBypass=2};
     //[/UserMethods]
 
     void paint (Graphics& g) override;
@@ -84,8 +86,11 @@ private:
     PluginGraph* graph;
     GraphEditorPanel* panel;
     bool m_soloMode;
-    bool m_pendingProgram;
-    bool m_pendingProgramNames;
+    bool m_pendingProgram = false;
+    bool m_pendingSoundOff = false;
+    bool m_pendingProgramNames = false;
+    bool m_pendingBank = false;
+    bool m_pendingBypass = false;
     bool m_manualPatchNames = false;
     vector<int> m_notesDown;
     bool m_anyNotesDown;

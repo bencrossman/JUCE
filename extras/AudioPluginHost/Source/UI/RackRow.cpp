@@ -44,8 +44,6 @@ RackRow::RackRow ()
     m_lastNote = -1;
     m_arpeggiatorBeat = 0;
     m_notesDown.reserve(128);
-    m_pendingProgram = false;
-    m_pendingProgramNames = false;
     m_arpeggiatorTimer = 0.f;
     //[/Constructor_pre]
 
@@ -269,7 +267,16 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
         m_current->Mute = buttonThatWasClicked->getToggleState();
         repaint(); // to change background of row
         if (m_current->Device->m_node)
-            ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+        {
+            auto bypass = m_current->Mute || (m_soloMode && !m_current->Solo);
+            if (bypass)
+            {
+                m_pendingSoundOff = true;
+                m_pendingBypass = true;
+            }
+            else
+                ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(bypass);
+        }
         m_program->setEnabled(!m_current->Mute);
         m_bank->setEnabled(!m_current->Mute);
         //[/UserButtonCode_m_mute]
@@ -361,6 +368,7 @@ void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         m_current->Bank = m_bank->getSelectedId() - 1;
         m_current->Program = 0;
 
+        m_pendingBank = true;
         m_pendingProgram = true;
         m_pendingProgramNames = true;
         //[/UserComboBoxCode_m_bank]
@@ -572,31 +580,36 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         midiBuffer = output;
     }
 
-    if (!m_pendingProgram && m_pendingProgramNames) // need bank to be set and midi processed before we can query program names
+    if (m_pendingSoundOff)
     {
-        m_pendingProgramNames = false;
-
-        auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-        MessageManagerLock lock;
-        m_program->clear(dontSendNotification);
-        for (int i = 0; i < processor->getNumPrograms(); ++i)
-            m_program->addItem(processor->getProgramName(i), i + 1);
-        m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
+        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
+        m_pendingSoundOff = false;
     }
-
-    if (m_pendingProgram)
+    else if (m_pendingBank)
     {
-        m_pendingProgram = false;
-
+        m_pendingBank = false;
         if (m_current->Device->m_usesBanks)
         {
             midiBuffer.addEvent(MidiMessage(0xB0, 0x00, 0), 0);
             midiBuffer.addEvent(MidiMessage(0xB0, 0x20, m_current->Bank), 0);
         }
-
+    }
+    else if (m_pendingProgramNames) // need bank to change first
+    {
+        m_pendingProgramNames = false;
+        if (!m_manualPatchNames)
+            postCommandMessage(CommandUpdateProgramList);
+    }
+    else if (m_pendingProgram) // need bank to change first
+    {
+        m_pendingProgram = false;
         midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
     }
-
+    else if (m_pendingBypass) // do this last so nothing is buffered up. Streamer should be fine since should be disabled(0)
+    {
+        m_pendingBypass = false;
+        postCommandMessage(CommandBypass);
+    }
 
     if (m_arpeggiatorTimer > 0) // arpeggiator active
     {
@@ -680,6 +693,8 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 
 void RackRow::Assign(Zone *zone)
 {
+    m_current = zone;
+
     auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
     if (!zone->OverrideState.empty())
     {
@@ -693,11 +708,12 @@ void RackRow::Assign(Zone *zone)
             graph->SendChunkString(processor, zone->Device->InitialState);
             m_lastZoneHadOverrideState = false;
         }
+
+        m_pendingBank = true;          
         m_pendingProgram = true;
-        if (!m_manualPatchNames)
-            m_pendingProgramNames = true;
+        m_pendingSoundOff = true;
+        m_pendingProgramNames = true;
     }
-    m_current = zone;
     m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute, sendNotification);
@@ -720,6 +736,22 @@ void RackRow::SetSoloMode(bool mode)
 {
     m_soloMode = mode;
     ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo)); // Do this here again. Can't rely on Toggle because only works if changed
+}
+
+void RackRow::handleCommandMessage(int id)
+{
+    if (id == CommandUpdateProgramList)
+    {
+        auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+        m_program->clear(dontSendNotification);
+        for (int i = 0; i < processor->getNumPrograms(); ++i)
+            m_program->addItem(processor->getProgramName(i), i + 1);
+        m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
+    }
+    if (id == CommandBypass)
+    {
+        ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
+    }
 }
 
 //[/MiscUserCode]
