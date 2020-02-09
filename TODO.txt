@@ -1,9 +1,10 @@
-I want it all appegiator
+I want it all appegiator - might just be tempo
 Appegiator getting stuck
-Patches changes noted for weekend
 Guitar doesnt respect all sound off
 
 BACKUP READY! return laptops
+
+Sampler Check octaves (can't remember what this means but must be covers for now)
 
 Setlist manager
 Mono switch (simply takes left of TruePianos)
@@ -11,7 +12,6 @@ Delete rack
 Add new rack
 
 Scoops/Falls for disco strings
-Check sampler supports octave mode, not sure what this means but maybe something to do with sampler trumpets?
 Support JV1080 - script presses button and saves out all patch states
 
 MainHostWindow
