@@ -31,6 +31,23 @@
 #include "../UI/GraphEditorPanel.h"
 #include <windows.h>
 
+class MyAudioPlayHead : public AudioPlayHead
+{
+public:
+	virtual bool getCurrentPosition(CurrentPositionInfo& result)
+	{
+		result.bpm = m_bpm;
+		return true;
+	}
+
+	double m_bpm = 120;
+};
+
+void PluginGraph::SetTempo(double tempo)
+{
+	((MyAudioPlayHead*)graph.getPlayHead())->m_bpm = tempo;
+}
+
 
 //==============================================================================
 PluginGraph::PluginGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
@@ -41,6 +58,7 @@ PluginGraph::PluginGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
       formatManager (fm), knownPluginList(kpl)
 {
     newDocument();
+	graph.setPlayHead(new MyAudioPlayHead());
     graph.addListener (this);
     m_shutdownPressCount = 0;
 }
@@ -310,6 +328,8 @@ void PluginGraph::setupPerformer()
         if (processor)
         {
             auto processorPtr = processor.get();
+
+			processorPtr->setPlayHead(graph.getPlayHead());
 
             if (rack.InitialState.size())
                 SendChunkString(processorPtr, rack.InitialState);

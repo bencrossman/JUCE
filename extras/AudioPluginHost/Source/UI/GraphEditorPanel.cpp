@@ -509,7 +509,10 @@ void GraphEditorPanel::SetPerformance()
     ((RackTitleBar*)m_rackTopUI.get())->Assign(song, performance);
 
     auto &zones = performance->Zone;
+
+	// Some globals
     RackRow::SetTempo(performance->Tempo);
+	graph.SetTempo(performance->Tempo);
 
     for (auto i = 0U; i < zones.size(); ++i)
     {

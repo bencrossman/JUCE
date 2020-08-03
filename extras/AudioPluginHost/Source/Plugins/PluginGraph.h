@@ -96,6 +96,7 @@ public:
     //==============================================================================
     AudioProcessorGraph graph;
     std::function<void()> m_onProgramChange = NULL;
+	void SetTempo(double tempo);
 
 private:
     //==============================================================================
