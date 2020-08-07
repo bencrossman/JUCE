@@ -1,16 +1,17 @@
-Appegiator getting stuck
+Appegiator getting stuck - I want it all, change patch while held
 
-BACKUP READY! return laptops
 
-Change appegiator to different modes (none, 3 octave up/down, single note)
-Sampler Check octaves (can't remember what this means but must be covers for now)
+BACKUP READY! Don't need to bring Windows 7 laptops to Sydney. Look at Windows 10 backup PC (NUC2?)
+
+Change appegiator to different modes (None, Scoop, Fall, Double octave, 16th repeat, Arpeggio 3 octaves, )
+Sampler Check octaves (can't remember what this means but must be covers for now, might be as simple as the crazy patches that use 4 samplers [2 octaved intruments])
 
 Setlist manager
 Mono switch (simply takes left of TruePianos)
-Delete rack
+Imeplement right click menu "Delete rack"
 Add new rack
 
-Scoops/Falls for disco strings
+Implement scoops / falls for disco strings
 Support JV1080 - script presses button and saves out all patch states
 
 MainHostWindow
