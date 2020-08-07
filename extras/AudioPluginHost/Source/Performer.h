@@ -31,6 +31,16 @@ public:
     }
 };
 
+enum NoteMode
+{
+	Normal,
+	Scoop,
+	Fall,
+	Sixteenth,
+	DoubleOctave,
+	ThreeOctaveArpeggio
+};
+
 class Zone
 {
 public:
@@ -41,8 +51,7 @@ public:
     float Volume;
     bool Solo;
     bool Mute;
-    bool DoubleOctave;
-	bool Arpeggiator;
+    int NoteMode;
     int Transpose;
     int LowKey;
     int HighKey;
@@ -62,8 +71,7 @@ public:
 		AR(Volume, XmlAttribute | XmlOptional);
         AR(Solo, XmlAttribute | XmlOptional);
         AR(Mute, XmlAttribute | XmlOptional);
-        AR(DoubleOctave, XmlAttribute | XmlOptional);
-		AR(Arpeggiator, XmlAttribute | XmlOptional);
+        AR(NoteMode, XmlAttribute | XmlOptional);
 		AR(Transpose, XmlAttribute | XmlOptional);
 		AR(LowKey, XmlAttribute | XmlOptional);
         AR(HighKey, XmlAttribute | XmlOptional, 127);

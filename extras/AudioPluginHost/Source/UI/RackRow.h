@@ -114,8 +114,7 @@ private:
     std::unique_ptr<TextEditor> m_highKey;
     std::unique_ptr<ImageButton> m_deviceSettings;
     std::unique_ptr<MidiKeyboardComponent> m_keyboard;
-    std::unique_ptr<ToggleButton> m_doubleOctave;
-    std::unique_ptr<ToggleButton> m_arpeggiator;
+    std::unique_ptr<ComboBox> m_noteMode;
 
 
     //==============================================================================

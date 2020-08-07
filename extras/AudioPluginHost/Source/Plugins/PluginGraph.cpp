@@ -325,6 +325,9 @@ void PluginGraph::setupPerformer()
         }
 
         auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
+
+		jassert(processor); // If crashing here need to discover vst
+
         if (processor)
         {
             auto processorPtr = processor.get();

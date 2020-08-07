@@ -96,7 +96,7 @@ RackRow::RackRow ()
     m_program->setTextWhenNoChoicesAvailable (String());
     m_program->addListener (this);
 
-    m_program->setBounds (233, 16, 150, 24);
+    m_program->setBounds (233, 14, 150, 24);
 
     m_transpose.reset (new TextEditor (String()));
     addAndMakeVisible (m_transpose.get());
@@ -161,19 +161,21 @@ RackRow::RackRow ()
 
     m_keyboard->setBounds (392, 43, 416, 24);
 
-    m_doubleOctave.reset (new ToggleButton (String()));
-    addAndMakeVisible (m_doubleOctave.get());
-    m_doubleOctave->setButtonText (TRANS("Double octave"));
-    m_doubleOctave->addListener (this);
+    m_noteMode.reset (new ComboBox (String()));
+    addAndMakeVisible (m_noteMode.get());
+    m_noteMode->setEditableText (false);
+    m_noteMode->setJustificationType (Justification::centredLeft);
+    m_noteMode->setTextWhenNothingSelected (String());
+    m_noteMode->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    m_noteMode->addItem (TRANS("Normal note mode"), 1);
+    m_noteMode->addItem (TRANS("Scoop"), 2);
+    m_noteMode->addItem (TRANS("Fall"), 3);
+    m_noteMode->addItem (TRANS("Sixteenth"), 4);
+    m_noteMode->addItem (TRANS("Double octave"), 5);
+    m_noteMode->addItem (TRANS("Three octave arpeggio"), 6);
+    m_noteMode->addListener (this);
 
-    m_doubleOctave->setBounds (392, 14, 123, 24);
-
-    m_arpeggiator.reset (new ToggleButton (String()));
-    addAndMakeVisible (m_arpeggiator.get());
-    m_arpeggiator->setButtonText (TRANS("Arpeggiator"));
-    m_arpeggiator->addListener (this);
-
-    m_arpeggiator->setBounds (512, 14, 112, 24);
+    m_noteMode->setBounds (400, 14, 232, 24);
 
 
     //[UserPreSize]
@@ -214,8 +216,7 @@ RackRow::~RackRow()
     m_highKey = nullptr;
     m_deviceSettings = nullptr;
     m_keyboard = nullptr;
-    m_doubleOctave = nullptr;
-    m_arpeggiator = nullptr;
+    m_noteMode = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -323,18 +324,6 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
 
         //[/UserButtonCode_m_deviceSettings]
     }
-    else if (buttonThatWasClicked == m_doubleOctave.get())
-    {
-        //[UserButtonCode_m_doubleOctave] -- add your button handler code here..
-        m_current->DoubleOctave = buttonThatWasClicked->getToggleState();
-        //[/UserButtonCode_m_doubleOctave]
-    }
-    else if (buttonThatWasClicked == m_arpeggiator.get())
-    {
-        //[UserButtonCode_m_arpeggiator] -- add your button handler code here..
-        m_current->Arpeggiator = buttonThatWasClicked->getToggleState();
-        //[/UserButtonCode_m_arpeggiator]
-    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -382,6 +371,12 @@ void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
             m_pendingProgram = true;
         }
         //[/UserComboBoxCode_m_program]
+    }
+    else if (comboBoxThatHasChanged == m_noteMode.get())
+    {
+        //[UserComboBoxCode_m_noteMode] -- add your combo box handling code here..
+        m_current->NoteMode = m_noteMode->getSelectedId() - 1;
+        //[/UserComboBoxCode_m_noteMode]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -511,7 +506,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
                     if (note >= 0 && note <= 127)
                     {
-                        if (m_current->Arpeggiator)
+                        if (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio)
                         {
                             // See if new sequence
                             if (m_notesDown.empty() && midi_message.isNoteOn())
@@ -565,7 +560,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                         {
                             midi_message.setNoteNumber(note); // transposed note
                             output.addEvent(midi_message, sample_number);
-                            if (m_current->DoubleOctave && note < 128 - 12) // double octave
+                            if (m_current->NoteMode == NoteMode::DoubleOctave && note < 128 - 12) // double octave
                             {
                                 midi_message.setNoteNumber(note + 12);
                                 output.addEvent(midi_message, sample_number);
@@ -713,7 +708,7 @@ void RackRow::Assign(Zone *zone)
             m_lastZoneHadOverrideState = false;
         }
 
-        m_pendingBank = true;          
+        m_pendingBank = true;
         m_pendingProgram = true;
         m_pendingSoundOff = true;
         m_pendingProgramNames = true;
@@ -721,8 +716,7 @@ void RackRow::Assign(Zone *zone)
     m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute, sendNotification);
-    m_doubleOctave->setToggleState(zone->DoubleOctave, dontSendNotification);
-    m_arpeggiator->setToggleState(zone->Arpeggiator, dontSendNotification);
+	m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));
@@ -797,7 +791,7 @@ BEGIN_JUCER_METADATA
             explicitFocusOrder="0" pos="233 43 150 24" editable="0" layout="33"
             items="&#10;" textWhenNonSelected="" textWhenNoItems=""/>
   <COMBOBOX name="" id="9de3cb5469378fa1" memberName="m_program" virtualName=""
-            explicitFocusOrder="0" pos="233 16 150 24" editable="0" layout="33"
+            explicitFocusOrder="0" pos="233 14 150 24" editable="0" layout="33"
             items="" textWhenNonSelected="" textWhenNoItems=""/>
   <TEXTEDITOR name="" id="b6e30577b79a003a" memberName="m_transpose" virtualName=""
               explicitFocusOrder="0" pos="648 14 32 24" initialText="" multiline="0"
@@ -821,12 +815,10 @@ BEGIN_JUCER_METADATA
                colourDown="0"/>
   <GENERICCOMPONENT name="" id="3a433662794e0409" memberName="m_keyboard" virtualName="MidiKeyboardComponent"
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
-  <TOGGLEBUTTON name="" id="7a9e84b485ffe060" memberName="m_doubleOctave" virtualName=""
-                explicitFocusOrder="0" pos="392 14 123 24" buttonText="Double octave"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <TOGGLEBUTTON name="" id="82787edffe0c1be4" memberName="m_arpeggiator" virtualName=""
-                explicitFocusOrder="0" pos="512 14 112 24" buttonText="Arpeggiator"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <COMBOBOX name="" id="321cb138fb836f9e" memberName="m_noteMode" virtualName=""
+            explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
+            items="Normal note mode&#10;Scoop&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

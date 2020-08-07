@@ -65,6 +65,8 @@ void Performer::Import(const char *fileToLoad)
 
     Root.CurrentSetListID = Root.SetLists.SetList[file.Rack.Setlists.Active].ID;
 
+	m_currentSetlistIndex = file.Rack.Setlists.Active;
+
     // Songs
     for (unsigned int si = 0; si < file.Rack.Setlists.Song.size(); ++si)
     {
@@ -137,8 +139,7 @@ void Performer::Import(const char *fileToLoad)
 					Zone zone;
 					zone.Solo = false;
 					zone.Mute = false;
-					zone.DoubleOctave = false;
-					zone.Arpeggiator = false;
+					zone.NoteMode = NoteMode::Normal;
 					zone.Volume = group.Gain;
 					zone.Device = NULL;
 					zone.DeviceID = group.ID + pass * 3;
@@ -146,7 +147,7 @@ void Performer::Import(const char *fileToLoad)
 					auto &filter = group.PluginChain.PlugIn[0].MIDIFilterSet.MIDIFilter[0];
 					if (onSetScene.ProgramChange.size() <= 1 && filter.MapChannel.size() == 2 && abs(filter.MapChannel[0].Key.Transpose - filter.MapChannel[0].Key.Transpose) == 12) // see if this is a transpose
 					{
-						zone.DoubleOctave = true;
+						zone.NoteMode = NoteMode::DoubleOctave;
 						zone.Transpose = filter.MapChannel[0].Key.Transpose < filter.MapChannel[1].Key.Transpose ? filter.MapChannel[0].Key.Transpose : filter.MapChannel[1].Key.Transpose;
 					}
 					else
@@ -170,14 +171,15 @@ void Performer::Import(const char *fileToLoad)
 					{
 						auto &filter2 = group.PluginChain.PlugIn[0].MIDIFilterSet.vMIDIFilter[0]; // should be only one
 						if (!filter2.Disabled && filter2.Name.find("Arpeggiator") != -1)
-							zone.Arpeggiator = true;
+							zone.NoteMode = NoteMode::ThreeOctaveArpeggio;
+						
 					}
 
 					if (group.Name == "Arpeggiator")
 					{
 						// copy parameters to other plugin
 						for (auto z = 0U; z<performance.Zone.size(); ++z)
-							if (performance.Zone[z].Arpeggiator)
+							if (performance.Zone[z].NoteMode == NoteMode::ThreeOctaveArpeggio)
 							{
 								performance.Zone[z].LowKey = zone.LowKey;
 								performance.Zone[z].HighKey = zone.HighKey;
