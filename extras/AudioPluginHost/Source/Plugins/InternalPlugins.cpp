@@ -345,7 +345,7 @@ private:
 class GainFilter : public InternalPlugin
 {
 public:
-    GainFilter(const PluginDescription& descr) : InternalPlugin(descr), m_gain(1)
+    GainFilter(const PluginDescription& descr) : InternalPlugin(descr)
     {}
 
     static String getIdentifier()
@@ -369,14 +369,33 @@ public:
     {
         auto numChannels = buffer.getNumChannels();
         buffer.applyGain(m_gain);
+
+		if (m_mixDownMode == 1)
+		{
+			buffer.applyGain(0.5f);
+			buffer.addFrom(0, 0, buffer, 1, 0, buffer.getNumSamples()); // mix
+		}
+		if (m_mixDownMode == 2)
+		{
+			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
+		}
         for (int ch = 2; ch < numChannels; ++ch)
             buffer.clear(ch, 0, buffer.getNumSamples());
     }
 
-    void SetGain(float gain) { m_gain = gain; }
+    void SetGain(float gain)
+	{ 
+		m_gain = gain;
+	}
+
+	void SetMono(int mixDownMode)
+	{
+		m_mixDownMode = mixDownMode;
+	}
 
 private:
-    float m_gain;
+    float m_gain = 1;
+	int m_mixDownMode = 0;
 };
 
 void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels)
@@ -384,11 +403,16 @@ void InternalPluginFormat::SetGain(AudioProcessorGraph::Node *node, float gain, 
     (static_cast<GainFilter*>(node->getProcessor()))->SetGain(useDecibels ? Decibels::decibelsToGain(gain) : gain);
 }
 
+void InternalPluginFormat::SetMono(AudioProcessorGraph::Node *node, int mixDownMode)
+{
+	(static_cast<GainFilter*>(node->getProcessor()))->SetMono(mixDownMode);
+}
+
 //==============================================================================
 class MidiFilter : public InternalPlugin
 {
 public:
-    MidiFilter(const PluginDescription& descr) : InternalPlugin(descr), m_callback(NULL) {}
+    MidiFilter(const PluginDescription& descr) : InternalPlugin(descr) {}
 
     static String getIdentifier()
     {
@@ -400,7 +424,7 @@ public:
         newSampleRate;
     }
 
-    void releaseResources() override {}
+	void releaseResources() override { }
 
     static PluginDescription getPluginDescription()
     {
@@ -416,8 +440,15 @@ public:
     void SetCallback(MidiFilterCallback *callback) { m_callback = callback; }
 
 private:
-    MidiFilterCallback * m_callback = NULL;
+    MidiFilterCallback * m_callback = nullptr;
 };
+
+
+void InternalPluginFormat::SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback)
+{
+    (static_cast<MidiFilter*>(node->getProcessor()))->SetCallback(callback);
+}
+
 
 
 //==============================================================================
@@ -490,9 +521,3 @@ void InternalPluginFormat::getAllTypes (Array<PluginDescription>& results)
                  GainFilter::getPluginDescription(),
                  MidiFilter::getPluginDescription());
 }
-
-void InternalPluginFormat::SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback)
-{
-    (static_cast<MidiFilter*>(node->getProcessor()))->SetCallback(callback);
-}
-

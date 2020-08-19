@@ -33,6 +33,680 @@
 #include "../Performer.h"
 
 //==============================================================================
+/*
+#if JUCE_IOS
+ class AUScanner
+ {
+ public:
+     AUScanner (KnownPluginList& list)
+         : knownPluginList (list), pool (5)
+     {
+         knownPluginList.clearBlacklistedFiles();
+         paths = formatToScan.getDefaultLocationsToSearch();
+
+         startScan();
+     }
+
+ private:
+     KnownPluginList& knownPluginList;
+     AudioUnitPluginFormat formatToScan;
+
+     std::unique_ptr<PluginDirectoryScanner> scanner;
+     FileSearchPath paths;
+
+     ThreadPool pool;
+
+     void startScan()
+     {
+         auto deadMansPedalFile = getAppProperties().getUserSettings()
+                                     ->getFile().getSiblingFile ("RecentlyCrashedPluginsList");
+
+         scanner.reset (new PluginDirectoryScanner (knownPluginList, formatToScan, paths,
+                                                    true, deadMansPedalFile, true));
+
+         for (int i = 5; --i >= 0;)
+             pool.addJob (new ScanJob (*this), true);
+     }
+
+     bool doNextScan()
+     {
+         String pluginBeingScanned;
+         if (scanner->scanNextFile (true, pluginBeingScanned))
+             return true;
+
+         return false;
+     }
+
+     struct ScanJob  : public ThreadPoolJob
+     {
+         ScanJob (AUScanner& s)  : ThreadPoolJob ("pluginscan"), scanner (s) {}
+
+         JobStatus runJob()
+         {
+             while (scanner.doNextScan() && ! shouldExit())
+             {}
+
+             return jobHasFinished;
+         }
+
+         AUScanner& scanner;
+
+         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScanJob)
+     };
+
+     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AUScanner)
+ };
+#endif
+
+//==============================================================================
+struct GraphEditorPanel::PinComponent   : public Component,
+                                          public SettableTooltipClient
+{
+    PinComponent (GraphEditorPanel& p, AudioProcessorGraph::NodeAndChannel pinToUse, bool isIn)
+        : panel (p), graph (p.graph), pin (pinToUse), isInput (isIn)
+    {
+        if (auto node = graph.graph.getNodeForId (pin.nodeID))
+        {
+            String tip;
+
+            if (pin.isMIDI())
+            {
+                tip = isInput ? "MIDI Input"
+                              : "MIDI Output";
+            }
+            else
+            {
+                auto& processor = *node->getProcessor();
+                auto channel = processor.getOffsetInBusBufferForAbsoluteChannelIndex (isInput, pin.channelIndex, busIdx);
+
+                if (auto* bus = processor.getBus (isInput, busIdx))
+                    tip = bus->getName() + ": " + AudioChannelSet::getAbbreviatedChannelTypeName (bus->getCurrentLayout().getTypeOfChannel (channel));
+                else
+                    tip = (isInput ? "Main Input: "
+                                   : "Main Output: ") + String (pin.channelIndex + 1);
+
+            }
+
+            setTooltip (tip);
+        }
+
+        setSize (16, 16);
+    }
+
+    void paint (Graphics& g) override
+    {
+        auto w = (float) getWidth();
+        auto h = (float) getHeight();
+
+        Path p;
+        p.addEllipse (w * 0.25f, h * 0.25f, w * 0.5f, h * 0.5f);
+        p.addRectangle (w * 0.4f, isInput ? (0.5f * h) : 0.0f, w * 0.2f, h * 0.5f);
+
+        auto colour = (pin.isMIDI() ? Colours::red : Colours::green);
+
+        g.setColour (colour.withRotatedHue (busIdx / 5.0f));
+        g.fillPath (p);
+    }
+
+    void mouseDown (const MouseEvent& e) override
+    {
+        AudioProcessorGraph::NodeAndChannel dummy { {}, 0 };
+
+        panel.beginConnectorDrag (isInput ? dummy : pin,
+                                  isInput ? pin : dummy,
+                                  e);
+    }
+
+    void mouseDrag (const MouseEvent& e) override
+    {
+        panel.dragConnector (e);
+    }
+
+    void mouseUp (const MouseEvent& e) override
+    {
+        panel.endDraggingConnector (e);
+    }
+
+    GraphEditorPanel& panel;
+    PluginGraph& graph;
+    AudioProcessorGraph::NodeAndChannel pin;
+    const bool isInput;
+    int busIdx = 0;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PinComponent)
+};
+
+//==============================================================================
+struct GraphEditorPanel::PluginComponent   : public Component,
+                                             public Timer,
+                                             private AudioProcessorParameter::Listener
+{
+    PluginComponent (GraphEditorPanel& p, AudioProcessorGraph::NodeID id)  : panel (p), graph (p.graph), pluginID (id)
+    {
+        shadow.setShadowProperties (DropShadow (Colours::black.withAlpha (0.5f), 3, { 0, 1 }));
+        setComponentEffect (&shadow);
+
+        if (auto f = graph.graph.getNodeForId (pluginID))
+        {
+            if (auto* processor = f->getProcessor())
+            {
+                if (auto* bypassParam = processor->getBypassParameter())
+                    bypassParam->addListener (this);
+            }
+        }
+
+        setSize (150, 60);
+    }
+
+    PluginComponent (const PluginComponent&) = delete;
+    PluginComponent& operator= (const PluginComponent&) = delete;
+
+    ~PluginComponent() override
+    {
+        if (auto f = graph.graph.getNodeForId (pluginID))
+        {
+            if (auto* processor = f->getProcessor())
+            {
+                if (auto* bypassParam = processor->getBypassParameter())
+                    bypassParam->removeListener (this);
+            }
+        }
+    }
+
+    void mouseDown (const MouseEvent& e) override
+    {
+        originalPos = localPointToGlobal (Point<int>());
+
+        toFront (true);
+
+        if (isOnTouchDevice())
+        {
+            startTimer (750);
+        }
+        else
+        {
+            if (e.mods.isPopupMenu())
+                showPopupMenu();
+        }
+    }
+
+    void mouseDrag (const MouseEvent& e) override
+    {
+        if (isOnTouchDevice() && e.getDistanceFromDragStart() > 5)
+            stopTimer();
+
+        if (! e.mods.isPopupMenu())
+        {
+            auto pos = originalPos + e.getOffsetFromDragStart();
+
+            if (getParentComponent() != nullptr)
+                pos = getParentComponent()->getLocalPoint (nullptr, pos);
+
+            pos += getLocalBounds().getCentre();
+
+            graph.setNodePosition (pluginID,
+                                   { pos.x / (double) getParentWidth(),
+                                     pos.y / (double) getParentHeight() });
+
+            panel.updateComponents();
+        }
+    }
+
+    void mouseUp (const MouseEvent& e) override
+    {
+        if (isOnTouchDevice())
+        {
+            stopTimer();
+            callAfterDelay (250, []() { PopupMenu::dismissAllActiveMenus(); });
+        }
+
+        if (e.mouseWasDraggedSinceMouseDown())
+        {
+            graph.setChangedFlag (true);
+        }
+        else if (e.getNumberOfClicks() == 2)
+        {
+            if (auto f = graph.graph.getNodeForId (pluginID))
+                if (auto* w = graph.getOrCreateWindowFor (f, PluginWindow::Type::normal))
+                    w->toFront (true);
+        }
+    }
+
+    bool hitTest (int x, int y) override
+    {
+        for (auto* child : getChildren())
+            if (child->getBounds().contains (x, y))
+                return true;
+
+        return x >= 3 && x < getWidth() - 6 && y >= pinSize && y < getHeight() - pinSize;
+    }
+
+    void paint (Graphics& g) override
+    {
+        auto boxArea = getLocalBounds().reduced (4, pinSize);
+        bool isBypassed = false;
+
+        if (auto* f = graph.graph.getNodeForId (pluginID))
+            isBypassed = f->isBypassed();
+
+        auto boxColour = findColour (TextEditor::backgroundColourId);
+
+        if (isBypassed)
+            boxColour = boxColour.brighter();
+
+        g.setColour (boxColour);
+        g.fillRect (boxArea.toFloat());
+
+        g.setColour (findColour (TextEditor::textColourId));
+        g.setFont (font);
+        g.drawFittedText (getName(), boxArea, Justification::centred, 2);
+    }
+
+    void resized() override
+    {
+        if (auto f = graph.graph.getNodeForId (pluginID))
+        {
+            if (auto* processor = f->getProcessor())
+            {
+                for (auto* pin : pins)
+                {
+                    const bool isInput = pin->isInput;
+                    auto channelIndex = pin->pin.channelIndex;
+                    int busIdx = 0;
+                    processor->getOffsetInBusBufferForAbsoluteChannelIndex (isInput, channelIndex, busIdx);
+
+                    const int total = isInput ? numIns : numOuts;
+                    const int index = pin->pin.isMIDI() ? (total - 1) : channelIndex;
+
+                    auto totalSpaces = static_cast<float> (total) + (static_cast<float> (jmax (0, processor->getBusCount (isInput) - 1)) * 0.5f);
+                    auto indexPos = static_cast<float> (index) + (static_cast<float> (busIdx) * 0.5f);
+
+                    pin->setBounds (proportionOfWidth ((1.0f + indexPos) / (totalSpaces + 1.0f)) - pinSize / 2,
+                                    pin->isInput ? 0 : (getHeight() - pinSize),
+                                    pinSize, pinSize);
+                }
+            }
+        }
+    }
+
+    Point<float> getPinPos (int index, bool isInput) const
+    {
+        for (auto* pin : pins)
+            if (pin->pin.channelIndex == index && isInput == pin->isInput)
+                return getPosition().toFloat() + pin->getBounds().getCentre().toFloat();
+
+        return {};
+    }
+
+    void update()
+    {
+        const AudioProcessorGraph::Node::Ptr f (graph.graph.getNodeForId (pluginID));
+        jassert (f != nullptr);
+
+        numIns = f->getProcessor()->getTotalNumInputChannels();
+        if (f->getProcessor()->acceptsMidi())
+            ++numIns;
+
+        numOuts = f->getProcessor()->getTotalNumOutputChannels();
+        if (f->getProcessor()->producesMidi())
+            ++numOuts;
+
+        int w = 100;
+        int h = 60;
+
+        w = jmax (w, (jmax (numIns, numOuts) + 1) * 20);
+
+        const int textWidth = font.getStringWidth (f->getProcessor()->getName());
+        w = jmax (w, 16 + jmin (textWidth, 300));
+        if (textWidth > 300)
+            h = 100;
+
+        setSize (w, h);
+
+        setName (f->getProcessor()->getName());
+
+        {
+            auto p = graph.getNodePosition (pluginID);
+            setCentreRelative ((float) p.x, (float) p.y);
+        }
+
+        if (numIns != numInputs || numOuts != numOutputs)
+        {
+            numInputs = numIns;
+            numOutputs = numOuts;
+
+            pins.clear();
+
+            for (int i = 0; i < f->getProcessor()->getTotalNumInputChannels(); ++i)
+                addAndMakeVisible (pins.add (new PinComponent (panel, { pluginID, i }, true)));
+
+            if (f->getProcessor()->acceptsMidi())
+                addAndMakeVisible (pins.add (new PinComponent (panel, { pluginID, AudioProcessorGraph::midiChannelIndex }, true)));
+
+            for (int i = 0; i < f->getProcessor()->getTotalNumOutputChannels(); ++i)
+                addAndMakeVisible (pins.add (new PinComponent (panel, { pluginID, i }, false)));
+
+            if (f->getProcessor()->producesMidi())
+                addAndMakeVisible (pins.add (new PinComponent (panel, { pluginID, AudioProcessorGraph::midiChannelIndex }, false)));
+
+            resized();
+        }
+    }
+
+    AudioProcessor* getProcessor() const
+    {
+        if (auto node = graph.graph.getNodeForId (pluginID))
+            return node->getProcessor();
+
+        return {};
+    }
+
+    void showPopupMenu()
+    {
+        menu.reset (new PopupMenu);
+        menu->addItem (1, "Delete this filter");
+        menu->addItem (2, "Disconnect all pins");
+        menu->addItem (3, "Toggle Bypass");
+
+        if (getProcessor()->hasEditor())
+        {
+            menu->addSeparator();
+            menu->addItem (10, "Show plugin GUI");
+            menu->addItem (11, "Show all programs");
+            menu->addItem (12, "Show all parameters");
+           #if JUCE_WINDOWS && JUCE_WIN_PER_MONITOR_DPI_AWARE
+            auto isTicked = false;
+            if (auto* node = graph.graph.getNodeForId (pluginID))
+                isTicked = node->properties["DPIAware"];
+
+            menu->addItem (13, "Enable DPI awareness", true, isTicked);
+           #endif
+            menu->addItem (14, "Show debug log");
+        }
+
+        menu->addSeparator();
+        menu->addItem (20, "Configure Audio I/O");
+        menu->addItem (21, "Test state save/load");
+
+        menu->showMenuAsync ({}, ModalCallbackFunction::create
+                             ([this] (int r) {
+        switch (r)
+        {
+            case 1:   graph.graph.removeNode (pluginID); break;
+            case 2:   graph.graph.disconnectNode (pluginID); break;
+            case 3:
+            {
+                if (auto* node = graph.graph.getNodeForId (pluginID))
+                    node->setBypassed (! node->isBypassed());
+
+                repaint();
+
+                break;
+            }
+            case 10:  showWindow (PluginWindow::Type::normal); break;
+            case 11:  showWindow (PluginWindow::Type::programs); break;
+            case 12:  showWindow (PluginWindow::Type::generic)  ; break;
+           #if JUCE_WINDOWS && JUCE_WIN_PER_MONITOR_DPI_AWARE
+            case 13:
+            {
+                if (auto* node = graph.graph.getNodeForId (pluginID))
+                    node->properties.set ("DPIAware", ! node->properties ["DPIAware"]);
+                break;
+            }
+           #endif
+            case 14:  showWindow (PluginWindow::Type::debug); break;
+            case 20:  showWindow (PluginWindow::Type::audioIO); break;
+            case 21:  testStateSaveLoad(); break;
+
+            default:  break;
+        }
+        }));
+    }
+
+    void testStateSaveLoad()
+    {
+        if (auto* processor = getProcessor())
+        {
+            MemoryBlock state;
+            processor->getStateInformation (state);
+            processor->setStateInformation (state.getData(), (int) state.getSize());
+        }
+    }
+
+    void showWindow (PluginWindow::Type type)
+    {
+        if (auto node = graph.graph.getNodeForId (pluginID))
+            if (auto* w = graph.getOrCreateWindowFor (node, type))
+                w->toFront (true);
+    }
+
+    void timerCallback() override
+    {
+        // this should only be called on touch devices
+        jassert (isOnTouchDevice());
+
+        stopTimer();
+        showPopupMenu();
+    }
+
+    void parameterValueChanged (int, float) override
+    {
+        repaint();
+    }
+
+    void parameterGestureChanged (int, bool) override  {}
+
+    GraphEditorPanel& panel;
+    PluginGraph& graph;
+    const AudioProcessorGraph::NodeID pluginID;
+    OwnedArray<PinComponent> pins;
+    int numInputs = 0, numOutputs = 0;
+    int pinSize = 16;
+    Point<int> originalPos;
+    Font font { 13.0f, Font::bold };
+    int numIns = 0, numOuts = 0;
+    DropShadowEffect shadow;
+    std::unique_ptr<PopupMenu> menu;
+};
+
+
+//==============================================================================
+struct GraphEditorPanel::ConnectorComponent   : public Component,
+                                                public SettableTooltipClient
+{
+    ConnectorComponent (GraphEditorPanel& p) : panel (p), graph (p.graph)
+    {
+        setAlwaysOnTop (true);
+    }
+
+    void setInput (AudioProcessorGraph::NodeAndChannel newSource)
+    {
+        if (connection.source != newSource)
+        {
+            connection.source = newSource;
+            update();
+        }
+    }
+
+    void setOutput (AudioProcessorGraph::NodeAndChannel newDest)
+    {
+        if (connection.destination != newDest)
+        {
+            connection.destination = newDest;
+            update();
+        }
+    }
+
+    void dragStart (Point<float> pos)
+    {
+        lastInputPos = pos;
+        resizeToFit();
+    }
+
+    void dragEnd (Point<float> pos)
+    {
+        lastOutputPos = pos;
+        resizeToFit();
+    }
+
+    void update()
+    {
+        Point<float> p1, p2;
+        getPoints (p1, p2);
+
+        if (lastInputPos != p1 || lastOutputPos != p2)
+            resizeToFit();
+    }
+
+    void resizeToFit()
+    {
+        Point<float> p1, p2;
+        getPoints (p1, p2);
+
+        auto newBounds = Rectangle<float> (p1, p2).expanded (4.0f).getSmallestIntegerContainer();
+
+        if (newBounds != getBounds())
+            setBounds (newBounds);
+        else
+            resized();
+
+        repaint();
+    }
+
+    void getPoints (Point<float>& p1, Point<float>& p2) const
+    {
+        p1 = lastInputPos;
+        p2 = lastOutputPos;
+
+        if (auto* src = panel.getComponentForPlugin (connection.source.nodeID))
+            p1 = src->getPinPos (connection.source.channelIndex, false);
+
+        if (auto* dest = panel.getComponentForPlugin (connection.destination.nodeID))
+            p2 = dest->getPinPos (connection.destination.channelIndex, true);
+    }
+
+    void paint (Graphics& g) override
+    {
+        if (connection.source.isMIDI() || connection.destination.isMIDI())
+            g.setColour (Colours::red);
+        else
+            g.setColour (Colours::green);
+
+        g.fillPath (linePath);
+    }
+
+    bool hitTest (int x, int y) override
+    {
+        auto pos = Point<int> (x, y).toFloat();
+
+        if (hitPath.contains (pos))
+        {
+            double distanceFromStart, distanceFromEnd;
+            getDistancesFromEnds (pos, distanceFromStart, distanceFromEnd);
+
+            // avoid clicking the connector when over a pin
+            return distanceFromStart > 7.0 && distanceFromEnd > 7.0;
+        }
+
+        return false;
+    }
+
+    void mouseDown (const MouseEvent&) override
+    {
+        dragging = false;
+    }
+
+    void mouseDrag (const MouseEvent& e) override
+    {
+        if (dragging)
+        {
+            panel.dragConnector (e);
+        }
+        else if (e.mouseWasDraggedSinceMouseDown())
+        {
+            dragging = true;
+
+            graph.graph.removeConnection (connection);
+
+            double distanceFromStart, distanceFromEnd;
+            getDistancesFromEnds (getPosition().toFloat() + e.position, distanceFromStart, distanceFromEnd);
+            const bool isNearerSource = (distanceFromStart < distanceFromEnd);
+
+            AudioProcessorGraph::NodeAndChannel dummy { {}, 0 };
+
+            panel.beginConnectorDrag (isNearerSource ? dummy : connection.source,
+                                      isNearerSource ? connection.destination : dummy,
+                                      e);
+        }
+    }
+
+    void mouseUp (const MouseEvent& e) override
+    {
+        if (dragging)
+            panel.endDraggingConnector (e);
+    }
+
+    void resized() override
+    {
+        Point<float> p1, p2;
+        getPoints (p1, p2);
+
+        lastInputPos = p1;
+        lastOutputPos = p2;
+
+        p1 -= getPosition().toFloat();
+        p2 -= getPosition().toFloat();
+
+        linePath.clear();
+        linePath.startNewSubPath (p1);
+        linePath.cubicTo (p1.x, p1.y + (p2.y - p1.y) * 0.33f,
+                          p2.x, p1.y + (p2.y - p1.y) * 0.66f,
+                          p2.x, p2.y);
+
+        PathStrokeType wideStroke (8.0f);
+        wideStroke.createStrokedPath (hitPath, linePath);
+
+        PathStrokeType stroke (2.5f);
+        stroke.createStrokedPath (linePath, linePath);
+
+        auto arrowW = 5.0f;
+        auto arrowL = 4.0f;
+
+        Path arrow;
+        arrow.addTriangle (-arrowL, arrowW,
+                           -arrowL, -arrowW,
+                           arrowL, 0.0f);
+
+        arrow.applyTransform (AffineTransform()
+                                .rotated (MathConstants<float>::halfPi - (float) atan2 (p2.x - p1.x, p2.y - p1.y))
+                                .translated ((p1 + p2) * 0.5f));
+
+        linePath.addPath (arrow);
+        linePath.setUsingNonZeroWinding (true);
+    }
+
+    void getDistancesFromEnds (Point<float> p, double& distanceFromStart, double& distanceFromEnd) const
+    {
+        Point<float> p1, p2;
+        getPoints (p1, p2);
+
+        distanceFromStart = p1.getDistanceFrom (p);
+        distanceFromEnd   = p2.getDistanceFrom (p);
+    }
+
+    GraphEditorPanel& panel;
+    PluginGraph& graph;
+    AudioProcessorGraph::Connection connection { { {}, 0 }, { {}, 0 } };
+    Point<float> lastInputPos, lastOutputPos;
+    Path linePath, hitPath;
+    bool dragging = false;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ConnectorComponent)
+};
+*/
+
+
+//==============================================================================
 GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 {
     graph.addChangeListener (this);
@@ -76,7 +750,7 @@ void GraphEditorPanel::createNewPlugin (const PluginDescription& desc, Point<int
 
 void GraphEditorPanel::resized()
 {
-    //updateComponents(); this will destroy racks and crash
+    updateComponents();
 }
 
 void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
@@ -86,8 +760,12 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
 void GraphEditorPanel::updateComponents()
 {
-    // Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
+	// Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
     // both of these are about to be added to in for loop below
+
+
+	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
+
     m_rackDevice.clear();
     m_rackUI->removeAllChildren();
 
@@ -349,7 +1027,7 @@ void GraphDocumentComponent::init()
     statusBar.reset (new TooltipBar());
     addAndMakeVisible (statusBar.get());
 
-    //graphPanel->updateComponents();
+    graphPanel->updateComponents();
 
     if (isOnTouchDevice())
     {
@@ -490,6 +1168,12 @@ void GraphEditorPanel::init()
     {
         SetPerformance();
     };
+
+	((RackTitleBar*)m_rackTopUI.get())->m_onMonoChanged = [this](bool mono)
+	{
+		graph.SetMono(mono);
+	};
+
 }
 
 void GraphEditorPanel::SetPerformance()

@@ -19,7 +19,8 @@ public:
     void *m_node = NULL;
     void *m_gainNode = NULL;
     void *m_midiFilterNode = NULL;
-    bool m_usesBanks;
+    bool m_usesBanks = false;
+	bool m_stereoToMonoWillPhase = false;
 
 	template<class A>
 	void Serialize(A& ar)

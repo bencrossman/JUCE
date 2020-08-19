@@ -1,15 +1,16 @@
-BACKUP READY! Don't need to bring Windows 7 laptops to Sydney. Look at Windows 10 backup PC (NUC2?)
+Current setlist
+Some devices renamed?
 
-Sampler Check octaves (can't remember what this means but must be covers for now, might be as simple as the crazy patches that use 4 samplers [2 octaved intruments])
+Setlist manager (see below - So can change set at gig)
 
-Setlist manager (see below)
-Mono switch (simply takes left of TruePianos)
+
+
+For covers / Blondie
+~~~~~~~~~~~~~~~~~~~~
+Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
+Implement 16th
 Implement right click menu item "Delete rack"
 Add new rack
-
-For covers
-~~~~~~~~~~
-Implement 16th
 
 Future
 ~~~~~~
@@ -33,7 +34,9 @@ Setlists/Songs
 Exactly like Forte but split 3 lists into two screen of 2 lists
 Have option to select any performance on rack screen (will say unassigned)
 
-Additional import tasks
+Additional Queen import tasks
+~~~~~~~~~~~~~~~~~~~~~~~
 - Load my famous OPX bank, Learn #3 to Filter Envelope D 
 - M1 set to prog mode, global midi channel 1
-- Show must go on override including transpose
+- Show must go on override including transpose, Delete the empty "end" performances
+- PC 0 on WavStreamer unmuted before Borap middle

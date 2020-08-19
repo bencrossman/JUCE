@@ -199,6 +199,11 @@ void Performer::Import(const char *fileToLoad)
 
 void Performer::ResolveIDs()
 {
+	// Resolve current setlist
+	for (auto sl = 0U; sl < Root.SetLists.SetList.size(); ++sl)
+		if (Root.SetLists.SetList[sl].ID == Root.CurrentSetListID)
+			m_currentSetlistIndex = sl;
+
     // Resolve songs in setlists
     for (auto sl = 0U; sl < Root.SetLists.SetList.size(); ++sl)
         for (auto sg = 0U; sg < Root.SetLists.SetList[sl].Song.size(); ++sg)

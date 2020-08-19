@@ -36,7 +36,8 @@ class Song;
                                                                     //[/Comments]
 */
 class RackTitleBar  : public Component,
-                      public TextEditor::Listener
+                      public TextEditor::Listener,
+                      public Button::Listener
 {
 public:
     //==============================================================================
@@ -47,10 +48,12 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
     void Assign(Song *song, PerformanceType *performance);
     void textEditorTextChanged(TextEditor&) override;
+	std::function<void(bool)> m_onMonoChanged;
     //[/UserMethods]
 
     void paint (Graphics& g) override;
     void resized() override;
+    void buttonClicked (Button* buttonThatWasClicked) override;
 
 
 
@@ -69,6 +72,7 @@ private:
     std::unique_ptr<TextEditor> m_performanceName;
     std::unique_ptr<Label> m_songLabel;
     std::unique_ptr<TextEditor> m_songName;
+    std::unique_ptr<ToggleButton> m_mono;
 
 
     //==============================================================================

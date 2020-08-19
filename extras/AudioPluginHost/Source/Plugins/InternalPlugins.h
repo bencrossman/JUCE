@@ -62,8 +62,9 @@ public:
     bool pluginNeedsRescanning (const PluginDescription&) override                      { return false; }
     StringArray searchPathsForPlugins (const FileSearchPath&, bool, bool) override      { return {}; }
 
-    static void SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels);
-    static void SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback);
+	static void SetGain(AudioProcessorGraph::Node *node, float gain, bool useDecibels);
+	static void SetMono(AudioProcessorGraph::Node *node, int mixDownMode);
+	static void SetFilterCallback(AudioProcessorGraph::Node *node, MidiFilterCallback *callback);
 
 private:
     //==============================================================================

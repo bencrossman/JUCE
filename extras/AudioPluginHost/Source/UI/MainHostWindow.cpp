@@ -501,7 +501,6 @@ bool MainHostWindow::perform (const InvocationInfo& info)
 	case CommandIDs::import:
         if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
         {
-            graphHolder->graph->newDocument();
             FileChooser fc("Select Forte RCF File to import",File(),"*.rcf");
             if (fc.browseForFileToOpen())
             {

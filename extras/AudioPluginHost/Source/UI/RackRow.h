@@ -92,6 +92,7 @@ private:
     bool m_pendingBank = false;
     bool m_pendingBypass = false;
     bool m_manualPatchNames = false;
+	bool m_stereoToMonoWillPhase = false;
     vector<int> m_notesDown;
     bool m_anyNotesDown;
     int m_arpeggiatorBeat;
@@ -99,6 +100,7 @@ private:
     float m_arpeggiatorTimer;
     static float m_tempo;
     bool m_lastZoneHadOverrideState = false;
+	AudioProcessorGraph::Node* m_midiFilterNode = nullptr; // didnt want to hold this but had to
     //[/UserVariables]
 
     //==============================================================================

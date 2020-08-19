@@ -97,6 +97,8 @@ public:
     AudioProcessorGraph graph;
     std::function<void()> m_onProgramChange = NULL;
 	void SetTempo(double tempo);
+	void SetMono(bool mono);
+	bool IsMono() { return m_mono; }
 
 private:
     //==============================================================================
@@ -115,6 +117,7 @@ private:
 
     int       m_shutdownPressCount;
     NonSysexFilter m_nonSysexFilter;
+	bool m_mono;
 
 
     NodeID lastUID;

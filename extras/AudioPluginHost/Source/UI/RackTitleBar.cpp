@@ -123,6 +123,13 @@ RackTitleBar::RackTitleBar ()
 
     m_songName->setBounds (136, 2, 272, 22);
 
+    m_mono.reset (new ToggleButton (String()));
+    addAndMakeVisible (m_mono.get());
+    m_mono->setButtonText (TRANS("Mono"));
+    m_mono->addListener (this);
+
+    m_mono->setBounds (424, 0, 80, 24);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -147,6 +154,7 @@ RackTitleBar::~RackTitleBar()
     m_performanceName = nullptr;
     m_songLabel = nullptr;
     m_songName = nullptr;
+    m_mono = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -172,6 +180,22 @@ void RackTitleBar::resized()
 
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
+}
+
+void RackTitleBar::buttonClicked (Button* buttonThatWasClicked)
+{
+    //[UserbuttonClicked_Pre]
+    //[/UserbuttonClicked_Pre]
+
+    if (buttonThatWasClicked == m_mono.get())
+    {
+        //[UserButtonCode_m_mono] -- add your button handler code here..
+		m_onMonoChanged(m_mono->getToggleState());
+        //[/UserButtonCode_m_mono]
+    }
+
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 
@@ -246,6 +270,9 @@ BEGIN_JUCER_METADATA
   <TEXTEDITOR name="" id="21ef937502d210df" memberName="m_songName" virtualName=""
               explicitFocusOrder="0" pos="136 2 272 22" initialText="" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="0" caret="1" popupmenu="1"/>
+  <TOGGLEBUTTON name="" id="e7ecdde1129e3bb5" memberName="m_mono" virtualName=""
+                explicitFocusOrder="0" pos="424 0 80 24" buttonText="Mono" connectedEdges="0"
+                needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

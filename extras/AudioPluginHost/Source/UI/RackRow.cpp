@@ -199,8 +199,8 @@ RackRow::RackRow ()
 RackRow::~RackRow()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
-    if (m_current->Device->m_midiFilterNode)
-        InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode, NULL);
+    if (m_midiFilterNode)
+        InternalPluginFormat::SetFilterCallback(m_midiFilterNode, NULL); // if we're still getting crashing related to this then probably because the node is already dead
     delete m_keyboardState;
     //[/Destructor_pre]
 
@@ -656,8 +656,9 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".png"));
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
-    if (device.m_midiFilterNode)
-        InternalPluginFormat::SetFilterCallback((AudioProcessorGraph::Node*)device.m_midiFilterNode, this);
+	m_midiFilterNode = (AudioProcessorGraph::Node*)device.m_midiFilterNode;
+    if (m_midiFilterNode)
+        InternalPluginFormat::SetFilterCallback(m_midiFilterNode, this);
 
     m_id = device.ID;
 

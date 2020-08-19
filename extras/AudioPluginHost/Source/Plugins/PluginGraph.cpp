@@ -48,6 +48,19 @@ void PluginGraph::SetTempo(double tempo)
 	((MyAudioPlayHead*)graph.getPlayHead())->m_bpm = tempo;
 }
 
+void PluginGraph::SetMono(bool mono)
+{
+	m_mono = mono;
+	InternalPluginFormat::SetMono(m_masterGainNode, mono ? 1 : 0);
+
+	for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
+	{
+		auto &rack = m_performer.Root.Racks.Rack[i];
+		InternalPluginFormat::SetMono((AudioProcessorGraph::Node *)rack.m_gainNode, (rack.m_stereoToMonoWillPhase && mono) ? 2 : 0);
+	}
+}
+
+
 
 //==============================================================================
 PluginGraph::PluginGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
@@ -321,18 +334,17 @@ void PluginGraph::setupPerformer()
                 pd.fileOrIdentifier = knownPluginList.getType(j)->fileOrIdentifier;
                 auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(pd.name + "_Banks.txt");
                 rack.m_usesBanks = File(bankFile).exists();
+				rack.m_stereoToMonoWillPhase = (pd.name.contains("TruePianos") || pd.name.contains("SUPERWAVE"));
             }
         }
 
         auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
-		jassert(processor); // If crashing here need to discover vst
-
-        if (processor)
+		auto processorPtr = processor.get();
+		jassert(processorPtr); // If crashing here need to discover vst
+        if (processorPtr)
         {
-            auto processorPtr = processor.get();
-
-			processorPtr->setPlayHead(graph.getPlayHead());
+          	processorPtr->setPlayHead(graph.getPlayHead());
 
             if (rack.InitialState.size())
                 SendChunkString(processorPtr, rack.InitialState);
@@ -381,6 +393,7 @@ void PluginGraph::setLastDocumentOpened (const File& file)
 void PluginGraph::Import(const char *filename)
 {
     clear();
+	m_performer = Performer();
     m_performer.Import(filename);
     m_performer.ResolveIDs();
     graph.removeChangeListener (this);
