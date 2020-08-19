@@ -91,8 +91,11 @@ void Performer::Import(const char *fileToLoad)
                 auto &blobref = mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].SharedBlobRef;
                 auto pluginName = mixer.Mixer.Group.InputGroup[ig].PluginChain.PlugIn[0].Name;
                 if (pluginName != "TruePianos" &&
-                    pluginName != "WAVESTATION" &&
-                    pluginName != "FM7" &&
+					pluginName != "M1" &&
+					pluginName != "OP-X PRO-II" && // Forte wont save the entire bank state
+					pluginName != "WAVESTATION" &&
+					pluginName != "energyXT2 VSTi" &&
+					pluginName != "FM7" &&
                     pluginName != "SUPERWAVE P8" &&
                     pluginName != "GuitarStrummer")
                 {

@@ -1,10 +1,5 @@
-Current setlist
-Some devices renamed?
-
 Setlist manager (see below - So can change set at gig)
-
-
-
+ 
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
@@ -29,6 +24,7 @@ MainHostWindow
                                           +m_rackDevice------------------------>RackRow's (UI but responsible for MIDI/State too)
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
+
 Setlists/Songs
 ~~~~~~~~~~~~~~
 Exactly like Forte but split 3 lists into two screen of 2 lists

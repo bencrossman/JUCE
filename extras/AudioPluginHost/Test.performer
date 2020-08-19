@@ -301,7 +301,6 @@
     <Performances>
         <Performance ID="325567451" Name="Piano" Tempo="120">
             <Zone DeviceID="627145948" Program="4"></Zone>
-            <Zone DeviceID="-1973686393" Program="0"></Zone>
         </Performance>
         <Performance ID="472862425" Name="Piano+2" Tempo="120">
             <Zone DeviceID="627145948" Program="4" Transpose="2"></Zone>
@@ -499,7 +498,6 @@
         </Performance>
         <Performance ID="904347925" Name="Radio Ga Ga Solo" Tempo="118">
             <Zone DeviceID="-1973686393" Program="38" Volume="-5" NoteMode="5"></Zone>
-            <Zone DeviceID="1555279137" Program="0"></Zone>
         </Performance>
         <Performance ID="-1888306599" Name="RunawaySolo" Tempo="120">
             <Zone DeviceID="-841590045" Program="6" Volume="-4"></Zone>
