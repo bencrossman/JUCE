@@ -1,3 +1,7 @@
+Upgrade to JUCE 6
+- Use their midi output
+- Use their gain plugin
+
 Setlist manager (see below - So can change set at gig)
  
 For covers / Blondie
