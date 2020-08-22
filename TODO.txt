@@ -1,7 +1,10 @@
-Setlist manager (see below - So can change set at gig)
- Exactly like Forte but split 3 lists into two screen of 2 lists
-Have auto setlist for all songs in alphabetical order
- 
+Setlist manager (So can change set at gig)
+- See design
+- Have an auto setlist of all songs
+- "Use" applies to "All songs", "Performances in selected song", "Performances"
+- If Performance isnt in current setlist then switch to auto setlist
+- Select song from "All songs" when select in setlist
+   
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 Upgrade to JUCE 6
@@ -32,10 +35,3 @@ MainHostWindow
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
 
-Additional Queen import tasks (won't need this soon since all data imported will be valid)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Load my famous OPX bank, Learn #3 to Filter Envelope D 
-- M1 set to prog mode, global midi channel 1
-- Show must go on override including transpose
-- Delete the Show must go on "end" performances
-- PC 0 on WavStreamer unmuted before Borap middle (Can't remember if this is actually only a Forte thing)
