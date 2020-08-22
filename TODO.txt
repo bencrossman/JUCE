@@ -1,20 +1,23 @@
-Upgrade to JUCE 6
-- Use their midi output
-- Use their gain plugin
-
 Setlist manager (see below - So can change set at gig)
+ Exactly like Forte but split 3 lists into two screen of 2 lists
+Have auto setlist for all songs in alphabetical order
  
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
+Upgrade to JUCE 6
+- Use their midi output
+- Use their gain plugin
+Append onto Queen
 Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
 Implement 16th
-Implement right click menu item "Delete rack"
-Add new rack
 
 Future
 ~~~~~~
+Implement right click menu item "Delete rack"
+Add new rack
 Implement scoops / falls for disco strings
-Support JV1080 - script presses button and saves out all patch states
+Support JV1080 - script presses button and saves out all patch states (This would give me a lot of new sounds)
+Would be good to get Triton too
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
@@ -29,14 +32,10 @@ MainHostWindow
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
 
-Setlists/Songs
-~~~~~~~~~~~~~~
-Exactly like Forte but split 3 lists into two screen of 2 lists
-Have option to select any performance on rack screen (will say unassigned)
-
-Additional Queen import tasks
-~~~~~~~~~~~~~~~~~~~~~~~
+Additional Queen import tasks (won't need this soon since all data imported will be valid)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Load my famous OPX bank, Learn #3 to Filter Envelope D 
 - M1 set to prog mode, global midi channel 1
-- Show must go on override including transpose, Delete the empty "end" performances
-- PC 0 on WavStreamer unmuted before Borap middle
+- Show must go on override including transpose
+- Delete the Show must go on "end" performances
+- PC 0 on WavStreamer unmuted before Borap middle (Can't remember if this is actually only a Forte thing)

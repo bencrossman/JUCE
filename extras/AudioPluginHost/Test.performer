@@ -96,11 +96,9 @@
     </Racks>
     <Songs>
         <Song ID="30129188" Name="Show Must Go On">
-            <Performance ID="1300694492" />
             <Performance ID="-1594132496" />
             <Performance ID="-507164114" />
             <Performance ID="-1594132496" />
-            <Performance ID="1300694492" />
         </Song>
         <Song ID="185879685" Name="Bycycle Race">
             <Performance ID="631897520" />
@@ -513,10 +511,6 @@
         </Performance>
         <Performance ID="-507164114" Name="Show must go on Key change" Tempo="120">
             <Zone DeviceID="1555279137" Program="6" Volume="6" Transpose="2"></Zone>
-        </Performance>
-        <Performance ID="1300694492" Name="Show must go on End" Tempo="120">
-            <Zone DeviceID="1555279137" Bank="22" Program="49"></Zone>
-            <Zone DeviceID="-2048222834" Program="1" LowKey="21" HighKey="22"></Zone>
         </Performance>
         <Performance ID="-837961205" Name="Space Capsule" Tempo="120">
             <Zone DeviceID="-1202024641" Program="17" Volume="-10" Transpose="24" LowKey="24"></Zone>
