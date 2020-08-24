@@ -2,6 +2,7 @@ Setlist manager (So can change set at gig)
 - Have an auto setlist of all songs
 - "Use" applies to "All songs", "Performances in selected song", "Performances"
 - If Performance isnt in current setlist then switch to auto setlist
+Rename cancel
 
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
