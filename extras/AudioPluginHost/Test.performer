@@ -182,9 +182,6 @@
         </Song>
     </Songs>
     <Performances>
-        <Performance ID="-339584521" Name="Accordian" Tempo="120">
-            <Zone DeviceID="1555279137" Bank="1" Program="52"></Zone>
-        </Performance>
         <Performance ID="-1169284237" Name="Advanced Australia Queen|" Tempo="120">
             <Zone DeviceID="546031377" Program="6"></Zone>
         </Performance>
@@ -206,16 +203,9 @@
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
             <Zone DeviceID="546031377" Program="2"></Zone>
         </Performance>
-        <Performance ID="-1494844207" Name="Brass" Tempo="120">
-            <Zone DeviceID="1555279137" Program="72"></Zone>
-        </Performance>
         <Performance ID="-695590563" Name="Breakthru|" Tempo="120">
             <Zone DeviceID="1555279137" Bank="12" Program="46" LowKey="60"></Zone>
             <Zone DeviceID="-1973686393" Program="62" HighKey="59"></Zone>
-        </Performance>
-        <Performance ID="-820016231" Name="Crocodile rock" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
-            <Zone DeviceID="522416168" Program="23" Volume="2" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-216466103" Name="Death On Two Legs|Intro" Tempo="120">
             <Zone DeviceID="522416168" Program="101" LowKey="60"></Zone>
@@ -247,15 +237,6 @@
             <Zone DeviceID="1555279137" Program="43" Volume="-2" LowKey="71"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-10" Transpose="12" LowKey="71"></Zone>
             <Zone DeviceID="522416168" Program="15" Transpose="24" LowKey="56" HighKey="70"></Zone>
-        </Performance>
-        <Performance ID="-456977170" Name="Harmonica" Tempo="120">
-            <Zone DeviceID="1555279137" Bank="1" Program="22" Volume="4"></Zone>
-        </Performance>
-        <Performance ID="569138515" Name="Hotel California" Tempo="120">
-            <Zone DeviceID="1555279137" Program="24" Transpose="10" HighKey="72"></Zone>
-        </Performance>
-        <Performance ID="650096567" Name="I Feel Good" Tempo="120">
-            <Zone DeviceID="1555279137" Program="72" Transpose="-2"></Zone>
         </Performance>
         <Performance ID="773092779" Name="I want it all|Bridge" Tempo="202">
             <Zone DeviceID="627145948" Program="4" Volume="-6" LowKey="54" HighKey="71"></Zone>
@@ -299,7 +280,6 @@
             <Zone DeviceID="-1973686393" Program="89" Volume="-15" LowKey="22" HighKey="22"></Zone>
             <Zone DeviceID="-2048222834" Program="4" Volume="-2"></Zone>
         </Performance>
-        <Performance ID="-25553276" Name="John Blunt Intro|" Tempo="120" />
         <Performance ID="-1642673523" Name="Killer Queen|" Tempo="120">
             <Zone DeviceID="627145948" Program="4" Volume="-6" LowKey="22"></Zone>
             <Zone DeviceID="1555279137" Bank="7" Program="25" LowKey="22"></Zone>
@@ -321,13 +301,6 @@
         </Performance>
         <Performance ID="-1777169755" Name="Music|" Tempo="120">
             <Zone DeviceID="546031377" Program="1"></Zone>
-        </Performance>
-        <Performance ID="1002397367" Name="My Way" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="10" HighKey="71"></Zone>
-            <Zone DeviceID="1555279137" Program="72" Transpose="-14" LowKey="72"></Zone>
-        </Performance>
-        <Performance ID="1059916542" Name="New Organ" Tempo="120">
-            <Zone DeviceID="1555279137" Bank="12" Program="46"></Zone>
         </Performance>
         <Performance ID="-1893591430" Name="Old Organ" Tempo="120">
             <Zone DeviceID="1024611825" Program="0" Volume="-6" Transpose="12"></Zone>
@@ -364,23 +337,9 @@
             <Zone DeviceID="627145948" Program="4" LowKey="23"></Zone>
             <Zone DeviceID="-2048222834" Program="0" Volume="-6"></Zone>
         </Performance>
-        <Performance ID="472862425" Name="Piano+2" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="2"></Zone>
-        </Performance>
-        <Performance ID="-1862712331" Name="Piano/Brass" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="61"></Zone>
-            <Zone DeviceID="1555279137" Program="72" LowKey="62"></Zone>
-        </Performance>
-        <Performance ID="53664735" Name="Piano/Tuba" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="61"></Zone>
-            <Zone DeviceID="1555279137" Bank="12" Program="5" LowKey="62"></Zone>
-        </Performance>
         <Performance ID="-1526903426" Name="Play the game" Tempo="120">
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
             <Zone DeviceID="-2048222834" Program="1"></Zone>
-        </Performance>
-        <Performance ID="1960457471" Name="Proud Mary" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="-2"></Zone>
         </Performance>
         <Performance ID="1200003438" Name="Radio Ga Ga|Intro" Tempo="118">
             <Zone DeviceID="-1973686393" Program="38" Volume="-5" NoteMode="5" LowKey="22"></Zone>
@@ -396,20 +355,10 @@
             <Zone DeviceID="-1973686393" Program="38" Volume="-9" NoteMode="5" HighKey="52"></Zone>
             <Zone DeviceID="-2048222834" Program="6" Volume="-5" LowKey="84"></Zone>
         </Performance>
-        <Performance ID="981015116" Name="Runaway (old)" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
-            <Zone DeviceID="1555279137" Bank="10" Program="23" Transpose="-12" LowKey="72"></Zone>
-        </Performance>
-        <Performance ID="-1888306599" Name="RunawaySolo" Tempo="120">
-            <Zone DeviceID="-841590045" Program="6" Volume="-4"></Zone>
-        </Performance>
         <Performance ID="1713728040" Name="Save me|" Tempo="120">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
             <Zone DeviceID="1555279137" Bank="12" Program="46" Volume="-4" Transpose="-12" LowKey="72"></Zone>
             <Zone DeviceID="522416168" Program="51" Volume="-3" Transpose="-12" LowKey="72"></Zone>
-        </Performance>
-        <Performance ID="-335610154" Name="Sax" Tempo="120">
-            <Zone DeviceID="1555279137" Program="22"></Zone>
         </Performance>
         <Performance ID="-1594132496" Name="Show must go on|" Tempo="120">
             <Zone DeviceID="1555279137" Program="6" Volume="6" LowKey="23">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</Zone>
@@ -429,9 +378,6 @@
         </Performance>
         <Performance ID="-1066488609" Name="Strings" Tempo="120">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="22"></Zone>
-        </Performance>
-        <Performance ID="538273237" Name="Synth" Tempo="202">
-            <Zone DeviceID="-841590045" Program="41" Volume="-9"></Zone>
         </Performance>
         <Performance ID="942179974" Name="The Great Pretender|" Tempo="120">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="22"></Zone>
@@ -473,10 +419,6 @@
         <Performance ID="111361031" Name="Who wants to live forever|" Tempo="120">
             <Zone DeviceID="1555279137" Bank="1" Program="40" Volume="-2" Transpose="22" HighKey="57"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="10" LowKey="58"></Zone>
-        </Performance>
-        <Performance ID="-1707191617" Name="You got it" Tempo="120">
-            <Zone DeviceID="1555279137" Bank="1" Program="19" Volume="3" HighKey="59"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-5" LowKey="60"></Zone>
         </Performance>
         <Performance ID="2039328788" Name="Your my best friend|" Tempo="120">
             <Zone DeviceID="-2048222834" Program="15" Volume="-3"></Zone>

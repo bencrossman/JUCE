@@ -186,6 +186,7 @@ private:
 	SelectedSongListModel *m_selectedSongListModel = nullptr;
 	SetlistListModel *m_setlistListModel = nullptr;
 	void UpdatePointers();
+	void UpdateSelectedSetlist();
 	//[/UserVariables]
 
     //==============================================================================

@@ -391,11 +391,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 				m_performer->Root.CurrentSetListID = 0;
 			}
 
-
-			m_currentSetlist->clear();
-			for (int i = 0; i < m_performer->Root.SetLists.SetList.size(); ++i)
-				m_currentSetlist->addItem(m_performer->Root.SetLists.SetList[i].Name, m_performer->Root.SetLists.SetList[i].ID);
-			m_currentSetlist->setSelectedId(m_performer->Root.CurrentSetListID);
+			UpdateSelectedSetlist();
 
 			m_setlist->updateContent();
 			m_setlist->repaint();
@@ -530,6 +526,27 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_deletePerformance.get())
     {
         //[UserButtonCode_m_deletePerformance] -- add your button handler code here..
+		int index = m_performanceList->getSelectedRow();
+		if (index != -1)
+		{
+			// remove from songs
+			for (auto sg = 0U; sg < m_performer->Root.Songs.Song.size(); ++sg)
+				for (auto p = 0U; p < m_performer->Root.Songs.Song[sg].Performance.size(); ++p)
+					if (m_performer->Root.Songs.Song[sg].Performance[p].ID == m_performer->Root.Performances.Performance[index].ID)
+					{
+						m_performer->Root.Songs.Song[sg].Performance.erase(m_performer->Root.Songs.Song[sg].Performance.begin() + p);
+						m_performer->Root.Songs.Song[sg].PerformancePtr.erase(m_performer->Root.Songs.Song[sg].PerformancePtr.begin() + p);
+					}
+
+			m_performer->Root.Performances.Performance.erase(m_performer->Root.Performances.Performance.begin() + index);
+
+			UpdatePointers();
+
+			m_performancesInSongList->updateContent();
+			m_performancesInSongList->repaint();
+			m_performanceList->updateContent();
+			m_performanceList->repaint();
+		}
         //[/UserButtonCode_m_deletePerformance]
     }
     else if (buttonThatWasClicked == m_renamePerformance.get())
@@ -573,6 +590,16 @@ void SetlistManager::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
+void SetlistManager::UpdateSelectedSetlist()
+{
+	m_currentSetlist->clear();
+	for (int i = 0; i < m_performer->Root.SetLists.SetList.size(); ++i)
+		m_currentSetlist->addItem(m_performer->Root.SetLists.SetList[i].Name, m_performer->Root.SetLists.SetList[i].ID);
+	m_currentSetlist->setSelectedId(m_performer->Root.CurrentSetListID);
+}
+
+
 void SetlistManager::UpdatePointers()
 {
 	// Update pointers
@@ -639,10 +666,7 @@ void SetlistManager::SetData(Performer *performer)
 	m_setlist->updateContent();
 	m_setlist->repaint();
 
-	m_currentSetlist->clear();
-	for (int i = 0; i < m_performer->Root.SetLists.SetList.size(); ++i)
-		m_currentSetlist->addItem(m_performer->Root.SetLists.SetList[i].Name, m_performer->Root.SetLists.SetList[i].ID);
-	m_currentSetlist->setSelectedId(m_performer->Root.CurrentSetListID);
+	UpdateSelectedSetlist();
 }
 //[/MiscUserCode]
 
