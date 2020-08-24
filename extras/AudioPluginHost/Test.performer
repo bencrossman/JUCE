@@ -296,11 +296,11 @@
         <Performance ID="1012516114" Name="Love of my life|" Tempo="120">
             <Zone DeviceID="627145948" Program="4" Transpose="-3"></Zone>
         </Performance>
-        <Performance ID="1012738439" Name="Magic Organ" Tempo="120">
-            <Zone DeviceID="1555279137" Program="70"></Zone>
-        </Performance>
         <Performance ID="-1777169755" Name="Music|" Tempo="120">
             <Zone DeviceID="546031377" Program="1"></Zone>
+        </Performance>
+        <Performance ID="1012738439" Name="Now I&apos;m here|Magic Organ" Tempo="120">
+            <Zone DeviceID="1555279137" Program="70"></Zone>
         </Performance>
         <Performance ID="-1893591430" Name="Old Organ" Tempo="120">
             <Zone DeviceID="1024611825" Program="0" Volume="-6" Transpose="12"></Zone>

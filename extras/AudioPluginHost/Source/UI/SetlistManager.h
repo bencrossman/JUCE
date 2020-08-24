@@ -187,6 +187,9 @@ private:
 	SetlistListModel *m_setlistListModel = nullptr;
 	void UpdatePointers();
 	void UpdateSelectedSetlist();
+	void Rename(std::string &str);
+	void SortSongs();
+	void SortPerformances();
 	//[/UserVariables]
 
     //==============================================================================

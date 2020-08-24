@@ -421,11 +421,29 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_upSetlistSong.get())
     {
         //[UserButtonCode_m_upSetlistSong] -- add your button handler code here..
+		auto index = m_setlist->getSelectedRow();
+		if (index > 0)
+		{
+			swap(m_setlistListModel->m_selectedSetlist->Song[index], m_setlistListModel->m_selectedSetlist->Song[index - 1]);
+			swap(m_setlistListModel->m_selectedSetlist->SongPtr[index], m_setlistListModel->m_selectedSetlist->SongPtr[index - 1]);
+			m_setlist->selectRow(index - 1);
+			m_setlist->updateContent();
+			m_setlist->repaint();
+		}
         //[/UserButtonCode_m_upSetlistSong]
     }
     else if (buttonThatWasClicked == m_downSetlistSong.get())
     {
         //[UserButtonCode_m_downSetlistSong] -- add your button handler code here..
+		auto index = m_setlist->getSelectedRow();
+		if (index != -1 && index < m_setlistListModel->m_selectedSetlist->Song.size() - 1)
+		{
+			swap(m_setlistListModel->m_selectedSetlist->Song[index], m_setlistListModel->m_selectedSetlist->Song[index + 1]);
+			swap(m_setlistListModel->m_selectedSetlist->SongPtr[index], m_setlistListModel->m_selectedSetlist->SongPtr[index + 1]);
+			m_setlist->selectRow(index + 1);
+			m_setlist->updateContent();
+			m_setlist->repaint();
+		}
         //[/UserButtonCode_m_downSetlistSong]
     }
     else if (buttonThatWasClicked == m_useSong.get())
@@ -477,12 +495,10 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_m_renameSong] -- add your button handler code here..
 		if (m_songList->getSelectedRow() != -1)
 		{
-			auto &str = m_performer->Root.Songs.Song[m_songList->getSelectedRow()].Name;
-			AlertWindow alert("", "", AlertWindow::NoIcon);
-			alert.addTextEditor("Name", str);
-			alert.addButton("Ok", 0);
-			alert.runModalLoop();
-			str = alert.getTextEditorContents("Name").toStdString();
+			Rename(m_performer->Root.Songs.Song[m_songList->getSelectedRow()].Name);
+			SortSongs();
+			UpdatePointers();
+			m_songList->deselectAllRows();
 			m_songList->updateContent();
 			m_songList->repaint();
 		}
@@ -552,6 +568,15 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_renamePerformance.get())
     {
         //[UserButtonCode_m_renamePerformance] -- add your button handler code here..
+		if (m_performanceList->getSelectedRow() != -1)
+		{
+			Rename(m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].Name);
+			SortPerformances();
+			UpdatePointers();
+			m_performanceList->deselectAllRows();
+			m_performanceList->updateContent();
+			m_performanceList->repaint();
+		}
         //[/UserButtonCode_m_renamePerformance]
     }
     else if (buttonThatWasClicked == m_addPerformance.get())
@@ -591,6 +616,44 @@ void SetlistManager::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 
+void SetlistManager::SortSongs()
+{
+	auto &list = m_performer->Root.Songs.Song;
+	for (int i = 0; i < (int)list.size() - 1; ++i)
+	{
+		for (int j = 0; j < (int)list.size() - i - 1; ++j)
+		{
+			if (list[j].Name > list[j + 1].Name)
+			{
+				swap(list[j], list[j + 1]);
+			}
+		}
+	}
+}
+void SetlistManager::SortPerformances()
+{
+	auto &list = m_performer->Root.Performances.Performance;
+	for (int i = 0; i < (int)list.size() - 1; ++i)
+	{
+		for (int j = 0; j < (int)list.size() - i - 1; ++j)
+		{
+			if (list[j].Name > list[j + 1].Name)
+			{
+				swap(list[j], list[j + 1]);
+			}
+		}
+	}
+}
+
+void SetlistManager::Rename(std::string &str)
+{
+	AlertWindow alert("", "", AlertWindow::NoIcon);
+	alert.addTextEditor("Name", str);
+	alert.addButton("Ok", 0);
+	alert.runModalLoop();
+	str = alert.getTextEditorContents("Name").toStdString();
+}
+
 void SetlistManager::UpdateSelectedSetlist()
 {
 	m_currentSetlist->clear();
@@ -620,35 +683,8 @@ void SetlistManager::SetData(Performer *performer)
 {
 	m_performer = performer;
 
-	// sort
-	{
-		auto &list = m_performer->Root.Songs.Song;
-		for (int i = 0; i < (int)list.size() - 1; ++i)
-		{
-			for (int j = 0; j < (int)list.size() - i - 1; ++j)
-			{
-				if (list[j].Name > list[j + 1].Name)
-				{
-					swap(list[j], list[j + 1]);
-				}
-			}
-		}
-	}
-
-	{
-		auto &list = m_performer->Root.Performances.Performance;
-		for (int i = 0; i < (int)list.size() - 1; ++i)
-		{
-			for (int j = 0; j < (int)list.size() - i - 1; ++j)
-			{
-				if (list[j].Name > list[j + 1].Name)
-				{
-					swap(list[j], list[j + 1]);
-				}
-			}
-		}
-	}
-
+	SortSongs();
+	SortPerformances();
 	UpdatePointers();
 
 	if (m_performer->m_currentSetlistIndex < m_performer->Root.SetLists.SetList.size())
