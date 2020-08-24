@@ -1,20 +1,6 @@
 <?xml version="1.0" ?>
 <Root CurrentSetListID="-40733610">
     <SetLists>
-        <SetList ID="725197447" Name="John Blunt">
-            <Song ID="800911578" />
-            <Song ID="-443386247" />
-            <Song ID="-1558578634" />
-            <Song ID="-1203166635" />
-            <Song ID="807221933" />
-            <Song ID="911396917" />
-            <Song ID="-584579934" />
-            <Song ID="1513500925" />
-            <Song ID="1030967864" />
-            <Song ID="-967273087" />
-            <Song ID="-472499682" />
-            <Song ID="749494757" />
-        </SetList>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
             <Song ID="1191735498" />
@@ -44,19 +30,6 @@
             <Song ID="-1558578634" />
             <Song ID="-998658640" />
             <Song ID="1436956953" />
-        </SetList>
-        <SetList ID="-366715636" Name="Gary Mullens">
-            <Song ID="800911578" />
-            <Song ID="-208230145" />
-            <Song ID="1030967864" />
-            <Song ID="225501463" />
-            <Song ID="196204920" />
-            <Song ID="-402915515" />
-            <Song ID="185879685" />
-            <Song ID="-967273087" />
-            <Song ID="807221933" />
-            <Song ID="-1234776648" />
-            <Song ID="749494757" />
         </SetList>
     </SetLists>
     <Racks>

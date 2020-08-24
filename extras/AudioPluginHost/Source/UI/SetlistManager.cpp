@@ -374,6 +374,32 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_deleteSetlist.get())
     {
         //[UserButtonCode_m_deleteSetlist] -- add your button handler code here..
+		int index = m_currentSetlist->getSelectedItemIndex();
+		if (index != -1)
+		{
+			m_performer->Root.SetLists.SetList.erase(m_performer->Root.SetLists.SetList.begin() + index);
+			
+			m_performer->m_currentSetlistIndex = 0;
+			if (m_performer->Root.SetLists.SetList.size())
+			{
+				m_setlistListModel->m_selectedSetlist = &m_performer->Root.SetLists.SetList[0];
+				m_performer->Root.CurrentSetListID = m_performer->Root.SetLists.SetList[0].ID;
+			}
+			else
+			{
+				m_setlistListModel->m_selectedSetlist = nullptr;
+				m_performer->Root.CurrentSetListID = 0;
+			}
+
+
+			m_currentSetlist->clear();
+			for (int i = 0; i < m_performer->Root.SetLists.SetList.size(); ++i)
+				m_currentSetlist->addItem(m_performer->Root.SetLists.SetList[i].Name, m_performer->Root.SetLists.SetList[i].ID);
+			m_currentSetlist->setSelectedId(m_performer->Root.CurrentSetListID);
+
+			m_setlist->updateContent();
+			m_setlist->repaint();
+		}
         //[/UserButtonCode_m_deleteSetlist]
     }
     else if (buttonThatWasClicked == m_cloneSetlist.get())
