@@ -51,35 +51,24 @@ void Performer::Import(const char *fileToLoad)
 		Root.Racks.Rack.push_back(newDevice);
 	}
 
-    // Setlists
-    for (unsigned int sl = 0; sl < file.Rack.Setlists.Setlist.size(); ++sl)
-    {
+	// Setlists
+	for (unsigned int sl = 0; sl < file.Rack.Setlists.Setlist.size(); ++sl)
+	{
 		auto &setlist = file.Rack.Setlists.Setlist[sl];
-        SetList newSetList;
+		SetList newSetList;
 		newSetList.ID = setlist.ID;
-        newSetList.Name = setlist.Name;
-        for (unsigned int sr = 0; sr < setlist.SongRef.size(); ++sr)
-            newSetList.Song.push_back(Integer(setlist.SongRef[sr].ID));
-        Root.SetLists.SetList.push_back(newSetList);
-    }
+		newSetList.Name = setlist.Name;
+		for (unsigned int sr = 0; sr < setlist.SongRef.size(); ++sr)
+			newSetList.Song.push_back(Integer(setlist.SongRef[sr].ID));
+		Root.SetLists.SetList.push_back(newSetList);
+	}
 
-    Root.CurrentSetListID = Root.SetLists.SetList[file.Rack.Setlists.Active].ID;
+	Root.CurrentSetListID = Root.SetLists.SetList[file.Rack.Setlists.Active].ID;
 
 	m_currentSetlistIndex = file.Rack.Setlists.Active;
 
-    // Songs
-    for (unsigned int si = 0; si < file.Rack.Setlists.Song.size(); ++si)
-    {
-		auto &song = file.Rack.Setlists.Song[si];
-        Song newSong;
-        newSong.ID = song.ID;
-        newSong.Name = song.Name;
-        for (unsigned int mr = 0; mr < song.MixerSceneRef.size(); ++mr)
-            newSong.Performance.push_back(song.MixerSceneRef[mr].ID);
-        Root.Songs.Song.push_back(newSong);
-    }
-
     // Performances
+	int m_initialID = -1;
     for (unsigned int mi = 0; mi<file.Rack.MixerScene.size(); ++mi)
     {
 		auto &mixer = file.Rack.MixerScene[mi];
@@ -116,11 +105,14 @@ void Performer::Import(const char *fileToLoad)
                 }
             }
         }
+
+		if (mixer.Name == "Initial")
+			m_initialID = mixer.ID;
+
         if (mixer.Name == "SaveState" || mixer.Name == "Initial") // dont need these now
-            continue; // TODO : remove Initial from Generic
+            continue;
 
         string songName = mixer.Name;
-        Replace(songName, "|", " ");
         TrimRight(songName);
 
         PerformanceType performance;
@@ -198,6 +190,23 @@ void Performer::Import(const char *fileToLoad)
         }
         Root.Performances.Performance.push_back(performance);
     }
+
+
+	// Songs
+	for (unsigned int si = 0; si < file.Rack.Setlists.Song.size(); ++si)
+	{
+		auto &song = file.Rack.Setlists.Song[si];
+		Song newSong;
+		newSong.ID = song.ID;
+		newSong.Name = song.Name;
+		for (unsigned int mr = 0; mr < song.MixerSceneRef.size(); ++mr)
+			if (song.MixerSceneRef[mr].ID != m_initialID)
+
+				newSong.Performance.push_back(song.MixerSceneRef[mr].ID);
+		Root.Songs.Song.push_back(newSong);
+	}
+
+
 }
 
 void Performer::ResolveIDs()
