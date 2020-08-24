@@ -29,6 +29,7 @@
 #include "../Plugins/InternalPlugins.h"
 #include "MainHostWindow.h"
 #include "RackRow.h"
+#include "SetlistManager.h"
 #include "RackTitleBar.h"
 #include "../Performer.h"
 
@@ -709,19 +710,22 @@ struct GraphEditorPanel::ConnectorComponent   : public Component,
 //==============================================================================
 GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 {
+	LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Impact");
+
     graph.addChangeListener (this);
     setOpaque (true);
 
     m_rackUIViewport.reset(new Viewport());
     m_rackUI.reset(new Component());
     m_rackTopUI.reset(new RackTitleBar());
+	m_setlistUI.reset(new SetlistManager());
 
     m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
-    m_tabs->setTabBarDepth(30);
-    m_tabs->addTab(TRANS("SetLists"), Colours::darkblue, 0, false);
-    m_tabs->addTab(TRANS("Songs"), Colours::darkgreen, 0, false);
+	m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
+    m_tabs->addTab(TRANS("SetLists"), Colours::darkblue, m_setlistUI.get(), false);
     m_tabs->addTab(TRANS("Performances"), Colours::darkgrey, m_rackUIViewport.get(), false);
-    m_tabs->setCurrentTabIndex(2);
+	//m_tabs->setTabBarDepth(30);
+	m_tabs->setCurrentTabIndex(1);
     addAndMakeVisible(m_tabs.get());
 
     m_rackUIViewport->setScrollBarsShown(true, false);
@@ -773,24 +777,26 @@ void GraphEditorPanel::updateComponents()
 
     auto performer = graph.GetPerformer();
     int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
-    int deviceWidth = 100;
     int deviceHeight = 20;
     for (int i = 0; i < devicesOnScreen; ++i)
     {
         m_rackDevice.push_back(std::make_unique<RackRow>());
         auto newRackRow = (RackRow*)m_rackDevice.back().get();
         newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
-        deviceWidth = newRackRow->getWidth() + 2;
         deviceHeight = newRackRow->getHeight();
         m_rackUI->addAndMakeVisible(newRackRow);
-        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, deviceWidth, deviceHeight);
+        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, newRackRow->getWidth(), newRackRow->getHeight());
     }
-    m_tabs->setBounds(10, 10, deviceWidth, 700); // include tab bar
+	int deviceWidth = 946;
+
+    m_tabs->setBounds(10, 10, deviceWidth, 671); // include tab bar
     m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
-    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight);
+    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
     m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
     SetPerformance();
+
+	((SetlistManager*)m_setlistUI.get())->SetData(performer);
 }
 
 //==============================================================================

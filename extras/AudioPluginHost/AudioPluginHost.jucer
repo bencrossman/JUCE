@@ -62,6 +62,10 @@
         <FILE id="cbvjhb" name="PluginGraph.h" compile="0" resource="0" file="Source/Plugins/PluginGraph.h"/>
       </GROUP>
       <GROUP id="{D892BFB2-FE85-B70F-10D3-450F407E2B3D}" name="UI">
+        <FILE id="kxZY3T" name="SetlistManager.cpp" compile="1" resource="0"
+              file="Source/UI/SetlistManager.cpp"/>
+        <FILE id="RKNskX" name="SetlistManager.h" compile="0" resource="0"
+              file="Source/UI/SetlistManager.h"/>
         <FILE id="UbsNEE" name="RackTitleBar.cpp" compile="1" resource="0"
               file="Source/UI/RackTitleBar.cpp"/>
         <FILE id="nW3lB2" name="RackTitleBar.h" compile="0" resource="0" file="Source/UI/RackTitleBar.h"/>

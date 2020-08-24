@@ -117,7 +117,7 @@ void Performer::Import(const char *fileToLoad)
             }
         }
         if (mixer.Name == "SaveState" || mixer.Name == "Initial") // dont need these now
-            continue;
+            continue; // TODO : remove Initial from Generic
 
         string songName = mixer.Name;
         Replace(songName, "|", " ");
@@ -211,14 +211,14 @@ void Performer::ResolveIDs()
     for (auto sl = 0U; sl < Root.SetLists.SetList.size(); ++sl)
         for (auto sg = 0U; sg < Root.SetLists.SetList[sl].Song.size(); ++sg)
             for (auto i = 0U; i < Root.Songs.Song.size(); ++i)
-                if (Root.Songs.Song[i].ID == Root.SetLists.SetList[sl].Song[sg].ID)
+                if (Root.SetLists.SetList[sl].Song[sg].ID == Root.Songs.Song[i].ID)
                     Root.SetLists.SetList[sl].SongPtr.push_back(&Root.Songs.Song[i]);
 
     // Resolve performances in songs
     for (auto sg = 0U; sg < Root.Songs.Song.size(); ++sg)
         for (auto p = 0U; p < Root.Songs.Song[sg].Performance.size(); ++p)
             for (auto i = 0U; i < Root.Performances.Performance.size(); ++i)
-                if (Root.Performances.Performance[i].ID == Root.Songs.Song[sg].Performance[p].ID)
+                if (Root.Songs.Song[sg].Performance[p].ID == Root.Performances.Performance[i].ID)
                     Root.Songs.Song[sg].PerformancePtr.push_back(&Root.Performances.Performance[i]);
 
     for (auto p = 0U; p < Root.Performances.Performance.size(); ++p)

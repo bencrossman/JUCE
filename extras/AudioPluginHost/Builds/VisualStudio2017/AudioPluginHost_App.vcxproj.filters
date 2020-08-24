@@ -460,6 +460,9 @@
     <ClCompile Include="..\..\Source\Plugins\PluginGraph.cpp">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\SetlistManager.cpp">
+      <Filter>AudioPluginHost\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\RackTitleBar.cpp">
       <Filter>AudioPluginHost\Source\UI</Filter>
     </ClCompile>
@@ -2426,6 +2429,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\PluginGraph.h">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\SetlistManager.h">
+      <Filter>AudioPluginHost\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\RackTitleBar.h">
       <Filter>AudioPluginHost\Source\UI</Filter>

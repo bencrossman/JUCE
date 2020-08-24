@@ -65,8 +65,9 @@ private:
     std::unique_ptr<TabbedComponent> m_tabs;
     std::unique_ptr<Component> m_rackTopUI;
     std::unique_ptr<Viewport> m_rackUIViewport;
-    std::unique_ptr<Component> m_rackUI;
-    std::vector<std::unique_ptr<Component>> m_rackDevice;
+	std::unique_ptr<Component> m_rackUI;
+	std::unique_ptr<Component> m_setlistUI;
+	std::vector<std::unique_ptr<Component>> m_rackDevice;
 
     void SetPerformance();
     int m_titleHeight;
