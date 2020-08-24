@@ -81,7 +81,7 @@
         <Song ID="225501463" Name="Another One Bites The Dust">
             <Performance ID="-180724266" />
         </Song>
-        <Song ID="-209972973" Name="Bohemiam Rhapsody 2">
+        <Song ID="-209972973" Name="Bohemiam Rhapsody">
             <Performance ID="346934948" />
             <Performance ID="176198027" />
             <Performance ID="-34862330" />
@@ -160,7 +160,7 @@
         <Song ID="1436956953" Name="Outro">
             <Performance ID="1207408049" />
         </Song>
-        <Song ID="446469300" Name="Radio Ga Ga Mod">
+        <Song ID="446469300" Name="Radio Ga Ga">
             <Performance ID="-406176206" />
             <Performance ID="1200003438" />
             <Performance ID="-406176206" />

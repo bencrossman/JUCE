@@ -453,6 +453,17 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_renameSong.get())
     {
         //[UserButtonCode_m_renameSong] -- add your button handler code here..
+		if (m_songList->getSelectedRow() != -1)
+		{
+			auto &str = m_performer->Root.Songs.Song[m_songList->getSelectedRow()].Name;
+			AlertWindow alert("", "", AlertWindow::NoIcon);
+			alert.addTextEditor("Name", str);
+			alert.addButton("Ok", 0);
+			alert.runModalLoop();
+			str = alert.getTextEditorContents("Name").toStdString();
+			m_songList->updateContent();
+			m_songList->repaint();
+		}
         //[/UserButtonCode_m_renameSong]
     }
     else if (buttonThatWasClicked == m_addSong.get())

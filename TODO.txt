@@ -1,10 +1,8 @@
 Setlist manager (So can change set at gig)
-- See design
 - Have an auto setlist of all songs
 - "Use" applies to "All songs", "Performances in selected song", "Performances"
 - If Performance isnt in current setlist then switch to auto setlist
-- Select song from "All songs" when select in setlist
-   
+
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 Upgrade to JUCE 6
@@ -13,6 +11,7 @@ Upgrade to JUCE 6
 Append onto Queen
 Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
 Implement 16th
+Tempo edit
 
 Future
 ~~~~~~
