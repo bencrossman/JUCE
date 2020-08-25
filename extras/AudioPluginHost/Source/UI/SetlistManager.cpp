@@ -406,6 +406,8 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_renameSetlist.get())
     {
         //[UserButtonCode_m_renameSetlist] -- add your button handler code here..
+		Rename(m_setlistListModel->m_selectedSetlist->Name);
+		UpdateSelectedSetlist();
         //[/UserButtonCode_m_renameSetlist]
     }
     else if (buttonThatWasClicked == m_useSetlistSong.get())
@@ -449,6 +451,21 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_useSong.get())
     {
         //[UserButtonCode_m_useSong] -- add your button handler code here..
+		// find song in setlist, if not there then deselect
+		if (m_songList->getSelectedRow() != -1)
+		{
+			bool found = false;
+			for (int i = 0; i < m_setlistListModel->m_selectedSetlist->Song.size(); ++i)
+			{
+				if (m_setlistListModel->m_selectedSetlist->Song[i].ID == m_performer->Root.Songs.Song[m_songList->getSelectedRow()].ID)
+				{
+					found = true;
+					m_setlist->selectRow(i);
+				}
+			}
+			if (!found)
+				m_setlist->deselectAllRows();
+		}
         //[/UserButtonCode_m_useSong]
     }
     else if (buttonThatWasClicked == m_newSong.get())
@@ -532,7 +549,35 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_usePerformance.get())
     {
         //[UserButtonCode_m_usePerformance] -- add your button handler code here..
-        //[/UserButtonCode_m_usePerformance]
+		// Find first song in setlist that uses performance
+		if (m_performanceList->getSelectedRow() != -1)
+		{
+			bool found = false;
+			for (int i = 0; i < m_setlistListModel->m_selectedSetlist->SongPtr.size(); ++i)
+			{
+				for (int j = 0; j < m_setlistListModel->m_selectedSetlist->SongPtr[i]->Performance.size(); ++j)
+				{
+					if (m_setlistListModel->m_selectedSetlist->SongPtr[i]->Performance[j].ID == m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].ID)
+					{
+						found = true;
+						m_setlist->selectRow(i);
+						m_performancesInSongList->selectRow(j);
+						i = (int)m_setlistListModel->m_selectedSetlist->SongPtr.size();
+						break;
+					}
+				}
+			}
+			if (!found)
+			{
+				m_selectedSongListModel->m_selectedSong = nullptr;
+				m_performancesInSongList->updateContent();
+				m_performancesInSongList->repaint();
+
+				m_songList->deselectAllRows();
+				m_setlist->deselectAllRows();
+			}
+		}
+		//[/UserButtonCode_m_usePerformance]
     }
     else if (buttonThatWasClicked == m_newPerformance.get())
     {
@@ -649,9 +694,11 @@ void SetlistManager::Rename(std::string &str)
 {
 	AlertWindow alert("", "", AlertWindow::NoIcon);
 	alert.addTextEditor("Name", str);
-	alert.addButton("Ok", 0);
-	alert.runModalLoop();
-	str = alert.getTextEditorContents("Name").toStdString();
+	alert.addButton("Cancel", 0);
+	alert.addButton("Ok", 1);
+	auto ret = alert.runModalLoop();
+	if (ret == 1)
+		str = alert.getTextEditorContents("Name").toStdString();
 }
 
 void SetlistManager::UpdateSelectedSetlist()

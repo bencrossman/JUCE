@@ -44,6 +44,8 @@ public:
     {
         // initialise our settings file..
 
+		system("pskill auxhost.exe");
+
         PropertiesFile::Options options;
         options.applicationName     = "Performer";
         options.filenameSuffix      = "settings";
