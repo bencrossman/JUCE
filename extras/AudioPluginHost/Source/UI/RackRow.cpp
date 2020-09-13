@@ -201,7 +201,6 @@ RackRow::~RackRow()
     //[Destructor_pre]. You can add your own custom destruction code here..
     if (m_midiFilterNode)
         InternalPluginFormat::SetFilterCallback(m_midiFilterNode, NULL); // if we're still getting crashing related to this then probably because the node is already dead
-    delete m_keyboardState;
     //[/Destructor_pre]
 
     m_deviceName = nullptr;
@@ -220,6 +219,7 @@ RackRow::~RackRow()
 
 
     //[Destructor]. You can add your own custom destruction code here..
+	delete m_keyboardState;
     //[/Destructor]
 }
 

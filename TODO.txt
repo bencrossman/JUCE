@@ -2,19 +2,23 @@ More setlist manager so can create/edit setlists/songs/performances
 
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
-Upgrade to JUCE 6
-- Use their midi output
-- Use their gain plugin
 Append onto Queen
 Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
 Implement 16th
 Tempo edit
 
+Upgrade to JUCE 6
+- Use their midi output
+- Use their gain plugin
+
 Future
 ~~~~~~
+Integrate for Access database with edit?
 Implement right click menu item "Delete rack"
 Add new rack
+Handle missing devices
 Implement scoops / falls for disco strings
+Jupiter 8
 Support JV1080 - script presses button and saves out all patch states (This would give me a lot of new sounds)
 Would be good to get Triton too
 

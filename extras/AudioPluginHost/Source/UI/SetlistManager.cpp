@@ -279,7 +279,7 @@ SetlistManager::SetlistManager ()
 			for (int i = 0; i < m_performer->Root.Songs.Song.size(); ++i)
 				if (m_performer->Root.Songs.Song[i].ID == m_setlistListModel->m_selectedSetlist->SongPtr[m_setlist->getSelectedRow()]->ID)
 					m_songList->selectRow(i);
-		}			
+		}
 	};
 	m_setlist->setModel(m_setlistListModel);
 
@@ -294,7 +294,7 @@ SetlistManager::SetlistManager ()
 		}
 	};
 	m_songList->setModel(m_songListModel);
-	//[/Constructor]
+    //[/Constructor]
 }
 
 SetlistManager::~SetlistManager()
@@ -378,7 +378,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 		if (index != -1)
 		{
 			m_performer->Root.SetLists.SetList.erase(m_performer->Root.SetLists.SetList.begin() + index);
-			
+
 			m_performer->m_currentSetlistIndex = 0;
 			if (m_performer->Root.SetLists.SetList.size())
 			{
@@ -577,7 +577,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 				m_setlist->deselectAllRows();
 			}
 		}
-		//[/UserButtonCode_m_usePerformance]
+        //[/UserButtonCode_m_usePerformance]
     }
     else if (buttonThatWasClicked == m_newPerformance.get())
     {
@@ -650,7 +650,7 @@ void SetlistManager::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 			m_setlist->updateContent();
 			m_setlist->repaint();
 		}
-		//[/UserComboBoxCode_m_currentSetlist]
+        //[/UserComboBoxCode_m_currentSetlist]
     }
 
     //[UsercomboBoxChanged_Post]

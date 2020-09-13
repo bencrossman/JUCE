@@ -190,7 +190,7 @@ private:
 	void Rename(std::string &str);
 	void SortSongs();
 	void SortPerformances();
-	//[/UserVariables]
+    //[/UserVariables]
 
     //==============================================================================
     std::unique_ptr<GroupComponent> m_selectedSongGroup;
