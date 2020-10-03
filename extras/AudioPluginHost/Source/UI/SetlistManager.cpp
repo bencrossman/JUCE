@@ -256,20 +256,6 @@ SetlistManager::SetlistManager ()
 
 
     //[Constructor] You can add your own custom stuff here..
-	m_performanceListModel = new PerformanceListModel();
-	m_performanceList->setModel(m_performanceListModel);
-
-	m_selectedSongListModel = new SelectedSongListModel();
-	m_selectedSongListModel->m_onSelectedChanged = [this]()
-	{
-		if (m_performancesInSongList->getSelectedRow() != -1)
-		{
-			for (int i = 0; i < m_performer->Root.Performances.Performance.size(); ++i)
-				if (m_performer->Root.Performances.Performance[i].ID == m_selectedSongListModel->m_selectedSong->PerformancePtr[m_performancesInSongList->getSelectedRow()]->ID)
-					m_performanceList->selectRow(i);
-		}
-	};
-	m_performancesInSongList->setModel(m_selectedSongListModel);
 
 	m_setlistListModel = new SetlistListModel();
 	m_setlistListModel->m_onSelectedChanged = [this]()
@@ -283,6 +269,7 @@ SetlistManager::SetlistManager ()
 	};
 	m_setlist->setModel(m_setlistListModel);
 
+
 	m_songListModel = new SongListModel();
 	m_songListModel->m_onSelectedChanged = [this]()
 	{
@@ -291,10 +278,33 @@ SetlistManager::SetlistManager ()
 			m_selectedSongListModel->m_selectedSong = &m_performer->Root.Songs.Song[m_songList->getSelectedRow()];
 			m_performancesInSongList->updateContent();
 			m_performancesInSongList->repaint();
+
+			m_performancesInSongList->selectRow(-1);
+			m_performancesInSongList->selectRow(0);
 		}
 	};
 	m_songList->setModel(m_songListModel);
-    //[/Constructor]
+
+	
+	m_selectedSongListModel = new SelectedSongListModel();
+	m_selectedSongListModel->m_onSelectedChanged = [this]()
+	{
+		m_performanceList->deselectAllRows();
+		if (m_performancesInSongList->getSelectedRow() != -1)
+		{
+			for (int i = 0; i < m_performer->Root.Performances.Performance.size(); ++i)
+				if (m_performer->Root.Performances.Performance[i].ID == m_selectedSongListModel->m_selectedSong->PerformancePtr[m_performancesInSongList->getSelectedRow()]->ID)
+					m_performanceList->selectRow(i);
+		}
+	};
+	m_performancesInSongList->setModel(m_selectedSongListModel);
+    
+
+	m_performanceListModel = new PerformanceListModel();
+	m_performanceList->setModel(m_performanceListModel);
+
+	
+	//[/Constructor]
 }
 
 SetlistManager::~SetlistManager()
@@ -369,6 +379,19 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == m_newSetlist.get())
     {
         //[UserButtonCode_m_newSetlist] -- add your button handler code here..
+		m_performer->Root.SetLists.SetList.resize(m_performer->Root.SetLists.SetList.size()+1);
+		auto &newSetlist = m_performer->Root.SetLists.SetList[m_performer->Root.SetLists.SetList.size() - 1];
+		newSetlist.ID = (int)Uuid().hash();
+		newSetlist.Name = "New Setlist";
+		m_performer->m_currentSetlistIndex =(int)m_performer->Root.SetLists.SetList.size() - 1;
+		m_performer->Root.CurrentSetListID = newSetlist.ID;
+		m_setlistListModel->m_selectedSetlist = &newSetlist;
+		UpdateSelectedSetlist();
+		m_songList->deselectAllRows();
+		m_performanceList->deselectAllRows();
+		m_performancesInSongList->deselectAllRows();
+		m_setlist->updateContent();
+		m_setlist->repaint();
         //[/UserButtonCode_m_newSetlist]
     }
     else if (buttonThatWasClicked == m_deleteSetlist.get())
@@ -401,6 +424,22 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_cloneSetlist.get())
     {
         //[UserButtonCode_m_cloneSetlist] -- add your button handler code here..
+		SetList newSetlist;
+		newSetlist.ID = (int)Uuid().hash();
+		newSetlist.Name = m_setlistListModel->m_selectedSetlist->Name + " Clone";
+		newSetlist.Song = m_setlistListModel->m_selectedSetlist->Song;
+		newSetlist.SongPtr = m_setlistListModel->m_selectedSetlist->SongPtr;
+
+		m_performer->Root.SetLists.SetList.push_back(newSetlist);
+		auto &newSetlist2 = m_performer->Root.SetLists.SetList[m_performer->Root.SetLists.SetList.size() - 1];
+		
+		m_performer->m_currentSetlistIndex = (int)m_performer->Root.SetLists.SetList.size() - 1;
+		m_performer->Root.CurrentSetListID = newSetlist2.ID;
+		m_setlistListModel->m_selectedSetlist = &newSetlist2;
+		UpdateSelectedSetlist();
+
+		m_setlist->updateContent();
+		m_setlist->repaint();
         //[/UserButtonCode_m_cloneSetlist]
     }
     else if (buttonThatWasClicked == m_renameSetlist.get())
@@ -418,6 +457,15 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_removeSetlistSong.get())
     {
         //[UserButtonCode_m_removeSetlistSong] -- add your button handler code here..
+		auto index = m_setlist->getSelectedRow();
+		if (index > 0)
+		{
+			m_setlistListModel->m_selectedSetlist->Song.erase(m_setlistListModel->m_selectedSetlist->Song.begin() + index);
+			m_setlistListModel->m_selectedSetlist->SongPtr.erase(m_setlistListModel->m_selectedSetlist->SongPtr.begin() + index);
+			m_setlist->selectRow(index);
+			m_setlist->updateContent();
+			m_setlist->repaint();
+		}
         //[/UserButtonCode_m_removeSetlistSong]
     }
     else if (buttonThatWasClicked == m_upSetlistSong.get())
@@ -471,6 +519,19 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_newSong.get())
     {
         //[UserButtonCode_m_newSong] -- add your button handler code here..
+		m_performer->Root.Songs.Song.resize(m_performer->Root.Songs.Song.size() + 1);
+		auto &newSong = m_performer->Root.Songs.Song[m_performer->Root.Songs.Song.size() - 1];
+		auto id = (int)Uuid().hash();
+		newSong.ID = id;
+		newSong.Name = "New Song";
+		//m_selectedSongListModel->m_selectedSong = &newSong;
+		SortSongs();
+		UpdatePointers();
+		m_songList->updateContent();
+		m_songList->repaint();
+		for(int i=0;i< m_performer->Root.Songs.Song.size();++i)
+			if (m_performer->Root.Songs.Song[i].ID == id)
+				m_songList->selectRow(i);
         //[/UserButtonCode_m_newSong]
     }
     else if (buttonThatWasClicked == m_deleteSong.get())
@@ -505,6 +566,28 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_cloneSong.get())
     {
         //[UserButtonCode_m_cloneSong] -- add your button handler code here..
+
+		if (m_songList->getSelectedRow() != -1)
+		{
+
+			auto &srcSong = m_performer->Root.Songs.Song[m_songList->getSelectedRow()];
+
+			Song newSong;
+			auto id = (int)Uuid().hash();
+			newSong.ID = id;
+			newSong.Name = srcSong.Name + " Clone";
+			newSong.Performance = srcSong.Performance;
+			newSong.PerformancePtr = srcSong.PerformancePtr;
+			m_performer->Root.Songs.Song.push_back(newSong);
+			m_selectedSongListModel->m_selectedSong = &newSong;
+			SortSongs();
+			UpdatePointers();
+			m_songList->updateContent();
+			m_songList->repaint();
+			for (int i = 0; i < m_performer->Root.Songs.Song.size(); ++i)
+				if (m_performer->Root.Songs.Song[i].ID == id)
+					m_songList->selectRow(i);
+		}
         //[/UserButtonCode_m_cloneSong]
     }
     else if (buttonThatWasClicked == m_renameSong.get())
@@ -534,16 +617,44 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_removePerformanceFromSong.get())
     {
         //[UserButtonCode_m_removePerformanceFromSong] -- add your button handler code here..
+		auto index = m_performancesInSongList->getSelectedRow();
+		if (index != -1)
+		{
+			m_selectedSongListModel->m_selectedSong->Performance.erase(m_selectedSongListModel->m_selectedSong->Performance.begin() + index);
+			m_selectedSongListModel->m_selectedSong->PerformancePtr.erase(m_selectedSongListModel->m_selectedSong->PerformancePtr.begin() + index);
+			if (index == m_selectedSongListModel->m_selectedSong->Performance.size())
+				m_performancesInSongList->selectRow(index-1);
+			m_performancesInSongList->updateContent();
+			m_performancesInSongList->repaint();
+		}
         //[/UserButtonCode_m_removePerformanceFromSong]
     }
     else if (buttonThatWasClicked == m_upPerformanceInSong.get())
     {
         //[UserButtonCode_m_upPerformanceInSong] -- add your button handler code here..
+		auto index = m_performancesInSongList->getSelectedRow();
+		if (index > 0)
+		{
+			swap(m_selectedSongListModel->m_selectedSong->Performance[index], m_selectedSongListModel->m_selectedSong->Performance[index - 1]);
+			swap(m_selectedSongListModel->m_selectedSong->PerformancePtr[index], m_selectedSongListModel->m_selectedSong->PerformancePtr[index - 1]);
+			m_performancesInSongList->selectRow(index - 1);
+			m_performancesInSongList->updateContent();
+			m_performancesInSongList->repaint();
+		}
         //[/UserButtonCode_m_upPerformanceInSong]
     }
     else if (buttonThatWasClicked == m_downPerformanceInSong.get())
     {
         //[UserButtonCode_m_downPerformanceInSong] -- add your button handler code here..
+		auto index = m_performancesInSongList->getSelectedRow();
+		if (index != -1 && index < m_selectedSongListModel->m_selectedSong->Performance.size() - 1)
+		{
+			swap(m_selectedSongListModel->m_selectedSong->Performance[index], m_selectedSongListModel->m_selectedSong->Performance[index + 1]);
+			swap(m_selectedSongListModel->m_selectedSong->PerformancePtr[index], m_selectedSongListModel->m_selectedSong->PerformancePtr[index + 1]);
+			m_performancesInSongList->selectRow(index + 1);
+			m_performancesInSongList->updateContent();
+			m_performancesInSongList->repaint();
+		}
         //[/UserButtonCode_m_downPerformanceInSong]
     }
     else if (buttonThatWasClicked == m_usePerformance.get())

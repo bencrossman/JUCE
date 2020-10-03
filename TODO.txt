@@ -1,4 +1,12 @@
-More setlist manager so can create/edit setlists/songs/performances
+Continue:
+- Setlist use (same as performance use)
+- song use (same as performance use)
+- song performance use (same as performance use)
+- Performance use
+- Performance new
+
+- song add to setlist
+- Performance add to song
 
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
