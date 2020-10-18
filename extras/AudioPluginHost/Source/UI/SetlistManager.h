@@ -170,7 +170,8 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
 	void SetData(Performer *performer);
 	Performer *m_performer = nullptr;
-    //[/UserMethods]
+	std::function<void()> m_onUsePerformance;
+	//[/UserMethods]
 
     void paint (Graphics& g) override;
     void resized() override;

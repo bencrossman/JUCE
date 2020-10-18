@@ -232,6 +232,7 @@ public:
 
     int m_currentPerformanceIndex = 0;
     int m_currentSetlistIndex = 0;
+	PerformanceType TempPerformance;
 
     int GetTotalPerformances();
     void GetPerformanceByIndex(PerformanceType*&, Song *&, int index);

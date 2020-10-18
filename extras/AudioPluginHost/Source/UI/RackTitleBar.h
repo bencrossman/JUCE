@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 6.0.1
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -37,23 +37,25 @@ class Song;
 */
 class RackTitleBar  : public Component,
                       public TextEditor::Listener,
-                      public Button::Listener
+                      public juce::Button::Listener
 {
 public:
     //==============================================================================
     RackTitleBar ();
-    ~RackTitleBar();
+    ~RackTitleBar() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     void Assign(Song *song, PerformanceType *performance);
-    void textEditorTextChanged(TextEditor&) override;
 	std::function<void(bool)> m_onMonoChanged;
+	std::function<void()> m_onNextPerformance;
+	std::function<void()> m_onPrevPerformance;
+	std::function<void()> m_onSavePerformance;
     //[/UserMethods]
 
-    void paint (Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
 
 
@@ -64,15 +66,18 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<Label> m_transposeColumn;
-    std::unique_ptr<Label> m_bankProgramColumn;
-    std::unique_ptr<Label> m_rangeColumn;
-    std::unique_ptr<Label> m_volumeColumn;
-    std::unique_ptr<Label> m_performanceLabel;
-    std::unique_ptr<TextEditor> m_performanceName;
-    std::unique_ptr<Label> m_songLabel;
-    std::unique_ptr<TextEditor> m_songName;
-    std::unique_ptr<ToggleButton> m_mono;
+    std::unique_ptr<juce::Label> m_transposeColumn;
+    std::unique_ptr<juce::Label> m_bankProgramColumn;
+    std::unique_ptr<juce::Label> m_rangeColumn;
+    std::unique_ptr<juce::Label> m_volumeColumn;
+    std::unique_ptr<juce::Label> m_performanceLabel;
+    std::unique_ptr<juce::TextEditor> m_performanceName;
+    std::unique_ptr<juce::Label> m_songLabel;
+    std::unique_ptr<juce::TextEditor> m_songName;
+    std::unique_ptr<juce::ToggleButton> m_mono;
+    std::unique_ptr<juce::TextButton> m_prevPerformance;
+    std::unique_ptr<juce::TextButton> m_nextPerformance;
+    std::unique_ptr<juce::TextButton> m_savePerformance;
 
 
     //==============================================================================

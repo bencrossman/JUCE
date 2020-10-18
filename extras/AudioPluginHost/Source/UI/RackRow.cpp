@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 6.0.1
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -48,58 +48,58 @@ RackRow::RackRow ()
     m_arpeggiatorTimer = 0.f;
     //[/Constructor_pre]
 
-    m_deviceName.reset (new GroupComponent (String(),
-                                            String()));
+    m_deviceName.reset (new juce::GroupComponent (juce::String(),
+                                                  juce::String()));
     addAndMakeVisible (m_deviceName.get());
 
     m_deviceName->setBounds (0, -2, 816, 80);
 
-    m_solo.reset (new ToggleButton (String()));
+    m_solo.reset (new juce::ToggleButton (juce::String()));
     addAndMakeVisible (m_solo.get());
     m_solo->setButtonText (TRANS("Solo"));
     m_solo->addListener (this);
 
     m_solo->setBounds (96, 14, 72, 24);
 
-    m_mute.reset (new ToggleButton (String()));
+    m_mute.reset (new juce::ToggleButton (juce::String()));
     addAndMakeVisible (m_mute.get());
     m_mute->setButtonText (TRANS("Mute"));
     m_mute->addListener (this);
 
     m_mute->setBounds (160, 14, 72, 24);
 
-    m_volume.reset (new Slider (String()));
+    m_volume.reset (new juce::Slider (juce::String()));
     addAndMakeVisible (m_volume.get());
     m_volume->setRange (-110, 12, 0.5);
-    m_volume->setSliderStyle (Slider::LinearBar);
-    m_volume->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    m_volume->setSliderStyle (juce::Slider::LinearBar);
+    m_volume->setTextBoxStyle (juce::Slider::TextBoxBelow, false, 80, 20);
     m_volume->addListener (this);
 
     m_volume->setBounds (96, 43, 128, 24);
 
-    m_bank.reset (new ComboBox (String()));
+    m_bank.reset (new juce::ComboBox (juce::String()));
     addAndMakeVisible (m_bank.get());
     m_bank->setEditableText (false);
-    m_bank->setJustificationType (Justification::centredLeft);
-    m_bank->setTextWhenNothingSelected (String());
-    m_bank->setTextWhenNoChoicesAvailable (String());
+    m_bank->setJustificationType (juce::Justification::centredLeft);
+    m_bank->setTextWhenNothingSelected (juce::String());
+    m_bank->setTextWhenNoChoicesAvailable (juce::String());
     m_bank->addSeparator();
     m_bank->addSeparator();
     m_bank->addListener (this);
 
     m_bank->setBounds (233, 43, 150, 24);
 
-    m_program.reset (new ComboBox (String()));
+    m_program.reset (new juce::ComboBox (juce::String()));
     addAndMakeVisible (m_program.get());
     m_program->setEditableText (false);
-    m_program->setJustificationType (Justification::centredLeft);
-    m_program->setTextWhenNothingSelected (String());
-    m_program->setTextWhenNoChoicesAvailable (String());
+    m_program->setJustificationType (juce::Justification::centredLeft);
+    m_program->setTextWhenNothingSelected (juce::String());
+    m_program->setTextWhenNoChoicesAvailable (juce::String());
     m_program->addListener (this);
 
     m_program->setBounds (233, 14, 150, 24);
 
-    m_transpose.reset (new TextEditor (String()));
+    m_transpose.reset (new juce::TextEditor (juce::String()));
     addAndMakeVisible (m_transpose.get());
     m_transpose->setMultiLine (false);
     m_transpose->setReturnKeyStartsNewLine (false);
@@ -107,22 +107,22 @@ RackRow::RackRow ()
     m_transpose->setScrollbarsShown (false);
     m_transpose->setCaretVisible (true);
     m_transpose->setPopupMenuEnabled (true);
-    m_transpose->setText (String());
+    m_transpose->setText (juce::String());
 
     m_transpose->setBounds (648, 14, 32, 24);
 
-    m_to.reset (new Label (String(),
-                           TRANS("to")));
+    m_to.reset (new juce::Label (juce::String(),
+                                 TRANS("to")));
     addAndMakeVisible (m_to.get());
-    m_to->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    m_to->setJustificationType (Justification::centred);
+    m_to->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    m_to->setJustificationType (juce::Justification::centred);
     m_to->setEditable (false, false, false);
-    m_to->setColour (TextEditor::textColourId, Colours::black);
-    m_to->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    m_to->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    m_to->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     m_to->setBounds (744, 14, 24, 24);
 
-    m_lowKey.reset (new TextEditor (String()));
+    m_lowKey.reset (new juce::TextEditor (juce::String()));
     addAndMakeVisible (m_lowKey.get());
     m_lowKey->setMultiLine (false);
     m_lowKey->setReturnKeyStartsNewLine (false);
@@ -130,11 +130,11 @@ RackRow::RackRow ()
     m_lowKey->setScrollbarsShown (false);
     m_lowKey->setCaretVisible (true);
     m_lowKey->setPopupMenuEnabled (true);
-    m_lowKey->setText (String());
+    m_lowKey->setText (juce::String());
 
     m_lowKey->setBounds (712, 14, 32, 24);
 
-    m_highKey.reset (new TextEditor (String()));
+    m_highKey.reset (new juce::TextEditor (juce::String()));
     addAndMakeVisible (m_highKey.get());
     m_highKey->setMultiLine (false);
     m_highKey->setReturnKeyStartsNewLine (false);
@@ -142,19 +142,19 @@ RackRow::RackRow ()
     m_highKey->setScrollbarsShown (false);
     m_highKey->setCaretVisible (true);
     m_highKey->setPopupMenuEnabled (true);
-    m_highKey->setText (String());
+    m_highKey->setText (juce::String());
 
     m_highKey->setBounds (768, 14, 32, 24);
 
-    m_deviceSettings.reset (new ImageButton (String()));
+    m_deviceSettings.reset (new juce::ImageButton (juce::String()));
     addAndMakeVisible (m_deviceSettings.get());
     m_deviceSettings->setButtonText (TRANS("new button"));
     m_deviceSettings->addListener (this);
 
     m_deviceSettings->setImages (false, true, true,
-                                 Image(), 1.000f, Colour (0x00000000),
-                                 Image(), 1.000f, Colour (0x00000000),
-                                 Image(), 1.000f, Colour (0x00000000));
+                                 juce::Image(), 1.000f, juce::Colour (0x00000000),
+                                 juce::Image(), 1.000f, juce::Colour (0x00000000),
+                                 juce::Image(), 1.000f, juce::Colour (0x00000000));
     m_deviceSettings->setBounds (8, 14, 76, 57);
 
     m_keyboard.reset (new MidiKeyboardComponent (*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard));
@@ -162,11 +162,11 @@ RackRow::RackRow ()
 
     m_keyboard->setBounds (392, 43, 416, 24);
 
-    m_noteMode.reset (new ComboBox (String()));
+    m_noteMode.reset (new juce::ComboBox (juce::String()));
     addAndMakeVisible (m_noteMode.get());
     m_noteMode->setEditableText (false);
-    m_noteMode->setJustificationType (Justification::centredLeft);
-    m_noteMode->setTextWhenNothingSelected (String());
+    m_noteMode->setJustificationType (juce::Justification::centredLeft);
+    m_noteMode->setTextWhenNothingSelected (juce::String());
     m_noteMode->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     m_noteMode->addItem (TRANS("Normal note mode"), 1);
     m_noteMode->addItem (TRANS("Scoop"), 2);
@@ -225,7 +225,7 @@ RackRow::~RackRow()
 }
 
 //==============================================================================
-void RackRow::paint (Graphics& g)
+void RackRow::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
@@ -251,7 +251,7 @@ void RackRow::resized()
     //[/UserResized]
 }
 
-void RackRow::buttonClicked (Button* buttonThatWasClicked)
+void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
@@ -334,7 +334,7 @@ void RackRow::buttonClicked (Button* buttonThatWasClicked)
     //[/UserbuttonClicked_Post]
 }
 
-void RackRow::sliderValueChanged (Slider* sliderThatWasMoved)
+void RackRow::sliderValueChanged (juce::Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
@@ -342,7 +342,7 @@ void RackRow::sliderValueChanged (Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == m_volume.get())
     {
         //[UserSliderCode_m_volume] -- add your slider handling code here..
-        m_current->Volume = (float)sliderThatWasMoved->getValue();	
+        m_current->Volume = (float)sliderThatWasMoved->getValue();
 		((AudioProcessorGraph::Node *)(m_current->Device->m_gainNode))->getProcessor()->getParameters()[0]->setValue(Decibels::decibelsToGain(m_current->Volume));
         //[/UserSliderCode_m_volume]
     }
@@ -351,7 +351,7 @@ void RackRow::sliderValueChanged (Slider* sliderThatWasMoved)
     //[/UsersliderValueChanged_Post]
 }
 
-void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
+void RackRow::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
@@ -388,14 +388,14 @@ void RackRow::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     //[/UsercomboBoxChanged_Post]
 }
 
-void RackRow::mouseDown (const MouseEvent& e)
+void RackRow::mouseDown (const juce::MouseEvent& e)
 {
     //[UserCode_mouseDown] -- Add your code here...
     mouseDrag(e);
     //[/UserCode_mouseDown]
 }
 
-void RackRow::mouseDrag (const MouseEvent& e)
+void RackRow::mouseDrag (const juce::MouseEvent& e)
 {
     //[UserCode_mouseDrag] -- Add your code here...
     if (e.eventComponent == m_keyboard.get())
@@ -421,7 +421,7 @@ void RackRow::mouseDrag (const MouseEvent& e)
     //[/UserCode_mouseDrag]
 }
 
-void RackRow::mouseUp (const MouseEvent& e)
+void RackRow::mouseUp (const juce::MouseEvent& e)
 {
     //[UserCode_mouseUp] -- Add your code here...
     mouseDrag(e);
@@ -740,7 +740,7 @@ void RackRow::SetSoloMode(bool mode)
 {
 	m_soloMode = mode;
 	// Do this here again. Can't rely on Toggle because only works if changed
-	((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo)); 
+	((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 	((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 	((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 }
