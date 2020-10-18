@@ -494,14 +494,14 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message;
         MidiBuffer output;
-        int sample_number;
 
-        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
-        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
+		for(const auto meta : midiBuffer)
         {
-            if (m_current == NULL)
+			auto midi_message = meta.getMessage();
+			int sample_number = meta.samplePosition;
+
+			if (m_current == NULL)
                 continue; // whilst I test the song knobs
             midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff())
