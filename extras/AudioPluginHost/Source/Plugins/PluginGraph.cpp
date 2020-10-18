@@ -233,7 +233,7 @@ Result PluginGraph::loadDocument (const File& file)
         return Result::ok();
     }
 
-    return Result::fail ("Not a valid performer file");
+    //return Result::fail ("Not a valid performer file");
 }
 
 Result PluginGraph::saveDocument (const File& file)
@@ -317,6 +317,7 @@ PluginDescription FindInternalPlugin(std::vector<PluginDescription>& types, cons
 	for (int i = 0; i < types.size(); ++i)
 		if (types[i].name == name)
 			return types[i];
+	return PluginDescription();
 }
 
 // shared code for load/import
@@ -340,10 +341,10 @@ void PluginGraph::setupPerformer()
         pd.isInstrument = true;
         for (auto j = 0U; j < (unsigned)knownPluginList.getNumTypes(); ++j)
         {
-            auto name = knownPluginList.getType(j)->name;
+            auto name = knownPluginList.getTypes()[j].name;
             if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
             {
-                pd.fileOrIdentifier = knownPluginList.getType(j)->fileOrIdentifier;
+                pd.fileOrIdentifier = knownPluginList.getTypes()[j].fileOrIdentifier;
                 auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(pd.name + "_Banks.txt");
                 rack.m_usesBanks = File(bankFile).exists();
 				rack.m_stereoToMonoWillPhase = (pd.name.contains("TruePianos") || pd.name.contains("SUPERWAVE"));
@@ -650,13 +651,13 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     sampleRate;
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message;
         MidiBuffer output;
-        int sample_number;
 
-        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
-        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
-        {
+		for (const auto meta : midiBuffer)
+		{
+			auto midi_message = meta.getMessage();
+			int sample_number = meta.samplePosition;
+
             if (midi_message.isControllerOfType(117)) // power off
             {
                 if (midi_message.getControllerValue() == 127)
@@ -800,13 +801,13 @@ void NonSysexFilter::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     sampleRate;
     if (!midiBuffer.isEmpty())
     {
-        MidiMessage midi_message;
         MidiBuffer output;
-        int sample_number;
 
-        MidiBuffer::Iterator midi_buffer_iter(midiBuffer);
-        while (midi_buffer_iter.getNextEvent(midi_message, sample_number))
-        {
+		for (const auto meta : midiBuffer)
+		{
+			auto midi_message = meta.getMessage();
+			int sample_number = meta.samplePosition;
+
             if (midi_message.isSysEx())
                 output.addEvent(midi_message, sample_number);
         }
