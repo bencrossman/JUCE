@@ -12,10 +12,6 @@ Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so i
 Implement 16th
 Tempo edit
 
-Bonus with no benefit - Upgrade to JUCE 6
-- Use their midi output
-- Use their gain plugin
-
 Future
 ~~~~~~
 Integrate for Access database with edit?
