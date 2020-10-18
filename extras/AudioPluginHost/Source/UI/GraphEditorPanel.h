@@ -28,7 +28,6 @@
 #include "../Plugins/PluginGraph.h"
 
 class MainHostWindow;
-class Performer;
 
 //==============================================================================
 /**

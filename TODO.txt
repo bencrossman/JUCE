@@ -3,7 +3,7 @@ Continue:
 - song use (same as performance use)
 - song performance use (same as performance use)
 - Performance use
-- Performance new
+- Use non setlist song clears selection
 
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
