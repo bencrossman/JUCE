@@ -458,10 +458,12 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_m_removeSetlistSong] -- add your button handler code here..
 		auto index = m_setlist->getSelectedRow();
-		if (index > 0)
+		if (index != -1)
 		{
 			m_setlistListModel->m_selectedSetlist->Song.erase(m_setlistListModel->m_selectedSetlist->Song.begin() + index);
 			m_setlistListModel->m_selectedSetlist->SongPtr.erase(m_setlistListModel->m_selectedSetlist->SongPtr.begin() + index);
+			if (index == m_setlistListModel->m_selectedSetlist->Song.size())
+				--index;
 			m_setlist->selectRow(index);
 			m_setlist->updateContent();
 			m_setlist->repaint();
@@ -549,9 +551,12 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 						m_performer->Root.SetLists.SetList[sl].SongPtr.erase(m_performer->Root.SetLists.SetList[sl].SongPtr.begin() + sg);
 					}
 
-			m_performer->Root.Songs.Song.erase(m_performer->Root.Songs.Song.begin()+index);
+			m_performer->Root.Songs.Song.erase(m_performer->Root.Songs.Song.begin() + index);
 
 			UpdatePointers();
+
+			if (index == m_performer->Root.Songs.Song.size())
+				m_songList->selectRow(index - 1);
 
 			m_selectedSongListModel->m_selectedSong = nullptr;
 			m_performancesInSongList->updateContent();
@@ -607,6 +612,18 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_addSong.get())
     {
         //[UserButtonCode_m_addSong] -- add your button handler code here..
+		if (m_songList->getSelectedRow() != -1)
+		{
+			auto index = m_setlist->getSelectedRow();
+			if (index != -1)
+			{
+				m_setlistListModel->m_selectedSetlist->Song.insert(m_setlistListModel->m_selectedSetlist->Song.begin() + index, m_performer->Root.Songs.Song[m_songList->getSelectedRow()].ID);
+				m_setlistListModel->m_selectedSetlist->SongPtr.insert(m_setlistListModel->m_selectedSetlist->SongPtr.begin() + index, &m_performer->Root.Songs.Song[m_songList->getSelectedRow()]);
+				m_setlist->selectRow(index);
+				m_setlist->updateContent();
+				m_setlist->repaint();
+			}
+		}
         //[/UserButtonCode_m_addSong]
     }
     else if (buttonThatWasClicked == m_usePerformanceInsSong.get())
@@ -738,6 +755,22 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_addPerformance.get())
     {
         //[UserButtonCode_m_addPerformance] -- add your button handler code here..
+		if (m_performanceList->getSelectedRow() != -1)
+		{
+			auto index = m_performancesInSongList->getSelectedRow();
+
+			if (index == -1)
+				index = 0;
+
+			if (m_selectedSongListModel->m_selectedSong)
+			{
+				m_selectedSongListModel->m_selectedSong->Performance.insert(m_selectedSongListModel->m_selectedSong->Performance.begin() + index, m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].ID);
+				m_selectedSongListModel->m_selectedSong->PerformancePtr.insert(m_selectedSongListModel->m_selectedSong->PerformancePtr.begin() + index, &m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()]);
+				m_performancesInSongList->updateContent();
+				m_performancesInSongList->repaint();
+				m_performancesInSongList->selectRow(index);
+			}
+		}
         //[/UserButtonCode_m_addPerformance]
     }
 

@@ -5,9 +5,6 @@ Continue:
 - Performance use
 - Performance new
 
-- song add to setlist
-- Performance add to song
-
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 Append onto Queen
@@ -15,7 +12,7 @@ Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so i
 Implement 16th
 Tempo edit
 
-Upgrade to JUCE 6
+Bonus with no benefit - Upgrade to JUCE 6
 - Use their midi output
 - Use their gain plugin
 
