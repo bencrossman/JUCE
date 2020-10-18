@@ -710,6 +710,20 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_newPerformance.get())
     {
         //[UserButtonCode_m_newPerformance] -- add your button handler code here..
+		m_performer->TempPerformance.ID = (int)Uuid().hash();
+		m_performer->TempPerformance.Name = "New performance";
+		m_performer->Root.Performances.Performance.push_back(m_performer->TempPerformance);
+		SortPerformances();
+		UpdatePointers();
+		for (int i = 0; i < m_performer->Root.Performances.Performance.size(); ++i)
+		{
+			if (m_performer->Root.Performances.Performance[i].ID == m_performer->TempPerformance.ID)
+			{
+				m_performanceList->selectRow(i);
+				m_performanceList->updateContent();
+				m_performanceList->repaint();
+			}
+		}
         //[/UserButtonCode_m_newPerformance]
     }
     else if (buttonThatWasClicked == m_deletePerformance.get())

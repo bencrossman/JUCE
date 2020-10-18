@@ -741,6 +741,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 if (midi_message.getControllerValue() > 0)
                 {
                     m_performer.m_currentPerformanceIndex--;
+					if (m_performer.m_currentPerformanceIndex < 0)
+						m_performer.m_currentPerformanceIndex = 0;
                     m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
                     UpdateCurrentRouting();
                 }

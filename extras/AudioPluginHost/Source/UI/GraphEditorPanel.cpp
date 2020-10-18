@@ -1263,6 +1263,34 @@ void GraphEditorPanel::init()
 		graph.SetMono(mono);
 	};
 
+	((RackTitleBar*)m_rackTopUI.get())->m_onPrevPerformance = [this]()
+	{
+		auto performer = graph.GetPerformer();
+		performer->m_currentPerformanceIndex--;
+		if (performer->m_currentPerformanceIndex < 0)
+			performer->m_currentPerformanceIndex = 0;
+		SetPerformance();
+	};
+
+	((RackTitleBar*)m_rackTopUI.get())->m_onNextPerformance = [this]()
+	{
+		auto performer = graph.GetPerformer();
+		performer->m_currentPerformanceIndex++;
+		SetPerformance();
+	};
+
+	((RackTitleBar*)m_rackTopUI.get())->m_onSavePerformance = [this]()
+	{
+		auto performer = graph.GetPerformer();
+
+		for (int i = 0; i < performer->Root.Performances.Performance.size(); ++i)
+		{
+			if (performer->Root.Performances.Performance[i].ID == performer->TempPerformance.ID)
+			{
+				performer->Root.Performances.Performance[i] = performer->TempPerformance;
+			}
+		}
+	};
 }
 
 void GraphEditorPanel::SetPerformance()
@@ -1277,15 +1305,17 @@ void GraphEditorPanel::SetPerformance()
 
     performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
     
-    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performance->Name);
+	performer->TempPerformance = *performance;
 
-    ((RackTitleBar*)m_rackTopUI.get())->Assign(song, performance);
+    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performer->TempPerformance.Name);
 
-    auto &zones = performance->Zone;
+    ((RackTitleBar*)m_rackTopUI.get())->Assign(song, &performer->TempPerformance);
+
+    auto &zones = performer->TempPerformance.Zone;
 
 	// Some globals
-    RackRow::SetTempo(performance->Tempo);
-	graph.SetTempo(performance->Tempo);
+    RackRow::SetTempo(performer->TempPerformance.Tempo);
+	graph.SetTempo(performer->TempPerformance.Tempo);
 
     for (auto i = 0U; i < zones.size(); ++i)
     {
@@ -1315,9 +1345,7 @@ bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
 {
     if (key == KeyPress::spaceKey)
     {
-        auto performer = graph.GetPerformer();
-        performer->m_currentPerformanceIndex++;
-        SetPerformance();
+		((RackTitleBar*)m_rackTopUI.get())->m_onPrevPerformance();
     }
     return true;
 }
