@@ -67,7 +67,7 @@ private:
 	std::unique_ptr<Component> m_setlistUI;
 	std::vector<std::unique_ptr<Component>> m_rackDevice;
 
-    void SetPerformance();
+    void SetPerformance(PerformanceType *performance = nullptr);
     int m_titleHeight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphEditorPanel)
