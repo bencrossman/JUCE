@@ -289,9 +289,9 @@ SetlistManager::SetlistManager ()
 	m_selectedSongListModel = new SelectedSongListModel();
 	m_selectedSongListModel->m_onSelectedChanged = [this]()
 	{
-		m_performanceList->deselectAllRows();
 		if (m_performancesInSongList->getSelectedRow() != -1)
 		{
+			m_performanceList->deselectAllRows(); // put this in 'if' so don't lose performance selection when clicking Use and not in setlist
 			for (int i = 0; i < m_performer->Root.Performances.Performance.size(); ++i)
 				if (m_performer->Root.Performances.Performance[i].ID == m_selectedSongListModel->m_selectedSong->PerformancePtr[m_performancesInSongList->getSelectedRow()]->ID)
 					m_performanceList->selectRow(i);
@@ -452,6 +452,13 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_useSetlistSong.get())
     {
         //[UserButtonCode_m_useSetlistSong] -- add your button handler code here..
+		int index = m_setlist->getSelectedRow();
+		if (index != -1)
+		{
+			auto &song = m_setlistListModel->m_selectedSetlist->SongPtr[index];
+			if (song->PerformancePtr.size()) // song may have no performances
+				m_onUsePerformance(m_performer->GetIndexByPerformance(song->ID, song->PerformancePtr[0]->ID), nullptr);
+		}		
         //[/UserButtonCode_m_useSetlistSong]
     }
     else if (buttonThatWasClicked == m_removeSetlistSong.get())
@@ -515,6 +522,10 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 			}
 			if (!found)
 				m_setlist->deselectAllRows();
+
+			auto &song = m_performer->Root.Songs.Song[m_songList->getSelectedRow()];
+			if (song.PerformancePtr.size()) // song may have no performances
+				m_onUsePerformance(m_performer->GetIndexByPerformance(song.ID, song.PerformancePtr[0]->ID), song.PerformancePtr[0]);
 		}
         //[/UserButtonCode_m_useSong]
     }
@@ -629,7 +640,10 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == m_usePerformanceInsSong.get())
     {
         //[UserButtonCode_m_usePerformanceInsSong] -- add your button handler code here..
-        //[/UserButtonCode_m_usePerformanceInsSong]
+		auto index = m_performancesInSongList->getSelectedRow();
+		if (index != -1)
+			m_onUsePerformance(m_performer->GetIndexByPerformance(m_selectedSongListModel->m_selectedSong->ID, m_selectedSongListModel->m_selectedSong->Performance[0].ID) + index, m_selectedSongListModel->m_selectedSong->PerformancePtr[index]);
+		//[/UserButtonCode_m_usePerformanceInsSong]
     }
     else if (buttonThatWasClicked == m_removePerformanceFromSong.get())
     {
@@ -704,6 +718,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 				m_songList->deselectAllRows();
 				m_setlist->deselectAllRows();
 			}
+			m_onUsePerformance(m_performer->GetIndexByPerformance(-1, m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].ID), &m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()]);
 		}
         //[/UserButtonCode_m_usePerformance]
     }
