@@ -236,6 +236,7 @@ public:
 
     int GetTotalPerformances();
     void GetPerformanceByIndex(PerformanceType*&, Song *&, int index);
+	int GetIndexByPerformance(int songID, int performanceID);
 
     void Import(const char *file);
     void ResolveIDs();
