@@ -246,7 +246,7 @@ void RackTitleBar::buttonClicked (juce::Button* buttonThatWasClicked)
 void RackTitleBar::Assign(Song *song, PerformanceType *performance)
 {
     m_performanceName->setText(performance->Name, false);
-    m_songName->setText(song->Name, false);
+    m_songName->setText(song ? song->Name : "NA", false);
 
 }
 //[/MiscUserCode]
