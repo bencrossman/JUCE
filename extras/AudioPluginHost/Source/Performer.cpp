@@ -300,3 +300,19 @@ void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song,
             break;
     }
 }
+
+int Performer::GetIndexByPerformance(int songID, int performanceID)
+{
+	auto &setlist = Root.SetLists.SetList[m_currentSetlistIndex];
+	int count = 0;
+	for (int s = 0; s < setlist.SongPtr.size(); ++s)
+	{
+		for (int p = 0; p < setlist.SongPtr[s]->PerformancePtr.size(); ++p)
+		{
+			if ((songID == -1 || setlist.Song[s].ID == songID) && setlist.SongPtr[s]->PerformancePtr[p]->ID == performanceID)
+				return count;
+			count++;
+		}
+	}
+	return -1;
+}

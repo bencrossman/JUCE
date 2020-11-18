@@ -770,10 +770,10 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 
     m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
 	m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
-    m_tabs->addTab(TRANS("SetLists"), Colours::darkblue, m_setlistUI.get(), false);
-    m_tabs->addTab(TRANS("Performances"), Colours::darkgrey, m_rackUIViewport.get(), false);
+    m_tabs->addTab(TRANS("Performances"), Colours::transparentBlack, m_rackUIViewport.get(), false);
+    m_tabs->addTab(TRANS("SetLists"), Colours::transparentBlack, m_setlistUI.get(), false);
 	//m_tabs->setTabBarDepth(30);
-	m_tabs->setCurrentTabIndex(1);
+	m_tabs->setCurrentTabIndex(0);
     addAndMakeVisible(m_tabs.get());
 
     m_rackUIViewport->setScrollBarsShown(true, false);
@@ -1291,23 +1291,37 @@ void GraphEditorPanel::init()
 			}
 		}
 	};
+
+	((SetlistManager*)m_setlistUI.get())->m_onUsePerformance = [this](int currentPerformanceIndex, PerformanceType *performance)
+	{
+		auto performer = graph.GetPerformer();
+		if (currentPerformanceIndex != -1)
+		{
+			performer->m_currentPerformanceIndex = currentPerformanceIndex;
+			SetPerformance();
+		}
+		else
+		{
+			SetPerformance(performance);
+		}
+	};
 }
 
-void GraphEditorPanel::SetPerformance()
+void GraphEditorPanel::SetPerformance(PerformanceType *performance)
 {
     auto performer = graph.GetPerformer();
 
     if (performer->Root.SetLists.SetList.size() == 0)
         return; 
 
-    PerformanceType* performance = NULL;
     Song *song = NULL;
 
-    performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
+	if (performance == nullptr)
+		performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
     
 	performer->TempPerformance = *performance;
 
-    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + song->Name + "|" + performer->TempPerformance.Name);
+    Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + (song ? song->Name : "NA") + "|" + performer->TempPerformance.Name);
 
     ((RackTitleBar*)m_rackTopUI.get())->Assign(song, &performer->TempPerformance);
 
