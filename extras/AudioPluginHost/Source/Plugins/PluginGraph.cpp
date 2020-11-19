@@ -110,15 +110,20 @@ void PluginGraph::changeListenerCallback (ChangeBroadcaster*)
 
 void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<double> pos)
 {
-    std::shared_ptr<ScopedDPIAwarenessDisabler> dpiDisabler = makeDPIAwarenessDisablerForPlugin (desc.pluginDescription);
+	String errorMessage;
+	auto processor = formatManager.createPluginInstance(desc, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
-    formatManager.createPluginInstanceAsync (desc.pluginDescription,
-                                             graph.getSampleRate(),
-                                             graph.getBlockSize(),
-                                             [this, pos, dpiDisabler, useARA = desc.useARA] (std::unique_ptr<AudioPluginInstance> instance, const String& error)
-                                             {
-                                                 addPluginCallback (std::move (instance), error, pos, useARA);
-                                             });
+	Device newRack;
+	newRack.ID = (int)Uuid().hash();
+	newRack.Name = desc.name.getCharPointer();
+	newRack.PluginName = desc.name.getCharPointer();
+
+	if (processor.get())
+		AddRack(processor, newRack);
+
+	m_performer.Root.Racks.Rack.push_back(newRack);
+	m_performer.ResolveIDs(); // Probably does more than required but doesnt matter
+
 }
 
 void PluginGraph::addPluginCallback (std::unique_ptr<AudioPluginInstance> instance,
@@ -341,15 +346,41 @@ PluginDescription FindInternalPlugin(std::vector<PluginDescription>& types, cons
 	return PluginDescription();
 }
 
+void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Device &rack)
+{
+	auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
+	rack.m_usesBanks = File(bankFile).exists();
+	rack.m_stereoToMonoWillPhase = (String(rack.PluginName).contains("TruePianos") || String(rack.PluginName).contains("SUPERWAVE"));
+
+	String errorMessage;
+
+	InternalPluginFormat internalFormat;
+	auto types = internalFormat.getAllTypes();
+
+	processor->setPlayHead(graph.getPlayHead());
+	auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
+	auto midi = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+	auto gain = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Gain PlugIn"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+
+	rack.m_node = (void*)node.get();
+	rack.m_gainNode = (void*)gain.get();
+	rack.m_midiFilterNode = (void*)midi.get();
+
+	graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ midi->nodeID, 4096 } });
+	graph.addConnection({ { midi->nodeID, 4096 },{ node->nodeID, 4096 } });
+
+	graph.addConnection({ { node->nodeID, 0 },{ gain->nodeID, 0 } });
+	graph.addConnection({ { node->nodeID, 1 },{ gain->nodeID, 1 } });
+
+	graph.addConnection({ { gain->nodeID, 0 },{ m_masterGainNode->nodeID, 0 } });
+	graph.addConnection({ { gain->nodeID, 1 },{ m_masterGainNode->nodeID, 1 } });
+}
+
 // shared code for load/import
 void PluginGraph::setupPerformer()
 {
     clear(); // because was in restoreFromXml
 
-    InternalPluginFormat internalFormat;
-	auto types = internalFormat.getAllTypes();
-
-    String errorMessage;
     CreateDefaultNodes();
 
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
@@ -364,41 +395,20 @@ void PluginGraph::setupPerformer()
         {
             auto name = knownPluginList.getTypes()[j].name;
             if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
-            {
                 pd.fileOrIdentifier = knownPluginList.getTypes()[j].fileOrIdentifier;
-                auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(pd.name + "_Banks.txt");
-                rack.m_usesBanks = File(bankFile).exists();
-				rack.m_stereoToMonoWillPhase = (pd.name.contains("TruePianos") || pd.name.contains("SUPERWAVE"));
-            }
         }
 
+		String errorMessage;
         auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
 		auto processorPtr = processor.get();
 		jassert(processorPtr); // If crashing here need to discover vst
         if (processorPtr)
         {
-          	processorPtr->setPlayHead(graph.getPlayHead());
-
-            if (rack.InitialState.size())
-                SendChunkString(processorPtr, rack.InitialState);
-
-            auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
-            auto midi = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-            auto gain = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Gain PlugIn"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
-
-            rack.m_node = (void*)node.get();
-            rack.m_gainNode = (void*)gain.get();
-            rack.m_midiFilterNode = (void*)midi.get();
-
-            graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ midi->nodeID, 4096 } });
-            graph.addConnection({ { midi->nodeID, 4096 },{ node->nodeID, 4096 } });
-
-            graph.addConnection({ { node->nodeID, 0 },{ gain->nodeID, 0 } });
-            graph.addConnection({ { node->nodeID, 1 },{ gain->nodeID, 1 } });
-
-            graph.addConnection({ { gain->nodeID, 0 },{ m_masterGainNode->nodeID, 0 } });
-            graph.addConnection({ { gain->nodeID, 1 },{ m_masterGainNode->nodeID, 1 } });
+			if (rack.InitialState.size())
+				SendChunkString(processorPtr, rack.InitialState);
+			
+			AddRack(processor, rack);
         }
     }
 }
