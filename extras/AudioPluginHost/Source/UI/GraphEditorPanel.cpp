@@ -1300,7 +1300,7 @@ bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
 {
     if (key == KeyPress::spaceKey)
     {
-		((RackTitleBar*)m_rackTopUI.get())->m_onPrevPerformance();
+		((RackTitleBar*)m_rackTopUI.get())->m_onNextPerformance();
     }
     return true;
 }
