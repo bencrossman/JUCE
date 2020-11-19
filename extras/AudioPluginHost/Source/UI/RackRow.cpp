@@ -751,8 +751,17 @@ void RackRow::handleCommandMessage(int id)
     {
         auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
         m_program->clear(dontSendNotification);
-        for (int i = 0; i < processor->getNumPrograms(); ++i)
-            m_program->addItem(processor->getProgramName(i), i + 1);
+
+		if (processor->getNumPrograms() == 1 && processor->getProgramName(0) == "")
+		{
+			for (int i = 0; i < 128; ++i)
+				m_program->addItem(String::formatted("PROGRAM %03d", i), i + 1);
+		}
+		else
+		{
+			for (int i = 0; i < processor->getNumPrograms(); ++i)
+				m_program->addItem(processor->getProgramName(i), i + 1);
+		}
         m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
     }
     if (id == CommandBypass)
