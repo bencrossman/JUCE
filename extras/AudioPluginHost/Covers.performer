@@ -1,183 +1,6 @@
 <?xml version="1.0" ?>
 <Root CurrentSetListID="230290255">
     <SetLists>
-        <SetList ID="725197447" Name="Normal">
-            <Song ID="800911578" />
-            <Song ID="1997842497" />
-            <Song ID="1242009781" />
-            <Song ID="1181829818" />
-            <Song ID="-1489615974" />
-            <Song ID="1365446626" />
-            <Song ID="-1658000739" />
-            <Song ID="2110017919" />
-            <Song ID="1451961192" />
-            <Song ID="2135996546" />
-            <Song ID="1111104538" />
-            <Song ID="2048429966" />
-            <Song ID="-1902089942" />
-            <Song ID="-1456116052" />
-            <Song ID="-1496032638" />
-            <Song ID="1691107623" />
-            <Song ID="-1627087528" />
-            <Song ID="-524070619" />
-            <Song ID="-1997789996" />
-            <Song ID="-605937879" />
-            <Song ID="-2129661997" />
-            <Song ID="1939417377" />
-            <Song ID="-1435346481" />
-            <Song ID="330387749" />
-            <Song ID="1083524302" />
-            <Song ID="-1490350529" />
-            <Song ID="145079410" />
-            <Song ID="16587712" />
-            <Song ID="1347067423" />
-            <Song ID="-955692712" />
-            <Song ID="-1082967827" />
-            <Song ID="-41670938" />
-            <Song ID="1539962914" />
-            <Song ID="-272316000" />
-            <Song ID="1401476763" />
-            <Song ID="2093119484" />
-            <Song ID="-1269189954" />
-            <Song ID="1104979560" />
-            <Song ID="1304339251" />
-            <Song ID="-1841851530" />
-            <Song ID="1402617184" />
-            <Song ID="718813853" />
-            <Song ID="-1424463714" />
-            <Song ID="-479079512" />
-            <Song ID="1952318942" />
-            <Song ID="-943744208" />
-            <Song ID="-817192901" />
-            <Song ID="2079621184" />
-            <Song ID="-1340790134" />
-            <Song ID="-1292562882" />
-            <Song ID="-161270048" />
-            <Song ID="872585702" />
-            <Song ID="940188658" />
-            <Song ID="-1959455314" />
-            <Song ID="1622943407" />
-            <Song ID="1091369720" />
-            <Song ID="1978461487" />
-            <Song ID="1749298240" />
-            <Song ID="-1492471256" />
-            <Song ID="1204532810" />
-            <Song ID="1318314072" />
-            <Song ID="1349718710" />
-            <Song ID="-93852910" />
-            <Song ID="347133768" />
-            <Song ID="1831335055" />
-            <Song ID="-933353772" />
-            <Song ID="285593620" />
-            <Song ID="1237489766" />
-            <Song ID="1858206394" />
-            <Song ID="1745808250" />
-            <Song ID="-779573588" />
-            <Song ID="-1491607353" />
-            <Song ID="-200064426" />
-            <Song ID="-1508606755" />
-            <Song ID="-2074681996" />
-            <Song ID="1766141482" />
-            <Song ID="-1432417486" />
-            <Song ID="-1070487912" />
-            <Song ID="-155673966" />
-            <Song ID="-1586614904" />
-            <Song ID="1791832546" />
-            <Song ID="-158333928" />
-            <Song ID="1274686534" />
-            <Song ID="-1486876295" />
-            <Song ID="-1702606041" />
-            <Song ID="-1547752858" />
-            <Song ID="1160947397" />
-            <Song ID="1696179067" />
-            <Song ID="337066101" />
-            <Song ID="1717462707" />
-            <Song ID="1738326295" />
-            <Song ID="-1453978809" />
-            <Song ID="-1998112814" />
-            <Song ID="1156240131" />
-            <Song ID="-1484974504" />
-            <Song ID="327291318" />
-            <Song ID="-1492236557" />
-            <Song ID="2061666411" />
-            <Song ID="1163968056" />
-            <Song ID="-492085869" />
-            <Song ID="-1190227636" />
-            <Song ID="-1491130557" />
-            <Song ID="-1401739690" />
-            <Song ID="-529586836" />
-            <Song ID="-1946182156" />
-            <Song ID="1274345564" />
-            <Song ID="1481312858" />
-            <Song ID="749982636" />
-            <Song ID="1574113342" />
-            <Song ID="-1936879067" />
-            <Song ID="-1687672551" />
-            <Song ID="333713341" />
-            <Song ID="-729704037" />
-            <Song ID="-1196603351" />
-            <Song ID="247824330" />
-            <Song ID="1143355226" />
-            <Song ID="178705268" />
-            <Song ID="-1486277595" />
-            <Song ID="2024784792" />
-            <Song ID="1975880123" />
-            <Song ID="1042026100" />
-            <Song ID="1457880343" />
-            <Song ID="-1491377796" />
-            <Song ID="-1886748225" />
-            <Song ID="1608466048" />
-            <Song ID="-1918218483" />
-            <Song ID="1917436859" />
-            <Song ID="1535916139" />
-            <Song ID="327771712" />
-            <Song ID="-2081850605" />
-            <Song ID="-1957313269" />
-            <Song ID="-2124553844" />
-            <Song ID="1180195080" />
-            <Song ID="-1585070218" />
-            <Song ID="20124418" />
-            <Song ID="-905941878" />
-            <Song ID="-1496971655" />
-            <Song ID="476011433" />
-            <Song ID="500852117" />
-            <Song ID="1755086497" />
-            <Song ID="737328479" />
-            <Song ID="330877181" />
-            <Song ID="1611254500" />
-            <Song ID="-1920615432" />
-            <Song ID="-1893425986" />
-            <Song ID="828020921" />
-            <Song ID="-1917133980" />
-            <Song ID="1200089613" />
-            <Song ID="-1776495401" />
-            <Song ID="1929494014" />
-            <Song ID="1991669108" />
-            <Song ID="530581165" />
-            <Song ID="1915354647" />
-            <Song ID="416566938" />
-            <Song ID="330678944" />
-            <Song ID="-1486070317" />
-            <Song ID="1091034234" />
-            <Song ID="-82432577" />
-            <Song ID="1953778449" />
-            <Song ID="1916619846" />
-            <Song ID="-57815850" />
-            <Song ID="-1492256628" />
-            <Song ID="446556129" />
-            <Song ID="1699197382" />
-            <Song ID="1287877998" />
-            <Song ID="-1492103383" />
-            <Song ID="548839704" />
-            <Song ID="1131085627" />
-            <Song ID="1696861196" />
-            <Song ID="1437844444" />
-            <Song ID="1539409980" />
-            <Song ID="2092782359" />
-            <Song ID="2115602165" />
-            <Song ID="325964708" />
-            <Song ID="2075167292" />
-        </SetList>
         <SetList ID="230290255" Name="Billy and Blondie">
             <Song ID="800911578" />
             <Song ID="243769681" />
@@ -851,9 +674,6 @@
         </Song>
         <Song ID="446556129" Name="Walking on sunshine">
             <Performance ID="643338072" />
-        </Song>
-        <Song ID="1699197382" Name="We are the champions">
-            <Performance ID="1622838435" />
         </Song>
         <Song ID="1287877998" Name="We met">
             <Performance ID="325567451" />
@@ -1551,13 +1371,6 @@
         <Performance ID="643338072" Name="Walking on Sunshine|" Tempo="120">
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="-2048222834" Program="6" LowKey="60"></Zone>
-        </Performance>
-        <Performance ID="1622838435" Name="We are the champions|" Tempo="120">
-            <Zone DeviceID="627145948" Program="4" LowKey="26"></Zone>
-            <Zone DeviceID="-2048222834" Program="18"></Zone>
-        </Performance>
-        <Performance ID="1780071847" Name="We will rock you|" Tempo="120">
-            <Zone DeviceID="-2048222834" Program="17"></Zone>
         </Performance>
         <Performance ID="60332017" Name="What I Like About You|" Tempo="120">
             <Zone DeviceID="627145948" Program="4" LowKey="23" HighKey="83"></Zone>
