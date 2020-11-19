@@ -436,12 +436,15 @@ void PluginGraph::setLastDocumentOpened (const File& file)
 
 void PluginGraph::Import(const char *filename)
 {
-    clear();
+	graph.removeChangeListener(this);
+	
 	m_performer = Performer();
     m_performer.Import(filename);
     m_performer.ResolveIDs();
-    graph.removeChangeListener (this);
-    setupPerformer();
+
+	clear(); // Do this after import
+	
+	setupPerformer();
     MessageManager::callAsync ([this]
         {
             setChangedFlag (false);

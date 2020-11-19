@@ -139,7 +139,11 @@ void Performer::Import(const char *fileToLoad)
 					zone.Device = NULL;
 					zone.DeviceID = group.ID + pass * 3;
 
-					auto &filter = group.PluginChain.PlugIn[0].MIDIFilterSet.MIDIFilter[0];
+					auto &midiFilters = group.PluginChain.PlugIn[0].MIDIFilterSet.MIDIFilter;
+					ForteMIDIFilter filter;
+					if (midiFilters.size() > 0)
+						filter = midiFilters[0];
+
 					if (onSetScene.ProgramChange.size() <= 1 && filter.MapChannel.size() == 2 && abs(filter.MapChannel[0].Key.Transpose - filter.MapChannel[0].Key.Transpose) == 12) // see if this is a transpose
 					{
 						zone.NoteMode = NoteMode::DoubleOctave;
@@ -156,7 +160,7 @@ void Performer::Import(const char *fileToLoad)
 						zone.Program = onSetScene.ProgramChange[pass].Program;
 						zone.Bank = onSetScene.ProgramChange[pass].Bank;
 					}
-					else
+					else if (group.Name != "Arpeggiator")
 					{
 						zone.Program = -1;
 						zone.Bank = -1;
