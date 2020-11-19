@@ -1,15 +1,16 @@
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 Append onto Queen
-- Get import of covers working
-- Initial one off setup
-- Handle sample program numbers (hard code)
+- Combine sampler (hard code)
 - Append .performer
 - Set appegiator modes to all 16th (hard code)
+- Put brass in Samples?
 
 Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
 Implement 16th
 Tempo edit
+Possible volume init bug? Too quiet?
+Possible midi bug on 2nd song
 
 Future
 ~~~~~~
