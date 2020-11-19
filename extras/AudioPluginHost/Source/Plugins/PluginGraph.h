@@ -80,6 +80,7 @@ public:
     File getLastDocumentOpened() override;
     void setLastDocumentOpened (const File& file) override;
     void setupPerformer();
+	void AddRack(std::unique_ptr<AudioPluginInstance> &processorPtr, Device &rack);
 
     void Import(const char *filename);
     Performer *GetPerformer() { return &m_performer; }
