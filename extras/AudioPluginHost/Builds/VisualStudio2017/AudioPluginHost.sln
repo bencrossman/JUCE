@@ -1,8 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPluginHost_App", "AudioPluginHost_App.vcxproj", "{5666EAA2-C82B-D06A-5228-D0E810428536}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2017
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPluginHost - App", "AudioPluginHost_App.vcxproj", "{5666EAA2-C82B-D06A-5228-D0E810428536}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +16,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0F8785F9-9EB2-41E3-B81D-70772D1F4310}
 	EndGlobalSection
 EndGlobal

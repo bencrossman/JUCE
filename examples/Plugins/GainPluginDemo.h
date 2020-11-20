@@ -59,7 +59,7 @@ public:
         : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::stereo())
                                            .withOutput ("Output", AudioChannelSet::stereo()))
     {
-        addParameter (gain = new AudioParameterFloat ("gain", "Gain", 0.0f, 1.0f, 0.5f));
+        addParameter (gain = new AudioParameterFloat ("gain", "Gain", 0.0f, 1.0f, 1.0f));
 		addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
 	}
 
