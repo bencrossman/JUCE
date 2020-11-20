@@ -151,6 +151,26 @@ RackTitleBar::RackTitleBar ()
 
     m_savePerformance->setBounds (480, 24, 150, 24);
 
+    m_tempoLabel.reset (new juce::Label (juce::String(),
+                                         TRANS("BPM\n")));
+    addAndMakeVisible (m_tempoLabel.get());
+    m_tempoLabel->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    m_tempoLabel->setJustificationType (juce::Justification::centredLeft);
+    m_tempoLabel->setEditable (false, false, false);
+    m_tempoLabel->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    m_tempoLabel->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    m_tempoLabel->setBounds (640, 24, 56, 24);
+
+    m_tempo.reset (new juce::Slider (juce::String()));
+    addAndMakeVisible (m_tempo.get());
+    m_tempo->setRange (60, 240, 1);
+    m_tempo->setSliderStyle (juce::Slider::IncDecButtons);
+    m_tempo->setTextBoxStyle (juce::Slider::TextBoxRight, false, 80, 20);
+    m_tempo->addListener (this);
+
+    m_tempo->setBounds (672, 24, 72, 24);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -179,6 +199,8 @@ RackTitleBar::~RackTitleBar()
     m_prevPerformance = nullptr;
     m_nextPerformance = nullptr;
     m_savePerformance = nullptr;
+    m_tempoLabel = nullptr;
+    m_tempo = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -240,12 +262,29 @@ void RackTitleBar::buttonClicked (juce::Button* buttonThatWasClicked)
     //[/UserbuttonClicked_Post]
 }
 
+void RackTitleBar::sliderValueChanged (juce::Slider* sliderThatWasMoved)
+{
+    //[UsersliderValueChanged_Pre]
+    //[/UsersliderValueChanged_Pre]
+
+    if (sliderThatWasMoved == m_tempo.get())
+    {
+        //[UserSliderCode_m_tempo] -- add your slider handling code here..
+		m_onSetTempo(m_tempo->getValue());
+        //[/UserSliderCode_m_tempo]
+    }
+
+    //[UsersliderValueChanged_Post]
+    //[/UsersliderValueChanged_Post]
+}
+
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void RackTitleBar::Assign(Song *song, PerformanceType *performance)
 {
     m_performanceName->setText(performance->Name, false);
+	m_tempo->setValue(performance->Tempo);
     m_songName->setText(song ? song->Name : "NA", false);
 
 }
@@ -316,6 +355,15 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="" id="d8ed5c4e2ab3cd09" memberName="m_savePerformance"
               virtualName="" explicitFocusOrder="0" pos="480 24 150 24" buttonText="Save performance"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <LABEL name="" id="ba318c750d6ee607" memberName="m_tempoLabel" virtualName=""
+         explicitFocusOrder="0" pos="640 24 56 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="BPM&#10;" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
+         kerning="0.0" bold="0" italic="0" justification="33"/>
+  <SLIDER name="" id="8329a0364ace0f47" memberName="m_tempo" virtualName=""
+          explicitFocusOrder="0" pos="672 24 72 24" min="60.0" max="240.0"
+          int="1.0" style="IncDecButtons" textBoxPos="TextBoxRight" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

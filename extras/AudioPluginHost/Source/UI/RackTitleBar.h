@@ -37,7 +37,8 @@ class Song;
 */
 class RackTitleBar  : public Component,
                       public TextEditor::Listener,
-                      public juce::Button::Listener
+                      public juce::Button::Listener,
+                      public juce::Slider::Listener
 {
 public:
     //==============================================================================
@@ -51,11 +52,13 @@ public:
 	std::function<void()> m_onNextPerformance;
 	std::function<void()> m_onPrevPerformance;
 	std::function<void()> m_onSavePerformance;
+	std::function<void(int)> m_onSetTempo;
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
     void resized() override;
     void buttonClicked (juce::Button* buttonThatWasClicked) override;
+    void sliderValueChanged (juce::Slider* sliderThatWasMoved) override;
 
 
 
@@ -78,6 +81,8 @@ private:
     std::unique_ptr<juce::TextButton> m_prevPerformance;
     std::unique_ptr<juce::TextButton> m_nextPerformance;
     std::unique_ptr<juce::TextButton> m_savePerformance;
+    std::unique_ptr<juce::Label> m_tempoLabel;
+    std::unique_ptr<juce::Slider> m_tempo;
 
 
     //==============================================================================

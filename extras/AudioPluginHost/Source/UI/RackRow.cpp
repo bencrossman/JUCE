@@ -511,7 +511,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
                     if (note >= 0 && note <= 127)
                     {
-                        if (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio)
+                        if (m_current->NoteMode == NoteMode::Sixteenth || m_current->NoteMode == NoteMode::ThreeOctaveArpeggio)
                         {
                             // See if new sequence
                             if (m_notesDown.empty() && midi_message.isNoteOn())
@@ -636,7 +636,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 // need new note
                 if (!m_notesDown.empty())
                 {
-                    m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % 3);
+                    m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio ? 3 : 1));
                     if (m_lastNote < 128)
                         midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
                     m_arpeggiatorBeat++;

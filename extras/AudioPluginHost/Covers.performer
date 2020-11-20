@@ -934,7 +934,7 @@
         <Performance ID="-456977170" Name="Harmonica -2">
             <Zone DeviceID="1555279137" Bank="1" Program="22" Volume="4" Transpose="-2"></Zone>
         </Performance>
-        <Performance ID="372654456" Name="Heart Of Glass|" Tempo="114">
+        <Performance ID="372654456" Name="Heart Of Glass|" Tempo="115">
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Volume="3" LowKey="83"></Zone>
             <Zone DeviceID="522416168" Program="12" Volume="-3" NoteMode="3" Transpose="12" LowKey="22" HighKey="59"></Zone>
             <Zone DeviceID="-841590045" Program="31" Volume="-6" Transpose="12" LowKey="60" HighKey="82"></Zone>
