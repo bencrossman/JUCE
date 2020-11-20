@@ -642,7 +642,12 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_m_usePerformanceInsSong] -- add your button handler code here..
 		auto index = m_performancesInSongList->getSelectedRow();
 		if (index != -1)
-			m_onUsePerformance(m_performer->GetIndexByPerformance(m_selectedSongListModel->m_selectedSong->ID, m_selectedSongListModel->m_selectedSong->Performance[0].ID) + index, m_selectedSongListModel->m_selectedSong->PerformancePtr[index]);
+		{
+			auto setlistIndex = m_performer->GetIndexByPerformance(m_selectedSongListModel->m_selectedSong->ID, m_selectedSongListModel->m_selectedSong->Performance[0].ID);	
+			if (setlistIndex != -1)
+				setlistIndex += index;
+			m_onUsePerformance(setlistIndex, m_selectedSongListModel->m_selectedSong->PerformancePtr[index]);
+		}
 		//[/UserButtonCode_m_usePerformanceInsSong]
     }
     else if (buttonThatWasClicked == m_removePerformanceFromSong.get())
