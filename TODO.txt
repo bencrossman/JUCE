@@ -1,10 +1,10 @@
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
-- Append onto Queen
 - Check samplier reverb (especially brass types)
 
 Possible random bypass bug
 Bug - Use "That's the way - Rips" picks piano?
+Bug - Rename performance doesnt update in song
 
 Future
 ~~~~~~
