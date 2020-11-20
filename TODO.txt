@@ -1,13 +1,10 @@
 For covers / Blondie
 ~~~~~~~~~~~~~~~~~~~~
 - Append onto Queen
-- Sampler
-  - Combine
-  - Put brass in Samples?
-  - Sampler Check octaves - Sampler treats midi channel 2 as separate intrument so in the case of octaved trumpets, PC should be set same for midi channel 1 and 2 etc...
+- Check samplier reverb (especially brass types)
 
 Possible random bypass bug
-
+Bug - Use "That's the way - Rips" picks piano?
 
 Future
 ~~~~~~
