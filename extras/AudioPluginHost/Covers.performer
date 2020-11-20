@@ -885,8 +885,8 @@
             <Zone DeviceID="-1202024641" Program="17" Volume="-2" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="-841590045" Program="39" Volume="-4" LowKey="60"></Zone>
         </Performance>
-        <Performance ID="695577816" Name="Funky town|">
-            <Zone DeviceID="1555279137" Bank="2" Program="69" NoteMode="5" Transpose="24" HighKey="40"></Zone>
+        <Performance ID="695577816" Name="Funky town|" Tempo="128">
+            <Zone DeviceID="1555279137" Bank="2" Program="69" NoteMode="3" Transpose="24" HighKey="40"></Zone>
             <Zone DeviceID="-1202024641" Bank="2" Program="41" Transpose="12" LowKey="41" HighKey="77"></Zone>
             <Zone DeviceID="522416168" Program="11" Transpose="-12" LowKey="78"></Zone>
             <Zone DeviceID="-1973686393" Program="70" Volume="-11" LowKey="78"></Zone>
@@ -936,7 +936,7 @@
         </Performance>
         <Performance ID="372654456" Name="Heart Of Glass|" Tempo="114">
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Volume="3" LowKey="83"></Zone>
-            <Zone DeviceID="522416168" Program="12" Volume="-3" NoteMode="5" Transpose="12" LowKey="22" HighKey="59"></Zone>
+            <Zone DeviceID="522416168" Program="12" Volume="-3" NoteMode="3" Transpose="12" LowKey="22" HighKey="59"></Zone>
             <Zone DeviceID="-841590045" Program="31" Volume="-6" Transpose="12" LowKey="60" HighKey="82"></Zone>
             <Zone DeviceID="-2048222834" Program="30" Volume="-5"></Zone>
         </Performance>
@@ -959,8 +959,8 @@
         </Performance>
         <Performance ID="-809443085" Name="Hot N Cold|" Tempo="121">
             <Zone DeviceID="1555279137" Bank="13" Program="26" Volume="-3" LowKey="50"></Zone>
-            <Zone DeviceID="522416168" Program="86" Volume="2" NoteMode="5" HighKey="48"></Zone>
-            <Zone DeviceID="-841590045" Program="55" Volume="-2" NoteMode="5" HighKey="48"></Zone>
+            <Zone DeviceID="522416168" Program="86" Volume="2" NoteMode="3" HighKey="48"></Zone>
+            <Zone DeviceID="-841590045" Program="55" Volume="-2" NoteMode="3" HighKey="48"></Zone>
         </Performance>
         <Performance ID="569138515" Name="Hotel California">
             <Zone DeviceID="1555279137" Program="24" Transpose="10" HighKey="72"></Zone>
@@ -973,8 +973,8 @@
         </Performance>
         <Performance ID="234966167" Name="I kissed a girl|" Tempo="100">
             <Zone DeviceID="1555279137" Bank="13" Program="26" Volume="-3" LowKey="50"></Zone>
-            <Zone DeviceID="522416168" Program="86" Volume="-1" NoteMode="5" HighKey="48"></Zone>
-            <Zone DeviceID="-841590045" Program="55" Volume="-2" NoteMode="5" HighKey="48"></Zone>
+            <Zone DeviceID="522416168" Program="86" Volume="-1" NoteMode="3" HighKey="48"></Zone>
+            <Zone DeviceID="-841590045" Program="55" Volume="-2" NoteMode="3" HighKey="48"></Zone>
         </Performance>
         <Performance ID="401437594" Name="I love it|">
             <Zone DeviceID="-1973686393" Program="124" Volume="-8" Transpose="12"></Zone>
@@ -1022,7 +1022,7 @@
             <Zone DeviceID="1555279137" Bank="4" Program="11" Volume="-9" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-333976795" Name="Legs|">
-            <Zone DeviceID="-1973686393" Program="115" Volume="-8" NoteMode="5"></Zone>
+            <Zone DeviceID="-1973686393" Program="115" Volume="-8" NoteMode="3"></Zone>
         </Performance>
         <Performance ID="710905962" Name="Let me entertain you|">
             <Zone DeviceID="627145948" Program="4" HighKey="71"></Zone>
