@@ -279,7 +279,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 			else
 			{
 				((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(bypass);
-				((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(bypass);
+				//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(bypass);
 				((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(bypass);
 			}
         }
@@ -742,7 +742,7 @@ void RackRow::SetSoloMode(bool mode)
 	// Do this here again. Can't rely on Toggle because only works if changed
 	((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 	((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
-	((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+	//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 }
 
 void RackRow::handleCommandMessage(int id)
@@ -767,7 +767,7 @@ void RackRow::handleCommandMessage(int id)
     if (id == CommandBypass)
     {
 		((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
-		((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
+		//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
 		((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
 	}
 }
