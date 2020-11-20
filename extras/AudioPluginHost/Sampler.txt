@@ -13,25 +13,21 @@ Fat Bottom Girls
 Bicycle Race
 We Are The Champions
 I Was Born To Love You
-EMPTY 001 = 001
 Alto Expressive
 TNT
 Walk Like A Egyptian
 Tenor Expressive
 Hanging Around
 Trumpet Full
-EMPTY 008 = 004
 Shes So Mean
 Put Your Hands Up
 Real World
-Busted
+Jew Harp
 Disease
 Pony
 Uptown Funk
 Crazy
 Vibraslap
-EMPTY 018 = 004
-EMPTY
 Echo Beach
 Tainted Love
 Wouldn't It Be Good
@@ -40,7 +36,6 @@ Locked Out Of Heaven
 Time Warp
 Trumpet Swells
 Trumpet Rips
-Quality Brass
 Eyes Without A Face
 Flesh For Fantasy
 Heart Of Glass
