@@ -93,7 +93,7 @@ public:
 	{
 		AR(ID, XmlAttribute);
 		AR(Name, XmlAttribute);
-		AR(Tempo, XmlAttribute);
+		AR(Tempo, XmlAttribute | XmlOptional, 120);
         
         auto oldZone = Zone;
         if (ar.IsSaving()) 
