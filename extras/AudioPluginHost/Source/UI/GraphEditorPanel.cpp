@@ -1279,6 +1279,14 @@ void GraphEditorPanel::init()
 		SetPerformance();
 	};
 
+	((RackTitleBar*)m_rackTopUI.get())->m_onSetTempo = [this](int tempo)
+	{
+		auto performer = graph.GetPerformer();
+		performer->TempPerformance.Tempo = tempo;
+		RackRow::SetTempo(tempo);
+		graph.SetTempo(tempo);
+	};
+
 	((RackTitleBar*)m_rackTopUI.get())->m_onSavePerformance = [this]()
 	{
 		auto performer = graph.GetPerformer();
