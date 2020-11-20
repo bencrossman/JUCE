@@ -242,9 +242,6 @@
             <Performance ID="-2016210536" />
             <Performance ID="1270865452" />
         </Song>
-        <Song ID="-41670938" Name="Crazy little thing called love">
-            <Performance ID="1270865452" />
-        </Song>
         <Song ID="1539962914" Name="Cry me">
             <Performance ID="-1593823047" />
             <Performance ID="2029604362" />
@@ -353,9 +350,6 @@
         <Song ID="800911578" Name="Generic">
             <Performance ID="325567451" />
         </Song>
-        <Song ID="800911578" Name="Generic">
-            <Performance ID="325567451" />
-        </Song>
         <Song ID="940188658" Name="Get Down Tonight">
             <Performance ID="-1506893963" />
         </Song>
@@ -454,9 +448,6 @@
             <Performance ID="-335610154" />
         </Song>
         <Song ID="1388958306" Name="I want you to want me">
-            <Performance ID="325567451" />
-        </Song>
-        <Song ID="-200064426" Name="I want you to want me">
             <Performance ID="325567451" />
         </Song>
         <Song ID="-998658640" Name="I was born to love you">
