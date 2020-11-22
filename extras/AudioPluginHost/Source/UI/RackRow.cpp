@@ -304,6 +304,16 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_m_deviceSettings] -- add your button handler code here..
         auto modifiers = ModifierKeys::getCurrentModifiers();
+        /*
+        // AutoIt script:
+        // For $i = 1 to 63
+        //   MouseClick("left",1318,789,1)
+        //   MouseClick("left",59,454,1)
+        // Next
+        static int num = -1;
+        int res = 1;
+        if (num >= 0)*/
+        
         if (modifiers.isRightButtonDown())
         {
             PopupMenu menu;
@@ -315,6 +325,12 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             {
                 MemoryBlock mb;
                 ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
+
+                /*VSTPluginFormat::getChunkData((AudioPluginInstance * )((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor(), mb, true);
+                MemoryInputStream input(mb, false);
+                auto output3 = File(String("C:\\Users\\ben\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\") + m_current->Device->PluginName + String::formatted("\\%03d_%03d.bin", m_current->Bank, num)).createOutputStream();
+                output3->writeFromInputStream(input,-1);*/
+
                 MemoryInputStream uncompressedInput(mb.getData(), mb.getSize(), false);
                 MemoryOutputStream output;
                 GZIPCompressorOutputStream zipper(&output);
@@ -339,6 +355,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                     w->toFront(true);
         }
 
+        //num++;
 
         //[/UserButtonCode_m_deviceSettings]
     }
@@ -378,6 +395,8 @@ void RackRow::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
         m_pendingBank = true;
         m_pendingProgram = true;
         m_pendingProgramNames = true;
+
+        SendPresetStateData();
         //[/UserComboBoxCode_m_bank]
     }
     else if (comboBoxThatHasChanged == m_program.get())
@@ -387,6 +406,8 @@ void RackRow::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
         {
             m_current->Program = m_program->getSelectedId() - 1;
             m_pendingProgram = true;
+
+            SendPresetStateData();
         }
         //[/UserComboBoxCode_m_program]
     }
@@ -734,6 +755,8 @@ void RackRow::Assign(Zone *zone)
 			m_pendingProgram = true;
 			m_pendingSoundOff = true;
 			m_pendingProgramNames = true;
+
+            SendPresetStateData();
 		}
 		m_missing->setVisible(false);
 	}
@@ -773,7 +796,7 @@ void RackRow::handleCommandMessage(int id)
 
 		if (m_current->Device->m_overridePatches.size())
 		{
-			int bank = m_bank->getSelectedId() - 1;
+			int bank = m_current->Bank;
 			for (int i = 0; i < m_current->Device->m_overridePatches[bank].size(); ++i)
 				m_program->addItem(m_current->Device->m_overridePatches[bank][i], i + 1);
 		}
@@ -796,6 +819,23 @@ void RackRow::handleCommandMessage(int id)
 		((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
 	}
 }
+
+
+void RackRow::SendPresetStateData()
+{
+    if (m_current->Device->PluginName == "JV-1080(VST2 64bit)" || m_current->Device->PluginName == "JUPITER-8(VST2 64bit)")
+    {
+        auto input = File(File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\" + m_current->Device->PluginName + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program)).createInputStream();
+        if (input.get())
+        {
+            MemoryBlock memblock;
+            input->readIntoMemoryBlock(memblock);
+            auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+            VSTPluginFormat::setChunkData((AudioPluginInstance*)processor, memblock.getData(), (int)memblock.getSize(), true);
+        }
+    }
+}
+
 
 //[/MiscUserCode]
 
