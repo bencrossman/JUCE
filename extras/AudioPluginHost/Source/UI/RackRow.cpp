@@ -178,6 +178,18 @@ RackRow::RackRow ()
 
     m_noteMode->setBounds (400, 14, 232, 24);
 
+    m_missing.reset (new juce::Label (juce::String(),
+                                      TRANS("PLUGIN\n"
+                                      "MISSING")));
+    addAndMakeVisible (m_missing.get());
+    m_missing->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    m_missing->setJustificationType (juce::Justification::centred);
+    m_missing->setEditable (false, false, false);
+    m_missing->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    m_missing->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    m_missing->setBounds (8, 14, 76, 57);
+
 
     //[UserPreSize]
     m_keyboard->setKeyWidth(8.f);
@@ -217,6 +229,7 @@ RackRow::~RackRow()
     m_deviceSettings = nullptr;
     m_keyboard = nullptr;
     m_noteMode = nullptr;
+    m_missing = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -701,25 +714,30 @@ void RackRow::Assign(Zone *zone)
 {
     m_current = zone;
 
-    auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
-    if (!zone->OverrideState.empty())
-    {
-        graph->SendChunkString(processor, zone->OverrideState);
-        m_lastZoneHadOverrideState = true;
-    }
-    else
-    {
-        if (m_lastZoneHadOverrideState)
-        {
-            graph->SendChunkString(processor, zone->Device->InitialState);
-            m_lastZoneHadOverrideState = false;
-        }
+	if (zone->Device->m_node)
+	{
+		auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
+		if (!zone->OverrideState.empty())
+		{
+			graph->SendChunkString(processor, zone->OverrideState);
+			m_lastZoneHadOverrideState = true;
+		}
+		else
+		{
+			if (m_lastZoneHadOverrideState)
+			{
+				graph->SendChunkString(processor, zone->Device->InitialState);
+				m_lastZoneHadOverrideState = false;
+			}
 
-        m_pendingBank = true;
-        m_pendingProgram = true;
-        m_pendingSoundOff = true;
-        m_pendingProgramNames = true;
-    }
+			m_pendingBank = true;
+			m_pendingProgram = true;
+			m_pendingSoundOff = true;
+			m_pendingProgramNames = true;
+		}
+		m_missing->setVisible(false);
+	}
+
     m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute, sendNotification);
@@ -846,6 +864,11 @@ BEGIN_JUCER_METADATA
             explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
             items="Normal note mode&#10;Scoop&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="" id="12f9414bd02d87a4" memberName="m_missing" virtualName=""
+         explicitFocusOrder="0" pos="8 14 76 57" edTextCol="ff000000"
+         edBkgCol="0" labelText="PLUGIN&#10;MISSING" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

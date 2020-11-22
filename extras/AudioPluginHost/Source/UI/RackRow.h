@@ -116,6 +116,7 @@ private:
     std::unique_ptr<juce::ImageButton> m_deviceSettings;
     std::unique_ptr<MidiKeyboardComponent> m_keyboard;
     std::unique_ptr<juce::ComboBox> m_noteMode;
+    std::unique_ptr<juce::Label> m_missing;
 
 
     //==============================================================================
