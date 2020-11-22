@@ -673,12 +673,13 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         StringArray lines;
         File(bankFile).readLines(lines);
         for (int i = 0; i < lines.size(); ++i)
-            m_bank->addItem(lines[i], i + 1);
+			if (lines[i] != "UNUSED")
+				m_bank->addItem(lines[i], i + 1);
     }
     else
         m_bank->setVisible(false);
 
-    auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt");
+    auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
     if (File(programFile).exists())
     {
         m_manualPatchNames = true;
@@ -752,7 +753,13 @@ void RackRow::handleCommandMessage(int id)
         auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
         m_program->clear(dontSendNotification);
 
-		if (processor->getNumPrograms() == 1 && processor->getProgramName(0) == "")
+		if (m_current->Device->m_overridePatches.size())
+		{
+			int bank = m_bank->getSelectedId() - 1;
+			for (int i = 0; i < m_current->Device->m_overridePatches[bank].size(); ++i)
+				m_program->addItem(m_current->Device->m_overridePatches[bank][i], i + 1);
+		}
+		else if (processor->getNumPrograms() == 1 && processor->getProgramName(0) == "")
 		{
 			for (int i = 0; i < 128; ++i)
 				m_program->addItem(String::formatted("PROGRAM %03d", i), i + 1);

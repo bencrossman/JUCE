@@ -611,12 +611,20 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_m_renameSong] -- add your button handler code here..
 		if (m_songList->getSelectedRow() != -1)
 		{
+			auto id = m_performer->Root.Songs.Song[m_songList->getSelectedRow()].ID;
 			Rename(m_performer->Root.Songs.Song[m_songList->getSelectedRow()].Name);
 			SortSongs();
 			UpdatePointers();
-			m_songList->deselectAllRows();
+			m_songList->deselectAllRows(); // Because order is about to change
 			m_songList->updateContent();
 			m_songList->repaint();
+
+			for (int i = 0; i < m_performer->Root.Songs.Song.size(); ++i)
+				if (m_performer->Root.Songs.Song[i].ID == id)
+					m_songList->selectRow(i);
+
+			m_setlist->updateContent();
+			m_setlist->repaint();
 		}
         //[/UserButtonCode_m_renameSong]
     }
@@ -777,12 +785,20 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_m_renamePerformance] -- add your button handler code here..
 		if (m_performanceList->getSelectedRow() != -1)
 		{
+			auto id = m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].ID;
 			Rename(m_performer->Root.Performances.Performance[m_performanceList->getSelectedRow()].Name);
 			SortPerformances();
 			UpdatePointers();
 			m_performanceList->deselectAllRows();
 			m_performanceList->updateContent();
 			m_performanceList->repaint();
+
+			for(int i = 0; i < m_performer->Root.Performances.Performance.size(); ++i)
+				if (m_performer->Root.Performances.Performance[i].ID == id)
+					m_performanceList->selectRow(i);
+
+			m_performancesInSongList->updateContent();
+			m_performancesInSongList->repaint();
 		}
         //[/UserButtonCode_m_renamePerformance]
     }
