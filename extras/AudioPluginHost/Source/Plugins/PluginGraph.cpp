@@ -439,9 +439,7 @@ void PluginGraph::setupPerformer()
 			}
 		}
 		
-		auto processorPtr = processor.get();
-		jassert(processorPtr); // If crashing here need to discover vst
-        if (processorPtr)
+        if (auto processorPtr = processor.get())
         {
 			if (rack.InitialState.size())
 				SendChunkString(processorPtr, rack.InitialState);
