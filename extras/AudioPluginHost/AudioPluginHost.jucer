@@ -81,9 +81,8 @@
     <VS2019 targetFolder="Builds/VisualStudio2019" smallIcon="c97aUr" bigIcon="c97aUr"
             extraCompilerFlags="/w44265 /w45038 /w44062" extraLinkerFlags="/NXCOMPAT:NO">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
-        <CONFIGURATION name="Release" isDebug="0" targetName="AudioPluginHost" debugInformationFormat="ProgramDatabase"
-                       winArchitecture="x64" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="C:\SDKs\VST_SDK\VST2_SDK&#10;C:\asiosdk_2.3.3_2019-06-14\common"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../modules"/>
@@ -250,7 +249,7 @@
   <JUCEOPTIONS JUCE_WASAPI="1" JUCE_DIRECTSOUND="1" JUCE_ALSA="1" JUCE_USE_FLAC="0"
                JUCE_USE_OGGVORBIS="0" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
                JUCE_USE_CAMERA="0" JUCE_PLUGINHOST_AU="1" JUCE_WEB_BROWSER="0"
-               JUCE_PLUGINHOST_VST3="0" JUCE_PLUGINHOST_LADSPA="0" JUCE_PLUGINHOST_LV2="1" JUCE_PLUGINHOST_VST="1" JUCE_ASIO="1" JUCE_WASAPI_EXCLUSIVE="1"/>
+               JUCE_PLUGINHOST_VST3="0" JUCE_PLUGINHOST_LADSPA="0" JUCE_PLUGINHOST_LV2="0" JUCE_PLUGINHOST_VST="1" JUCE_ASIO="1" JUCE_WASAPI_EXCLUSIVE="1"/>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1"/>
     <MODULE id="juce_audio_devices" showAllCode="1" useGlobalPath="0"/>
