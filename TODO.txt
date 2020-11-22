@@ -1,7 +1,7 @@
-Bug - Rename performance doesnt update in song
-
 Future
 ~~~~~~
+Triton - Patch names (Extract from dll)
+
 Integrate for Access database with edit?
 Implement right click menu item "Delete rack"
 Rename rack
@@ -10,7 +10,7 @@ Handle missing devices
 Implement scoops / falls for disco strings
 Jupiter 8
 Support JV1080 - script presses button and saves out all patch states (This would give me a lot of new sounds)
-Triton - Patch names (Extract from dll)
+
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
