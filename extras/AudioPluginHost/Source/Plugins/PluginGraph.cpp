@@ -401,7 +401,7 @@ void PluginGraph::setupPerformer()
 		String errorMessage;
         auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
-		if (pd.name == "TRITON")
+		if (rack.PluginName == "TRITON")
 		{
 			auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
 			MemoryBlock memblock;
@@ -439,6 +439,53 @@ void PluginGraph::setupPerformer()
 			}
 		}
 		
+
+        int headerSize = 0;
+        String dir;
+        vector<string> banks;
+        int patches = 128;
+        if (rack.PluginName == "JV-1080(VST2 64bit)")
+        {
+            headerSize = 25;
+            dir = "JV-1080";
+            banks.push_back("PR-A");
+            banks.push_back("PR-B");
+            banks.push_back("PR-C");
+            banks.push_back("PR-D");
+            banks.push_back("PR-E");
+        }
+        if (rack.PluginName == "JUPITER-8(VST2 64bit)")
+        {
+            headerSize = 22;
+            dir = "JUPITER-8";
+            banks.push_back("1 Preset");
+            banks.push_back("Jupiter-8Techno");
+            patches = 64;
+        }
+
+        if (headerSize)
+        {
+            rack.m_overridePatches.resize(banks.size());
+            for (int b = 0; b < rack.m_overridePatches.size(); ++b)
+            {
+                auto input = File(String("C:\\ProgramData\\Roland Cloud\\")+ dir +"\\" + banks [b]+".bin").createInputStream();
+                MemoryBlock memblock;
+                input->readIntoMemoryBlock(memblock);
+
+                char* ptr = (char*)memblock.getData() + headerSize;
+
+                for (int p = 0; p < patches; ++p)
+                {
+                    String name = ptr;
+
+                    name = name.upToFirstOccurrenceOf("\x1", false, false);
+                        
+                    rack.m_overridePatches[b].push_back(name.trimEnd().toStdString());
+                    ptr += (memblock.getSize() - headerSize) / patches;
+                }
+            }
+        }
+
         if (auto processorPtr = processor.get())
         {
 			if (rack.InitialState.size())
