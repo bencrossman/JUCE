@@ -16,6 +16,7 @@ public:
     string Name;
     string PluginName;
     string InitialState;
+	vector<vector<string>> m_overridePatches;
     void *m_node = NULL;
     void *m_gainNode = NULL;
     void *m_midiFilterNode = NULL;
