@@ -65,6 +65,7 @@ public:
     static void SetTempo(float tempo) { m_tempo = tempo; }
     void handleCommandMessage(int id) override;
     enum {CommandUpdateProgramList = 1, CommandBypass=2};
+    void SendPresetStateData();
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
