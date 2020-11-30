@@ -74,6 +74,7 @@
             <Song ID="1499851816" />
             <Song ID="1467102654" />
             <Song ID="1403592803" />
+            <Song ID="-1486277595" />
             <Song ID="1388958306" />
             <Song ID="-1687672551" />
             <Song ID="1309324409" />
@@ -90,7 +91,6 @@
             <Song ID="-1946182156" />
             <Song ID="1738326295" />
             <Song ID="-155673966" />
-            <Song ID="-1486277595" />
             <Song ID="-1401739690" />
             <Song ID="-1893425986" />
             <Song ID="327771712" />
@@ -1042,6 +1042,7 @@
         <Performance ID="211262094" Name="Dumb things|">
             <Zone DeviceID="1555279137" Bank="1" Program="22" Volume="1" LowKey="60"></Zone>
             <Zone DeviceID="-1202024641" Bank="1" Program="45" Volume="6" Transpose="24" HighKey="59"></Zone>
+            <Zone DeviceID="-985547765" Bank="1" Program="115" Volume="12" LowKey="60"></Zone>
         </Performance>
         <Performance ID="1281826436" Name="Echo Beach|">
             <Zone DeviceID="1555279137" Program="22" Transpose="-24" LowKey="72"></Zone>
@@ -1427,6 +1428,7 @@
         <Performance ID="1102019116" Name="Piano+Strings+RockOrgan">
             <Zone DeviceID="1555279137" Bank="7" Program="16" Volume="1" Transpose="12"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-5" Transpose="12"></Zone>
+            <Zone DeviceID="-985547765" Program="4"></Zone>
         </Performance>
         <Performance ID="1590077094" Name="Piano+Strings+Trumpets|">
             <Zone DeviceID="627145948" Program="4"></Zone>
@@ -1509,16 +1511,18 @@
         </Performance>
         <Performance ID="393417845" Name="Rebel Yell|">
             <Zone DeviceID="627145948" Program="4" Volume="-5" Transpose="36" HighKey="35"></Zone>
-            <Zone DeviceID="1555279137" Program="31" Transpose="36" HighKey="35"></Zone>
+            <Zone DeviceID="1555279137" Bank="20" Program="31" Transpose="12" LowKey="36" HighKey="54"></Zone>
             <Zone DeviceID="-1973686393" Program="5" Volume="-1" LowKey="72" HighKey="92"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="55" HighKey="71"></Zone>
             <Zone DeviceID="522416168" Program="82" Transpose="-24" LowKey="93"></Zone>
+            <Zone DeviceID="-985547765" Program="41" Volume="12" Transpose="36" HighKey="35"></Zone>
         </Performance>
         <Performance ID="-347719044" Name="Riding on the Horses|">
             <Zone DeviceID="627145948" Program="4" Transpose="-12" LowKey="48" HighKey="99"></Zone>
             <Zone DeviceID="1555279137" Bank="3" Program="37" Transpose="36" LowKey="22" HighKey="30"></Zone>
             <Zone DeviceID="-2048222834" Program="29" Volume="-4"></Zone>
             <Zone DeviceID="-1202024641" Program="17" LowKey="100"></Zone>
+            <Zone DeviceID="-985547765" Program="86" Volume="12" Transpose="24" LowKey="31" HighKey="47"></Zone>
         </Performance>
         <Performance ID="-1246458370" Name="Roades">
             <Zone DeviceID="1555279137" Bank="21" Program="11" Volume="-3"></Zone>
@@ -1723,9 +1727,10 @@
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Transpose="12" LowKey="42" HighKey="71"></Zone>
         </Performance>
         <Performance ID="-393714637" Name="Valerie|">
-            <Zone DeviceID="1555279137" Bank="30" Program="0" Transpose="-12" LowKey="60" HighKey="100"></Zone>
+            <Zone DeviceID="-985547765" Bank="1" Program="126" Volume="12" Transpose="-12" LowKey="60" HighKey="100"></Zone>
             <Zone DeviceID="-2048222834" Program="20" NoteMode="4"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="36" HighKey="59"></Zone>
+            <Zone DeviceID="1555279137" Program="45" Volume="12" NoteMode="4" Transpose="-36" LowKey="101"></Zone>
         </Performance>
         <Performance ID="-230307805" Name="Walk Like A Egyptian|">
             <Zone DeviceID="1024611825" Program="15" Transpose="24" LowKey="23" HighKey="47"></Zone>
