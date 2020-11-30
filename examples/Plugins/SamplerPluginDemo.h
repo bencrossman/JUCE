@@ -2118,6 +2118,8 @@ public:
             inputStream->readIntoMemoryBlock (mb);
             readerFactory = std::make_unique<MemoryAudioFormatReaderFactory> (std::move (mb));
         }
+        else
+            return;
 
         if (readerFactory != nullptr)
         {
