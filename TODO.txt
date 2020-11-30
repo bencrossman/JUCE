@@ -1,10 +1,22 @@
-Compress bin files and check in?
+Capitalize song names?
+Decide what do do about songs in non original keys.
+When clicking setlist, select current song
+Don't send patch if last set (for JV1080)
+Check for duplicate ID's
 
+Next cover band
+~~~~~~~~~~~~~~~
 Integrate for Access database with edit?
+Implement scoops / falls for disco strings
+
+Next time rack removed
+~~~~~~~~~~~~~~~~~~~~~~
 Implement right click menu item "Delete rack"
+
+If releaseed
+~~~~~~~~~~~~
 Rename rack
 Reorder racks
-Implement scoops / falls for disco strings
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
