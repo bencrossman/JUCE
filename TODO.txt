@@ -1,8 +1,5 @@
 Capitalize song names?
 Decide what do do about songs in non original keys.
-When clicking setlist, select current song
-Don't send patch if last set (for JV1080)
-Check for duplicate ID's
 
 Next cover band
 ~~~~~~~~~~~~~~~
