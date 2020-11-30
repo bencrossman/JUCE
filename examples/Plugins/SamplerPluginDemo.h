@@ -2112,6 +2112,8 @@ public:
             inputStream->readIntoMemoryBlock (mb);
             readerFactory.reset (new MemoryAudioFormatReaderFactory (mb.getData(), mb.getSize()));
         }
+        else
+            return;
 
         // Set up initial sample, which we load from a binary resource
         AudioFormatManager manager;
