@@ -1,10 +1,26 @@
+Stress test and check all sounds
+
 Capitalize song names?
 Decide what do do about songs in non original keys.
-Dual M1's!!
-
 
 Next cover band
 ~~~~~~~~~~~~~~~
+2nd M1's:
+-Another brick
+-Billy Jean
+-Cotton Eyed
+-Dancing in the dark
+-Hip to be square-sax boost
+-Hotel California-lead guitar
+-I'm outta love-extra epiano layer
+-Land downunder-extra flute layer
+-Living on a prayer-ArcoStrings
+-Never tear us apart-sax boost
+-Uptown funk-brass
+-Unwell-flute high? showing blank bank
+-With or without you-softstrings
+-Wouldn't it be good-SynBrass layer
+
 Integrate for Access database with edit?
 Implement scoops / falls for disco strings
 
