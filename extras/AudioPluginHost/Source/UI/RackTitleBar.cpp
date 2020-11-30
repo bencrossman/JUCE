@@ -270,7 +270,7 @@ void RackTitleBar::sliderValueChanged (juce::Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == m_tempo.get())
     {
         //[UserSliderCode_m_tempo] -- add your slider handling code here..
-		m_onSetTempo(m_tempo->getValue());
+		m_onSetTempo((int)m_tempo->getValue());
         //[/UserSliderCode_m_tempo]
     }
 

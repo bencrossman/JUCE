@@ -171,6 +171,7 @@ public:
 	void SetData(Performer *performer);
 	Performer *m_performer = nullptr;
 	std::function<void(int,PerformanceType *)> m_onUsePerformance;
+	virtual void visibilityChanged();
 	//[/UserMethods]
 
     void paint (Graphics& g) override;
