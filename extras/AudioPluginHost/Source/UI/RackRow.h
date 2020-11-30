@@ -100,7 +100,8 @@ private:
     float m_arpeggiatorTimer;
     static float m_tempo;
     bool m_lastZoneHadOverrideState = false;
-	AudioProcessorGraph::Node* m_midiFilterNode = nullptr; // didnt want to hold this but had to
+    String m_lastSendPresetStateDataFilename;
+    AudioProcessorGraph::Node* m_midiFilterNode = nullptr; // didnt want to hold this but had to
     //[/UserVariables]
 
     //==============================================================================

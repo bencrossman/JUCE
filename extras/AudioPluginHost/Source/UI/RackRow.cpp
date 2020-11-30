@@ -825,9 +825,11 @@ void RackRow::SendPresetStateData()
 {
     if (m_current->Device->PluginName == "JV-1080(VST2 64bit)" || m_current->Device->PluginName == "JUPITER-8(VST2 64bit)")
     {
-        auto input = File(File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\" + m_current->Device->PluginName + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program)).createInputStream();
-        if (input.get())
+        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\" + m_current->Device->PluginName + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
+        auto input = File(sendPresetStateDataFilename).createInputStream();
+        if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)
         {
+            m_lastSendPresetStateDataFilename = sendPresetStateDataFilename;
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
