@@ -453,7 +453,7 @@
             <Performance ID="325567451" />
         </Song>
         <Song ID="-998658640" Name="I was born to love you">
-            <Performance ID="1957098501" />
+            <Performance ID="1957098502" />
         </Song>
         <Song ID="-1508606755" Name="I will survive">
             <Performance ID="325567451" />
@@ -727,7 +727,7 @@
         </Song>
         <Song ID="-584579934" Name="Somebody To Love">
             <Performance ID="709579329" />
-            <Performance ID="-1893591430" />
+            <Performance ID="-1893591431" />
             <Performance ID="709579329" />
         </Song>
         <Song ID="737328479" Name="Stand By Me">
@@ -1225,7 +1225,7 @@
             <Zone DeviceID="1555279137" Bank="7" Program="43" Volume="7"></Zone>
             <Zone DeviceID="-1973686393" Program="35" Volume="-8"></Zone>
         </Performance>
-        <Performance ID="1957098501" Name="I was born to love you|">
+        <Performance ID="1957098502" Name="I was born to love you|">
             <Zone DeviceID="627145948" Program="4" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="23" HighKey="59"></Zone>
             <Zone DeviceID="-2048222834" Program="14"></Zone>
@@ -1358,7 +1358,7 @@
         <Performance ID="1012738439" Name="Now I&apos;m here|Magic Organ">
             <Zone DeviceID="1555279137" Program="70"></Zone>
         </Performance>
-        <Performance ID="-1893591430" Name="Old Organ">
+        <Performance ID="-1893591431" Name="Old Organ">
             <Zone DeviceID="1024611825" Program="0" Volume="-6" Transpose="12"></Zone>
         </Performance>
         <Performance ID="1293133469" Name="One Vision|">

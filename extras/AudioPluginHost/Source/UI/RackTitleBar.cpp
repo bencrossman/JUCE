@@ -283,7 +283,9 @@ void RackTitleBar::sliderValueChanged (juce::Slider* sliderThatWasMoved)
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void RackTitleBar::Assign(Song *song, PerformanceType *performance)
 {
-    m_performanceName->setText(performance->Name, false);
+    String performanceName = performance->Name;
+    performanceName = performanceName.fromLastOccurrenceOf("|",false,false);
+    m_performanceName->setText(performanceName, false);
 	m_tempo->setValue(performance->Tempo);
     m_songName->setText(song ? song->Name : "NA", false);
 
