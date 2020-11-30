@@ -782,8 +782,10 @@ void RackRow::SetSoloMode(bool mode)
 {
 	m_soloMode = mode;
 	// Do this here again. Can't rely on Toggle because only works if changed
-	((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
-	((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+    if (m_current->Device->m_node)
+	    ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+    if (m_current->Device->m_gainNode)
+	    ((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 	//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 }
 
