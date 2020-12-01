@@ -401,45 +401,6 @@ void PluginGraph::setupPerformer()
 		String errorMessage;
         auto processor = formatManager.createPluginInstance(pd, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
-		if (rack.PluginName == "TRITON")
-		{
-			auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
-			MemoryBlock memblock;
-			input->readIntoMemoryBlock(memblock);
-			
-			char *ptr = (char*)memblock.getData();
-			const char *firstPatch = "Noisy Stabber";
-			int firstPatchLen = (int)strlen(firstPatch);
-			char *endPtr = (char*)memblock.getData() + memblock.getSize() - strlen(firstPatch) - 1;
-			int bankRemap[] = {0,1,2,3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8,9,10,11,12,13,14,15,16,-1,-1,-1,-1,-1,-1,-1,32,33,34,35};
-			int banks = sizeof(bankRemap) / sizeof(bankRemap[0]);
-			while (ptr < endPtr)
-			{
-				if (memcmp(ptr, firstPatch, firstPatchLen) == 0)
-				{
-					rack.m_overridePatches.resize(banks);
-					for (int b = 0; b < banks; ++b)
-					{
-						if (bankRemap[b] == -1)
-						{
-							ptr += 22 * 128;
-							continue;
-
-						}
-						for (int p = 0; p < 128; ++p)
-						{
-							String name = ptr;						
-							rack.m_overridePatches[bankRemap[b]].push_back(name.trimEnd().toStdString());
-							ptr += 22;
-						}
-					}
-					break;
-				}
-				ptr++;
-			}
-		}
-		
-
         int headerSize = 0;
         String dir;
         vector<string> banks;
@@ -488,6 +449,46 @@ void PluginGraph::setupPerformer()
 
         if (auto processorPtr = processor.get())
         {
+
+            if (rack.PluginName == "TRITON")
+            {
+                auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
+                MemoryBlock memblock;
+                input->readIntoMemoryBlock(memblock);
+
+                char* ptr = (char*)memblock.getData();
+                const char* firstPatch = "Noisy Stabber";
+                int firstPatchLen = (int)strlen(firstPatch);
+                char* endPtr = (char*)memblock.getData() + memblock.getSize() - strlen(firstPatch) - 1;
+                int bankRemap[] = { 0,1,2,3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8,9,10,11,12,13,14,15,16,-1,-1,-1,-1,-1,-1,-1,32,33,34,35 };
+                int numBanks = sizeof(bankRemap) / sizeof(bankRemap[0]);
+                while (ptr < endPtr)
+                {
+                    if (memcmp(ptr, firstPatch, firstPatchLen) == 0)
+                    {
+                        rack.m_overridePatches.resize(numBanks);
+                        for (int b = 0; b < numBanks; ++b)
+                        {
+                            if (bankRemap[b] == -1)
+                            {
+                                ptr += 22 * 128;
+                                continue;
+
+                            }
+                            for (int p = 0; p < 128; ++p)
+                            {
+                                String name = ptr;
+                                rack.m_overridePatches[bankRemap[b]].push_back(name.trimEnd().toStdString());
+                                ptr += 22;
+                            }
+                        }
+                        break;
+                    }
+                    ptr++;
+                }
+            }
+
+
 			if (rack.InitialState.size())
 				SendChunkString(processorPtr, rack.InitialState);
 			
