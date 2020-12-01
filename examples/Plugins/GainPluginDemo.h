@@ -59,7 +59,7 @@ public:
         : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::stereo())
                                            .withOutput ("Output", AudioChannelSet::stereo()))
     {
-        addParameter (gain = new AudioParameterFloat ("gain", "Gain", 0.0f, 1.0f, 1.0f));
+        addParameter (gain = new AudioParameterFloat ("gain", "Gain", 0.0f, 1.0f, 0.25f));
 		addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
 	}
 
@@ -69,7 +69,7 @@ public:
 
     void processBlock (AudioBuffer<float>& buffer, MidiBuffer&) override
     {
-        buffer.applyGain (*gain);
+        buffer.applyGain (*gain * 4);
 
 		if (m_mixDownMode->get() == 0.5f)
 		{
@@ -85,7 +85,7 @@ public:
 
     void processBlock (AudioBuffer<double>& buffer, MidiBuffer&) override
     {
-        buffer.applyGain ((float) *gain);
+        buffer.applyGain ((float) *gain * 4);
 
 		if (m_mixDownMode->get() == 0.5f)
 		{

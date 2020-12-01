@@ -803,7 +803,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             //}
             else if (midi_message.isControllerOfType(0x09))
             {
-				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue(((float)midi_message.getControllerValue()) / 127.f);
+				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue((((float)midi_message.getControllerValue()) / 127.f) * 0.25f);
             }
             else if (midi_message.isProgramChange())
             {
