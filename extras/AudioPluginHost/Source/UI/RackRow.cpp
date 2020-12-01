@@ -70,7 +70,7 @@ RackRow::RackRow ()
 
     m_volume.reset (new juce::Slider (juce::String()));
     addAndMakeVisible (m_volume.get());
-    m_volume->setRange (-110, 12, 0.5);
+    m_volume->setRange (-100, 12, 0.5);
     m_volume->setSliderStyle (juce::Slider::LinearBar);
     m_volume->setTextBoxStyle (juce::Slider::TextBoxBelow, false, 80, 20);
     m_volume->addListener (this);
@@ -313,7 +313,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
         static int num = -1;
         int res = 1;
         if (num >= 0)*/
-        
+
         if (modifiers.isRightButtonDown())
         {
             PopupMenu menu;
@@ -373,7 +373,7 @@ void RackRow::sliderValueChanged (juce::Slider* sliderThatWasMoved)
     {
         //[UserSliderCode_m_volume] -- add your slider handling code here..
         m_current->Volume = (float)sliderThatWasMoved->getValue();
-		((AudioProcessorGraph::Node *)(m_current->Device->m_gainNode))->getProcessor()->getParameters()[0]->setValue(Decibels::decibelsToGain(m_current->Volume));
+		((AudioProcessorGraph::Node *)(m_current->Device->m_gainNode))->getProcessor()->getParameters()[0]->setValue(Decibels::decibelsToGain(m_current->Volume) * 0.25f);
         //[/UserSliderCode_m_volume]
     }
 
@@ -873,7 +873,7 @@ BEGIN_JUCER_METADATA
                 explicitFocusOrder="0" pos="160 14 72 24" buttonText="Mute" connectedEdges="0"
                 needsCallback="1" radioGroupId="0" state="0"/>
   <SLIDER name="" id="a0e2bc5a61933c6d" memberName="m_volume" virtualName=""
-          explicitFocusOrder="0" pos="96 43 128 24" min="-110.0" max="12.0"
+          explicitFocusOrder="0" pos="96 43 128 24" min="-100.0" max="12.0"
           int="0.5" style="LinearBar" textBoxPos="TextBoxBelow" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <COMBOBOX name="" id="90d63ca95a92a112" memberName="m_bank" virtualName=""
