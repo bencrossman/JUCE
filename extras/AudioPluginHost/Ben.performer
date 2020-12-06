@@ -1347,7 +1347,7 @@
             <Zone DeviceID="-1202024641" Bank="5" Program="36" Volume="12" LowKey="48"></Zone>
         </Performance>
         <Performance ID="146441954" Name="Mr Brightside|">
-            <Zone DeviceID="-841590045" Program="13"></Zone>
+            <Zone DeviceID="-841590045" Program="13" Transpose="1"></Zone>
         </Performance>
         <Performance ID="-1777169755" Name="Music|">
             <Zone DeviceID="546031377" Program="1"></Zone>
@@ -1618,9 +1618,9 @@
             <Zone DeviceID="-2048222834" Program="20" Volume="6" NoteMode="4" Transpose="1" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-58432065" Name="Sweet child of mine|">
-            <Zone DeviceID="627145948" Program="4" Transpose="-1"></Zone>
-            <Zone DeviceID="1555279137" Program="64" Transpose="11"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-1" Transpose="23"></Zone>
+            <Zone DeviceID="627145948" Program="4"></Zone>
+            <Zone DeviceID="1555279137" Program="64" Transpose="12"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-1" Transpose="24"></Zone>
         </Performance>
         <Performance ID="-1506893963" Name="Swell Brass/Strings">
             <Zone DeviceID="-2048222834" Program="36" NoteMode="4" Transpose="24" HighKey="59"></Zone>
