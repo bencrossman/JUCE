@@ -1,5 +1,3 @@
-Midi output delay?
-
 Capitalize song names?
 Decide what do do about songs in non original keys.
 
@@ -26,7 +24,7 @@ Implement scoops / falls for disco strings
 
 Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
-Implement right click menu item "Delete rack"
+Implement right click menu item "Delete rack", delete all zones
 
 If releaseed
 ~~~~~~~~~~~~
