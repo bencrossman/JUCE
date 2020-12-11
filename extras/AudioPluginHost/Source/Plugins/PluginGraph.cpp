@@ -768,6 +768,13 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     }
     samples;
     sampleRate;
+
+    if (m_manualMidi > 0)
+    {
+        midiBuffer.addEvent(MidiMessage::controllerEvent(1, m_manualMidi, 127),0);
+        m_manualMidi = 0;
+    }
+
     if (!midiBuffer.isEmpty())
     {
         MidiBuffer output;
@@ -842,9 +849,10 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 						m_performer.m_currentPerformanceIndex = 0;
                     m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
                     UpdateCurrentRouting();
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
                 }
                 else
-                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
 
             }
             else if (midi_message.isControllerOfType(116)) // forward
@@ -854,9 +862,10 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     m_performer.m_currentPerformanceIndex++;
                     m_pendingPerformanceIndex = m_performer.m_currentPerformanceIndex;
                     UpdateCurrentRouting();
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
                 }
                 else
-                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
+                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
 
             }
             else if (midi_message.isControllerOfType(115))
