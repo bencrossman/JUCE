@@ -1206,18 +1206,12 @@ void GraphEditorPanel::init()
 
 	((RackTitleBar*)m_rackTopUI.get())->m_onPrevPerformance = [this]()
 	{
-		auto performer = graph.GetPerformer();
-		performer->m_currentPerformanceIndex--;
-		if (performer->m_currentPerformanceIndex < 0)
-			performer->m_currentPerformanceIndex = 0;
-		SetPerformance();
+        graph.PrevPerformance();
 	};
 
 	((RackTitleBar*)m_rackTopUI.get())->m_onNextPerformance = [this]()
 	{
-		auto performer = graph.GetPerformer();
-		performer->m_currentPerformanceIndex++;
-		SetPerformance();
+        graph.NextPerformance();
 	};
 
 	((RackTitleBar*)m_rackTopUI.get())->m_onSetTempo = [this](int tempo)
