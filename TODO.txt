@@ -1,5 +1,6 @@
 Capitalize song names?
 Decide what do do about songs in non original keys.
+When display non setlist song, need better titles
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -7,13 +8,10 @@ Next cover band
 Integrate for Access database with edit? (library linked already)
 Implement scoops / falls for disco strings
 
-Bug where GraphEditorPanel::changeListenerCallback sometimes fires randomly and on save. Can't just check for changed. OnLoad fires multiple times and if added support for non setlist performances then would just lose local changes
-
-Bug where M1 bank is fine but shows patch list from previous (Wavestation at least)
-
-Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted)
-
-Bug - switching back to setlist if non setlist performance selected
+Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly and on save. Can't just check for changed. OnLoad fires multiple times and if added support for non setlist performances then would just lose local changes
+Creator bug : Where M1 bank is fine but shows patch list from previous (Wavestation at least)
+Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted)
+Creator bug - switching back to setlist view if non setlist performance selected
 
 Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
