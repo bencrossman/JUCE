@@ -3,24 +3,17 @@ Decide what do do about songs in non original keys.
 
 Next cover band
 ~~~~~~~~~~~~~~~
-2nd M1's:
--Another brick
--Billy Jean
--Cotton Eyed
--Dancing in the dark
--Hip to be square-sax boost
--Hotel California-lead guitar
--I'm outta love-extra epiano layer
--Land downunder-extra flute layer
--Living on a prayer-ArcoStrings
--Never tear us apart-sax boost
--Uptown funk-brass
--Unwell-flute high? showing blank bank
--With or without you-softstrings
--Wouldn't it be good-SynBrass layer
 
 Integrate for Access database with edit? (library linked already)
 Implement scoops / falls for disco strings
+
+Bug where GraphEditorPanel::changeListenerCallback sometimes fires randomly and on save. Can't just check for changed. OnLoad fires multiple times and if added support for non setlist performances then would just lose local changes
+
+Bug where M1 bank is fine but shows patch list from previous (Wavestation at least)
+
+Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted)
+
+Bug - switching back to setlist if non setlist performance selected
 
 Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
