@@ -5,6 +5,14 @@ When display non setlist song, need better titles
 Next cover band
 ~~~~~~~~~~~~~~~
 
+Police - 1 song - King Of Pain
+Dire Straits - 4 songs
+John Farnham(Still loads in Forte) - 5 songs, Voice already done
+Pink Floyd - 11 songs, Brick already done
+Bon Jovi - 15 songs, Living Prayer already done
+Pink(Still loads in Forte) - 20 performances, 
+Madonna - 23 performances
+
 Integrate for Access database with edit? (library linked already)
 Implement scoops / falls for disco strings
 
