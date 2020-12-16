@@ -1297,15 +1297,11 @@ void GraphEditorPanel::init()
 	((SetlistManager*)m_setlistUI.get())->m_onUsePerformance = [this](int currentPerformanceIndex, PerformanceType *performance)
 	{
 		auto performer = graph.GetPerformer();
-		if (currentPerformanceIndex != -1)
-		{
-			performer->m_currentPerformanceIndex = currentPerformanceIndex;
+        performer->m_currentPerformanceIndex = currentPerformanceIndex;
+        if (currentPerformanceIndex != -1)
 			SetPerformance();
-		}
 		else
-		{
 			SetPerformance(performance);
-		}
 	};
 }
 

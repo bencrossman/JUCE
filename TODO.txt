@@ -19,7 +19,6 @@ Implement scoops / falls for disco strings
 Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly and on save. Can't just check for changed. OnLoad fires multiple times and if added support for non setlist performances then would just lose local changes
 Creator bug : Where M1 bank is fine but shows patch list from previous (Wavestation at least)
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted)
-Creator bug - switching back to setlist view if non setlist performance selected
 
 Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
