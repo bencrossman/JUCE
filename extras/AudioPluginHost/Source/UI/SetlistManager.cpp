@@ -949,19 +949,20 @@ void SetlistManager::SetData(Performer *performer)
 void SetlistManager::visibilityChanged()
 {
 	Component::visibilityChanged();
-	if (isVisible())
-	{
-		PerformanceType* performance = NULL;
-		Song* song = NULL;
-		m_performer->GetPerformanceByIndex(performance, song, m_performer->m_currentPerformanceIndex);
+	if (isVisible() && m_performer->m_currentPerformanceIndex != -1)
+		{
+			PerformanceType* performance = NULL;
+			Song* song = NULL;
+			m_performer->GetPerformanceByIndex(performance, song, m_performer->m_currentPerformanceIndex);
 
-		for (int i = 0; i < m_setlistListModel->m_selectedSetlist->Song.size(); ++i)
-			if (m_setlistListModel->m_selectedSetlist->Song[i].ID == song->ID)
-				m_setlist->selectRow(i);
+			for (int i = 0; i < m_setlistListModel->m_selectedSetlist->Song.size(); ++i)
+				if (m_setlistListModel->m_selectedSetlist->Song[i].ID == song->ID)
+					m_setlist->selectRow(i);
 
-		for (int i = 0; i < m_selectedSongListModel->m_selectedSong->Performance.size(); ++i)
-			if (m_selectedSongListModel->m_selectedSong->Performance[i].ID == performance->ID)
-				m_performancesInSongList->selectRow(i);
+			for (int i = 0; i < m_selectedSongListModel->m_selectedSong->Performance.size(); ++i)
+				if (m_selectedSongListModel->m_selectedSong->Performance[i].ID == performance->ID)
+					m_performancesInSongList->selectRow(i);
+		}
 	}
 }
 //[/MiscUserCode]
