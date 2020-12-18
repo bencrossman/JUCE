@@ -632,16 +632,16 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             midiBuffer.addEvent(MidiMessage(0xB0, 0x20, m_current->Bank), 0);
         }
     }
+    else if (m_pendingProgram) // need bank to change first
+    {
+        m_pendingProgram = false;
+        midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
+    }
     else if (m_pendingProgramNames) // need bank to change first
     {
         m_pendingProgramNames = false;
         if (!m_manualPatchNames)
             postCommandMessage(CommandUpdateProgramList);
-    }
-    else if (m_pendingProgram) // need bank to change first
-    {
-        m_pendingProgram = false;
-        midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
     }
     else if (m_pendingBypass) // do this last so nothing is buffered up. Streamer should be fine since should be disabled(0)
     {
