@@ -278,8 +278,8 @@ public:
                                    ->getFile().getSiblingFile ("RecentlyCrashedPluginsList");
 
         setContentOwned (new CustomPluginListComponent (pluginFormatManager,
-                                                        owner.knownPluginList,
-                                                        deadMansPedalFile,
+                                                  owner.knownPluginList,
+                                                  deadMansPedalFile,
                                                         getAppProperties().getUserSettings(),
                                                         true), true);
 
@@ -444,11 +444,11 @@ void MainHostWindow::tryToQuitApplication()
     {
         auto releaseAndQuit = [this]
         {
-            // Some plug-ins do not want [NSApp stop] to be called
-            // before the plug-ins are not deallocated.
-            graphHolder->releaseGraph();
+        // Some plug-ins do not want [NSApp stop] to be called
+        // before the plug-ins are not deallocated.
+        graphHolder->releaseGraph();
 
-            JUCEApplication::quit();
+        JUCEApplication::quit();
         };
 
        #if JUCE_ANDROID || JUCE_IOS
@@ -606,7 +606,7 @@ void MainHostWindow::menuItemSelected (int menuItemID, int /*topLevelMenuIndex*/
                     if (r == FileBasedDocument::savedOk)
                         parent->graphHolder->graph->loadFrom (recentFiles.getFile (menuItemID - 100), true);
                 });
-            }
+    }
         }
     }
    #endif
@@ -880,12 +880,18 @@ bool MainHostWindow::perform (const InvocationInfo& info)
 
     case CommandIDs::save:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)
+        {
+            graphHolder->graphPanel->m_updateComponents = false;
             graphHolder->graph->saveAsync (true, true, nullptr);
+        }
         break;
 
     case CommandIDs::saveAs:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)
+        {
+            graphHolder->graphPanel->m_updateComponents = false;
             graphHolder->graph->saveAsAsync ({}, true, true, true, nullptr);
+        }
         break;
    #endif
 
@@ -906,9 +912,9 @@ bool MainHostWindow::perform (const InvocationInfo& info)
             auto newIsDoublePrecision = ! isDoublePrecisionProcessingEnabled();
             props->setValue ("doublePrecisionProcessing", var (newIsDoublePrecision));
 
-            ApplicationCommandInfo cmdInfo (info.commandID);
-            updatePrecisionMenuItem (cmdInfo);
-            menuItemsChanged();
+                ApplicationCommandInfo cmdInfo (info.commandID);
+                updatePrecisionMenuItem (cmdInfo);
+                menuItemsChanged();
 
             if (graphHolder != nullptr)
                 graphHolder->setDoublePrecision (newIsDoublePrecision);
@@ -1022,7 +1028,7 @@ void MainHostWindow::filesDropped (const StringArray& files, int x, int y)
                     if (r == FileBasedDocument::savedOk)
                         g->loadFrom (firstFile, true);
                 });
-            }
+        }
         }
         else
        #endif
