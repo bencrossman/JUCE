@@ -1470,7 +1470,7 @@
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="61"></Zone>
             <Zone DeviceID="1555279137" Bank="12" Program="5" LowKey="62"></Zone>
         </Performance>
-        <Performance ID="2055539644" Name="Play that funky music in Eb|">
+        <Performance ID="2055539644" Name="Play that funky music|">
             <Zone DeviceID="1555279137" Bank="1" Program="68" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-2048222834" Program="20" NoteMode="4" LowKey="60"></Zone>
         </Performance>

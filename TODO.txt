@@ -1,10 +1,5 @@
-Capitalize song names?
-Decide what do do about songs in non original keys.
-When display non setlist song, need better titles
-
 Next cover band
 ~~~~~~~~~~~~~~~
-
 Police - 1 song - King Of Pain
 Dire Straits - 4 songs
 John Farnham(Still loads in Forte) - 5 songs, Voice already done
@@ -16,8 +11,8 @@ Madonna - 23 performances
 Integrate for Access database with edit? (library linked already)
 Implement scoops / falls for disco strings
 
-Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly and on save. Can't just check for changed. OnLoad fires multiple times and if added support for non setlist performances then would just lose local changes
-Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted)
+Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there
+Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
 
 Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
