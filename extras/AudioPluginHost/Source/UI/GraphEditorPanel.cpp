@@ -767,6 +767,11 @@ void GraphEditorPanel::updateComponents()
 	// Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
     // both of these are about to be added to in for loop below
 
+    if (!m_updateComponents)
+    {
+        m_updateComponents = true;
+        return;
+    }
 
 	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
 
@@ -1258,7 +1263,9 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
 	if (performance == nullptr)
 		performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex);
     
-	performer->TempPerformance = *performance;
+    // will hit here twice on load from listener.
+    if (performance != nullptr) // if null then probably index is -1 and we just saved so its re-setting
+	    performer->TempPerformance = *performance;
 
     Logger::outputDebugString(String(performer->m_currentPerformanceIndex) + ":" + (song ? song->Name : "NA") + "|" + performer->TempPerformance.Name);
 

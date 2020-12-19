@@ -517,12 +517,18 @@ bool MainHostWindow::perform (const InvocationInfo& info)
 
     case CommandIDs::save:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)
-            graphHolder->graph->save (true, true);
+        {
+            graphHolder->graphPanel->m_updateComponents = false;
+            graphHolder->graph->save(true, true);
+        }
         break;
 
     case CommandIDs::saveAs:
         if (graphHolder != nullptr && graphHolder->graph != nullptr)
-            graphHolder->graph->saveAs (File(), true, true, true);
+        {
+            graphHolder->graphPanel->m_updateComponents = false;
+            graphHolder->graph->saveAs(File(), true, true, true);
+        }
         break;
    #endif
 
