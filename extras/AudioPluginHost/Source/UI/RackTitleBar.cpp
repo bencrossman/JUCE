@@ -284,7 +284,8 @@ void RackTitleBar::sliderValueChanged (juce::Slider* sliderThatWasMoved)
 void RackTitleBar::Assign(Song *song, PerformanceType *performance)
 {
     String performanceName = performance->Name;
-    performanceName = performanceName.fromLastOccurrenceOf("|",false,false);
+    if (song)
+        performanceName = performanceName.fromLastOccurrenceOf("|",false,false);
     m_performanceName->setText(performanceName, false);
 	m_tempo->setValue(performance->Tempo);
     m_songName->setText(song ? song->Name : "NA", false);

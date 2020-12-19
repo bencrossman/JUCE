@@ -58,6 +58,7 @@ public:
 
     //==============================================================================
     PluginGraph& graph;
+    bool m_updateComponents = true;
 
 private:
 
