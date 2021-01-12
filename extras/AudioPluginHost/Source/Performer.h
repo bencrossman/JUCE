@@ -246,6 +246,18 @@ public:
     void Serialize(A& ar)
     {
         AR(Root);
+        if (!ar.IsSaving())
+        {
+            AR(TempPerformance); // fill this with default data
+            TempPerformance.ID = (int)Uuid().hash();
+            TempPerformance.Zone.resize(Root.Racks.Rack.size());
+            for (int i = 0; i < TempPerformance.Zone.size(); ++i)
+            {
+                AR(TempPerformance.Zone[i]);
+                TempPerformance.Zone[i].DeviceID = Root.Racks.Rack[i].ID;
+                TempPerformance.Zone[i].Device = &Root.Racks.Rack[i];
+            }
+        }
     }
 
     PerformerFile Root;

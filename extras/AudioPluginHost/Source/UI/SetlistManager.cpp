@@ -634,6 +634,10 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 		if (m_songList->getSelectedRow() != -1)
 		{
 			auto index = m_setlist->getSelectedRow();
+
+			if (m_setlistListModel->m_selectedSetlist->Song.size() == 0)
+				index = 0;
+
 			if (index != -1)
 			{
 				m_setlistListModel->m_selectedSetlist->Song.insert(m_setlistListModel->m_selectedSetlist->Song.begin() + index, m_performer->Root.Songs.Song[m_songList->getSelectedRow()].ID);
@@ -959,9 +963,12 @@ void SetlistManager::visibilityChanged()
 			if (m_setlistListModel->m_selectedSetlist->Song[i].ID == song->ID)
 				m_setlist->selectRow(i);
 
-		for (int i = 0; i < m_selectedSongListModel->m_selectedSong->Performance.size(); ++i)
-			if (m_selectedSongListModel->m_selectedSong->Performance[i].ID == performance->ID)
-				m_performancesInSongList->selectRow(i);
+		if (m_selectedSongListModel->m_selectedSong)
+		{
+			for (int i = 0; i < m_selectedSongListModel->m_selectedSong->Performance.size(); ++i)
+				if (m_selectedSongListModel->m_selectedSong->Performance[i].ID == performance->ID)
+					m_performancesInSongList->selectRow(i);
+		}
 	}
 }
 //[/MiscUserCode]

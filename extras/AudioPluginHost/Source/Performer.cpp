@@ -283,7 +283,11 @@ int Performer::GetTotalPerformances()
 
 void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song, int index)
 { 
-    index = index % GetTotalPerformances();
+    auto totalPerformances = GetTotalPerformances();
+    if (totalPerformances > 0)
+        index = index % totalPerformances;
+    else
+        index = 0;
     auto &setlist = Root.SetLists.SetList[m_currentSetlistIndex];
     int count=0;
     bool found = false;
