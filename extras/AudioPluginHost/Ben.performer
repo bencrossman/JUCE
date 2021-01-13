@@ -101,7 +101,6 @@
         </SetList>
         <SetList ID="-584882470" Name="Australia Day">
             <Song ID="-519350841" />
-            <Song ID="1539962914" />
             <Song ID="-1946182156" />
             <Song ID="1181829818" />
             <Song ID="-1935234702" />
@@ -334,7 +333,9 @@
         <Song ID="807221933" Name="Fat Bottom Girls">
             <Performance ID="1639720971" />
         </Song>
-        <Song ID="1124825429" Name="Fire Away" />
+        <Song ID="1124825429" Name="Fire Away">
+            <Performance ID="-1893591430" />
+        </Song>
         <Song ID="2079621184" Name="Fire it up">
             <Performance ID="327650012" />
             <Performance ID="2029604362" />
@@ -784,7 +785,10 @@
         <Song ID="1200089613" Name="Tainted love">
             <Performance ID="-150685422" />
         </Song>
-        <Song ID="-519350841" Name="Take Me Back" />
+        <Song ID="-519350841" Name="Take Me Back">
+            <Performance ID="1692821628" />
+            <Performance ID="1688367010" />
+        </Song>
         <Song ID="-1776495401" Name="That&apos;s the way">
             <Performance ID="-895406611" />
             <Performance ID="-868437778" />
@@ -814,7 +818,9 @@
         <Song ID="416566938" Name="Titanium">
             <Performance ID="1800715814" />
         </Song>
-        <Song ID="-1935234702" Name="Torn" />
+        <Song ID="-1935234702" Name="Torn">
+            <Performance ID="1969668934" />
+        </Song>
         <Song ID="-1486070317" Name="Treat Her Right">
             <Performance ID="-335610154" />
         </Song>
@@ -902,7 +908,9 @@
         <Song ID="115731966" Name="You&apos;re the voice">
             <Performance ID="-1754501238" />
         </Song>
-        <Song ID="-1018822127" Name="Youngblood" />
+        <Song ID="-1018822127" Name="Youngblood">
+            <Performance ID="-1594871140" />
+        </Song>
         <Song ID="-878477753" Name="Zombie">
             <Performance ID="325567451" />
         </Song>
@@ -1304,8 +1312,8 @@
         </Performance>
         <Performance ID="137804045" Name="Khe Sahn|">
             <Zone DeviceID="627145948" Program="4" Volume="-1" HighKey="78"></Zone>
-            <Zone DeviceID="1555279137" Bank="1" Program="22" Transpose="-12" LowKey="79"></Zone>
-            <Zone DeviceID="-1202024641" Bank="1" Program="41" Volume="1" Transpose="-12" LowKey="78"></Zone>
+            <Zone DeviceID="1555279137" Bank="1" Program="22" Volume="2" Transpose="-12" LowKey="79"></Zone>
+            <Zone DeviceID="-1202024641" Bank="1" Program="41" Volume="12" Transpose="-12" LowKey="78"></Zone>
         </Performance>
         <Performance ID="-1642673523" Name="Killer Queen|">
             <Zone DeviceID="627145948" Program="4" Volume="-6" LowKey="22"></Zone>
@@ -1677,6 +1685,14 @@
             <Zone DeviceID="522416168" Program="41" Volume="-6" Transpose="-12" LowKey="56"></Zone>
             <Zone DeviceID="-2048222834" Program="31" Volume="-11"></Zone>
         </Performance>
+        <Performance ID="1688367010" Name="Take Me Back|">
+            <Zone DeviceID="-841590045" Program="24" Volume="-6" HighKey="108"></Zone>
+            <Zone DeviceID="-985547765" Program="70" Volume="6"></Zone>
+        </Performance>
+        <Performance ID="1692821628" Name="Take Me Back|Intro">
+            <Zone DeviceID="-841590045" Program="24" Volume="-6" Transpose="12" HighKey="71"></Zone>
+            <Zone DeviceID="522416168" Program="1" Transpose="12" LowKey="72"></Zone>
+        </Performance>
         <Performance ID="942179974" Name="The Great Pretender|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="22"></Zone>
             <Zone DeviceID="546031377" Program="5"></Zone>
@@ -1732,6 +1748,10 @@
         </Performance>
         <Performance ID="-1743114123" Name="Too much love will kill you|">
             <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
+        </Performance>
+        <Performance ID="1969668934" Name="Torn|">
+            <Zone DeviceID="522416168" Program="21" Transpose="12" HighKey="71"></Zone>
+            <Zone DeviceID="1555279137" Program="43" LowKey="72"></Zone>
         </Performance>
         <Performance ID="658942309" Name="Turning Japanese|">
             <Zone DeviceID="1555279137" Bank="3" Program="0" Volume="-7" Transpose="12" HighKey="59"></Zone>
@@ -1844,6 +1864,12 @@
             <Zone DeviceID="1555279137" Bank="1" Program="70" Volume="2" Transpose="-12" LowKey="79"></Zone>
             <Zone DeviceID="522416168" Program="96" Volume="-2" LowKey="79"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="36" HighKey="47"></Zone>
+            <Zone DeviceID="-985547765" Bank="1" Program="96" Volume="12" LowKey="79"></Zone>
+        </Performance>
+        <Performance ID="-1594871140" Name="Youngblood|">
+            <Zone DeviceID="-2048222834" Program="45"></Zone>
+            <Zone DeviceID="-841590045" Program="7" Volume="-6.5" LowKey="60"></Zone>
+            <Zone DeviceID="522416168" Program="103" Transpose="24" LowKey="23" HighKey="59"></Zone>
         </Performance>
         <Performance ID="2039328788" Name="Your my best friend|">
             <Zone DeviceID="-2048222834" Program="10" Volume="-3"></Zone>
