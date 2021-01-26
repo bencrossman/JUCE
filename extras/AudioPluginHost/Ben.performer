@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="-584882470">
+<Root CurrentSetListID="-40733610">
     <SetLists>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
@@ -99,25 +99,7 @@
             <Song ID="-857372096" />
             <Song ID="-878477753" />
         </SetList>
-        <SetList ID="-584882470" Name="Australia Day">
-            <Song ID="-519350841" />
-            <Song ID="-272316000" />
-            <Song ID="-1946182156" />
-            <Song ID="1181829818" />
-            <Song ID="-1935234702" />
-            <Song ID="1309324409" />
-            <Song ID="115731966" />
-            <Song ID="178705268" />
-            <Song ID="1124825429" />
-            <Song ID="1274686534" />
-            <Song ID="-1018822127" />
-            <Song ID="1828933804" />
-            <Song ID="327771712" />
-            <Song ID="1402617184" />
-            <Song ID="-1997789996" />
-            <Song ID="-1456116052" />
-            <Song ID="-1886748225" />
-        </SetList>
+
     </SetLists>
     <Racks>
         <Rack ID="627145948" Name="Piano" PluginName="TruePianos"></Rack>
