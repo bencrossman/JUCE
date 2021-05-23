@@ -540,9 +540,10 @@ void PluginGraph::Import(const char *filename)
 int m_pendingPerformanceIndex = 0;
 int m_pendingSet = 0;
 
+// https://forum.arturia.com/index.php?topic=87454.msg153922#msg153922
 void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
 {
-    for (int m = 0; m<60; ++m)
+    for (int m = 0; m<64; ++m)
     {
         unsigned char mes[10];
         int meslen = 0;
@@ -616,10 +617,34 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         else if (m == 58)
         {
             parameter = 1;
+            control = 0x58; // rewind backup
+            value = 8; // for some reason this mode value instead of 3
+        }
+        else if (m == 59)
+        {
+            parameter = 3;
+            control = 0x58;
+            value = 111;
+        }
+        else if (m == 60)
+        {
+            parameter = 1;
+            control = 0x5a; // forward backup (record)
+            value = 8;
+        }
+        else if (m == 61)
+        {
+            parameter = 3;
+            control = 0x5a;
+            value = 116;
+        }
+        else if (m == 62)
+        {
+            parameter = 1;
             control = 0x59; // stop
             value = 8;
         }
-        else if (m == 59)
+        else if (m == 63)
         {
             parameter = 3;
             control = 0x59;
