@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="-40733610">
+<Root CurrentSetListID="1715665941">
     <SetLists>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
@@ -98,6 +98,31 @@
             <Song ID="-725953381" />
             <Song ID="-857372096" />
             <Song ID="-878477753" />
+        </SetList>
+        <SetList ID="1715665941" Name="Funktastic">
+            <Song ID="-892581515" />
+            <Song ID="-1269189954" />
+            <Song ID="872585702" />
+            <Song ID="-266478303" />
+            <Song ID="-779573588" />
+            <Song ID="-1048111250" />
+            <Song ID="-1486876295" />
+            <Song ID="1549438206" />
+            <Song ID="1738326295" />
+            <Song ID="-1484974504" />
+            <Song ID="-1730762731" />
+            <Song ID="-397923736" />
+            <Song ID="-729704037" />
+            <Song ID="1042026100" />
+            <Song ID="794541357" />
+            <Song ID="1898205208" />
+            <Song ID="-1833124162" />
+            <Song ID="828020921" />
+            <Song ID="-1776495401" />
+            <Song ID="-82432577" />
+            <Song ID="-57815850" />
+            <Song ID="1423344023" />
+            <Song ID="1043913962" />
         </SetList>
     </SetLists>
     <Racks>
@@ -226,6 +251,9 @@
         <Song ID="311697932" Name="Call me">
             <Performance ID="985014735" />
             <Performance ID="522832568" />
+        </Song>
+        <Song ID="-892581515" Name="Car wash">
+            <Performance ID="1270865452" />
         </Song>
         <Song ID="145079410" Name="Celebration">
             <Performance ID="-1862712331" />
@@ -441,6 +469,9 @@
             <Performance ID="-1102562470" />
             <Performance ID="-181299492" />
         </Song>
+        <Song ID="-266478303" Name="I feel good">
+            <Performance ID="-1494844207" />
+        </Song>
         <Song ID="1237489766" Name="I gotta a feeling">
             <Performance ID="-2049211248" />
         </Song>
@@ -506,6 +537,9 @@
         <Song ID="-402915515" Name="Killer Queen">
             <Performance ID="-1642673523" />
         </Song>
+        <Song ID="-1048111250" Name="Kiss">
+            <Performance ID="-1494844207" />
+        </Song>
         <Song ID="1262892447" Name="LA Woman">
             <Performance ID="325567451" />
         </Song>
@@ -514,6 +548,9 @@
         </Song>
         <Song ID="-1702606041" Name="Land downunder">
             <Performance ID="-2066548255" />
+        </Song>
+        <Song ID="1549438206" Name="Le Freak">
+            <Performance ID="-1494844207" />
         </Song>
         <Song ID="-1547752858" Name="Leave me alone">
             <Performance ID="1957098501" />
@@ -560,6 +597,7 @@
         <Song ID="1296753828" Name="Maria">
             <Performance ID="1251944336" />
         </Song>
+        <Song ID="-1730762731" Name="Mercy" />
         <Song ID="2061666411" Name="Message In A Bottle">
             <Performance ID="-1893591430" />
         </Song>
@@ -574,6 +612,9 @@
         </Song>
         <Song ID="-1491130557" Name="Moves Like Jagger">
             <Performance ID="-275725803" />
+        </Song>
+        <Song ID="-397923736" Name="Moving on up">
+            <Performance ID="-335610154" />
         </Song>
         <Song ID="-1401739690" Name="Mr Brightside">
             <Performance ID="146441954" />
@@ -698,11 +739,17 @@
         <Song ID="911396917" Name="Save me">
             <Performance ID="1713728040" />
         </Song>
+        <Song ID="794541357" Name="September">
+            <Performance ID="-1494844207" />
+        </Song>
         <Song ID="-1957313269" Name="Sex on fire">
             <Performance ID="1406338149" />
         </Song>
         <Song ID="-2124553844" Name="Shake your groove thing">
             <Performance ID="-1066488609" />
+        </Song>
+        <Song ID="1898205208" Name="Shakey Ground">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="1180195080" Name="Sharped dressed man">
             <Performance ID="-332746000" />
@@ -724,6 +771,9 @@
         </Song>
         <Song ID="-1496971655" Name="Simply The Best">
             <Performance ID="-5817312" />
+        </Song>
+        <Song ID="-1833124162" Name="Sisters are doing it for themselves">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="476011433" Name="Sk8ter Boy">
             <Performance ID="-979596834" />
@@ -837,6 +887,12 @@
         </Song>
         <Song ID="446556129" Name="Walking on sunshine">
             <Performance ID="643338072" />
+        </Song>
+        <Song ID="1423344023" Name="Wanna Be Starting Something">
+            <Performance ID="-1494844207" />
+        </Song>
+        <Song ID="1043913962" Name="We Are Family">
+            <Performance ID="-1066488609" />
         </Song>
         <Song ID="1908421785" Name="We Are The Champions">
             <Performance ID="-1066488609" />
