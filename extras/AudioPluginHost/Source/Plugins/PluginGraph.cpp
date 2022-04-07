@@ -581,7 +581,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x5b;
-            value = 111;
+            value = 28;
         }
         else if (m == 56)
         {
@@ -593,7 +593,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x5c;
-            value = 116;
+            value = 29;
         }
         else if (m == 58)
         {
@@ -629,7 +629,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x59;
-            value = 117;
+            value = 30;
         }
 
 
@@ -789,7 +789,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
 
-            if (midi_message.isControllerOfType(117)) // power off
+            if (midi_message.isControllerOfType(30)) // power off
             {
                 if (midi_message.getControllerValue() == 127)
                     m_shutdownPressCount++;
@@ -845,7 +845,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
                 UpdateCurrentRouting();
             }
-            else if (midi_message.isControllerOfType(111)) // backward
+            else if (midi_message.isControllerOfType(28)) // backward
             {
                 if (midi_message.getControllerValue() > 0)
                 {
@@ -860,7 +860,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
 
             }
-            else if (midi_message.isControllerOfType(116)) // forward
+            else if (midi_message.isControllerOfType(29)) // forward
             {
                 if (midi_message.getControllerValue() > 0)
                 {
