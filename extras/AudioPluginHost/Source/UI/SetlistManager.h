@@ -46,6 +46,7 @@ public:
 		if (rowIsSelected)
 			g.fillAll(Colours::grey);
 		g.setColour(Colours::white);
+			if (rowNumber < list.size())
 		g.drawText(list[rowNumber]->Name, 2, 0, width, height, Justification::centredLeft, true);
 	}
 
@@ -138,7 +139,8 @@ public:
 		if (rowIsSelected)
 			g.fillAll(Colours::grey);
 		g.setColour(Colours::white);
-		g.drawText(list[rowNumber]->Name, 2, 0, width, height, Justification::centredLeft, true);
+		if (rowNumber < list.size())
+			g.drawText(list[rowNumber]->Name, 2, 0, width, height, Justification::centredLeft, true);
 	}
 
 	SetList *m_selectedSetlist = nullptr;
