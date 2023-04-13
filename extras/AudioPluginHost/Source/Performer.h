@@ -40,7 +40,8 @@ enum NoteMode
 	Fall,
 	Sixteenth,
 	DoubleOctave,
-	ThreeOctaveArpeggio
+	ThreeOctaveArpeggio,
+    NoSustain
 };
 
 class Zone

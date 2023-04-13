@@ -174,6 +174,7 @@ RackRow::RackRow ()
     m_noteMode->addItem (TRANS("Sixteenth"), 4);
     m_noteMode->addItem (TRANS("Double octave"), 5);
     m_noteMode->addItem (TRANS("Three octave arpeggio"), 6);
+    m_noteMode->addItem (TRANS("No sustain"), 7);
     m_noteMode->addListener (this);
 
     m_noteMode->setBounds (400, 14, 232, 24);
@@ -608,7 +609,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     }
                 }
             }
-            else
+            else if (m_current->NoteMode != NoteMode::NoSustain)
                 output.addEvent(midi_message, sample_number); // other events like sustain
         }
         midiBuffer = output;
@@ -906,7 +907,7 @@ BEGIN_JUCER_METADATA
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
   <COMBOBOX name="" id="321cb138fb836f9e" memberName="m_noteMode" virtualName=""
             explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
-            items="Normal note mode&#10;Scoop&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio"
+            items="Normal note mode&#10;Scoop&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="" id="12f9414bd02d87a4" memberName="m_missing" virtualName=""
          explicitFocusOrder="0" pos="8 14 76 57" edTextCol="ff000000"
