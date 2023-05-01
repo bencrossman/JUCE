@@ -330,7 +330,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 {
 	auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
 	rack.m_usesBanks = File(bankFile).exists();
-	rack.m_stereoToMonoWillPhase = (String(rack.PluginName).contains("TruePianos") || rack.PluginName == "P8");
+	rack.m_stereoToMonoWillPhase = rack.PluginName =="TruePianos x64" || rack.PluginName == "P8";
 
 	String errorMessage;
 
@@ -340,7 +340,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	processor->setPlayHead(graph.getPlayHead());
 
     auto audioInputs = processor->getTotalNumInputChannels();
-    if (String(rack.PluginName).contains("TruePianos") || String(rack.PluginName).contains("DirectWave"))
+    if (String(rack.PluginName).contains("DirectWave"))
         audioInputs = 0;
 
     auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
