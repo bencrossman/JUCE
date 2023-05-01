@@ -1,9 +1,5 @@
 Start upgrading all plugins to 64bit (Probably not TruePianos, B3? DX7? DirectWave? Mine first, P8 possibly, OBX but might be with some patch conversion)
 
-Implement audio in
-
-Remap pads on MKII, off to 0x1E, maybe filter other sliders and knobs
-
 Runtime bug - Hold last radio patch and change to break free
 
 Next cover band
