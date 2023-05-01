@@ -609,7 +609,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     }
                 }
             }
-            else if (m_current->NoteMode != NoteMode::NoSustain)
+            else if (((midi_message.isControllerOfType(m_CC3) && m_allowCC3) || !midi_message.isControllerOfType(m_CC3)) && m_current->NoteMode != NoteMode::NoSustain)
                 output.addEvent(midi_message, sample_number); // other events like sustain
         }
         midiBuffer = output;
@@ -683,7 +683,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
         // reduce timer
         m_arpeggiatorTimer -= (samples - arpeggiatorSample) / (float)sampleRate;
-        assert(m_arpeggiatorTimer > 0); // shouldnt be possible to get to 0 here
+        assert(m_arpeggiatorTimer > 0); // shouldnt be possible to get to 0 here, but have seen it
     }
 }
 
@@ -732,7 +732,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     }
 }
 
-void RackRow::Assign(Zone *zone)
+void RackRow::Assign(Zone *zone, int CC3)
 {
     m_current = zone;
 
@@ -774,7 +774,8 @@ void RackRow::Assign(Zone *zone)
         m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
 
     m_program->setSelectedId(zone->Program + 1, dontSendNotification);
-
+    m_allowCC3 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC3");
+    m_CC3 = CC3;
 
     UpdateKeyboard();
 }

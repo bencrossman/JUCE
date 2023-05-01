@@ -27,7 +27,6 @@
 #include "../UI/MainHostWindow.h"
 #include "PluginGraph.h"
 #include "InternalPlugins.h"
-#include "../UI/GraphEditorPanel.h"
 #include <windows.h>
 #include "../examples/Plugins/GainPluginDemo.h"
 
@@ -581,7 +580,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x5b;
-            value = 28;
+            value = 111;
         }
         else if (m == 56)
         {
@@ -593,7 +592,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x5c;
-            value = 29;
+            value = 116;
         }
         else if (m == 58)
         {
@@ -629,7 +628,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         {
             parameter = 3;
             control = 0x59;
-            value = 30;
+            value = 117;
         }
 
 
@@ -768,7 +767,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     if (m_keylabNeedsSettingup)
     {
         m_keylabNeedsSettingup = false;
-        SetupKeylab(midiBuffer, 0);
+        if (!m_isKeylab88MkII) // We'll use "Analog Lab" mode so no controller assignment, remap at runtime
+            SetupKeylab(midiBuffer, 0);
         PrintLCDScreen(midiBuffer, 0, "Engine Loaded", "Select setlist");
     }
     samples;
@@ -788,6 +788,17 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 		{
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
+
+            if (m_isKeylab88MkII)
+            {
+                // Remap for Keylab MKII because want it in "Analog Lab" mode to change patches and can't override controllers
+                if (midi_message.isControllerOfType(0x4A))
+                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue());
+                if (midi_message.isControllerOfType(0x55))
+                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 9, midi_message.getControllerValue());
+                if (midi_message.isControllerOfType(0x49))
+                    continue; // Filter out default slider 1 (use master volume instead)
+            }
 
             if (midi_message.isControllerOfType(30)) // power off
             {

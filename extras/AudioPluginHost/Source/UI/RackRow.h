@@ -56,7 +56,7 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
     void UpdateKeyboard();
     void Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &panel);
-    void Assign(Zone *zone);
+    void Assign(Zone *zone, int CC3);
     int ID() { return m_id; }
     void textEditorTextChanged(TextEditor&) override;
     void SetSoloMode(bool mode);
@@ -92,6 +92,8 @@ private:
     bool m_pendingProgramNames = false;
     bool m_pendingBank = false;
     bool m_pendingBypass = false;
+    bool m_allowCC3 = false;
+    int m_CC3 = 3;
     bool m_manualPatchNames = false;
     vector<int> m_notesDown;
     bool m_anyNotesDown;

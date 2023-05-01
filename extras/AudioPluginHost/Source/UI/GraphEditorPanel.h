@@ -52,7 +52,7 @@ public:
     void updateComponents();
 
 
-    void init();
+    void init(String name);
     void SoloChange();
 
     //==============================================================================
