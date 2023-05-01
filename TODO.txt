@@ -1,4 +1,8 @@
-Start upgrading all plugins to 64bit (Probably not TruePianos, B3? DX7? DirectWave? Mine first, P8 possibly, OBX but might be with some patch conversion)
+64bit upgrade:
+- B3
+- FM7
+- DirectWave
+- OBXa
 
 Runtime bug - Hold last radio patch and change to break free
 
