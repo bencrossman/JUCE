@@ -121,9 +121,10 @@ public:
 	void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
-    void PrevPerformance() { m_manualMidi = 111; }
-    void NextPerformance() { m_manualMidi = 116; }
-
+    void PrevPerformance() { m_manualMidi = m_isKeylab88MkII ? 28: 111; }
+    void NextPerformance() { m_manualMidi = m_isKeylab88MkII ? 29 : 116; }
+    void SetMidiOutputDeviceName(String name) { m_isKeylab88MkII = name.contains("KeyLab mkII 88");}
+    int GetCC3() { return m_isKeylab88MkII ? 16 : 3; }
 
 private:
     //==============================================================================
@@ -146,6 +147,7 @@ private:
 	bool m_mono;
     int m_manualMidi = 0;
 
+    bool m_isKeylab88MkII = false;
 
     NodeID lastUID;
     NodeID getNextUID() noexcept;
