@@ -723,13 +723,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         for (int i = 0; i<lines.size(); ++i)
             m_program->addItem(lines[i], i + 1);
     }
-    else if (!m_bank->isVisible() && device.m_node)
-    {
-        auto processor = ((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
 
-        for (int i = 0; i < processor->getNumPrograms(); ++i)
-            m_program->addItem(processor->getProgramName(i).isNotEmpty() ? processor->getProgramName(i) : String(i+1), i + 1);
-    }
 }
 
 void RackRow::Assign(Zone *zone)
@@ -803,10 +797,9 @@ void RackRow::handleCommandMessage(int id)
 			for (int i = 0; i < m_current->Device->m_overridePatches[bank].size(); ++i)
 				m_program->addItem(m_current->Device->m_overridePatches[bank][i], i + 1);
 		}
-		else if (processor->getNumPrograms() == 1 && processor->getProgramName(0) == "")
+		else if (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default"))
 		{
-			for (int i = 0; i < 128; ++i)
-				m_program->addItem(String::formatted("PROGRAM %03d", i), i + 1);
+				m_program->addItem("Default", 1); // Used by Guitar and Disco Strings but might be better to just hide patch
 		}
 		else
 		{
