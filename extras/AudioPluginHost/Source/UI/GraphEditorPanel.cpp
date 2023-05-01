@@ -1347,7 +1347,7 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             auto rackDevice = ((RackRow*)m_rackDevice[d].get());
             if (rackDevice->ID() == zones[i].DeviceID)
             {
-                rackDevice->Assign(&(zones[i]), graph.GetCC3());
+                rackDevice->Assign(&(zones[i]));
                 break;
             }
         }

@@ -4,6 +4,8 @@ Implement audio in
 
 Remap pads on MKII, off to 0x1E, maybe filter other sliders and knobs
 
+Runtime bug - Hold last radio patch and change to break free
+
 Next cover band
 ~~~~~~~~~~~~~~~
 Police - 1 song - King Of Pain
@@ -15,7 +17,6 @@ Pink(Still loads in Forte) - 20 performances,
 Madonna - 23 performances (Borderline is OPX patch)
 
 Integrate for Access database with edit? (library linked already)
-Implement scoops / falls for disco strings?
 
 Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
@@ -24,7 +25,7 @@ Next time rack removed
 ~~~~~~~~~~~~~~~~~~~~~~
 Implement right click menu item "Delete rack", delete all zones
 
-If releaseed
+If released
 ~~~~~~~~~~~~
 Rename rack
 Reorder racks
