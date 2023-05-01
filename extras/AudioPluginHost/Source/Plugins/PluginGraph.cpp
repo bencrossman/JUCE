@@ -338,11 +338,16 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	auto types = internalFormat.getAllTypes();
 
 	processor->setPlayHead(graph.getPlayHead());
-	auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
+
+    auto audioInputs = processor->getTotalNumInputChannels();
+    if (String(rack.PluginName).contains("TruePianos") || String(rack.PluginName).contains("DirectWave"))
+        audioInputs = 0;
+
+    auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);
 	auto midi = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 	auto gain = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Gain PlugIn"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
 
-	rack.m_node = (void*)node.get();
+    rack.m_node = (void*)node.get();
 	rack.m_gainNode = (void*)gain.get();
 	rack.m_midiFilterNode = (void*)midi.get();
 
@@ -354,6 +359,12 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 
 	graph.addConnection({ { gain->nodeID, 0 },{ m_masterGainNode->nodeID, 0 } });
 	graph.addConnection({ { gain->nodeID, 1 },{ m_masterGainNode->nodeID, 1 } });
+
+    if (audioInputs > 0)
+    {
+        graph.addConnection({ { m_audioInNode->nodeID, 0 }, { node->nodeID, 0 }});
+        graph.addConnection({ { m_audioInNode->nodeID, 1 }, { node->nodeID, 1 }});
+    }
 }
 
 // shared code for load/import
@@ -973,6 +984,7 @@ void PluginGraph::CreateDefaultNodes()
     String errorMessage;
     m_midiInNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types,"MIDI Input"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiOutNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "MIDI Output"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+    m_audioInNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Audio Input"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_audioOutNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Audio Output"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiControlNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
