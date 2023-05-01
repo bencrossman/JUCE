@@ -136,6 +136,7 @@ private:
     string m_performerFilename;
     AudioProcessorGraph::Node::Ptr m_midiInNode;
     AudioProcessorGraph::Node::Ptr m_midiOutNode;
+    AudioProcessorGraph::Node::Ptr m_audioInNode;
     AudioProcessorGraph::Node::Ptr m_audioOutNode;
     AudioProcessorGraph::Node::Ptr m_midiControlNode;
     AudioProcessorGraph::Node::Ptr m_masterGainNode;
