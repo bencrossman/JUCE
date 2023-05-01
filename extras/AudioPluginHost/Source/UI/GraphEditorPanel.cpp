@@ -1077,7 +1077,7 @@ void GraphDocumentComponent::init()
     updateMidiOutput();
 
     graphPanel.reset (new GraphEditorPanel (*graph));
-    graphPanel->init();
+    graphPanel->init(deviceManager.getDefaultMidiOutput()->getDeviceInfo().name);
     addAndMakeVisible (graphPanel.get());
     graphPlayer.setProcessor (&graph->graph);
     graphPlayer.setMidiOutput(deviceManager.getDefaultMidiOutput());
@@ -1258,8 +1258,10 @@ void GraphDocumentComponent::updateMidiOutput()
     }
 }
 
-void GraphEditorPanel::init()
+void GraphEditorPanel::init(String name)
 {
+    graph.SetMidiOutputDeviceName(name);
+
     graph.m_onProgramChange = [this]()
     {
         SetPerformance();
@@ -1345,7 +1347,7 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             auto rackDevice = ((RackRow*)m_rackDevice[d].get());
             if (rackDevice->ID() == zones[i].DeviceID)
             {
-                rackDevice->Assign(&(zones[i]));
+                rackDevice->Assign(&(zones[i]), graph.GetCC3());
                 break;
             }
         }

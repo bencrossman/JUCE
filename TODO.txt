@@ -1,15 +1,21 @@
+Start upgrading all plugins to 64bit (Probably not TruePianos, B3? DX7? DirectWave? Mine first, P8 possibly, OBX but might be with some patch conversion)
+
+Implement audio in
+
+Remap pads on MKII, off to 0x1E, maybe filter other sliders and knobs
+
 Next cover band
 ~~~~~~~~~~~~~~~
 Police - 1 song - King Of Pain
 Dire Straits - 4 songs
 John Farnham(Still loads in Forte) - 5 songs, Voice already done
-Pink Floyd - 11 songs, Brick already done
-Bon Jovi - 15 songs, Living Prayer already done
+Pink Floyd - 11 songs, Brick already done (On the run is OBX patch)
+Bon Jovi - 15 songs, Living Prayer already done (runaway is OBX patch)
 Pink(Still loads in Forte) - 20 performances, 
-Madonna - 23 performances
+Madonna - 23 performances (Borderline is OPX patch)
 
 Integrate for Access database with edit? (library linked already)
-Implement scoops / falls for disco strings
+Implement scoops / falls for disco strings?
 
 Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
@@ -22,6 +28,7 @@ If releaseed
 ~~~~~~~~~~~~
 Rename rack
 Reorder racks
+Need UI to enable/disable #CC3
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
