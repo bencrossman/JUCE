@@ -330,7 +330,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 {
 	auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
 	rack.m_usesBanks = File(bankFile).exists();
-	rack.m_stereoToMonoWillPhase = (String(rack.PluginName).contains("TruePianos") || String(rack.PluginName).contains("SUPERWAVE"));
+	rack.m_stereoToMonoWillPhase = (String(rack.PluginName).contains("TruePianos") || rack.PluginName == "P8");
 
 	String errorMessage;
 

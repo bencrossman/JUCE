@@ -2,6 +2,8 @@ Start upgrading all plugins to 64bit (Probably not TruePianos, B3? DX7? DirectWa
 
 Runtime bug - Hold last radio patch and change to break free
 
+Perhaps map modulation to CC16 (for unknown midi keyboards)
+
 Next cover band
 ~~~~~~~~~~~~~~~
 Police - 1 song - King Of Pain
