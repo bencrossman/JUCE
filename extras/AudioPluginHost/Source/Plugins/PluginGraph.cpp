@@ -550,7 +550,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         unsigned char parameter = 3;
         unsigned char control = 0;
         unsigned char value = 0;
-        // order volume / knob 1 #3 / 9 disable knobs / Slider 1 #9 / 8 disable sliders / 16 pads (midi and note) / rewind (mode and cc) / forward (mode and cc) / stop (mode and cc)
+        // order volume / knob 1 #16 / 9 disable knobs / Slider 1 #9 / 8 disable sliders / 16 pads (midi and note) / rewind (mode and cc) / forward (mode and cc) / stop (mode and cc)
         if (m == 0)
         {
             control = 0x30;
@@ -559,7 +559,7 @@ void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
         else if (m == 1)
         {
             control = 1;
-            value = 3;
+            value = 16;
         }
         else if (m<2 + 9)
         {
@@ -809,18 +809,22 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
 
-            if (m_isKeylab88MkII)
+            if (m_isKeylab88MkII && midi_message.isController())
             {
                 // Remap for Keylab MKII because want it in "Analog Lab" mode to change patches and can't override controllers
-                if (midi_message.isControllerOfType(0x4A))
+                if (midi_message.getControllerNumber() == 0x4A)
                     midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue());
-                if (midi_message.isControllerOfType(0x55))
+                else if (midi_message.getControllerNumber() == 0x55)
                     midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 9, midi_message.getControllerValue());
-                if (midi_message.isControllerOfType(0x49))
-                    continue; // Filter out default slider 1 (use master volume instead)
+                else if (midi_message.getControllerNumber() == 0x1C)
+                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 111, midi_message.getControllerValue()); // back
+                else if (midi_message.getControllerNumber() == 0x1D)
+                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 116, midi_message.getControllerValue()); // forward
+                else if (midi_message.getControllerNumber() == 0x1E && (midi_message.getControllerValue() == 0x10 || midi_message.getControllerValue() == 0x11))
+                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 117, (midi_message.getControllerValue() == 0x11) ? 127 : 0); // power off
             }
 
-            if (midi_message.isControllerOfType(30)) // power off
+            if (midi_message.isControllerOfType(117)) // power off
             {
                 if (midi_message.getControllerValue() == 127)
                     m_shutdownPressCount++;
@@ -876,7 +880,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
                 UpdateCurrentRouting();
             }
-            else if (midi_message.isControllerOfType(28)) // backward
+            else if (midi_message.isControllerOfType(111)) // backward
             {
                 if (midi_message.getControllerValue() > 0)
                 {
@@ -891,7 +895,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
 
             }
-            else if (midi_message.isControllerOfType(29)) // forward
+            else if (midi_message.isControllerOfType(116)) // forward
             {
                 if (midi_message.getControllerValue() > 0)
                 {
@@ -954,7 +958,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             }
             else if (midi_message.isNoteOn() && midi_message.getVelocity() == 0)
                 output.addEvent(MidiMessage::noteOff(midi_message.getChannel(), midi_message.getNoteNumber()), sample_number);
-            else
+            else if ((midi_message.isController() && (midi_message.getControllerNumber() == 1/*modulation*/ || midi_message.getControllerNumber() == 16 || midi_message.getControllerNumber() == 0x40/*sustain*/ || midi_message.isPitchWheel())) || !midi_message.isController())
                 output.addEvent(midi_message, sample_number);
         }
         midiBuffer = output;
