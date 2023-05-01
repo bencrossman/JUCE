@@ -102,7 +102,6 @@ public:
     void PrevPerformance() { m_manualMidi = m_isKeylab88MkII ? 28: 111; }
     void NextPerformance() { m_manualMidi = m_isKeylab88MkII ? 29 : 116; }
     void SetMidiOutputDeviceName(String name) { m_isKeylab88MkII = name.contains("KeyLab mkII 88");}
-    int GetCC3() { return m_isKeylab88MkII ? 16 : 3; }
 
 private:
     //==============================================================================
