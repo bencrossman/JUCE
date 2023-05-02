@@ -1075,7 +1075,7 @@ void GraphDocumentComponent::init()
     updateMidiOutput();
 
     graphPanel.reset (new GraphEditorPanel (*graph));
-    graphPanel->init(deviceManager.getDefaultMidiOutput()->getDeviceInfo().name);
+    graphPanel->init(deviceManager.getDefaultMidiOutput() ? deviceManager.getDefaultMidiOutput()->getDeviceInfo().name : "");
     addAndMakeVisible (graphPanel.get());
     graphPlayer.setProcessor (&graph->graph);
     graphPlayer.setMidiOutput(deviceManager.getDefaultMidiOutput());
