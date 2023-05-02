@@ -251,7 +251,7 @@ void RackRow::paint (juce::Graphics& g)
     g.drawRect(rect);
     if (m_mute->getToggleState())
     {
-        g.fillAll(Colour(0x50ffffff));
+        g.fillAll(Colour(0x30000000));
     }
     //[/UserPaint]
 }
@@ -297,8 +297,15 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 				((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(bypass);
 			}
         }
-        m_program->setEnabled(!m_current->Mute);
-        m_bank->setEnabled(!m_current->Mute);
+        m_program->setVisible(!m_current->Mute && m_hasPrograms);
+        m_bank->setVisible(!m_current->Mute && m_bank->getNumItems() > 0);
+        m_keyboard->setVisible(!m_current->Mute);
+        m_volume->setVisible(!m_current->Mute);
+        m_transpose->setVisible(!m_current->Mute);
+        m_lowKey->setVisible(!m_current->Mute);
+        m_highKey->setVisible(!m_current->Mute);
+        m_noteMode->setVisible(!m_current->Mute);
+        m_to->setVisible(!m_current->Mute);
         //[/UserButtonCode_m_mute]
     }
     else if (buttonThatWasClicked == m_deviceSettings.get())
@@ -636,7 +643,8 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     else if (m_pendingProgram) // need bank to change first
     {
         m_pendingProgram = false;
-        midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
+        if (m_hasPrograms)
+            midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
     }
     else if (m_pendingProgramNames) // need bank to change first
     {
@@ -712,16 +720,22 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 				m_bank->addItem(lines[i], i + 1);
     }
     else
-        m_bank->setVisible(false);
-
-    auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
-    if (File(programFile).exists())
     {
-        m_manualPatchNames = true;
-        StringArray lines;
-        File(programFile).readLines(lines);
-        for (int i = 0; i<lines.size(); ++i)
-            m_program->addItem(lines[i], i + 1);
+        auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
+        if (File(programFile).exists())
+        {
+            m_manualPatchNames = true;
+            StringArray lines;
+            File(programFile).readLines(lines);
+            for (int i = 0; i < lines.size(); ++i)
+                m_program->addItem(lines[i], i + 1);
+        }
+        else if (device.m_node)
+        {
+            auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
+            if (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default"))
+                m_hasPrograms = false; // Used by Guitar and Disco Strings
+        }
     }
 
 }
@@ -763,9 +777,7 @@ void RackRow::Assign(Zone *zone)
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));
-
-    if (m_bank->isVisible())
-        m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
+    m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
 
     m_program->setSelectedId(zone->Program + 1, dontSendNotification);
     m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
@@ -797,11 +809,7 @@ void RackRow::handleCommandMessage(int id)
 			for (int i = 0; i < m_current->Device->m_overridePatches[bank].size(); ++i)
 				m_program->addItem(m_current->Device->m_overridePatches[bank][i], i + 1);
 		}
-		else if (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default"))
-		{
-				m_program->addItem("Default", 1); // Used by Guitar and Disco Strings but might be better to just hide patch
-		}
-		else
+		else if (m_hasPrograms)
 		{
 			for (int i = 0; i < processor->getNumPrograms(); ++i)
 				m_program->addItem(processor->getProgramName(i), i + 1);
