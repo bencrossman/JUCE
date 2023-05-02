@@ -1,9 +1,8 @@
 64bit upgrade:
-- FM7 (would need to try FM8)
 - DirectWave
+- FM7 (FM8 divide by zero crash in Performer)
 - OPX (didn't work 1.1 is 32bit, higher versions don't save entire bank and dont report patch names)
 - B4 II (Doesn't come in 64 bit, would need to try other plugins)
-
 
 Runtime bug - Hold last radio patch and change to break free
 Perhaps map modulation to CC16 (for unknown midi keyboards)
