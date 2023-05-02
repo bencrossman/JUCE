@@ -94,6 +94,7 @@ private:
     bool m_pendingBypass = false;
     bool m_allowCC16 = false;
     bool m_manualPatchNames = false;
+    bool m_hasPrograms = true;
     vector<int> m_notesDown;
     bool m_anyNotesDown;
     int m_arpeggiatorBeat;
