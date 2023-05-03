@@ -1,9 +1,17 @@
-Runtime bug - Hold last radio patch and change to break free
-Perhaps map modulation to CC16 (for unknown midi keyboards)
+Loading message
 
-Better Hammer piano
-Big Spender sax
+Schedule
+~~~~~~~~
+Obtain "Hammer piano" and "Big Spender sax"
+Copy WavStreamer for the hell of it (doesn't take long)
+Test new guitar using laptop / interface, if successul then continue
+Do some gigs with laptop / interface to iron out software bugs
+Replace NUC in Keylab (most likely Brisbane gig), pick interface (Existing guitar in/out, DI[Will give headphone, volume, reduce cables] with guitar, inbuilt with guitar, Behringer Guitar Link UCG102 Interface)
+Work laptop becomes backup (retire old laptop)
 
+Next midi controller with one parameter
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Map modulation to CC16
 
 Next cover band
 ~~~~~~~~~~~~~~~
