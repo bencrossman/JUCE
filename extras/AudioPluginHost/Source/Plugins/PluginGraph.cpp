@@ -486,6 +486,7 @@ void PluginGraph::setupPerformer()
 			AddRack(processor, rack);
         }
     }
+    m_keylabReady = true;
 }
 
 File PluginGraph::getLastDocumentOpened()
@@ -771,8 +772,6 @@ void PluginGraph::LoadSet(int setIndex)
     m_performer.m_currentPerformanceIndex = 0;
 }
 
-bool m_keylabNeedsSettingup = true;
-
 void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
     if (m_keylabNeedsSettingup)
@@ -780,8 +779,17 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         m_keylabNeedsSettingup = false;
         if (!m_isKeylab88MkII) // We'll use "Analog Lab" mode so no controller assignment, remap at runtime
             SetupKeylab(midiBuffer, 0);
-        PrintLCDScreen(midiBuffer, 0, "Engine Loaded", "Select setlist");
+        PrintLCDScreen(midiBuffer, 0, "Performer", "Loading...");
     }
+
+    if (m_keylabReady)
+    {
+        MidiBuffer output;
+        m_keylabReady = false;
+        UpdateLCDScreen(output, 0, m_performer.m_currentPerformanceIndex);
+        midiBuffer = output;
+    }
+
     samples;
     sampleRate;
 
