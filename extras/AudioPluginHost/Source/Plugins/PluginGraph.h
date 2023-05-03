@@ -142,6 +142,10 @@ private:
     AudioProcessorGraph::Node::Ptr m_masterGainNode;
     AudioProcessorGraph::Node::Ptr m_midiSysexNode;
 
+
+    bool m_keylabNeedsSettingup = true;
+    bool m_keylabReady = false;
+
     int       m_shutdownPressCount;
     NonSysexFilter m_nonSysexFilter;
 	bool m_mono;
