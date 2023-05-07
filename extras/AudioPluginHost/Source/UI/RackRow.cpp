@@ -442,20 +442,20 @@ void RackRow::mouseDrag (const juce::MouseEvent& e)
     //[UserCode_mouseDrag] -- Add your code here...
     if (e.eventComponent == m_keyboard.get())
     {
-        auto key = m_keyboard->getNoteAtPosition(e.position);
-        if (key != -1)
+        auto key = m_keyboard->getNoteAndVelocityAtPosition(e.position);
+        if (key.note != -1)
         {
             auto lowkey = ParseNote(m_lowKey->getTextValue().toString().getCharPointer());
             auto highkey = ParseNote(m_highKey->getTextValue().toString().getCharPointer());
-            if (abs(key - lowkey) > abs(key - highkey))
+            if (abs(key.note - lowkey) > abs(key.note - highkey))
             {
-                m_highKey->setText(FormatKey(key));
-                m_current->HighKey = key;
+                m_highKey->setText(FormatKey(key.note));
+                m_current->HighKey = key.note;
             }
             else
             {
-                m_lowKey->setText(FormatKey(key));
-                m_current->LowKey = key;
+                m_lowKey->setText(FormatKey(key.note));
+                m_current->LowKey = key.note;
             }
             UpdateKeyboard();
         }
