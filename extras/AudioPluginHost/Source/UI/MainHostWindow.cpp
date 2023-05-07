@@ -328,9 +328,9 @@ MainHostWindow::MainHostWindow()
    #if JUCE_IOS || JUCE_ANDROID
     setFullScreen (true);
    #else
-    setResizable (true, false);
-    setResizeLimits (500, 400, 10000, 10000);
-    centreWithSize (1024, 720);
+    setResizable (false, false);
+    //setResizeLimits (500, 400, 10000, 10000);
+    centreWithSize (966, getParentHeight() - 62); // minus Windows task bar but also not quite working so just a value to make sure entire window visible
    #endif
 
     knownPluginList.setCustomScanner (std::make_unique<CustomPluginScanner>());
@@ -341,7 +341,8 @@ MainHostWindow::MainHostWindow()
 
     setUsingNativeTitleBar (true);
 
-    restoreWindowStateFromString (getAppProperties().getUserSettings()->getValue ("mainWindowPos"));
+    //restoreWindowStateFromString (getAppProperties().getUserSettings()->getValue ("mainWindowPos")); seemed to keep going fullscreen
+
 
     setVisible (true);
 
