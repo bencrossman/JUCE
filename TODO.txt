@@ -1,13 +1,10 @@
-Check changes from keylab88 WavStreamer branch
-Cant get to Guitar on laptop screen
-
-
 Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there - Might be able to get similar by remote desktop and letting screen switch off
 Turn off sleep time
 
 Schedule
 ~~~~~~~~
 Get new guitar working (threshold?)
+Could be some input coming through even with guitar off
 Do some gigs with laptop / interface to iron out software bugs
 Replace NUC in Keylab (most likely Brisbane gig), pick interface (Existing guitar in/out, DI[Will give headphone, volume, reduce cables] with guitar, inbuilt with guitar, Behringer Guitar Link UCG102 Interface)
 Work laptop becomes backup (retire old laptop)
