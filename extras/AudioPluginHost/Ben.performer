@@ -1266,7 +1266,7 @@
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="55"></Zone>
             <Zone DeviceID="1555279137" Program="43" Volume="-2" LowKey="71"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-10" Transpose="12" LowKey="71"></Zone>
-            <Zone DeviceID="522416168" Program="15" Transpose="24" LowKey="56" HighKey="70"></Zone>
+            <Zone DeviceID="-985547765" Program="14" Volume="3" Transpose="24" LowKey="56" HighKey="70"></Zone>
         </Performance>
         <Performance ID="-1962429869" Name="Hangin Around|">
             <Zone DeviceID="627145948" Program="4" LowKey="23"></Zone>
