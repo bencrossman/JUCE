@@ -1,8 +1,16 @@
+Bug with 2nd row
+Korg solo sax (see rcf)
+Hammer e piano 2 (see rcf) - replace
+Check changes from keylab88 WavStreamer branch
+Cant get to Guitar on laptop screen
+
+
+Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there - Might be able to get similar by remote desktop and letting screen switch off
+Turn off sleep time
+
 Schedule
 ~~~~~~~~
-Obtain "Hammer piano" and "Big Spender sax"
-Copy WavStreamer for the hell of it (doesn't take long)
-Test new guitar using laptop / interface, if successul then continue
+Get new guitar working (threshold?)
 Do some gigs with laptop / interface to iron out software bugs
 Replace NUC in Keylab (most likely Brisbane gig), pick interface (Existing guitar in/out, DI[Will give headphone, volume, reduce cables] with guitar, inbuilt with guitar, Behringer Guitar Link UCG102 Interface)
 Work laptop becomes backup (retire old laptop)
@@ -23,7 +31,7 @@ Madonna - 23 performances (Borderline is OPX patch)
 
 Integrate for Access database with edit? (library linked already)
 
-Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there
+
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
 
 Next time rack removed
@@ -34,7 +42,7 @@ If released
 ~~~~~~~~~~~~
 Rename rack
 Reorder racks
-Need UI to enable/disable #CC3
+Need UI to enable/disable #CC16
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
