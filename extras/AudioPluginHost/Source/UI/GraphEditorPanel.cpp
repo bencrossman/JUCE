@@ -794,7 +794,7 @@ void GraphEditorPanel::updateComponents()
     }
 	int deviceWidth = 946;
 
-    m_tabs->setBounds(10, 10, deviceWidth, 671); // include tab bar
+    m_tabs->setBounds(10, 10, deviceWidth, getParentHeight() - 90); // include tab bar, could work out number so just hard coded 89
     m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
     m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
     m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
