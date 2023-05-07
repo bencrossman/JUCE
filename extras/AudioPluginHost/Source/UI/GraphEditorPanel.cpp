@@ -1184,7 +1184,7 @@ bool GraphDocumentComponent::isInterestedInDragSource (const SourceDetails& deta
             && details.description.toString().startsWith ("PLUGIN"));
 }
 
-void GraphDocumentComponent::itemDropped (const SourceDetails&)
+void GraphDocumentComponent::itemDropped (const SourceDetails& details)
 {
     // don't allow items to be dropped behind the sidebar
     if (pluginListSidePanel.getBounds().contains (details.localPosition))
@@ -1290,8 +1290,8 @@ void GraphEditorPanel::init(String name)
 	((RackTitleBar*)m_rackTopUI.get())->m_onSetTempo = [this](int tempo)
 	{
 		auto performer = graph.GetPerformer();
-		performer->TempPerformance.Tempo = tempo;
-		RackRow::SetTempo(tempo);
+		performer->TempPerformance.Tempo = (float)tempo;
+		RackRow::SetTempo((float)tempo);
 		graph.SetTempo(tempo);
 	};
 

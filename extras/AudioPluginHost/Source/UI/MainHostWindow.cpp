@@ -859,7 +859,7 @@ bool MainHostWindow::perform (const InvocationInfo& info)
         break;
 
 	case CommandIDs::import:
-        if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
+        /*if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
         {
             FileChooser fc("Select Forte RCF File to import",File(),"*.rcf");
             if (fc.browseForFileToOpen())
@@ -867,7 +867,7 @@ bool MainHostWindow::perform (const InvocationInfo& info)
                 graphHolder->graph->Import(fc.getResult().getFullPathName().getCharPointer());
                 graphHolder->graphPanel->updateComponents();
             }
-        }
+        }*/
 		break;
 
     case CommandIDs::save:
