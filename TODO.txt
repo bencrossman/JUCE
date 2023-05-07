@@ -1,4 +1,3 @@
-Creator bug : Where GraphEditorPanel::changeListenerCallback sometimes fires randomly - Need to repro so keep break point there - Might be able to get similar by remote desktop and letting screen switch off
 Turn off sleep time
 
 Schedule
