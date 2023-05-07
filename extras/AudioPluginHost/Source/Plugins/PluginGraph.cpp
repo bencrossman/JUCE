@@ -44,13 +44,15 @@ static std::unique_ptr<ScopedDPIAwarenessDisabler> makeDPIAwarenessDisablerForPl
     return shouldAutoScalePlugin (desc) ? std::make_unique<ScopedDPIAwarenessDisabler>()
                                         : nullptr;
 }
+
 class MyAudioPlayHead : public AudioPlayHead
 {
 public:
-	virtual bool getCurrentPosition(CurrentPositionInfo& result)
+    virtual Optional<PositionInfo> getPosition() const
 	{
-		result.bpm = m_bpm;
-		return true;
+        PositionInfo result;
+		result.setBpm(m_bpm);
+		return result;
 	}
 
 	double m_bpm = 120;
@@ -58,7 +60,9 @@ public:
 
 void PluginGraph::SetTempo(double tempo)
 {
-	((MyAudioPlayHead*)graph.getPlayHead())->m_bpm = tempo;
+    auto playhead = graph.getPlayHead();
+    //if (playhead)
+	//    ((MyAudioPlayHead*)playhead)->m_bpm = tempo;
 }
 
 void PluginGraph::SetMono(bool mono)
@@ -116,15 +120,15 @@ void PluginGraph::changeListenerCallback (ChangeBroadcaster*)
 
 
 
-void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<double> pos)
+void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<double>)
 {
 	String errorMessage;
-	auto processor = formatManager.createPluginInstance(desc, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
+	auto processor = formatManager.createPluginInstance(desc.pluginDescription, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
 	Device newRack;
 	newRack.ID = (int)Uuid().hash();
-	newRack.Name = desc.name.getCharPointer();
-	newRack.PluginName = desc.name.getCharPointer();
+	newRack.Name = desc.pluginDescription.name.getCharPointer();
+	newRack.PluginName = desc.pluginDescription.name.getCharPointer();
 
 	if (processor.get())
 		AddRack(processor, newRack);
@@ -410,11 +414,11 @@ void PluginGraph::setupPerformer()
         pd.name = rack.PluginName;
         pd.pluginFormatName = "VST";
         pd.isInstrument = true;
-        for (auto j = 0U; j < (unsigned)knownPluginList.getNumTypes(); ++j)
+        for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)
         {
-            auto name = knownPluginList.getTypes()[j].name;
+            auto name = knownPlugins.getTypes()[j].name;
             if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
-                pd.fileOrIdentifier = knownPluginList.getTypes()[j].fileOrIdentifier;
+                pd.fileOrIdentifier = knownPlugins.getTypes()[j].fileOrIdentifier;
         }
 
 		String errorMessage;
@@ -799,7 +803,7 @@ void PluginGraph::LoadSet(int setIndex)
     setIndex; 
     m_performer.m_currentPerformanceIndex = 0;
 }
-    }
+
 
 void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
