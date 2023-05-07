@@ -157,7 +157,8 @@ public:
 
         // initialise our settings file..
 
-		system("pskill auxhost.exe");
+        system("pskill auxhost.exe");
+        system("pskill P8_Core.exe");
 
         PropertiesFile::Options options;
         options.applicationName     = "Performer";
