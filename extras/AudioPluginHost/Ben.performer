@@ -200,7 +200,7 @@
             <Performance ID="1102019116" />
         </Song>
         <Song ID="-1320569983" Name="Big Spender">
-            <Performance ID="-335610154" />
+            <Performance ID="-1990874256" />
         </Song>
         <Song ID="-1496032638" Name="Billy Jean">
             <Performance ID="-1996754324" />
@@ -1679,6 +1679,9 @@
         </Performance>
         <Performance ID="-335610154" Name="Sax">
             <Zone DeviceID="-2048222836" Program="1" Volume="6" Transpose="12"></Zone>
+        </Performance>
+        <Performance ID="-1990874256" Name="Sax (fake)">
+            <Zone DeviceID="1555279137" Program="22"></Zone>
         </Performance>
         <Performance ID="-516407046" Name="Sax -3">
             <Zone DeviceID="-2048222836" Program="1" Volume="6" Transpose="9"></Zone>
