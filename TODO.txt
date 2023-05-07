@@ -1,4 +1,3 @@
-Korg solo sax (see rcf)
 Check changes from keylab88 WavStreamer branch
 Cant get to Guitar on laptop screen
 
