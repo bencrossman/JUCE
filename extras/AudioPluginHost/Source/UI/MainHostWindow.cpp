@@ -46,7 +46,7 @@ public:
                                                   deadMansPedalFile,
                                                   getAppProperties().getUserSettings(), true), true);
 
-        setResizable (false, false);
+        setResizable (true, false);
         setResizeLimits (300, 400, 800, 1500);
         setTopLeftPosition (60, 60);
 
