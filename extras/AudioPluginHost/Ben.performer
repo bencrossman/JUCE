@@ -15,6 +15,7 @@
             <Song ID="30129188" />
             <Song ID="-768071340" />
             <Song ID="-1790375015" />
+            <Song ID="292042218" />
             <Song ID="-209972973" />
             <Song ID="1030967864" />
             <Song ID="1351634846" />
@@ -214,7 +215,6 @@
             <Performance ID="325567451" />
         </Song>
         <Song ID="-209972973" Name="Bohemiam Rhapsody">
-            <Performance ID="346934948" />
             <Performance ID="853792618" />
             <Performance ID="-34862330" />
             <Performance ID="853792618" />
@@ -575,6 +575,9 @@
         <Song ID="337066101" Name="Like The Way I Do">
             <Performance ID="325567451" />
             <Performance ID="2054530584" />
+        </Song>
+        <Song ID="292042218" Name="Live Aid Intro">
+            <Performance ID="346934948" />
         </Song>
         <Song ID="1717462707" Name="Living on a prayer">
             <Performance ID="411472449" />
@@ -1054,7 +1057,7 @@
             <Zone DeviceID="-1202024641" Program="17" Transpose="48" HighKey="39"></Zone>
             <Zone DeviceID="-985547765" Bank="4" Program="2" Transpose="-39" LowKey="108"></Zone>
         </Performance>
-        <Performance ID="-34862330" Name="Bohemiam Rhapsody|">
+        <Performance ID="-34862330" Name="Bohemiam Rhapsody|Opera">
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
             <Zone DeviceID="546031377" Program="2"></Zone>
         </Performance>
@@ -1433,7 +1436,7 @@
         </Performance>
         <Performance ID="346934948" Name="Live Aid Intro|">
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
-            <Zone DeviceID="546031377" Program="10"></Zone>
+            <Zone DeviceID="546031377" Program="6"></Zone>
         </Performance>
         <Performance ID="411472449" Name="Living on a prayer|">
             <Zone DeviceID="1555279137" Bank="13" Program="4" Transpose="12" LowKey="56" HighKey="95"></Zone>
@@ -1562,6 +1565,10 @@
             <Zone DeviceID="627145948" Program="4"></Zone>
             <Zone DeviceID="1024611825" Program="0" Volume="-8" Transpose="12"></Zone>
         </Performance>
+        <Performance ID="853792618" Name="Piano+Strings">
+            <Zone DeviceID="627145948" Program="4" Volume="-1"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-2" Transpose="12"></Zone>
+        </Performance>
         <Performance ID="1931302682" Name="Piano+Strings+Organ|">
             <Zone DeviceID="627145948" Program="4"></Zone>
             <Zone DeviceID="1024611825" Program="0" Transpose="12"></Zone>
@@ -1576,10 +1583,6 @@
             <Zone DeviceID="627145948" Program="4"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="12" HighKey="71"></Zone>
             <Zone DeviceID="-2048222836" Program="2" Volume="-5" NoteMode="4" Transpose="12"></Zone>
-        </Performance>
-        <Performance ID="853792618" Name="Piano+Strings|">
-            <Zone DeviceID="627145948" Program="4" Volume="-1"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-2" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-1862712331" Name="Piano/Brass">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
