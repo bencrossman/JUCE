@@ -1,4 +1,3 @@
-Bug with 2nd row
 Korg solo sax (see rcf)
 Hammer e piano 2 (see rcf) - replace
 Check changes from keylab88 WavStreamer branch
