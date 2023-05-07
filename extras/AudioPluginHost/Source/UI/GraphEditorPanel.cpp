@@ -757,8 +757,15 @@ void GraphEditorPanel::resized()
     updateComponents();
 }
 
+static bool changeListenerCallbackDone = false;
+
 void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 {
+    if (changeListenerCallbackDone)
+        return;
+
+    changeListenerCallbackDone = true;
+
     updateComponents();
 }
 
