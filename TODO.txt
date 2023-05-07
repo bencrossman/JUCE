@@ -1,9 +1,8 @@
-Turn off sleep time
-
 Schedule
 ~~~~~~~~
-Get new guitar working (threshold?)
-Could be some input coming through even with guitar off
+Could be some input coming through RIGHT_ONLY even with guitar off
+Guitar need 256 buffer size for no crap on NUC, fine with 16 on laptop. Must boot with guitar ready.
+
 Do some gigs with laptop / interface to iron out software bugs
 Replace NUC in Keylab (most likely Brisbane gig), pick interface (Existing guitar in/out, DI[Will give headphone, volume, reduce cables] with guitar, inbuilt with guitar, Behringer Guitar Link UCG102 Interface)
 Work laptop becomes backup (retire old laptop)
