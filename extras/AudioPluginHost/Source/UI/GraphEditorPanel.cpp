@@ -1527,6 +1527,10 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
     RackRow::SetTempo(performer->TempPerformance.Tempo);
 	graph.SetTempo(performer->TempPerformance.Tempo);
 
+
+
+    bool tempBufferIncrease = false;
+
     for (auto i = 0U; i < zones.size(); ++i)
     {
         for (auto d = 0U; d < m_rackDevice.size(); d++)
@@ -1534,11 +1538,19 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             auto rackDevice = ((RackRow*)m_rackDevice[d].get());
             if (rackDevice->ID() == zones[i].DeviceID)
             {
+                if (zones[i].Device->m_audioInputNode && !zones[i].Mute)
+                    tempBufferIncrease = true;
+
                 rackDevice->Assign(&(zones[i]));
                 break;
             }
         }
     }
+
+    auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
+    mainWindow->postCommandMessage(tempBufferIncrease ? CommandIDs::temporarilyIncreaseSampleBuffer : CommandIDs::restoreSampleBuffer);
+
+
 }
 
 void GraphEditorPanel::SoloChange()

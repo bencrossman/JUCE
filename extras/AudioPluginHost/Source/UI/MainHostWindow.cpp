@@ -861,7 +861,7 @@ bool MainHostWindow::perform (const InvocationInfo& info)
         break;
 
 	case CommandIDs::import:
-
+        
          if (graphHolder != nullptr && graphHolder->graph != nullptr)
          {
              SafePointer<MainHostWindow> parent { this };
@@ -1072,4 +1072,29 @@ void MainHostWindow::updateAutoScaleMenuItem (ApplicationCommandInfo& info)
 {
     info.setInfo ("Auto-Scale Plug-in Windows", {}, "General", 0);
     info.setTicked (isAutoScalePluginWindowsEnabled());
+}
+
+void MainHostWindow::handleCommandMessage(int commandId)
+{
+    switch (commandId)
+    {
+    case CommandIDs::temporarilyIncreaseSampleBuffer:
+        if (m_originalBufferSize == 0)
+        {
+            auto setup = deviceManager.getAudioDeviceSetup();
+            m_originalBufferSize = setup.bufferSize;
+            setup.bufferSize = 256;
+            deviceManager.setAudioDeviceSetup(setup, false);
+        }
+        break;
+    case CommandIDs::restoreSampleBuffer:
+        if (m_originalBufferSize > 0)
+        {
+            auto setup = deviceManager.getAudioDeviceSetup();
+            setup.bufferSize = m_originalBufferSize;
+            m_originalBufferSize = 0;
+            deviceManager.setAudioDeviceSetup(setup, false);
+        }
+        break;
+    }
 }
