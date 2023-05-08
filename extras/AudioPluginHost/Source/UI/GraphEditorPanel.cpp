@@ -758,22 +758,22 @@ struct GraphEditorPanel::ConnectorComponent final : public Component,
 //==============================================================================
 GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 {
-	LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Impact");
-
     graph.addChangeListener (this);
     setOpaque (true);
+
+    LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Impact");
 
     m_rackUIViewport.reset(new Viewport());
     m_rackUI.reset(new Component());
     m_rackTopUI.reset(new RackTitleBar());
-	m_setlistUI.reset(new SetlistManager());
+    m_setlistUI.reset(new SetlistManager());
 
     m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
-	m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
+    m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     m_tabs->addTab(TRANS("Performances"), Colours::transparentBlack, m_rackUIViewport.get(), false);
     m_tabs->addTab(TRANS("SetLists"), Colours::transparentBlack, m_setlistUI.get(), false);
-	//m_tabs->setTabBarDepth(30);
-	m_tabs->setCurrentTabIndex(0);
+    //m_tabs->setTabBarDepth(30);
+    m_tabs->setCurrentTabIndex(0);
     addAndMakeVisible(m_tabs.get());
 
     m_rackUIViewport->setScrollBarsShown(true, false);
@@ -785,6 +785,11 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 GraphEditorPanel::~GraphEditorPanel()
 {
     graph.removeChangeListener (this);
+/*
+    draggingConnector = nullptr;
+    nodes.clear();
+    connectors.clear();
+*/
 }
 
 void GraphEditorPanel::paint (Graphics& g)
@@ -792,23 +797,83 @@ void GraphEditorPanel::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 }
 
+/*
+void GraphEditorPanel::mouseDown (const MouseEvent& e)
+{
+    if (isOnTouchDevice())
+    {
+        originalTouchPos = e.position.toInt();
+        startTimer (750);
+    }
+
+    if (e.mods.isPopupMenu())
+        showPopupMenu (e.position.toInt());
+}
+
+void GraphEditorPanel::mouseUp (const MouseEvent&)
+{
+    if (isOnTouchDevice())
+    {
+        stopTimer();
+        callAfterDelay (250, []() { PopupMenu::dismissAllActiveMenus(); });
+    }
+}
+
+void GraphEditorPanel::mouseDrag (const MouseEvent& e)
+{
+    if (isOnTouchDevice() && e.getDistanceFromDragStart() > 5)
+        stopTimer();
+}
+*/
 
 void GraphEditorPanel::createNewPlugin (const PluginDescriptionAndPreference& desc, Point<int> position)
 {
     graph.addPlugin (desc, position.toDouble() / Point<double> ((double) getWidth(), (double) getHeight()));
 }
 
+/*
+GraphEditorPanel::PluginComponent* GraphEditorPanel::getComponentForPlugin (AudioProcessorGraph::NodeID nodeID) const
+{
+    for (auto* fc : nodes)
+       if (fc->pluginID == nodeID)
+            return fc;
 
+    return nullptr;
+}
+
+GraphEditorPanel::ConnectorComponent* GraphEditorPanel::getComponentForConnection (const AudioProcessorGraph::Connection& conn) const
+{
+    for (auto* cc : connectors)
+        if (cc->connection == conn)
+            return cc;
+
+    return nullptr;
+}
+
+GraphEditorPanel::PinComponent* GraphEditorPanel::findPinAt (Point<float> pos) const
+{
+    for (auto* fc : nodes)
+    {
+        // NB: A Visual Studio optimiser error means we have to put this Component* in a local
+        // variable before trying to cast it, or it gets mysteriously optimised away..
+        auto* comp = fc->getComponentAt (pos.toInt() - fc->getPosition());
+
+        if (auto* pin = dynamic_cast<PinComponent*> (comp))
+            return pin;
+    }
+
+    return nullptr;
+}
+*/
 
 void GraphEditorPanel::resized()
 {
     updateComponents();
 }
 
-static bool changeListenerCallbackDone = false;
-
 void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 {
+    static bool changeListenerCallbackDone = false;
     if (changeListenerCallbackDone)
         return;
 
@@ -817,47 +882,164 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
     updateComponents();
 }
 
+/*
 void GraphEditorPanel::updateComponents()
 {
-	// Originally this should be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
-    // both of these are about to be added to in for loop below
+    for (int i = nodes.size(); --i >= 0;)
+        if (graph.graph.getNodeForId (nodes.getUnchecked(i)->pluginID) == nullptr)
+            nodes.remove (i);
 
-    if (!m_updateComponents)
+    for (int i = connectors.size(); --i >= 0;)
+        if (! graph.graph.isConnected (connectors.getUnchecked(i)->connection))
+            connectors.remove (i);
+
+    for (auto* fc : nodes)
+        fc->update();
+
+    for (auto* cc : connectors)
+        cc->update();
+
+    for (auto* f : graph.graph.getNodes())
     {
-        m_updateComponents = true;
-        return;
+        if (getComponentForPlugin (f->nodeID) == nullptr)
+        {
+            auto* comp = nodes.add (new PluginComponent (*this, f->nodeID));
+            addAndMakeVisible (comp);
+            comp->update();
+        }
     }
 
-	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
-
-    m_rackDevice.clear();
-    m_rackUI->removeAllChildren();
-
-    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
-
-    auto performer = graph.GetPerformer();
-    int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
-    int deviceHeight = 20;
-    for (int i = 0; i < devicesOnScreen; ++i)
+    for (auto& c : graph.graph.getConnections())
     {
-        m_rackDevice.push_back(std::make_unique<RackRow>());
-        auto newRackRow = (RackRow*)m_rackDevice.back().get();
-        newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
-        deviceHeight = newRackRow->getHeight();
-        m_rackUI->addAndMakeVisible(newRackRow);
-        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, newRackRow->getWidth(), newRackRow->getHeight());
+        if (getComponentForConnection (c) == nullptr)
+        {
+            auto* comp = connectors.add (new ConnectorComponent (*this));
+            addAndMakeVisible (comp);
+
+            comp->setInput (c.source);
+            comp->setOutput (c.destination);
+        }
     }
-	int deviceWidth = 946;
-
-    m_tabs->setBounds(10, 10, deviceWidth, getParentHeight() - 90); // include tab bar, could work out number so just hard coded 89
-    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
-    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
-    m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
-
-    SetPerformance();
-
-	((SetlistManager*)m_setlistUI.get())->SetData(performer);
 }
+
+void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
+{
+    menu.reset (new PopupMenu);
+
+    if (auto* mainWindow = findParentComponentOfClass<MainHostWindow>())
+    {
+        mainWindow->addPluginsToMenu (*menu);
+
+        menu->showMenuAsync ({},
+                             ModalCallbackFunction::create ([this, mousePos] (int r)
+                                                            {
+                                                                if (r > 0)
+                                                                    if (auto* mainWin = findParentComponentOfClass<MainHostWindow>())
+                                                                        createNewPlugin (mainWin->getChosenType (r), mousePos);
+                                                            }));
+    }
+}
+
+void GraphEditorPanel::beginConnectorDrag (AudioProcessorGraph::NodeAndChannel source,
+                                           AudioProcessorGraph::NodeAndChannel dest,
+                                           const MouseEvent& e)
+{
+    auto* c = dynamic_cast<ConnectorComponent*> (e.originalComponent);
+    connectors.removeObject (c, false);
+    draggingConnector.reset (c);
+
+    if (draggingConnector == nullptr)
+        draggingConnector.reset (new ConnectorComponent (*this));
+
+    draggingConnector->setInput (source);
+    draggingConnector->setOutput (dest);
+
+    addAndMakeVisible (draggingConnector.get());
+    draggingConnector->toFront (false);
+
+    dragConnector (e);
+}
+
+void GraphEditorPanel::dragConnector (const MouseEvent& e)
+{
+    auto e2 = e.getEventRelativeTo (this);
+
+    if (draggingConnector != nullptr)
+    {
+        draggingConnector->setTooltip ({});
+
+        auto pos = e2.position;
+
+        if (auto* pin = findPinAt (pos))
+        {
+            auto connection = draggingConnector->connection;
+
+            if (connection.source.nodeID == AudioProcessorGraph::NodeID() && ! pin->isInput)
+            {
+                connection.source = pin->pin;
+            }
+            else if (connection.destination.nodeID == AudioProcessorGraph::NodeID() && pin->isInput)
+            {
+                connection.destination = pin->pin;
+            }
+
+            if (graph.graph.canConnect (connection))
+            {
+                pos = (pin->getParentComponent()->getPosition() + pin->getBounds().getCentre()).toFloat();
+                draggingConnector->setTooltip (pin->getTooltip());
+            }
+        }
+
+        if (draggingConnector->connection.source.nodeID == AudioProcessorGraph::NodeID())
+            draggingConnector->dragStart (pos);
+        else
+            draggingConnector->dragEnd (pos);
+    }
+}
+
+void GraphEditorPanel::endDraggingConnector (const MouseEvent& e)
+{
+    if (draggingConnector == nullptr)
+        return;
+
+    draggingConnector->setTooltip ({});
+
+    auto e2 = e.getEventRelativeTo (this);
+    auto connection = draggingConnector->connection;
+
+    draggingConnector = nullptr;
+
+    if (auto* pin = findPinAt (e2.position))
+    {
+        if (connection.source.nodeID == AudioProcessorGraph::NodeID())
+        {
+            if (pin->isInput)
+                return;
+
+            connection.source = pin->pin;
+        }
+        else
+        {
+            if (! pin->isInput)
+                return;
+
+            connection.destination = pin->pin;
+        }
+
+        graph.graph.addConnection (connection);
+    }
+}
+
+void GraphEditorPanel::timerCallback()
+{
+    // this should only be called on touch devices
+    jassert (isOnTouchDevice());
+
+    stopTimer();
+    showPopupMenu (originalTouchPos);
+}
+
+*/
 
 //==============================================================================
 struct GraphDocumentComponent::TooltipBar final : public Component,
@@ -1100,8 +1282,8 @@ void GraphDocumentComponent::init()
 
     if (isOnTouchDevice())
     {
-            titleBarComponent.reset (new TitleBarComponent (*this));
-            addAndMakeVisible (titleBarComponent.get());
+        titleBarComponent.reset (new TitleBarComponent (*this));
+        addAndMakeVisible (titleBarComponent.get());
 
         pluginListBoxModel.reset (new PluginListBoxModel (pluginListBox, pluginList));
 
@@ -1114,10 +1296,10 @@ void GraphDocumentComponent::init()
                                                                               0, 2, 0, 2,
                                                                               true, true, true, false));
 
-            addAndMakeVisible (pluginListSidePanel);
-            addAndMakeVisible (mobileSettingsSidePanel);
-        }
+        addAndMakeVisible (pluginListSidePanel);
+        addAndMakeVisible (mobileSettingsSidePanel);
     }
+}
 
 GraphDocumentComponent::~GraphDocumentComponent()
 {
@@ -1376,6 +1558,48 @@ bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
 		((RackTitleBar*)m_rackTopUI.get())->m_onNextPerformance();
     }
     return true;
+}
+
+void GraphEditorPanel::updateComponents()
+{
+	// Originally updateComponents would be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
+    // both of these are about to be added to in for loop below
+
+    if (!m_updateComponents)
+    {
+        m_updateComponents = true;
+        return;
+    }
+
+	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
+
+    m_rackDevice.clear();
+    m_rackUI->removeAllChildren();
+
+    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
+
+    auto performer = graph.GetPerformer();
+    int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
+    int deviceHeight = 20;
+    for (int i = 0; i < devicesOnScreen; ++i)
+    {
+        m_rackDevice.push_back(std::make_unique<RackRow>());
+        auto newRackRow = (RackRow*)m_rackDevice.back().get();
+        newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
+        deviceHeight = newRackRow->getHeight();
+        m_rackUI->addAndMakeVisible(newRackRow);
+        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, newRackRow->getWidth(), newRackRow->getHeight());
+    }
+	int deviceWidth = 946;
+
+    m_tabs->setBounds(10, 10, deviceWidth, getParentHeight() - 90); // include tab bar, could work out number so just hard coded 89
+    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
+    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
+    m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
+
+    SetPerformance();
+
+	((SetlistManager*)m_setlistUI.get())->SetData(performer);
 }
 
 

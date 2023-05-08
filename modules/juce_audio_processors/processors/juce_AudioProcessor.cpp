@@ -898,7 +898,7 @@ AudioProcessorEditor* AudioProcessor::createEditorIfNeeded()
     if (ed != nullptr)
     {
         // you must give your editor comp a size before returning it..
-        jassert (ed->getWidth() > 0 && ed->getHeight() > 0); // may need to comment this out
+        //jassert (ed->getWidth() > 0 && ed->getHeight() > 0); // Commented this out for FM7 hitting
         activeEditor = ed;
     }
 

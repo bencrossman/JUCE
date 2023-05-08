@@ -504,11 +504,12 @@ void IOConfigurationWindow::update()
         if (nodeID != AudioProcessorGraph::NodeID())
             graph->disconnectNode (nodeID);
 
-    // This was removed for some reason
-    /*
+    // I removed updateComponents below for some reason
+    return;
+
     if (auto* graphEditor = getGraphEditor())
         if (auto* panel = graphEditor->graphPanel.get())
-            panel->updateComponents();*/
+            panel->updateComponents();
 }
 
 AudioProcessorGraph::NodeID IOConfigurationWindow::getNodeID() const

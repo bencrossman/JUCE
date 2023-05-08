@@ -689,8 +689,9 @@ static void addToMenu (const KnownPluginList::PluginTree& tree,
 
 void MainHostWindow::addPluginsToMenu (PopupMenu& m)
 {
-    // Dont need this for some reason
-    /*if (graphHolder != nullptr)
+    // Don't add the Internal plugins into the menu bar
+    /*
+    if (graphHolder != nullptr)
     {
         int i = 0;
 
@@ -698,7 +699,8 @@ void MainHostWindow::addPluginsToMenu (PopupMenu& m)
             m.addItem (++i, t.name + " (" + t.pluginFormatName + ")");
     }
 
-    m.addSeparator();*/
+    m.addSeparator();
+    */
 
     auto pluginDescriptions = knownPluginList.getTypes();
 
@@ -859,15 +861,22 @@ bool MainHostWindow::perform (const InvocationInfo& info)
         break;
 
 	case CommandIDs::import:
-        /*if (graphHolder != nullptr && graphHolder->graph != nullptr && graphHolder->graph->saveIfNeededAndUserAgrees() == FileBasedDocument::savedOk)
-        {
-            FileChooser fc("Select Forte RCF File to import",File(),"*.rcf");
-            if (fc.browseForFileToOpen())
-            {
-                graphHolder->graph->Import(fc.getResult().getFullPathName().getCharPointer());
-                graphHolder->graphPanel->updateComponents();
-            }
-        }*/
+
+         if (graphHolder != nullptr && graphHolder->graph != nullptr)
+         {
+             SafePointer<MainHostWindow> parent { this };
+             graphHolder->graph->saveIfNeededAndUserAgreesAsync ([parent] (FileBasedDocument::SaveResult r)
+             {
+                 if (parent == nullptr)
+                     return;
+
+                 if (r == FileBasedDocument::savedOk)
+                 {
+                     //parent->graphHolder->graph->Import(fc.getResult().getFullPathName().getCharPointer()); // Need to implement importFromUserSpecifiedFileAsync
+                     parent->graphHolder->graphPanel->updateComponents();
+                 }
+             });
+         }
 		break;
 
     case CommandIDs::save:
