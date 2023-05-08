@@ -295,6 +295,8 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 				((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(bypass);
 				//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(bypass);
 				((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(bypass);
+                if (m_current->Device->m_audioInputNode)
+                    ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(bypass);
 			}
         }
         m_program->setVisible(!m_current->Mute && m_hasPrograms);
@@ -797,6 +799,9 @@ void RackRow::SetSoloMode(bool mode)
     if (m_current->Device->m_gainNode)
 	    ((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 	//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+
+    if (m_current->Device->m_audioInputNode)
+        ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
 }
 
 void RackRow::handleCommandMessage(int id)
@@ -824,6 +829,8 @@ void RackRow::handleCommandMessage(int id)
 		((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
 		//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
 		((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
+        if (m_current->Device->m_audioInputNode)
+            ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
 	}
 }
 
