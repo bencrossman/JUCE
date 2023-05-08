@@ -693,8 +693,6 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	InternalPluginFormat internalFormat;
 	auto types = internalFormat.getAllTypes();
 
-	processor->setPlayHead(graph.getPlayHead());
-
     auto audioInputs = processor->getTotalNumInputChannels();
     if (String(rack.PluginName).contains("DirectWave"))
         audioInputs = 0;
@@ -720,6 +718,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
     {
         graph.addConnection({ { m_audioInNode->nodeID, 0 }, { node->nodeID, 0 }});
         graph.addConnection({ { m_audioInNode->nodeID, 1 }, { node->nodeID, 1 }});
+        rack.m_audioInputNode = (void*)m_audioInNode.get();
     }
 }
 

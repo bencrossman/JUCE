@@ -20,6 +20,7 @@ public:
     void *m_node = NULL;
     void *m_gainNode = NULL;
     void *m_midiFilterNode = NULL;
+    void* m_audioInputNode = NULL;
     bool m_usesBanks = false;
 	bool m_stereoToMonoWillPhase = false;
 
