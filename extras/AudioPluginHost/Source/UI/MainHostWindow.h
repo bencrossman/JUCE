@@ -54,6 +54,8 @@ namespace CommandIDs
     static const int allWindowsForward      = 0x30400;
     static const int toggleDoublePrecision  = 0x30500;
     static const int autoScalePluginWindows = 0x30600;
+    static const int temporarilyIncreaseSampleBuffer = 0x30700;
+    static const int restoreSampleBuffer = 0x30800;
 }
 
 //==============================================================================
@@ -145,6 +147,9 @@ private:
 
     class PluginListWindow;
     std::unique_ptr<PluginListWindow> pluginListWindow;
+
+    int m_originalBufferSize = 0;
+    void handleCommandMessage(int commandId) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainHostWindow)
 };
