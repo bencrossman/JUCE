@@ -54,7 +54,6 @@ public:
     InternalPluginFormat();
 
     //==============================================================================
-    PluginDescription audioInDesc, audioOutDesc, midiInDesc;
     const std::vector<PluginDescription>& getAllTypes() const;
 
     //==============================================================================

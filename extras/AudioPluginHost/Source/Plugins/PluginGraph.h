@@ -87,11 +87,19 @@ public:
     using NodeID = AudioProcessorGraph::NodeID;
 
     void addPlugin (const PluginDescriptionAndPreference&, Point<double>);
+/*
+    AudioProcessorGraph::Node::Ptr getNodeForName (const String& name) const;
 
+    void setNodePosition (NodeID, Point<double>);
+    Point<double> getNodePosition (NodeID) const;
+*/
     //==============================================================================
     void clear();
 
     PluginWindow* getOrCreateWindowFor (AudioProcessorGraph::Node*, PluginWindow::Type);
+/*
+    void closeCurrentlyOpenWindowsFor (AudioProcessorGraph::NodeID);
+*/
     bool closeAnyOpenPluginWindows();
 
     //==============================================================================
@@ -99,6 +107,10 @@ public:
     void audioProcessorChanged (AudioProcessor*, const ChangeDetails&) override { changed(); }
 
     //==============================================================================
+/*
+    std::unique_ptr<XmlElement> createXml() const;
+    void restoreFromXml (const XmlElement&);
+*/
 
     static const char* getFilenameSuffix()      { return ".performer"; }
     static const char* getFilenameWildcard()    { return "*.performer"; }
@@ -110,6 +122,14 @@ public:
     Result saveDocument (const File& file) override;
     File getLastDocumentOpened() override;
     void setLastDocumentOpened (const File& file) override;
+
+/*
+    static File getDefaultGraphDocumentOnMobile();
+*/
+
+    //==============================================================================
+    AudioProcessorGraph graph;
+
     void setupPerformer();
 	void AddRack(std::unique_ptr<AudioPluginInstance> &processorPtr, Device &rack);
 
@@ -124,8 +144,6 @@ public:
     void CreateDefaultNodes();
     void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 
-    //==============================================================================
-    AudioProcessorGraph graph;
     std::function<void()> m_onProgramChange = NULL;
 	void SetTempo(double tempo);
 	void SetMono(bool mono);
@@ -164,8 +182,9 @@ private:
 
     NodeID lastUID;
     NodeID getNextUID() noexcept;
-
-
+/*
+    void createNodeFromXml (const XmlElement&);
+*/
     void addPluginCallback (std::unique_ptr<AudioPluginInstance>,
                             const String& error,
                             Point<double>,

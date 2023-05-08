@@ -76,6 +76,8 @@ JUCE_BEGIN_IGNORE_DEPRECATION_WARNINGS
  static void _clearfp() {}
 #endif
 
+// SUPPORT JBRIDGE!
+
 #ifdef _M_AMD64
 #ifndef JUCE_VST_WRAPPER_LOAD_CUSTOM_MAIN
  // JBridge 
