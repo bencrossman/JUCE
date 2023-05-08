@@ -1,11 +1,7 @@
-JUCE7 - Playhead crash
-Might be a async plugin problem
-Import different
 
 
 Schedule
 ~~~~~~~~
-Input coming through RIGHT_ONLY even with guitar off
 Guitar need 256 buffer size for no crap on NUC, fine with 16 on laptop. Must boot with guitar ready.
 
 Do some gigs with laptop / interface to iron out software bugs
