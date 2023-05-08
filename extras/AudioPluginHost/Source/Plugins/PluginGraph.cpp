@@ -43,6 +43,7 @@ public:
 	{
         PositionInfo result;
 		result.setBpm(m_bpm);
+        result.setTimeInSamples(0); // Setting this to 0 but should probably be a proper value
 		return result;
 	}
 
@@ -81,8 +82,8 @@ PluginGraph::PluginGraph (AudioPluginFormatManager& fm, KnownPluginList& kpl)
       formatManager (fm),
       knownPlugins (kpl)
 {
-    graph.setPlayHead(new MyAudioPlayHead());
     newDocument();
+    graph.setPlayHead(new MyAudioPlayHead());
     graph.addListener (this);
     m_shutdownPressCount = 0;
 }
@@ -692,7 +693,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	InternalPluginFormat internalFormat;
 	auto types = internalFormat.getAllTypes();
 
-	processor->setPlayHead(new MyAudioPlayHead());
+	processor->setPlayHead(graph.getPlayHead());
 
     auto audioInputs = processor->getTotalNumInputChannels();
     if (String(rack.PluginName).contains("DirectWave"))
