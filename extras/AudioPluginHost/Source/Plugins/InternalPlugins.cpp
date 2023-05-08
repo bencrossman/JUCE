@@ -113,7 +113,7 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layout) const override        { return inner->checkBusesLayoutSupported (layout); }
     bool applyBusLayouts (const BusesLayout& layouts) override                    { return inner->setBusesLayout (layouts) && AudioPluginInstance::applyBusLayouts (layouts); }
 
-	const Array<AudioProcessorParameter*>& getParameters() const override         { return inner->getParameters(); }
+    const Array<AudioProcessorParameter*>& getParameters() const override         { return inner->getParameters(); } 
 
     bool canAddBus (bool) const override                                          { return true; }
     bool canRemoveBus (bool) const override                                       { return true; }
@@ -124,7 +124,7 @@ public:
         description = getPluginDescription (*inner);
     }
 
-	std::unique_ptr<AudioProcessor> &GetInner() { return inner; }
+	std::unique_ptr<AudioProcessor> &GetInner() { return inner; } // So SetFilterCallback can get access
 
 private:
     static PluginDescription getPluginDescription (const AudioProcessor& proc)
@@ -407,7 +407,6 @@ private:
     Reverb reverb;
 };
 
-
 //==============================================================================
 class MidiFilter : public AudioProcessor
 {
@@ -473,7 +472,7 @@ void InternalPluginFormat::SetFilterCallback(AudioProcessorGraph::Node *node, Mi
 InternalPluginFormat::InternalPluginFactory::InternalPluginFactory (const std::initializer_list<Constructor>& constructorsIn)
     : constructors (constructorsIn),
       descriptions ([&]
-    {
+      {
           std::vector<PluginDescription> result;
 
           for (const auto& constructor : constructors)
