@@ -1538,8 +1538,8 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             auto rackDevice = ((RackRow*)m_rackDevice[d].get());
             if (rackDevice->ID() == zones[i].DeviceID)
             {
-                if (zones[i].Device->m_audioInputNode && !zones[i].Mute)
-                    tempBufferIncrease = true;
+                //if (zones[i].Device->m_audioInputNode && !zones[i].Mute)
+                //    tempBufferIncrease = true;
 
                 rackDevice->Assign(&(zones[i]));
                 break;

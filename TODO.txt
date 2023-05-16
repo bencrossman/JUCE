@@ -1,8 +1,8 @@
 Schedule
 ~~~~~~~~
-Do some gigs with laptop / interface to iron out software bugs
-Replace NUC in Keylab (most likely Brisbane gig), pick interface (Existing guitar in/out, DI[Will give headphone, volume, reduce cables] with guitar, inbuilt with guitar, Behringer Guitar Link UCG102 Interface)
-Work laptop becomes backup (retire old laptop)
+Do some gigs with laptop to iron out software bugs. Try ASIO4ALL and WASAPI for lowest latency.
+Replace NUC in Keylab
+Work laptop becomes backup (retire old laptop, old NUC becomes international small backup)
 
 Next midi controller with one parameter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
