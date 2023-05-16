@@ -284,6 +284,8 @@ int Performer::GetTotalPerformances()
 void Performer::GetPerformanceByIndex(PerformanceType*&performance, Song *&song, int index)
 { 
     auto totalPerformances = GetTotalPerformances();
+    while (index < 0)
+        index += totalPerformances;
     if (totalPerformances > 0)
         index = index % totalPerformances;
     else
