@@ -1,6 +1,6 @@
 Schedule
 ~~~~~~~~
-Do some gigs with laptop to iron out software bugs. Try ASIO4ALL and WASAPI for lowest latency.
+Do some gigs with laptop to iron out software bugs. Try ASIO4ALL and WASAPI for lowest latency. (or maybe not, maybe straight to NUC, confidence is getting pretty high)
 Replace NUC in Keylab
 Work laptop becomes backup (retire old laptop, old NUC becomes international small backup)
 
