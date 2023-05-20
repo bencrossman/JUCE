@@ -1,8 +1,12 @@
 Schedule
 ~~~~~~~~
-Do some gigs with laptop to iron out software bugs. Try ASIO4ALL and WASAPI for lowest latency. (or maybe not, maybe straight to NUC, confidence is getting pretty high)
-Replace NUC in Keylab
-Work laptop becomes backup (retire old laptop, old NUC becomes international small backup)
+Test guitar, use new NUC
+If successful, work laptop becomes backup (retire old laptop, old NUC becomes international small backup)
+
+Song improvements (do a full pass):
+-I want it all bridge, more sounds up keyboard
+-Crazy little thing called love, try and get preample in
+-More BV triggers?
 
 Next midi controller with one parameter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
