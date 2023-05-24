@@ -913,7 +913,7 @@
             <Performance ID="-685490819" />
         </Song>
         <Song ID="1908421785" Name="We Are The Champions">
-            <Performance ID="-1066488609" />
+            <Performance ID="-1858471367" />
             <Performance ID="267872047" />
         </Song>
         <Song ID="749494757" Name="We Will Rock You">
@@ -1915,6 +1915,10 @@
         </Performance>
         <Performance ID="267872047" Name="We are the champions|">
             <Zone DeviceID="627145948" Program="4" LowKey="26"></Zone>
+            <Zone DeviceID="-2048222834" Program="13" Volume="-5"></Zone>
+        </Performance>
+        <Performance ID="-1858471367" Name="We are the champions|Strings">
+            <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="26"></Zone>
             <Zone DeviceID="-2048222834" Program="13" Volume="-5"></Zone>
         </Performance>
         <Performance ID="-116774935" Name="We will rock you fast|">
