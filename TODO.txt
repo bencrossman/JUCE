@@ -1,9 +1,30 @@
-Schedule
-~~~~~~~~
-Test guitar, use new NUC
-If successful, work laptop becomes backup (retire old laptop, old NUC becomes international small backup)
+Hardware
+- Aerials back
+- One of the 1/4" channel contact points
+- ASIO4ALL doesnt show inputs on laptop (seems to work on NUC though - Windows 11?)
+- WASAPI errors on input on laptop with new LINK2 with all combinations. Weird
+- Fine with BEHRINGER but with WASAPI exclusive only 
+- BEHRINGER with laptop on WASAPI sounds great
+- Selecting input on laptop crashes unless you remove racks on load (I had to do this on NUC anyway)
+- Guitar has directional noise problem anyway
+- Both LINKS have noise problems although NUC may be worse.
+- Laptop guitar tone (thru WASAPI) seems stronger than NUC's - I wonder if the switch is reversed (the volume is)
+
+Software
+- Guitar plugin needs Internet - Show stopper for now, although not reproducable.
+- Arpegio not triggering
+- If device not found dont save blank
+- OBX - 3oclock on old hp, full on NUC - Do a pass on all Queen songs
+- Final countdown too loud
+- Kinda magic bells?
+- Love of my life strings (make simpler or reduce volume)
+- Best friend maybe too loud (compare)
+- Somebody 2nd patch organ really loud (not touch?)
+
 
 Song improvements (do a full pass):
+
+-Choir at end!
 -I want it all bridge, more sounds up keyboard
 -Crazy little thing called love, try and get preample in
 -More BV triggers?
@@ -36,6 +57,7 @@ If released
 Rename rack
 Reorder racks
 Need UI to enable/disable #CC16
+Disconnect plugins on device change (stop ASIO4ALL crash)
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent

@@ -20,6 +20,7 @@
             <Song ID="1030967864" />
             <Song ID="1351634846" />
             <Song ID="-1203166635" />
+            <Song ID="1278192846" />
             <Song ID="-1320569983" />
             <Song ID="-1558578634" />
             <Song ID="-584579934" />
@@ -540,6 +541,9 @@
         </Song>
         <Song ID="-158333928" Name="Karma Camelion">
             <Performance ID="243455343" />
+        </Song>
+        <Song ID="1278192846" Name="Keep Yourself Alive">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="1274686534" Name="Khe Sahn">
             <Performance ID="137804045" />
