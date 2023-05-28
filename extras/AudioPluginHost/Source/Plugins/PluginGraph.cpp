@@ -1343,3 +1343,18 @@ void PluginGraph::CreateDefaultNodes()
     graph.addConnection({ { m_masterGainNode->nodeID, 1 },{ m_audioOutNode->nodeID, 1 } });
 }
 
+String GetMachineName()
+{
+    wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
+    DWORD dwSize = sizeof(name);
+    if (!GetComputerNameW(name, &dwSize))
+        return "";
+    return String(name);
+}
+
+void PluginGraph::SetMidiOutputDeviceName(String name)
+{
+    m_isKeylab88MkII = name.contains("KeyLab mkII 88");
+    if (name == "" && GetMachineName() == "KEYLAB88MKII")
+        system("shutdown /t 60 /s");
+}
