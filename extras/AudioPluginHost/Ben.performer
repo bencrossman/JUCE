@@ -919,6 +919,7 @@
         <Song ID="1908421785" Name="We Are The Champions">
             <Performance ID="-1858471367" />
             <Performance ID="267872047" />
+            <Performance ID="-2121879230" />
         </Song>
         <Song ID="749494757" Name="We Will Rock You">
             <Performance ID="1887265414" />
@@ -1106,6 +1107,9 @@
             <Zone DeviceID="1555279137" Bank="36" Program="10" Volume="4" Transpose="-36" LowKey="96"></Zone>
             <Zone DeviceID="-1202024641" Bank="1" Program="41" LowKey="60" HighKey="95"></Zone>
             <Zone DeviceID="522416168" Program="17" Volume="-2" LowKey="60" HighKey="95"></Zone>
+        </Performance>
+        <Performance ID="-2121879230" Name="Choir" Tempo="118">
+            <Zone DeviceID="-699955187" Bank="9" Program="20"></Zone>
         </Performance>
         <Performance ID="-867379470" Name="Church Organ|">
             <Zone DeviceID="1555279137" Bank="10" Program="8" Volume="2"></Zone>
@@ -1357,10 +1361,9 @@
             <Zone DeviceID="-1783610977" Program="1" HighKey="71"></Zone>
         </Performance>
         <Performance ID="773092779" Name="I want it all|Bridge" Tempo="202">
-            <Zone DeviceID="627145948" Program="4" Volume="-6" LowKey="54" HighKey="71"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="45" LowKey="61"></Zone>
             <Zone DeviceID="1555279137" Bank="3" Program="28" Transpose="24" LowKey="37" HighKey="52"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="48" HighKey="53"></Zone>
-            <Zone DeviceID="-841590045" Program="41" Volume="-15" Transpose="-12" LowKey="72"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="48" HighKey="60"></Zone>
             <Zone DeviceID="-1973686393" Program="91" Volume="-12" Transpose="36" HighKey="37"></Zone>
         </Performance>
         <Performance ID="1910999940" Name="I want that man|">
