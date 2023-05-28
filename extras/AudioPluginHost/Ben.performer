@@ -1196,10 +1196,10 @@
             <Zone DeviceID="-2048222834" Program="11"></Zone>
         </Performance>
         <Performance ID="-1104081288" Name="Final Countdown">
-            <Zone DeviceID="546031377" Program="7"></Zone>
-            <Zone DeviceID="-1973686393" Program="87" Volume="3" Transpose="-27" LowKey="78"></Zone>
+            <Zone DeviceID="546031377" Program="7" Volume="-3"></Zone>
+            <Zone DeviceID="-1973686393" Program="87" Transpose="-27" LowKey="78"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="33" HighKey="56"></Zone>
-            <Zone DeviceID="522416168" Program="86" Volume="5" NoteMode="6" Transpose="-3" LowKey="57" HighKey="77"></Zone>
+            <Zone DeviceID="522416168" Program="86" NoteMode="6" Transpose="-3" LowKey="57" HighKey="77"></Zone>
         </Performance>
         <Performance ID="1562058522" Name="Fire Away|">
             <Zone DeviceID="-1202024641" Bank="2" Program="12" Volume="-3" Transpose="12" HighKey="71"></Zone>
@@ -1536,8 +1536,8 @@
             <Zone DeviceID="546031377" Program="5"></Zone>
         </Performance>
         <Performance ID="709579329" Name="Organ/Piano">
-            <Zone DeviceID="627145948" Program="5" Transpose="-12" LowKey="60"></Zone>
-            <Zone DeviceID="1024611825" Program="0" Transpose="36" HighKey="59"></Zone>
+            <Zone DeviceID="627145948" Program="4" LowKey="48"></Zone>
+            <Zone DeviceID="1024611825" Program="0" Volume="-6" Transpose="36" HighKey="47"></Zone>
         </Performance>
         <Performance ID="-323245629" Name="Our Song|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="36" LowKey="22" HighKey="59"></Zone>
@@ -1995,7 +1995,7 @@
             <Zone DeviceID="522416168" Program="103" Transpose="24" LowKey="23" HighKey="59"></Zone>
         </Performance>
         <Performance ID="2039328788" Name="Your my best friend|">
-            <Zone DeviceID="-2048222834" Program="10" Volume="-3"></Zone>
+            <Zone DeviceID="-2048222834" Program="10" Volume="-6"></Zone>
         </Performance>
     </Performances>
 </Root>
