@@ -626,13 +626,12 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (m_pendingSoundOff)
     {
-		// turn off all notes, OPX didnt work with just MidiMessage::AllNotesOff
-		for (int note = 0; note <= 127; ++note)
-			midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
 
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
 
+        midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (OPX just kept going with sustain lifted elsewhere and then change back even with all notes off event)
+        midiBuffer.addEvent(MidiMessage::allNotesOff(1), 0);
         midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
         m_pendingSoundOff = false;
     }
@@ -663,7 +662,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         postCommandMessage(CommandBypass);
     }
 
-    if (m_arpeggiatorTimer > 0) // arpeggiator active
+    if (!m_notesDown.empty()) // arpeggiator active
     {
         while (1)
         {
@@ -672,7 +671,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 arpeggiatorSample = nextarpeggiatorSample; // in case we can fit more in
 
-                m_arpeggiatorTimer = 15.f / m_tempo; // reset timer
+                m_arpeggiatorTimer = 15.f / m_tempo; // reset timer, what the hell is 15? Does make timing correct
 
                 // cancel last note
                 if (m_lastNote >= 0)
@@ -682,13 +681,11 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 }
 
                 // need new note
-                if (!m_notesDown.empty())
-                {
-                    m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio ? 3 : 1));
-                    if (m_lastNote < 128)
-                        midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
-                    m_arpeggiatorBeat++;
-                }
+	
+                m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio ? 3 : 1));
+                if (m_lastNote < 128)
+                    midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
+                m_arpeggiatorBeat++;
             }
             else
                 break;
@@ -696,7 +693,6 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
         // reduce timer
         m_arpeggiatorTimer -= (samples - arpeggiatorSample) / (float)sampleRate;
-        assert(m_arpeggiatorTimer > 0); // shouldnt be possible to get to 0 here, but have seen it
     }
 }
 
