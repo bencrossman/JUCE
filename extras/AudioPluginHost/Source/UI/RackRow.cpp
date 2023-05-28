@@ -561,7 +561,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                             if (m_notesDown.empty() && midi_message.isNoteOn())
                             {
                                 m_arpeggiatorBeat = 0;
-                                m_arpeggiatorTimer = 0.001f; // 1ms for first one
+                                m_arpeggiatorTimer = 0;
                                 arpeggiatorSample = sample_number;
                             }
 
@@ -570,6 +570,8 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                             for (auto i = 0U; i < m_notesDown.size(); ++i)
                                 if (m_notesDown[i] == note)
                                     found = i;
+
+                            // Add note if not in list
                             if (found == -1 && midi_message.isNoteOn())
                             {
                                 for (auto i = 0U; i < m_notesDown.size(); ++i)
@@ -584,16 +586,24 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                                     m_notesDown.push_back(note);
                                 else
                                     m_notesDown.insert(m_notesDown.begin() + found, note);
-                                m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
+
+                                // Any change in notes reset arpeggiator
+                                m_arpeggiatorBeat = 0;
+                                m_arpeggiatorTimer = 0;
                             }
+
+                            // remove note if in list
                             if (found != -1 && midi_message.isNoteOff())
                             {
                                 swap(m_notesDown[found], m_notesDown[m_notesDown.size() - 1]);
                                 m_notesDown.pop_back();
-                                m_arpeggiatorBeat = 0; // Any change in notes resets arpeggiator position
+
+                                // Any change in notes reset arpeggiator
+                                m_arpeggiatorBeat = 0;
+                                m_arpeggiatorTimer = 0;
                             }
 
-                            // are we ending?
+                            // last note released, stop it
                             if (midi_message.isNoteOff() && m_notesDown.empty())
                             {
                                 // cancel last note
@@ -602,7 +612,6 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                                     output.addEvent(MidiMessage::noteOff(1, m_lastNote), sample_number);
                                     m_lastNote = -1;
                                 }
-                                m_arpeggiatorTimer = 0.f;
                             }
                         }
                         else
