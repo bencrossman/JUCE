@@ -635,12 +635,13 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (m_pendingSoundOff)
     {
-
+		// turn off all notes, OPX didnt work with just MidiMessage::AllNotesOff
+		for (int note = 0; note <= 127; ++note)
+			midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
 
         midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (OPX just kept going with sustain lifted elsewhere and then change back even with all notes off event)
-        midiBuffer.addEvent(MidiMessage::allNotesOff(1), 0);
         midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
         m_pendingSoundOff = false;
     }
