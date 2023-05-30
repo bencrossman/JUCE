@@ -29,6 +29,7 @@ Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
 Highlight tab
 Enter closes text boxes
+Realtime VU meter
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
