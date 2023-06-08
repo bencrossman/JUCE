@@ -1048,7 +1048,7 @@
             <Zone DeviceID="-1973686393" Program="127" Volume="-4" Transpose="24" HighKey="71"></Zone>
         </Performance>
         <Performance ID="1946795113" Name="Another Day in Paradise|">
-            <Zone DeviceID="-1973686393" Program="112" Volume="-3" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
+            <Zone DeviceID="-1973686393" Program="112" Volume="-9" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-985547765" Bank="2" Program="39" Transpose="12" HighKey="60"></Zone>
         </Performance>
         <Performance ID="2000364178" Name="Another brick in the wall|">
@@ -1730,7 +1730,7 @@
             <Zone DeviceID="-2048222836" Program="1" Volume="6" Transpose="9"></Zone>
         </Performance>
         <Performance ID="642584100" Name="Separate Ways|">
-            <Zone DeviceID="-1973686393" Program="5" Volume="-3"></Zone>
+            <Zone DeviceID="-1973686393" Program="5"></Zone>
         </Performance>
         <Performance ID="1406338149" Name="Sex on fiire|">
             <Zone DeviceID="1555279137" Bank="7" Program="19"></Zone>
@@ -1854,7 +1854,7 @@
             <Zone DeviceID="546031377" Program="5"></Zone>
         </Performance>
         <Performance ID="-1762529841" Name="The Living Years|">
-            <Zone DeviceID="-985547765" Bank="2" Program="38"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="38" Volume="3"></Zone>
         </Performance>
         <Performance ID="1454644447" Name="These are the days of our lives|">
             <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
