@@ -46,7 +46,8 @@ namespace CommandIDs
     static const int toggleDoublePrecision  = 0x30500;
     static const int autoScalePluginWindows = 0x30600;
     static const int temporarilyIncreaseSampleBuffer = 0x30700;
-    static const int restoreSampleBuffer = 0x30800;
+    static const int restoreSampleBuffer    = 0x30800;
+    static const int resetDevice            = 0x30900;
 }
 
 //==============================================================================
