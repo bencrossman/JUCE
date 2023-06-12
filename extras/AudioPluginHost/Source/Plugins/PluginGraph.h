@@ -136,7 +136,8 @@ public:
     void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 
     std::function<void()> m_onProgramChange = NULL;
-	void SetTempo(double tempo);
+    std::function<void()> m_onResetDevice = NULL;
+    void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
     void PrevPerformance() { m_manualMidi = m_isKeylab88MkII ? 28: 111; }

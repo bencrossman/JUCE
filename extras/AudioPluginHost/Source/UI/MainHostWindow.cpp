@@ -1084,5 +1084,11 @@ void MainHostWindow::handleCommandMessage(int commandId)
             deviceManager.setAudioDeviceSetup(setup, false);
         }
         break;
+    case CommandIDs::resetDevice:
+        {
+            deviceManager.closeAudioDevice();
+            deviceManager.restartLastAudioDevice();
+            break;
+        }
     }
 }
