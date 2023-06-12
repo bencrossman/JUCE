@@ -1,3 +1,6 @@
+Change to remaps on MKI - Volume / knob 1 #16 / Slider 1 #9 (Need to see what they come through as)
+Perhaps change from #9 to #85 (see how MKI goes) - Updates notes if we do
+
 Next midi controller with one parameter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Map modulation to CC16
@@ -30,6 +33,7 @@ Disconnect guitar on device change (stop ASIO4ALL crash)
 Highlight tab
 Enter closes text boxes
 Realtime VU meter
+Visual volume slider
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
