@@ -131,7 +131,6 @@ public:
     void UpdateLCDScreen(MidiBuffer &output, int sample_number, int index);
     void UpdateCurrentRouting();
     void LoadSet(int setIndex);
-    void SetupKeylab(MidiBuffer &output, int sample_number);
     void CreateDefaultNodes();
     void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 
