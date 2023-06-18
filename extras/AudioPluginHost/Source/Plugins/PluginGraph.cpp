@@ -866,107 +866,6 @@ void PluginGraph::Import(const char *filename)
 int m_pendingPerformanceIndex = 0;
 int m_pendingSet = 0;
 
-// https://forum.arturia.com/index.php?topic=87454.msg153922#msg153922
-void PluginGraph::SetupKeylab(MidiBuffer &output, int sample_number)
-{
-    for (int m = 0; m<43; ++m)
-    {
-        unsigned char mes[10];
-        int meslen = 0;
-        memcpy(mes, "\x00\x20\x6B\x7F\x42\x02\x00", 7); meslen += 7;
-        unsigned char parameter = 3;
-        unsigned char control = 0;
-        unsigned char value = 0;
-        // volume / knob 1 #16 / Slider 1 #9 / 16 pads (midi and note) / rewind (mode and cc) / forward (mode and cc) / stop (mode and cc) / record (mode and cc)
-        // Hoping to cull volume / knob 1 / slider 1
-        if (m == 0)
-        {
-            control = 0x30;
-            value = 9;
-        }
-        else if (m == 1)
-        {
-            control = 1;
-            value = 16;
-        }
-        else if (m == 2)
-        {
-            control = 0x0b; // slider 1
-            value = 9; // also setup slider 1 like volume
-        }
-        else if (m < 3 + 16)
-        {
-            parameter = 2; // midi channel (defaults to 10 on pads)
-            control = (unsigned char)(0x70 + (m - 3));
-            value = 0; // midi channel 1
-        }
-        else if (m < 3 + 16 * 2)
-        {
-            control = (unsigned char)(0x70 + (m - 3 - 16));
-            value = (unsigned char)(0x15 + (m - 3 - 16)); // Low A up
-        }
-        else if (m == 35)
-        {
-            parameter = 1;
-            control = 0x5b; // rewind
-            value = 8; // for some reason this mode value instead of 3
-        }
-        else if (m == 36)
-        {
-            parameter = 3;
-            control = 0x5b;
-            value = 28;
-        }
-        else if (m == 37)
-        {
-            parameter = 1;
-            control = 0x5c; // forward
-            value = 8;
-        }
-        else if (m == 38)
-        {
-            parameter = 3;
-            control = 0x5c;
-            value = 29;
-        }
-        else if (m == 39)
-        {
-            parameter = 1;
-            control = 0x59; // stop
-            value = 8;
-        }
-        else if (m == 40)
-        {
-            parameter = 3;
-            control = 0x59;
-            value = 30;
-        }
-        else if (m == 41)
-        {
-            parameter = 1;
-            control = 0x5a; // record
-            value = 8;
-        }
-        else if (m == 42)
-        {
-            parameter = 3;
-            control = 0x5a;
-            value = 31;
-        }
-
-
-        mes[meslen++] = parameter;
-        mes[meslen++] = control;
-        mes[meslen++] = value;
-
-        // send to lcd
-        vector<unsigned char> message(meslen);
-        memcpy(message.data(), mes, meslen);
-        output.addEvent(MidiMessage::createSysExMessage(mes, meslen), sample_number);
-    }
-}
-
-
 void PluginGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2)
 {
     std::string ip;
@@ -1090,8 +989,6 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     {
         m_keylabNeedsSettingup = false;
         PrintLCDScreen(midiBuffer, 0, "Performer", "Loading...");
-        if (!m_isKeylab88MkII) // We'll use "Analog Lab" mode so no controller assignment, remap at runtime
-            SetupKeylab(midiBuffer, 0);
     }
 
     if (m_keylabReady)
@@ -1125,8 +1022,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 // Remap for Keylab MKII because want it in "Analog Lab" mode to change patches and can't override controllers
                 if (midi_message.getControllerNumber() == 74) // 74 = Frequency Cutoff (standard MIDI)
                     midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()); // Filter
-                else if (midi_message.getControllerNumber() == 85) // 85 = Master volume (on MKII)
-                    midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 9, midi_message.getControllerValue()); // Volume
+
                 else if (midi_message.getControllerNumber() == 30)
                 {
                     if (midi_message.getControllerValue() == 17)
@@ -1138,15 +1034,18 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 }
             }
 
-            if (midi_message.isControllerOfType(30) && midi_message.getControllerValue() == 127) // power off
+            if (midi_message.isControllerOfType(30)) // power off
             {
-                m_shutdownPressCount++;
-                if (m_shutdownPressCount == 1)
-                    PrintLCDScreen(output, sample_number, "Are you sure?", " ");
-                else
+                if (midi_message.getControllerValue() == 127)
                 {
-                    PrintLCDScreen(output, sample_number, "Shutting Down", " ");
-                    system("shutdown /t 0 /s");
+                    m_shutdownPressCount++;
+                    if (m_shutdownPressCount == 1)
+                        PrintLCDScreen(output, sample_number, "Are you sure?", " ");
+                    else
+                    {
+                        PrintLCDScreen(output, sample_number, "Shutting Down", " ");
+                        system("shutdown /t 0 /s");
+                    }
                 }
             }
             else
@@ -1175,7 +1074,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             //  //ignore modulation
             //}
 
-            else if (midi_message.isControllerOfType(0x09))
+            else if (midi_message.isControllerOfType(85))
             {
 				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue((((float)midi_message.getControllerValue()) / 127.f) * 0.25f);
             }
