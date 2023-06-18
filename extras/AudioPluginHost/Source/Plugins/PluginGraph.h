@@ -139,8 +139,8 @@ public:
     void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
-    void PrevPerformance() { m_manualMidi = m_isKeylab88MkII ? 28: 111; }
-    void NextPerformance() { m_manualMidi = m_isKeylab88MkII ? 29 : 116; }
+    void PrevPerformance() { m_manualMidi = 28; }
+    void NextPerformance() { m_manualMidi = 29; }
     void SetMidiOutputDeviceName(String name);
 
 private:
