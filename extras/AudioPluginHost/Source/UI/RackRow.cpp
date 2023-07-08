@@ -627,8 +627,10 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     }
                 }
             }
+            else if (midi_message.isControllerOfType(0x01) && m_allowCC16) // Modulation can map to CC16 as well in case midi controller only has one assign
+                output.addEvent(MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()), sample_number); 
             else if (((midi_message.isControllerOfType(16) && m_allowCC16) || !midi_message.isControllerOfType(16)) && m_current->NoteMode != NoteMode::NoSustain)
-                output.addEvent(midi_message, sample_number); // other events like sustain
+            output.addEvent(midi_message, sample_number); // other events like sustain
         }
         midiBuffer = output;
     }
