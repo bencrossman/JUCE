@@ -1,6 +1,5 @@
-Next midi controller with one parameter
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Map modulation to CC16
+New "Another one bites the dust" sounds
+"I want it all" - Start louder
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -11,18 +10,12 @@ Pink Floyd - 11 songs, Brick already done (On the run is OBX patch)
 Bon Jovi - 15 songs, Living Prayer already done (runaway is OBX patch)
 Pink(Still loads in Forte) - 20 performances, 
 Madonna - 23 performances (Borderline is OPX patch)
-
 Integrate for Access database with edit? (library linked already)
-
-
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
-
-Next time rack removed
-~~~~~~~~~~~~~~~~~~~~~~
-Implement right click menu item "Delete rack", delete all zones
 
 If released
 ~~~~~~~~~~~~
+Implement right click menu item "Delete rack", delete all zones
 Rename rack
 Reorder racks
 Need UI to enable/disable #CC16
@@ -31,6 +24,10 @@ Highlight tab
 Enter closes text boxes
 Realtime VU meter
 Visual volume slider
+
+Future features
+~~~~~~~~~~~~~~~
+Hand over notes from previous patch
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
