@@ -1062,6 +1062,8 @@
             <Zone DeviceID="522416168" Program="122" Volume="-5" Transpose="36" LowKey="36" HighKey="47"></Zone>
             <Zone DeviceID="-841590045" Program="59" Volume="-3" LowKey="72" HighKey="83"></Zone>
             <Zone DeviceID="-2048222834" Program="8"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="103" Volume="-6" Transpose="-48" LowKey="84" HighKey="108"></Zone>
+            <Zone DeviceID="-699955187" Bank="2" Program="8" Transpose="12" LowKey="32" HighKey="35"></Zone>
         </Performance>
         <Performance ID="-1992293823" Name="Atomic|">
             <Zone DeviceID="1555279137" Bank="18" Program="84" Volume="-2" Transpose="10" LowKey="34" HighKey="58"></Zone>
