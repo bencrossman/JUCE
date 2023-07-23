@@ -762,6 +762,7 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
     setOpaque (true);
 
     LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Impact");
+    LookAndFeel::getDefaultLookAndFeel().setColour(TabbedButtonBar::frontTextColourId, Colours::white);
 
     m_rackUIViewport.reset(new Viewport());
     m_rackUI.reset(new Component());
@@ -770,10 +771,10 @@ GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 
     m_tabs.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
     m_tabs->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
-    m_tabs->addTab(TRANS("Performances"), Colours::transparentBlack, m_rackUIViewport.get(), false);
-    m_tabs->addTab(TRANS("SetLists"), Colours::transparentBlack, m_setlistUI.get(), false);
+    m_tabs->addTab(TRANS("Setlists"), Colours::transparentWhite, m_setlistUI.get(), false);
+    m_tabs->addTab(TRANS("Racks"), Colours::transparentWhite, m_rackUIViewport.get(), false);
     //m_tabs->setTabBarDepth(30);
-    m_tabs->setCurrentTabIndex(0);
+    m_tabs->setCurrentTabIndex(1);
     addAndMakeVisible(m_tabs.get());
 
     m_rackUIViewport->setScrollBarsShown(true, false);
@@ -1452,12 +1453,6 @@ void GraphEditorPanel::init(String name)
     graph.m_onProgramChange = [this]()
     {
         SetPerformance();
-    };
-
-    graph.m_onResetDevice = [this]()
-    {
-        auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
-        mainWindow->postCommandMessage(CommandIDs::resetDevice);
     };
 
 	((RackTitleBar*)m_rackTopUI.get())->m_onMonoChanged = [this](bool mono)

@@ -953,7 +953,7 @@ void SetlistManager::SetData(Performer *performer)
 void SetlistManager::visibilityChanged()
 {
 	Component::visibilityChanged();
-	if (isVisible() && m_performer->m_currentPerformanceIndex != -1)
+	if (isVisible() && m_performer && m_performer->m_currentPerformanceIndex != -1)
 	{
 		PerformanceType* performance = NULL;
 		Song* song = NULL;
