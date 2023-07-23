@@ -1069,8 +1069,6 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 m_shutdownPressCount = 0;
             }
 
-            if (midi_message.isControllerOfType(31) && midi_message.getControllerValue() == 127)
-                m_onResetDevice();
 
             // 4 broken wheels
             // 
@@ -1083,7 +1081,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             //  //ignore modulation
             //}
 
-            else if (midi_message.isControllerOfType(85))
+            if (midi_message.isControllerOfType(85))
             {
 				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue((((float)midi_message.getControllerValue()) / 127.f) * 0.25f);
             }
@@ -1234,5 +1232,5 @@ void PluginGraph::SetMidiOutputDeviceName(String name)
 {
     m_isKeylab88MkII = name.contains("KeyLab mkII 88");
     if (name == "" && GetMachineName() == "KEYLAB88MKII") //reset the PC if USB cable wasn't connected
-        system("shutdown /t 60 /s");
+        system("shutdown /t 120 /s");
 }
