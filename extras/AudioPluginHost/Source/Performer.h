@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../JuceLibraryCode/JuceHeader.h" // For Uuid
+
 #include <string>
 #include <vector>
 #include "ForteEmulator/ForteSDK/XmlArchive.h"
