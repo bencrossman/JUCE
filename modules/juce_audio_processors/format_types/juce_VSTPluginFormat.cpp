@@ -108,6 +108,14 @@ JUCE_BEGIN_IGNORE_WARNINGS_MSVC (4355)
                                                 effect = (Vst2::AEffect*)(jBridgeMain(&audioMaster, plug32bitPath));\
                                         }
 #endif // JUCE_VST_WRAPPER_INVOKE_MAIN
+#else
+#ifndef JUCE_VST_WRAPPER_LOAD_CUSTOM_MAIN
+#define JUCE_VST_WRAPPER_LOAD_CUSTOM_MAIN
+#endif
+
+#ifndef JUCE_VST_WRAPPER_INVOKE_MAIN
+#define JUCE_VST_WRAPPER_INVOKE_MAIN  effect = module->moduleMain ((Vst2::audioMasterCallback) &audioMaster);
+#endif
 #endif // _AMD64_
 
 #ifndef JUCE_VST_FALLBACK_HOST_NAME
