@@ -515,7 +515,7 @@ int ParseNote(const char *str)
     for (int note = 0; note <= 127; ++note)
     {
         sprintf(notename, "%s%d", notenames[note % 12], note / 12 - 2);
-        if (_stricmp(notename, nospace) == 0)
+        if (strcasecmp(notename, nospace) == 0)
             return note;
     }
     return 0;
