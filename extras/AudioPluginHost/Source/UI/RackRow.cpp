@@ -515,7 +515,11 @@ int ParseNote(const char *str)
     for (int note = 0; note <= 127; ++note)
     {
         sprintf(notename, "%s%d", notenames[note % 12], note / 12 - 2);
+#ifdef JUCE_WINDOWS
+        if (_stricmp(notename, nospace) == 0)
+#else
         if (strcasecmp(notename, nospace) == 0)
+#endif
             return note;
     }
     return 0;
