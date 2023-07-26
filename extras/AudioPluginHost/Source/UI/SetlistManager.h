@@ -73,6 +73,9 @@ public:
 	{
 		auto list = m_performer->Root.Performances.Performance;
 
+		if (rowNumber >= list.size())
+			return;
+
 		if (rowIsSelected)
 			g.fillAll(Colours::grey);
 		g.setColour(Colours::white);
@@ -103,6 +106,9 @@ public:
 	void paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) override
 	{
 		auto list = m_performer->Root.Songs.Song;
+
+		if (rowNumber >= list.size())
+			return;
 
 		if (rowIsSelected)
 			g.fillAll(Colours::grey);
