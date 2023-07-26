@@ -27,7 +27,13 @@
 #include "../UI/MainHostWindow.h"
 #include "PluginGraph.h"
 #include "InternalPlugins.h"
+#ifdef JUCE_WINDOWS
 #include <windows.h>
+#else
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#endif
 #include "../examples/Plugins/GainPluginDemo.h"
 
 static std::unique_ptr<ScopedDPIAwarenessDisabler> makeDPIAwarenessDisablerForPlugin (const PluginDescription& desc)
@@ -1212,11 +1218,7 @@ void PluginGraph::CreateDefaultNodes()
 
 String GetMachineName()
 {
-    wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
-    DWORD dwSize = sizeof(name);
-    if (!GetComputerNameW(name, &dwSize))
-        return "";
-    return String(name);
+    return SystemStats::getComputerName();
 }
 
 void PluginGraph::SetMidiOutputDeviceName(String name)
