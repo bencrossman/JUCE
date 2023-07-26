@@ -951,6 +951,9 @@ void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number, int ind
     PerformanceType* performance = NULL;
     Song *song = NULL;
 
+    if (m_performer.Root.SetLists.SetList.size() == 0 || m_performer.Root.Songs.Song.size() == 0)
+        return;
+
     m_performer.GetPerformanceByIndex(performance, song, index);
 
     songName1 = song->Name;

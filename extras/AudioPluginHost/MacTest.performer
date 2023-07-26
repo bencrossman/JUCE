@@ -1,9 +1,21 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="2471">
-    <SetLists />
+<Root CurrentSetListID="-1979937417">
+    <SetLists>
+        <SetList ID="-1979937417" Name="New Setlist">
+            <Song ID="782716634" />
+        </SetList>
+    </SetLists>
     <Racks>
         <Rack ID="-821687061" Name="AUSampler" PluginName="AUSampler"></Rack>
     </Racks>
-    <Songs />
-    <Performances />
+    <Songs>
+        <Song ID="782716634" Name="New Song">
+            <Performance ID="-1165828820" />
+        </Song>
+    </Songs>
+    <Performances>
+        <Performance ID="-1165828820" Name="New performance">
+            <Zone DeviceID="-821687061" Program="0"></Zone>
+        </Performance>
+    </Performances>
 </Root>
