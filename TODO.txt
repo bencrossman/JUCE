@@ -1,6 +1,3 @@
-New "Another one bites the dust" sounds
-"I want it all" - Start louder
-
 Next cover band
 ~~~~~~~~~~~~~~~
 Police - 1 song - King Of Pain
@@ -21,14 +18,16 @@ Rename rack
 Reorder racks
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
-Highlight tab
+Text focus on dialog
 Enter closes text boxes
 Realtime VU meter
 Visual volume slider
+After adding first song/setlist/performance going back to rack doesnt update titles
+Adding a rack doesn't show until reload
 
 Future features
 ~~~~~~~~~~~~~~~
-Hand over notes from previous patch
+Hang over notes from previous patch
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
