@@ -7,7 +7,6 @@
     </SetLists>
     <Racks>
         <Rack ID="-821687061" Name="AUSampler" PluginName="AUSampler"></Rack>
-        <Rack ID="1576270776" Name="AUMIDISynth" PluginName="AUMIDISynth"></Rack>
     </Racks>
     <Songs>
         <Song ID="782716634" Name="New Song">
@@ -16,7 +15,7 @@
     </Songs>
     <Performances>
         <Performance ID="-1165828820" Name="New performance">
-            <Zone DeviceID="-821687061" Program="0"></Zone>
+            <Zone DeviceID="-821687061"></Zone>
         </Performance>
     </Performances>
 </Root>
