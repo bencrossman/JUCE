@@ -741,7 +741,12 @@ void PluginGraph::setupPerformer()
 
         PluginDescription pd;
         pd.name = rack.PluginName;
+#ifdef JUCE_WINDOWS
         pd.pluginFormatName = "VST";
+#else
+        pd.pluginFormatName = "AudioUnit";
+#endif
+        
         pd.isInstrument = true;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)
         {

@@ -497,7 +497,7 @@ void RackRow::textEditorTextChanged(TextEditor&te)
 String FormatKey(int note)
 {
     const char *notenames[] = { "C ","C#","D ","D#","E ","F ","F#","G ","G#","A ","A#","B " };
-    return String::formatted("%S%d", notenames[note % 12], note / 12 - 2);
+    return String::formatted("%s%d", notenames[note % 12], note / 12 - 2);
 }
 
 int ParseNote(const char *str)
@@ -718,7 +718,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     panel = &GraphEditorPanel;
 
     m_deviceName->setText(device.Name);
-    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".png"));
+    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".png"));
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
 	m_midiFilterNode = (AudioProcessorGraph::Node*)device.m_midiFilterNode;
@@ -791,7 +791,8 @@ void RackRow::Assign(Zone *zone)
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute, sendNotification);
 	m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
-    m_lowKey->setText(FormatKey(zone->LowKey));
+    auto t1 = FormatKey(zone->LowKey);
+    m_lowKey->setText(t1);
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));
     m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
