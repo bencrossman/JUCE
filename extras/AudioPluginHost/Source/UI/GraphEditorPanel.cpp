@@ -756,7 +756,6 @@ struct GraphEditorPanel::ConnectorComponent   : public Component,
 };
 */
 
-
 //==============================================================================
 GraphEditorPanel::GraphEditorPanel (PluginGraph& g)  : graph (g)
 {
@@ -1457,6 +1456,11 @@ void GraphEditorPanel::init(String name)
         SetPerformance();
     };
 
+    graph.m_onMasterVolume = [this](int volume)
+    {
+        ((RackTitleBar*)m_rackTopUI.get())->postCommandMessage(volume);
+    };
+
 	((RackTitleBar*)m_rackTopUI.get())->m_onMonoChanged = [this](bool mono)
 	{
 		graph.SetMono(mono);
@@ -1479,6 +1483,12 @@ void GraphEditorPanel::init(String name)
 		RackRow::SetTempo((float)tempo);
 		graph.SetTempo(tempo);
 	};
+
+    ((RackTitleBar*)m_rackTopUI.get())->m_onChangeMasterVolume = [this](int volume)
+    {
+        // Need to do something like manualMidi
+        volume;
+    };
 
 	((RackTitleBar*)m_rackTopUI.get())->m_onSavePerformance = [this]()
 	{

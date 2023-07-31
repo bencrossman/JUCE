@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.0.1
+  Created with Projucer version: 7.0.2
 
   ------------------------------------------------------------------------------
 
@@ -37,6 +37,7 @@ class Song;
 */
 class RackTitleBar  : public Component,
                       public TextEditor::Listener,
+                      public Timer,
                       public juce::Button::Listener,
                       public juce::Slider::Listener
 {
@@ -52,7 +53,16 @@ public:
 	std::function<void()> m_onNextPerformance;
 	std::function<void()> m_onPrevPerformance;
 	std::function<void()> m_onSavePerformance;
-	std::function<void(int)> m_onSetTempo;
+    std::function<void(int)> m_onSetTempo;
+    std::function<void(int)> m_onChangeMasterVolume;
+    static int CommandSetMasterVolume;
+
+    void timerCallback() override
+    {
+        auto old = m_heartBeat->getText();
+        m_heartBeat->setText((old == "") ? "." : "", dontSendNotification);
+    };
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -66,6 +76,7 @@ private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     PerformanceType * m_current;
     Song * m_currentSong;
+    void handleCommandMessage(int commandId) override;
     //[/UserVariables]
 
     //==============================================================================
@@ -83,6 +94,8 @@ private:
     std::unique_ptr<juce::TextButton> m_savePerformance;
     std::unique_ptr<juce::Label> m_tempoLabel;
     std::unique_ptr<juce::Slider> m_tempo;
+    std::unique_ptr<juce::Slider> m_masterVolume;
+    std::unique_ptr<juce::Label> m_heartBeat;
 
 
     //==============================================================================

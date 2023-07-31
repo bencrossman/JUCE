@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.0.1
+  Created with Projucer version: 7.0.2
 
   ------------------------------------------------------------------------------
 
@@ -25,6 +25,8 @@
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
+int RackTitleBar::CommandSetMasterVolume = 1;
+
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -171,8 +173,30 @@ RackTitleBar::RackTitleBar ()
 
     m_tempo->setBounds (672, 24, 72, 24);
 
+    m_masterVolume.reset (new juce::Slider (juce::String()));
+    addAndMakeVisible (m_masterVolume.get());
+    m_masterVolume->setRange (0, 127, 1);
+    m_masterVolume->setSliderStyle (juce::Slider::LinearHorizontal);
+    m_masterVolume->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
+    m_masterVolume->addListener (this);
+
+    m_masterVolume->setBounds (189, 54, 69, 16);
+
+    m_heartBeat.reset (new juce::Label (juce::String(),
+                                        TRANS(".")));
+    addAndMakeVisible (m_heartBeat.get());
+    m_heartBeat->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    m_heartBeat->setJustificationType (juce::Justification::centredLeft);
+    m_heartBeat->setEditable (false, false, false);
+    m_heartBeat->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    m_heartBeat->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    m_heartBeat->setBounds (124, 46, 16, 24);
+
 
     //[UserPreSize]
+    m_masterVolume->setValue(127);
+    startTimer(200);
     //[/UserPreSize]
 
     setSize (816, 70);
@@ -201,6 +225,8 @@ RackTitleBar::~RackTitleBar()
     m_savePerformance = nullptr;
     m_tempoLabel = nullptr;
     m_tempo = nullptr;
+    m_masterVolume = nullptr;
+    m_heartBeat = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -273,6 +299,12 @@ void RackTitleBar::sliderValueChanged (juce::Slider* sliderThatWasMoved)
 		m_onSetTempo((int)m_tempo->getValue());
         //[/UserSliderCode_m_tempo]
     }
+    else if (sliderThatWasMoved == m_masterVolume.get())
+    {
+        //[UserSliderCode_m_masterVolume] -- add your slider handling code here..
+        m_onChangeMasterVolume((int)m_masterVolume->getValue());
+        //[/UserSliderCode_m_masterVolume]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -291,6 +323,12 @@ void RackTitleBar::Assign(Song *song, PerformanceType *performance)
     m_songName->setText(song ? song->Name : "NA", false);
 
 }
+
+void RackTitleBar::handleCommandMessage(int commandId)
+{
+    m_masterVolume->setValue(commandId);
+}
+
 //[/MiscUserCode]
 
 
@@ -304,7 +342,7 @@ void RackTitleBar::Assign(Song *song, PerformanceType *performance)
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="RackTitleBar" componentName=""
-                 parentClasses="public Component, public TextEditor::Listener"
+                 parentClasses="public Component, public TextEditor::Listener, public Timer"
                  constructorParams="" variableInitialisers="" snapPixels="8" snapActive="1"
                  snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="816"
                  initialHeight="70">
@@ -367,6 +405,15 @@ BEGIN_JUCER_METADATA
           explicitFocusOrder="0" pos="672 24 72 24" min="60.0" max="240.0"
           int="1.0" style="IncDecButtons" textBoxPos="TextBoxRight" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+  <SLIDER name="" id="7ca9d11c4ed98cc9" memberName="m_masterVolume" virtualName=""
+          explicitFocusOrder="0" pos="189 54 69 16" min="0.0" max="127.0"
+          int="1.0" style="LinearHorizontal" textBoxPos="NoTextBox" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+  <LABEL name="" id="378f3a6790f970b4" memberName="m_heartBeat" virtualName=""
+         explicitFocusOrder="0" pos="124 46 16 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="." editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
+         kerning="0.0" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

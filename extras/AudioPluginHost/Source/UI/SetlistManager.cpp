@@ -892,8 +892,9 @@ void SetlistManager::Rename(std::string &str)
 {
 	AlertWindow alert("", "", AlertWindow::NoIcon);
 	alert.addTextEditor("Name", str);
-	alert.addButton("Cancel", 0);
-	alert.addButton("Ok", 1);
+	alert.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey));
+	alert.addButton("Ok", 1, KeyPress(KeyPress::returnKey));
+	alert.getTextEditor("Name")->setExplicitFocusOrder(1);
 	auto ret = alert.runModalLoop();
 	if (ret == 1)
 		str = alert.getTextEditorContents("Name").toStdString();
