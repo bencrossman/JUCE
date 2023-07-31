@@ -1,3 +1,18 @@
+Buy Amplitude
+
+Plugins
+~~~~~~~
+I don't like internet licenses because worry about legacy support
+What currently uses licenses that require Internet check (These are also the 64 bit ones except P8):
+-Truepianos (Why not, always have old version to full back on)
+-Korg (because just couldn't find Triton hacked but have M1/WS old versions to fall back on)
+
+Mac support
+~~~~~~~~~~~
+-No Superwave P8
+-OPX wont be 1.1 (does patches well)
+-Would have to hunt for B4II / FM7 / JV1080 / Jupiter 8 / DirectWave but shouldnt be afraid to just buy
+
 Next cover band
 ~~~~~~~~~~~~~~~
 Police - 1 song - King Of Pain
@@ -13,7 +28,9 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 
 If released
 ~~~~~~~~~~~~
+Adding a rack doesn't show until reload
 Implement right click menu item "Delete rack", delete all zones
+
 Rename rack
 Reorder racks
 Need UI to enable/disable #CC16
@@ -23,7 +40,8 @@ Enter closes text boxes
 Realtime VU meter
 Visual volume slider
 After adding first song/setlist/performance going back to rack doesnt update titles
-Adding a rack doesn't show until reload
+Option to select an image for plugin
+"Select an image" texture
 
 Future features
 ~~~~~~~~~~~~~~~
