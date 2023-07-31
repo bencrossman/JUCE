@@ -740,19 +740,11 @@ void PluginGraph::setupPerformer()
         auto &rack = m_performer.Root.Racks.Rack[i];
 
         PluginDescription pd;
-        pd.name = rack.PluginName;
-#ifdef JUCE_WINDOWS
-        pd.pluginFormatName = "VST";
-#else
-        pd.pluginFormatName = "AudioUnit";
-#endif
-        
-        pd.isInstrument = true;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)
         {
             auto name = knownPlugins.getTypes()[j].name;
-            if (name.compareIgnoreCase(pd.name)==0 || name.compareIgnoreCase(pd.name.removeCharacters(" "))==0 || name.compareIgnoreCase(pd.name + " VSTi") == 0)
-                pd.fileOrIdentifier = knownPlugins.getTypes()[j].fileOrIdentifier;
+            if (name.compareIgnoreCase(rack.PluginName) == 0 || name.compareIgnoreCase(String(rack.PluginName).removeCharacters(" ")) == 0 || name.compareIgnoreCase(rack.PluginName + " VSTi") == 0)
+                pd = knownPlugins.getTypes()[j];
         }
 
 		String errorMessage;
