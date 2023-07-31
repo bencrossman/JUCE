@@ -144,6 +144,8 @@ public:
     void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 
     std::function<void()> m_onProgramChange = NULL;
+    std::function<void(int)> m_onMasterVolume = NULL;
+    
     void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
