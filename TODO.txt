@@ -1,17 +1,16 @@
-Buy Amplitude
-
 Plugins
 ~~~~~~~
 I don't like internet licenses because worry about legacy support
-What currently uses licenses that require Internet check (These are also the 64 bit ones except P8):
+What currently uses licenses that require Internet check:
 -Truepianos (Why not, always have old version to full back on)
 -Korg (because just couldn't find Triton hacked but have M1/WS old versions to fall back on)
+-Amplitube (Also have old version to fall back on)
 
 Mac support
 ~~~~~~~~~~~
 -No Superwave P8
 -OPX wont be 1.1 (does patches well)
--Would have to hunt for B4II / FM7 / JV1080 / Jupiter 8 / DirectWave but shouldnt be afraid to just buy
+-Won't be able to find B4II / FM7(FM8?) / DirectWave
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -35,10 +34,6 @@ Rename rack
 Reorder racks
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
-Text focus on dialog
-Enter closes text boxes
-Realtime VU meter
-Visual volume slider
 After adding first song/setlist/performance going back to rack doesnt update titles
 Option to select an image for plugin
 "Select an image" texture

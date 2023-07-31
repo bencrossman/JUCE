@@ -1081,6 +1081,7 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             if (midi_message.isControllerOfType(85))
             {
 				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue((((float)midi_message.getControllerValue()) / 127.f) * 0.25f);
+                m_onMasterVolume(midi_message.getControllerValue());
             }
             else if (midi_message.isProgramChange())
             {
