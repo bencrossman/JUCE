@@ -751,7 +751,12 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     }
     else
     {
+#ifdef JUCE_WINDOWS
         auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
+#else
+        auto programFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
+#endif
+        
         if (File(programFile).exists())
         {
             m_manualPatchNames = true;
@@ -864,7 +869,11 @@ void RackRow::SendPresetStateData()
 {
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
+#ifdef JUCE_WINDOWS
         auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\" + String(m_current->Device->PluginName).replace("(VST2 64bit)","") + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
+#else
+        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + "PresetStates/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
+#endif
         auto input = File(sendPresetStateDataFilename).createInputStream();
         if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)
         {
@@ -872,6 +881,7 @@ void RackRow::SendPresetStateData()
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+            // TODO handle AudioUnits (Components), use setStateInformation?
             VSTPluginFormat::setChunkData((AudioPluginInstance*)processor, memblock.getData(), (int)memblock.getSize(), true);
         }
     }
