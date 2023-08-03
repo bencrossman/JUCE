@@ -690,7 +690,16 @@ PluginDescription FindInternalPlugin(std::vector<PluginDescription>& types, cons
 
 void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Device &rack)
 {
-	auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
+	
+    
+#ifdef JUCE_WINDOWS
+    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
+#else
+    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(rack.PluginName + "_Banks.txt");
+#endif
+
+    
+    
 	rack.m_usesBanks = File(bankFile).exists();
 	rack.m_stereoToMonoWillPhase = rack.PluginName =="TruePianos x64" || rack.PluginName == "P8";
 
@@ -754,17 +763,18 @@ void PluginGraph::setupPerformer()
         String dir;
         vector<string> banks;
         int patches = 128;
-        if (rack.PluginName == "JV-1080(VST2 64bit)")
+        if (String(rack.PluginName).startsWith("JV-1080"))
         {
             headerSize = 25;
             dir = "JV-1080";
+            // TODO use the banks.txt file for these
             banks.push_back("PR-A");
             banks.push_back("PR-B");
             banks.push_back("PR-C");
             banks.push_back("PR-D");
             banks.push_back("PR-E");
         }
-        if (rack.PluginName == "JUPITER-8(VST2 64bit)")
+        if (String(rack.PluginName).startsWith("JUPITER-8"))
         {
             headerSize = 22;
             dir = "JUPITER-8";
@@ -778,7 +788,14 @@ void PluginGraph::setupPerformer()
             rack.m_overridePatches.resize(banks.size());
             for (int b = 0; b < rack.m_overridePatches.size(); ++b)
             {
+                
+                
+            #ifdef JUCE_WINDOWS
                 auto input = File(String("C:\\ProgramData\\Roland Cloud\\")+ dir +"\\" + banks [b]+".bin").createInputStream();
+            #else
+                auto input = File(String("/Library/Audio/Plug-Ins/Components/"+dir+".component/Contents/Resources/Patch/"+banks[b]+".bin")).createInputStream();
+            #endif
+                
                 MemoryBlock memblock;
                 input->readIntoMemoryBlock(memblock);
 
