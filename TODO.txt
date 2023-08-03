@@ -1,4 +1,4 @@
-Plugins
+IPlugins
 ~~~~~~~
 I don't like internet licenses because worry about legacy support
 What currently uses licenses that require Internet check:
@@ -11,6 +11,11 @@ Mac support
 -No Superwave P8
 -OPX wont be 1.1 (does patches well)
 -Won't be able to find B4II / FM7(FM8?) / DirectWave
+
+Bugs
+~~~~
+First load, banks always visible
+
 
 Next cover band
 ~~~~~~~~~~~~~~~

@@ -690,15 +690,11 @@ PluginDescription FindInternalPlugin(std::vector<PluginDescription>& types, cons
 
 void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Device &rack)
 {
-	
-    
 #ifdef JUCE_WINDOWS
-    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt");
+    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt").replace("(VST2 64bit)","");
 #else
     auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(rack.PluginName + "_Banks.txt");
 #endif
-
-    
     
 	rack.m_usesBanks = File(bankFile).exists();
 	rack.m_stereoToMonoWillPhase = rack.PluginName =="TruePianos x64" || rack.PluginName == "P8";
@@ -762,29 +758,33 @@ void PluginGraph::setupPerformer()
         int headerSize = 0;
         String dir;
         vector<string> banks;
+
+#ifdef JUCE_WINDOWS
+        auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(rack.PluginName + "_Banks.txt").replace("(VST2 64bit)", "");
+#else
+        auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(rack.PluginName + "_Banks.txt");
+#endif
         int patches = 128;
         if (String(rack.PluginName).startsWith("JV-1080"))
         {
             headerSize = 25;
             dir = "JV-1080";
-            // TODO use the banks.txt file for these
-            banks.push_back("PR-A");
-            banks.push_back("PR-B");
-            banks.push_back("PR-C");
-            banks.push_back("PR-D");
-            banks.push_back("PR-E");
         }
         if (String(rack.PluginName).startsWith("JUPITER-8"))
         {
             headerSize = 22;
             dir = "JUPITER-8";
-            banks.push_back("1 Preset");
-            banks.push_back("Jupiter-8Techno");
             patches = 64;
         }
 
         if (headerSize)
         {
+            StringArray lines;
+            File(bankFile).readLines(lines);
+            for (int i = 0; i < lines.size(); ++i)
+                if (lines[i] != "UNUSED")
+                    banks.push_back(lines[i].toStdString());
+
             rack.m_overridePatches.resize(banks.size());
             for (int b = 0; b < rack.m_overridePatches.size(); ++b)
             {
