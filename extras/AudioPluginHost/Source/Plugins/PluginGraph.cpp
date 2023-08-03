@@ -666,6 +666,8 @@ void PluginGraph::SendChunkString(AudioPluginInstance *processorPtr, StringRef s
 
     auto set = (const fxSet*)((uint64_t)output2.getData() + (progAtBeginning ? 16 : 0));
 
+    // TODO handle AudioUnits (Components), use setStateInformation?
+    
     // setStateInformation sets program name so don't want that
     if (compareMagic(set->fxMagic, "FBCh"))
     {
@@ -697,7 +699,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 #endif
     
 	rack.m_usesBanks = File(bankFile).exists();
-	rack.m_stereoToMonoWillPhase = rack.PluginName =="TruePianos x64" || rack.PluginName == "P8";
+	rack.m_stereoToMonoWillPhase = String(rack.PluginName).startsWith("TruePianos") || rack.PluginName == "P8";
 
 	String errorMessage;
 
@@ -818,7 +820,12 @@ void PluginGraph::setupPerformer()
 
             if (rack.PluginName == "TRITON")
             {
+#ifdef JUCE_WINDOWS
                 auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
+#else
+                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/TRITON")).createInputStream();
+#endif
+            
                 MemoryBlock memblock;
                 input->readIntoMemoryBlock(memblock);
 
@@ -852,8 +859,8 @@ void PluginGraph::setupPerformer()
                     }
                     ptr++;
                 }
+ 
             }
-
 
 			if (rack.InitialState.size())
 				SendChunkString(processorPtr, rack.InitialState);
