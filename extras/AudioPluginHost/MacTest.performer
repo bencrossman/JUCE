@@ -6,7 +6,14 @@
         </SetList>
     </SetLists>
     <Racks>
-        <Rack ID="-821687061" Name="AUSampler" PluginName="AUSampler"></Rack>
+        <Rack ID="1972536097" Name="Piano" PluginName="TruePianos"></Rack>
+        <Rack ID="-1263294741" Name="Yamaha DX7" PluginName="FM8"></Rack>
+        <Rack ID="-1454637391" Name="Roland JV-1080" PluginName="JV-1080"></Rack>
+        <Rack ID="401752497" Name="Roland Jupiter-8" PluginName="JUPITER-8"></Rack>
+        <Rack ID="-1410258127" Name="Korg M1" PluginName="M1"></Rack>
+        <Rack ID="1574775199" Name="Korg Wavestation" PluginName="WAVESTATION"></Rack>
+        <Rack ID="1440531609" Name="Korg Triton" PluginName="TRITON"></Rack>
+        <Rack ID="227096078" Name="Oberheim OP-X" PluginName="OP-X PRO-II"></Rack>
     </Racks>
     <Songs>
         <Song ID="782716634" Name="New Song">
@@ -15,7 +22,14 @@
     </Songs>
     <Performances>
         <Performance ID="-1165828820" Name="New performance">
-            <Zone DeviceID="-821687061"></Zone>
+            <Zone DeviceID="227096078" Program="0"></Zone>
+            <Zone DeviceID="-1263294741" Program="0"></Zone>
+            <Zone DeviceID="-1454637391" Program="0"></Zone>
+            <Zone DeviceID="1972536097" Program="0"></Zone>
+            <Zone DeviceID="-1410258127" Program="0"></Zone>
+            <Zone DeviceID="1574775199" Program="0"></Zone>
+            <Zone DeviceID="401752497" Program="0"></Zone>
+            <Zone DeviceID="1440531609" Program="0"></Zone>
         </Performance>
     </Performances>
 </Root>
