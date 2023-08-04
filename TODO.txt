@@ -1,21 +1,22 @@
-IPlugins
+Plugins
 ~~~~~~~
 I don't like internet licenses because worry about legacy support
 What currently uses licenses that require Internet check:
--Truepianos (Why not, always have old version to full back on)
+-Truepianos (Always have old version to full back on but actually might not need Internet)
 -Korg (because just couldn't find Triton hacked but have M1/WS old versions to fall back on)
 -Amplitube (Also have old version to fall back on)
 
-Mac support
-~~~~~~~~~~~
--No Superwave P8
--OPX wont be 1.1 (does patches well)
--Won't be able to find B4II / FM7(FM8?) / DirectWave
-
-Bugs
-~~~~
+Mac support (And next release)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Chunk send/recieve (Check OPX after)
+Adding a rack doesn't show until reload
+Implement right click menu item "Delete rack", delete all zones
+Rename rack
+Reorder racks
 First load, banks always visible
 
+-OPX wont be 1.1 (which handled patches really well but that's solvable)
+-Won't be able to get P8 (Windows only) / B4II(Old) / DirectWave(Old, buy latest has no VST)
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -32,11 +33,6 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 
 If released
 ~~~~~~~~~~~~
-Adding a rack doesn't show until reload
-Implement right click menu item "Delete rack", delete all zones
-
-Rename rack
-Reorder racks
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
 After adding first song/setlist/performance going back to rack doesnt update titles
