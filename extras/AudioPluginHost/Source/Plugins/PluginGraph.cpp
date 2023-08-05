@@ -626,60 +626,7 @@ void PluginGraph::SendChunkString(AudioPluginInstance *processorPtr, StringRef s
     GZIPDecompressorInputStream unzipper(compressedInput);
     MemoryOutputStream output2;
     output2 << unzipper;
-
-    auto progAtBeginning = (memcmp(output2.getData(), "Prog", 4) == 0);
-
-    struct fxSet
-    {
-        int32 chunkMagic;    // 'CcnK'
-        int32 byteSize;      // of this chunk, excl. magic + byteSize
-        int32 fxMagic;       // 'FxBk'
-    };
-
-    struct fxChunkSet
-    {
-        int32 chunkMagic;    // 'CcnK'
-        int32 byteSize;      // of this chunk, excl. magic + byteSize
-        int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
-        int32 version;
-        int32 fxID;          // fx unique id
-        int32 fxVersion;
-        int32 numPrograms;
-        char future[128];
-        int32 chunkSize;
-        char chunk[8];          // variable
-    };
-
-    struct fxProgramSet
-    {
-        int32 chunkMagic;    // 'CcnK'
-        int32 byteSize;      // of this chunk, excl. magic + byteSize
-        int32 fxMagic;       // 'FxCh', 'FPCh', or 'FBCh'
-        int32 version;
-        int32 fxID;          // fx unique id
-        int32 fxVersion;
-        int32 numPrograms;
-        char name[28];
-        int32 chunkSize;
-        char chunk[8];          // variable
-    };
-
-    auto set = (const fxSet*)((uint64_t)output2.getData() + (progAtBeginning ? 16 : 0));
-
-    // TODO handle AudioUnits (Components), use setStateInformation?
-    
-    // setStateInformation sets program name so don't want that
-    if (compareMagic(set->fxMagic, "FBCh"))
-    {
-        // non-preset chunk
-        auto cset = (const fxChunkSet*)set;
-        VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), false);
-    }
-    else if (compareMagic(set->fxMagic, "FPCh"))
-    {
-        auto cset = (const fxProgramSet*)set;
-        VSTPluginFormat::setChunkData(processorPtr, cset->chunk, (int32)ByteOrder::swapIfLittleEndian((uint32)cset->chunkSize), true);
-    }
+    processorPtr->setStateInformation(output2.getData(), (int)output2.getDataSize());
 }
 
 PluginDescription FindInternalPlugin(std::vector<PluginDescription>& types, const char* name)
