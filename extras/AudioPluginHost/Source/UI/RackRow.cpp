@@ -881,8 +881,7 @@ void RackRow::SendPresetStateData()
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-            // TODO handle AudioUnits (Components), use setStateInformation?
-            VSTPluginFormat::setChunkData((AudioPluginInstance*)processor, memblock.getData(), (int)memblock.getSize(), true);
+            processor->setStateInformation(memblock.getData(), memblock.getSize());
         }
     }
 }
