@@ -1,3 +1,6 @@
+Possibly a sort bug
+Check history
+
 Plugins
 ~~~~~~~
 I don't like internet licenses because worry about legacy support
