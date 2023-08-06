@@ -281,6 +281,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_m_mute] -- add your button handler code here..
         m_current->Mute = buttonThatWasClicked->getToggleState();
+        panel->RefreshRacks();
         repaint(); // to change background of row
         if (m_current->Device->m_node)
         {
@@ -329,7 +330,10 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             PopupMenu menu;
             menu.addItem(1, "Save global rack state");
             menu.addItem(2, "Save performance override state");
-            menu.addItem(3, "Delete Rack");
+            menu.addItem(3, "Move rack up");
+            menu.addItem(4, "Move rack down");
+            menu.addItem(5, "Rename rack");
+            menu.addItem(6, "Delete rack");
             auto res = menu.show();
             if (res == 1 || res == 2)
             {
@@ -355,7 +359,34 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             }
             if (res == 3)
             {
+                m_current->Device->m_order -= 1.5f;
+                panel->RefreshRacks();
+            }
+            if (res == 4)
+            {
+                m_current->Device->m_order += 1.5f;
+                panel->RefreshRacks();
+            }
+            if (res == 5)
+            {
+                AlertWindow alert("", "", AlertWindow::NoIcon);
+                alert.addTextEditor("Name", m_current->Device->Name);
+                alert.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey));
+                alert.addButton("Ok", 1, KeyPress(KeyPress::returnKey));
+                alert.getTextEditor("Name")->setExplicitFocusOrder(1);
+                auto ret = alert.runModalLoop();
+                if (ret == 1)
+                {
+                    m_current->Device->Name = alert.getTextEditorContents("Name").toStdString();
+                    m_deviceName->setText(m_current->Device->Name);
 
+                }
+            }
+            if (res == 6)
+            {
+                m_current->Device->m_deleted = true;
+                m_mute->setToggleState(true, sendNotification); // Good, will only bypass if not currently muted
+                panel->RefreshRacks();
             }
         }
         else
@@ -722,10 +753,23 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     panel = &GraphEditorPanel;
 
     m_deviceName->setText(device.Name);
+
+    auto imageName = device.Name;
+    if (imageName == "OP-X PRO-II")
+        imageName = "Oberheim OP-X";
+    else if (imageName == "TruePianos")
+        imageName = "Piano";
+    else if (imageName == "AmpliTube 5")
+        imageName = "Guitar";    
+    else if (imageName == "B4 II")
+        imageName = "B3";
+    else if (imageName == "fm7")
+        imageName = "Yamaha DX7";
+
 #ifdef JUCE_WINDOWS
-    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".png"));
+    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(imageName + ".png"));
 #else
-    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".png"));
+    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(imageName + ".png"));
 #endif
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
@@ -773,6 +817,8 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         }
     }
 
+    m_program->setVisible(m_hasPrograms);
+    m_bank->setVisible(m_bank->getNumItems() > 0);
 }
 
 void RackRow::Assign(Zone *zone)
@@ -807,7 +853,7 @@ void RackRow::Assign(Zone *zone)
 
     m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
-    m_mute->setToggleState(zone->Mute, sendNotification);
+    m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification);
 	m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
