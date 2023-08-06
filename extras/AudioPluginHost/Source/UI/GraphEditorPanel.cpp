@@ -1609,11 +1609,25 @@ void GraphEditorPanel::RefreshRacks()
 
     m_rackUI->addAndMakeVisible(m_rackTopUI.get());
 
-    sort(m_rackDevice.begin(), m_rackDevice.end(), [](std::unique_ptr<Component>& a, std::unique_ptr<Component>& b)
+    auto performer = graph.GetPerformer();
+    sort(m_rackDevice.begin(), m_rackDevice.end(), [performer](std::unique_ptr<Component>& a, std::unique_ptr<Component>& b)
         {
-            auto ar = (RackRow*)a.get();
-            auto br = (RackRow*)b.get();
-            return ar->GetOrder() < br->GetOrder();
+
+            auto ai = ((RackRow*)a.get())->ID();
+            auto bi = ((RackRow*)b.get())->ID();
+
+            float ao = 0;
+            float bo = 0;
+            for (int i = 0; i < performer->Root.Racks.Rack.size(); ++i)
+            {
+                if (performer->Root.Racks.Rack[i].ID == ai)
+                    ao = performer->Root.Racks.Rack[i].m_order;
+                if (performer->Root.Racks.Rack[i].ID == bi)
+                    bo = performer->Root.Racks.Rack[i].m_order;
+
+            }
+
+            return ao < bo;
         }
     );
 
