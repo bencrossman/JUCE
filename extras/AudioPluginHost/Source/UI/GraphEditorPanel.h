@@ -75,7 +75,9 @@ public:
     bool m_updateComponents = true;
     void init(String name);
     void SoloChange();
-    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;    void changeListenerCallback (ChangeBroadcaster*) override;
+    bool keyPressed(const KeyPress &key, Component *originatingComponent) override;    
+    void changeListenerCallback (ChangeBroadcaster*) override;
+    void RefreshRacks();
 
     void updateComponents();
 

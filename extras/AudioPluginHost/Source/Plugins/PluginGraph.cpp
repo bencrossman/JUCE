@@ -144,21 +144,35 @@ void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<d
     */
     pos; // use
 
+    CreateDefaultNodes(); // Couldn't hear anything after adding a new plugin until this
+
     String errorMessage;
 	auto processor = formatManager.createPluginInstance(desc.pluginDescription, graph.getSampleRate(), graph.getBlockSize(), errorMessage);
 
 	Device newRack;
 	newRack.ID = (int)Uuid().hash();
-	newRack.Name = desc.pluginDescription.name.getCharPointer();
 	newRack.PluginName = desc.pluginDescription.name.getCharPointer();
+
+    String name = desc.pluginDescription.name.getCharPointer();
+    name = name.replace(" x64", "");
+    name = name.replace("(VST2 64bit)", "");
+    if (name == "M1")
+        name = "Korg M1";
+    else if (name == "WAVESTATION")
+        name = "Korg Wavestation";
+    else if (name == "TRITON")
+        name = "Korg Triton";
+    else if (name == "JV-1080")
+        name = "Roland JV-1080";
+    else if (name == "JUPITER-8")
+        name = "Roland Jupiter-8";
+    newRack.Name = name.toStdString();
 
 	if (processor.get())
 		AddRack(processor, newRack);
 
 	m_performer.Root.Racks.Rack.push_back(newRack);
 	m_performer.ResolveIDs(); // Probably does more than required but doesnt matter
-
-    // TODO need to refresh somehow
 
 }
 
