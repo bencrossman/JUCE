@@ -8,14 +8,9 @@ What currently uses licenses that require Internet check:
 
 Mac support (And next release)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Chunk send/recieve (Check OPX after)
-Adding a rack doesn't show until reload
-Implement right click menu item "Delete rack", delete all zones
-Rename rack
-Reorder racks
-First load, banks always visible
-
--OPX wont be 1.1 (which handled patches really well but that's solvable)
+-Roland AU's would need presets all redumped
+-Korg M1/WS isn't reporting program names (Just do what I did for Triton)
+-OPX wont handle program changes and names
 -Won't be able to get P8 (Windows only) / B4II(Old) / DirectWave(Old, buy latest has no VST)
 
 Next cover band
@@ -33,6 +28,7 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 
 If released
 ~~~~~~~~~~~~
+Load doesn't work
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
 After adding first song/setlist/performance going back to rack doesnt update titles

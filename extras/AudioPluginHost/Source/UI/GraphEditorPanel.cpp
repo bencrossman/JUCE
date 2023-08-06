@@ -829,6 +829,25 @@ void GraphEditorPanel::mouseDrag (const MouseEvent& e)
 void GraphEditorPanel::createNewPlugin (const PluginDescriptionAndPreference& desc, Point<int> position)
 {
     graph.addPlugin (desc, position.toDouble() / Point<double> ((double) getWidth(), (double) getHeight()));
+
+    const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
+
+    auto performer = graph.GetPerformer();
+
+    m_rackDevice.push_back(std::make_unique<RackRow>());
+    auto newRackRow = (RackRow*)m_rackDevice.back().get();
+    newRackRow->Setup(performer->Root.Racks.Rack.back(), graph, *this);
+    newRackRow->SetOrder(performer->Root.Racks.Rack.size());
+
+    performer->TempPerformance.Zone.push_back(Zone());
+    Zone *newZone = &performer->TempPerformance.Zone.back();
+    XmlArchive ar(NULL);
+    newZone->Serialize(ar); // Create default zone parameters
+    newZone->Device = &performer->Root.Racks.Rack.back(); // Assign needs Device setup
+    newZone->DeviceID = newZone->Device->ID;
+    newRackRow->Assign(newZone); // Visually set up rack
+
+    RefreshRacks(); // Reshuffle
 }
 
 /*
@@ -1583,6 +1602,53 @@ bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
     return true;
 }
 
+
+void GraphEditorPanel::RefreshRacks()
+{
+    m_rackUI->removeAllChildren();
+
+    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
+
+    sort(m_rackDevice.begin(), m_rackDevice.end(), [](std::unique_ptr<Component>& a, std::unique_ptr<Component>& b)
+        {
+            auto ar = (RackRow*)a.get();
+            auto br = (RackRow*)b.get();
+            return ar->GetOrder() < br->GetOrder();
+        }
+    );
+
+    int y = m_titleHeight;
+    int o = 0;
+    for (int i = 0; i < m_rackDevice.size(); ++i)
+    {
+        auto newRackRow = (RackRow*)m_rackDevice[i].get();
+        if (!newRackRow->IsDeleted())
+        {
+            m_rackUI->addAndMakeVisible(newRackRow);
+            newRackRow->SetOrder(o);
+            if (newRackRow->IsMuted())
+            {
+                newRackRow->setBounds(0, y, newRackRow->getWidth(), 37);
+                y += 37;
+            }
+            else
+            {
+                newRackRow->setBounds(0, y, newRackRow->getWidth(),76);
+                y += 76;
+            }
+
+            o++;
+        }
+    }
+
+    int deviceWidth = 946;
+    m_tabs->setBounds(10, 10, deviceWidth, getParentHeight() - 90); // include tab bar, could work out number so just hard coded 89
+    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
+    m_rackUI->setBounds(0, 0, deviceWidth, y + 3);
+    m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
+
+}
+
 void GraphEditorPanel::updateComponents()
 {
 	// Originally updateComponents would be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
@@ -1597,30 +1663,19 @@ void GraphEditorPanel::updateComponents()
 	const ScopedLock sl(graph.graph.getCallbackLock()); // we're going to be replacing filter callbacks so stop the audio thread for a sec
 
     m_rackDevice.clear();
-    m_rackUI->removeAllChildren();
-
-    m_rackUI->addAndMakeVisible(m_rackTopUI.get());
 
     auto performer = graph.GetPerformer();
     int devicesOnScreen = (int)performer->Root.Racks.Rack.size();
-    int deviceHeight = 20;
     for (int i = 0; i < devicesOnScreen; ++i)
     {
         m_rackDevice.push_back(std::make_unique<RackRow>());
         auto newRackRow = (RackRow*)m_rackDevice.back().get();
         newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
-        deviceHeight = newRackRow->getHeight();
-        m_rackUI->addAndMakeVisible(newRackRow);
-        newRackRow->setBounds(0, i*deviceHeight + m_titleHeight, newRackRow->getWidth(), newRackRow->getHeight());
+        newRackRow->SetOrder(i);
     }
-	int deviceWidth = 946;
-
-    m_tabs->setBounds(10, 10, deviceWidth, getParentHeight() - 90); // include tab bar, could work out number so just hard coded 89
-    m_rackTopUI->setBounds(0, 0, deviceWidth, m_titleHeight);
-    m_rackUI->setBounds(0, 0, deviceWidth, deviceHeight * devicesOnScreen + m_titleHeight+1);
-    m_rackUIViewport->setBounds(0, 30, deviceWidth, m_tabs->getBounds().getHeight() - 30);
 
     SetPerformance();
+    RefreshRacks();
 
 	((SetlistManager*)m_setlistUI.get())->SetData(performer);
 }
