@@ -25,6 +25,8 @@ public:
     void* m_audioInputNode = NULL;
     bool m_usesBanks = false;
 	bool m_stereoToMonoWillPhase = false;
+    bool m_deleted = false;
+    float m_order = 0;
 
 	template<class A>
 	void Serialize(A& ar)
@@ -93,6 +95,11 @@ public:
     float Tempo;
     vector<Zone> Zone;
 
+    PerformanceType()
+    {
+        Tempo = 120; // Starting from empty can have this not set
+    }
+
 	template<class A>
 	void Serialize(A& ar)
 	{
@@ -103,15 +110,10 @@ public:
         auto oldZone = Zone;
         if (ar.IsSaving()) 
         {
-            for (unsigned int i = 0; i < Zone.size(); ++i)
-            {
-                if (Zone[i].Mute)
-                {
-                    swap(Zone[i], Zone.back());
-                    Zone.pop_back();
-                    i--;
-                }
-            }
+            Zone.clear();
+            for (unsigned int i = 0; i < oldZone.size(); ++i)
+                if (!oldZone[i].Mute && (!oldZone[i].Device || !oldZone[i].Device->m_deleted))
+                    Zone.push_back(oldZone[i]);
         }
 		AR(Zone);
         if (ar.IsSaving())
@@ -174,7 +176,23 @@ public:
     template<class A>
     void Serialize(A& ar)
     {
-        AR(Rack);
+        if (ar.IsSaving())
+        {
+            auto oldRack = Rack;
+            Rack.clear();
+            for (int i = 0; i < oldRack.size(); ++i)
+                if (!oldRack[i].m_deleted)
+                    Rack.push_back(oldRack[i]);
+            sort(Rack.begin(), Rack.end(), [](Device& a, Device& b) { return a.m_order < b.m_order; });
+            AR(Rack);
+            Rack = oldRack;
+        }
+        else
+        {
+            AR(Rack);
+            for (int i = 0; i < Rack.size(); ++i)
+                Rack[i].m_order = i;
+        }
     }
 };
 
@@ -214,6 +232,11 @@ public:
 class PerformerFile
 {
 public:
+
+    PerformerFile()
+    {
+        Racks.Rack.reserve(100);
+    }
     SetListsType SetLists;
     RacksType Racks;
     SongsType Songs;
@@ -234,6 +257,11 @@ public:
 class Performer
 {
 public:
+
+    Performer()
+    {
+        TempPerformance.Zone.reserve(100);
+    }
 
     int m_currentPerformanceIndex = 0;
     int m_currentSetlistIndex = 0;

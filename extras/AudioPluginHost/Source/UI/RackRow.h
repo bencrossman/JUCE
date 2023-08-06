@@ -66,6 +66,10 @@ public:
     void handleCommandMessage(int id) override;
     enum {CommandUpdateProgramList = 1, CommandBypass=2};
     void SendPresetStateData();
+    bool IsDeleted() { return m_current ? m_current->Device->m_deleted : false; }
+    bool IsMuted() { return m_current ? m_current->Mute : false; }
+    float GetOrder() { return m_current ? m_current->Device->m_order : 0; } const
+    void SetOrder(float o) { if (m_current) m_current->Device->m_order = o; }
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -82,7 +86,7 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     MidiKeyboardState *m_keyboardState;
-    Zone *m_current;
+    Zone *m_current = NULL;
     int m_id;
     PluginGraph* graph;
     GraphEditorPanel* panel;
