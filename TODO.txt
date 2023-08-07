@@ -1,5 +1,4 @@
-Possibly a sort bug
-Check history
+VST specific was something to do with import I think (13/1/20)
 
 Plugins
 ~~~~~~~
