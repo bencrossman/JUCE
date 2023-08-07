@@ -927,7 +927,11 @@ void RackRow::SendPresetStateData()
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
+#ifdef JUCE_WINDOWS
+            VSTPluginFormat::setChunkData((AudioPluginInstance*)processor, memblock.getData(), (int)memblock.getSize(), true);
+#else
             processor->setStateInformation(memblock.getData(), memblock.getSize());
+#endif
         }
     }
 }
