@@ -837,7 +837,6 @@ void GraphEditorPanel::createNewPlugin (const PluginDescriptionAndPreference& de
     m_rackDevice.push_back(std::make_unique<RackRow>());
     auto newRackRow = (RackRow*)m_rackDevice.back().get();
     newRackRow->Setup(performer->Root.Racks.Rack.back(), graph, *this);
-    newRackRow->SetOrder(performer->Root.Racks.Rack.size());
 
     performer->TempPerformance.Zone.push_back(Zone());
     Zone *newZone = &performer->TempPerformance.Zone.back();
@@ -1612,7 +1611,6 @@ void GraphEditorPanel::RefreshRacks()
     auto performer = graph.GetPerformer();
     sort(m_rackDevice.begin(), m_rackDevice.end(), [performer](std::unique_ptr<Component>& a, std::unique_ptr<Component>& b)
         {
-
             auto ai = ((RackRow*)a.get())->ID();
             auto bi = ((RackRow*)b.get())->ID();
 
@@ -1626,20 +1624,24 @@ void GraphEditorPanel::RefreshRacks()
                     bo = performer->Root.Racks.Rack[i].m_order;
 
             }
-
             return ao < bo;
         }
     );
 
+    for (int i = 0; i < m_rackDevice.size(); ++i)
+        for (int j = 0; j < performer->Root.Racks.Rack.size(); ++j)
+            if (performer->Root.Racks.Rack[j].ID == ((RackRow*)m_rackDevice[i].get())->ID())
+                performer->Root.Racks.Rack[j].m_order = (float)i;
+
+
     int y = m_titleHeight;
-    int o = 0;
     for (int i = 0; i < m_rackDevice.size(); ++i)
     {
         auto newRackRow = (RackRow*)m_rackDevice[i].get();
         if (!newRackRow->IsDeleted())
         {
             m_rackUI->addAndMakeVisible(newRackRow);
-            newRackRow->SetOrder(o);
+
             if (newRackRow->IsMuted())
             {
                 newRackRow->setBounds(0, y, newRackRow->getWidth(), 37);
@@ -1650,8 +1652,6 @@ void GraphEditorPanel::RefreshRacks()
                 newRackRow->setBounds(0, y, newRackRow->getWidth(),76);
                 y += 76;
             }
-
-            o++;
         }
     }
 
@@ -1685,7 +1685,6 @@ void GraphEditorPanel::updateComponents()
         m_rackDevice.push_back(std::make_unique<RackRow>());
         auto newRackRow = (RackRow*)m_rackDevice.back().get();
         newRackRow->Setup(performer->Root.Racks.Rack[i], graph, *this);
-        newRackRow->SetOrder(i);
     }
 
     SetPerformance();
