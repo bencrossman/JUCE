@@ -68,8 +68,7 @@ public:
     void SendPresetStateData();
     bool IsDeleted() { return m_current ? m_current->Device->m_deleted : false; }
     bool IsMuted() { return m_current ? m_current->Mute : false; }
-    float GetOrder() { return m_current ? m_current->Device->m_order : 0; } const
-    void SetOrder(float o) { if (m_current) m_current->Device->m_order = o; }
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
