@@ -152,6 +152,7 @@ void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<d
 	Device newRack;
 	newRack.ID = (int)Uuid().hash();
 	newRack.PluginName = desc.pluginDescription.name.getCharPointer();
+    newRack.m_order = m_performer.Root.Racks.Rack.size();
 
     String name = desc.pluginDescription.name.getCharPointer();
     name = name.replace(" x64", "");
