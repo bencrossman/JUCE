@@ -960,9 +960,10 @@ void SetlistManager::visibilityChanged()
 		Song* song = NULL;
 		m_performer->GetPerformanceByIndex(performance, song, m_performer->m_currentPerformanceIndex);
 
-		for (int i = 0; i < m_setlistListModel->m_selectedSetlist->Song.size(); ++i)
-			if (m_setlistListModel->m_selectedSetlist->Song[i].ID == song->ID)
-				m_setlist->selectRow(i);
+        if (song)
+            for (int i = 0; i < m_setlistListModel->m_selectedSetlist->Song.size(); ++i)
+                if (m_setlistListModel->m_selectedSetlist->Song[i].ID == song->ID)
+                    m_setlist->selectRow(i);
 
 		if (m_selectedSongListModel->m_selectedSong)
 		{
