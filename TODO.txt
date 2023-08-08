@@ -15,7 +15,7 @@ What currently uses licenses that require Internet check:
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -OPX (Crash if set state too quick, State only saved of current preset and number is 1 [Shame because does respond to PC's], No names saved or can be queried). Would have to simply use as state plugin (or extreme write a script to cycle through / dump / get names from opxbank file - would be hard to maintain)
--DirectWave (Fruityloops does work although possible bug with PC send, expensive)
+-DirectWave (Fruityloops does work although possible bug with PC send, no pirate version so buy)
 -Won't be able to get P8 (Windows only) / B4II(Old)
 
 Next cover band
