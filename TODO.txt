@@ -1,4 +1,8 @@
-VST specific was something to do with import I think (13/1/20)
+Next
+~~~~
+-Roland AU's would need presets all redumped (Could load from old and save as new, may even work on Mac), also see if can extract straight from bin file
+-Korg M1/WS isn't reporting program names (Just do what I did for Triton) - Will be able to remove m_pendingProgramNames
+-Switch from FM7 to FM8?
 
 Plugins
 ~~~~~~~
@@ -8,12 +12,11 @@ What currently uses licenses that require Internet check:
 -Korg (because just couldn't find Triton hacked but have M1/WS old versions to fall back on)
 -Amplitube (Also have old version to fall back on)
 
-Mac support (And next release)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--Roland AU's would need presets all redumped
--Korg M1/WS isn't reporting program names (Just do what I did for Triton)
--OPX wont handle program changes and names
--Won't be able to get P8 (Windows only) / B4II(Old) / DirectWave(Old, buy latest has no VST)
+Mac support missing
+~~~~~~~~~~~~~~~~~~~
+-OPX (Crash if set state too quick, State only saved of current preset and number is 1 [Shame because does respond to PC's], No names saved or can be queried). Would have to simply use as state plugin (or extreme write a script to cycle through / dump / get names from opxbank file - would be hard to maintain)
+-DirectWave (Fruityloops does work although possible bug with PC send, expensive)
+-Won't be able to get P8 (Windows only) / B4II(Old)
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -30,9 +33,12 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 
 If released
 ~~~~~~~~~~~~
+Notification of overrides (hide programs/banks)
+Clear override (easy)
 Load doesn't work
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash)
+Crash with empty scene and adding performance only?
 After adding first song/setlist/performance going back to rack doesnt update titles
 Option to select an image for plugin
 "Select an image" texture
@@ -54,3 +60,5 @@ MainHostWindow
                                                                                 +graph(Needed to open plugin window and also using for shared chunk send function)
                                                                                 +panel(added so we can notify of solo)
 
+
+VST specific was something to do with import I think (13/1/20)
