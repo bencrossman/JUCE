@@ -812,7 +812,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         else if (device.m_node)
         {
             auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
-            if (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default"))
+            if (processor->getNumPrograms() == 0 || (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default")))
                 m_hasPrograms = false; // Used by Guitar and Disco Strings
         }
     }

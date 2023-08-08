@@ -65,3 +65,4 @@ extras/Projucer/JUCECompileEngine.dylib
 /build
 
 CMakeUserPresets.json
+/extras/AudioPluginHost/AudioPluginHost.app
