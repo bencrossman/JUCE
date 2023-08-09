@@ -2,7 +2,10 @@ Next
 ~~~~
 -Roland AU's would need presets all redumped (Could load from old and save as new, may even work on Mac), also see if can extract straight from bin file
 -Korg M1/WS isn't reporting program names (Just do what I did for Triton) - Will be able to remove m_pendingProgramNames
--Switch from FM7 to FM8?
+-Replacement for DirectWave (my own?)
+ Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
+ https://github.com/Birch-san/juicysfplugin.git could be good basis
+ Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files.
 
 Plugins
 ~~~~~~~
@@ -33,6 +36,7 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 
 If released
 ~~~~~~~~~~~~
+Solo - Visually mutes other zones
 Notification of overrides (hide programs/banks)
 Clear override (easy)
 Load doesn't work
