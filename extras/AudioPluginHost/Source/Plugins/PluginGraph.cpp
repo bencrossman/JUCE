@@ -777,220 +777,222 @@ void PluginGraph::setupPerformer()
             }
         }
 
+        if (auto processorPtr = processor.get())
+        {
+
 #ifndef JUCE_WINDOWS
 
-        if (rack.PluginName == "M1")
-        {
-            auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/M1")).createInputStream();
-
-            MemoryBlock memblock;
-            input->readIntoMemoryBlock(memblock);
-
-            const int numBanks = 37;
-            int patches[numBanks] = { 100,100,100,50,50,50,50, 50,50,50,50, 50,50,50,50, 50,50,50,100,100,100,100,50,50,50,50 ,100,20,20,20,20,20,20,20,20,20,20};
-            String firstPatch[numBanks];
-            firstPatch[0] = "Universe  ";
-            firstPatch[1] = "One World ";
-            firstPatch[2] = "Stringsaw ";
-            firstPatch[3] = "Squeez Me "; // patch 20
-            firstPatch[4] = "Ambient   ";
-            firstPatch[5] = "Cornet    "; // patch 20
-            firstPatch[6] = "Piano2 Low";
-            firstPatch[7] = "Rocklead  ";
-            firstPatch[8] = "Mysterian ";
-            firstPatch[9] = "Anvil #1  ";
-            firstPatch[10] = "UniverseII";
-            firstPatch[11] = "Dumbek Art";
-            firstPatch[12] = "JzAltoSax ";
-            firstPatch[13] = "Orient    ";
-            firstPatch[14] = "Rubass    "; // patch 20
-            firstPatch[15] = "FoggyRain ";
-            firstPatch[16] = "NATURAL   ";
-            firstPatch[17] = "ShinjukuC6";
-            firstPatch[18] = "UK Strings";
-            firstPatch[19] = "Ethereal  ";
-            firstPatch[20] = "TT SynHorn";
-            firstPatch[21] = "Water World";
-            firstPatch[22] = "Init Prog ";
-            firstPatch[23] = "Init Prog ";
-            firstPatch[24] = "Init Prog ";
-            firstPatch[25] = "Init Prog ";
-            firstPatch[26] = "Aeroglide ";
-            firstPatch[27] = "Live Wire "; // patch 20
-            firstPatch[28] = "Natural DR";
-            firstPatch[29] = "SynBells  "; // patch 20
-            firstPatch[30] = "BrassHorns";
-            firstPatch[31] = "Organ Perc"; // patch 20
-            firstPatch[32] = "HeavySteel";
-            firstPatch[33] = "Perc&Drums"; // patch 20
-            firstPatch[34] = "VasePad   "; // patch 20
-            firstPatch[35] = "WaterColor"; // patch 20
-            firstPatch[36] = "Hoodoos   ";
-
-
-
-            rack.m_overridePatches.resize(numBanks);
-
-            for (int b = 0; b < numBanks; ++b)
+            if (rack.PluginName == "M1")
             {
-                auto patchSize = (b==21) ? 1869 : 178;
+                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/M1")).createInputStream();
 
-                char* ptr = (char*)memblock.getData();
-                char* endPtr = ptr + memblock.getSize();
+                MemoryBlock memblock;
+                input->readIntoMemoryBlock(memblock);
 
-                if (firstPatch[b] == "Init Prog ")
+                const int numBanks = 37;
+                int patches[numBanks] = { 100,100,100,50,50,50,50, 50,50,50,50, 50,50,50,50, 50,50,50,100,100,100,100,50,50,50,50 ,100,20,20,20,20,20,20,20,20,20,20};
+                String firstPatch[numBanks];
+                firstPatch[0] = "Universe  ";
+                firstPatch[1] = "One World ";
+                firstPatch[2] = "Stringsaw ";
+                firstPatch[3] = "Squeez Me "; // patch 20
+                firstPatch[4] = "Ambient   ";
+                firstPatch[5] = "Cornet    "; // patch 20
+                firstPatch[6] = "Piano2 Low";
+                firstPatch[7] = "Rocklead  ";
+                firstPatch[8] = "Mysterian ";
+                firstPatch[9] = "Anvil #1  ";
+                firstPatch[10] = "UniverseII";
+                firstPatch[11] = "Dumbek Art";
+                firstPatch[12] = "JzAltoSax ";
+                firstPatch[13] = "Orient    ";
+                firstPatch[14] = "Rubass    "; // patch 20
+                firstPatch[15] = "FoggyRain ";
+                firstPatch[16] = "NATURAL   ";
+                firstPatch[17] = "ShinjukuC6";
+                firstPatch[18] = "UK Strings";
+                firstPatch[19] = "Ethereal  ";
+                firstPatch[20] = "TT SynHorn";
+                firstPatch[21] = "Water World";
+                firstPatch[22] = "Init Prog ";
+                firstPatch[23] = "Init Prog ";
+                firstPatch[24] = "Init Prog ";
+                firstPatch[25] = "Init Prog ";
+                firstPatch[26] = "Aeroglide ";
+                firstPatch[27] = "Live Wire "; // patch 20
+                firstPatch[28] = "Natural DR";
+                firstPatch[29] = "SynBells  "; // patch 20
+                firstPatch[30] = "BrassHorns";
+                firstPatch[31] = "Organ Perc"; // patch 20
+                firstPatch[32] = "HeavySteel";
+                firstPatch[33] = "Perc&Drums"; // patch 20
+                firstPatch[34] = "VasePad   "; // patch 20
+                firstPatch[35] = "WaterColor"; // patch 20
+                firstPatch[36] = "Hoodoos   ";
+
+
+
+                rack.m_overridePatches.resize(numBanks);
+
+                for (int b = 0; b < numBanks; ++b)
                 {
-                    for (int p = 0; p < patches[b]; ++p)
-                    {
-                        rack.m_overridePatches[b].push_back(firstPatch[b].trimEnd().toStdString());
-                    }
-                }
-                else while (ptr < endPtr)
-                {
-                    if (memcmp(ptr, firstPatch[b].getCharPointer(), 10) == 0)
-                    {
-                        if (b == 27 || b == 29 || b == 34 || b == 14 || b == 33 || b == 35 || b == 3 || b == 5 || b == 31)
-                            ptr -= patchSize * 19;
+                    auto patchSize = (b==21) ? 1869 : 178;
 
+                    char* ptr = (char*)memblock.getData();
+                    char* endPtr = ptr + memblock.getSize();
+
+                    if (firstPatch[b] == "Init Prog ")
+                    {
                         for (int p = 0; p < patches[b]; ++p)
                         {
-                            //*(ptr + 16) = 0; // null terminate on Mac
-                            String name = ptr;
-
-                            rack.m_overridePatches[b].push_back(name.trimEnd().toStdString());
-                            ptr += patchSize;
+                            rack.m_overridePatches[b].push_back(firstPatch[b].trimEnd().toStdString());
                         }
-                        break;
                     }
-                    ptr++;
-                }
-            }
-        }
-
-        if (rack.PluginName == "WAVESTATION")
-        {
-            auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/WAVESTATION")).createInputStream();
-
-            MemoryBlock memblock;
-            input->readIntoMemoryBlock(memblock);
-
-            const int numBanks = 18;
-            //int patches[numBanks] = { 100,100,100,50,50,50,50, 50,50,50,50, 50,50,50,50, 50,50,50,100,100,100,100,50,50,50,50 ,100,20,20,20,20,20,20,20,20,20,20 };
-            String firstPatch[numBanks];
-            firstPatch[0] = "Ski Jam        ";
-            firstPatch[1] = "Pharoah's Jig  ";
-            firstPatch[2] = "ResoPad 1      ";
-            firstPatch[3] = "Mr.Terminator\x7f ";
-            firstPatch[4] = "HousePianoSplt ";
-            firstPatch[5] = "Funky\x7fPlanet   ";
-            firstPatch[6] = String("Toto'ly\x7f")+"6/8\x7f \x7f\x7f";
-            firstPatch[7] = "Layers Of Funk ";
-            firstPatch[8] = "Life\x7fGoes\x7fOn...";
-            firstPatch[9] = "Mizik\x7fSplit\x7f\x7f\x7f ";
-            firstPatch[10] = "The\x7fWave\x7fSong\x7f\x7f";
-            firstPatch[11] = String("Piano\x7f\x7f")+"16' \x7f\x7f\x7f\x7f";
-            firstPatch[12] = "Kit 1: Hall  *w";
-            firstPatch[13] = "Power Monsters\x7f";
-            firstPatch[14] = "Pop Man        ";
-            firstPatch[15] = "Toolbox Jam !! ";
-            firstPatch[16] = "Bali Dancer\x7f\x7f\x7f\x7f";
-            firstPatch[17] = "TurtleBeats    ";
-
-            rack.m_overridePatches.resize(numBanks);
-
-            for (int b = 0; b < numBanks; ++b)
-            {
-                auto patchSize = 181;
-
-                char* ptr = (char*)memblock.getData();
-                char* endPtr = ptr + memblock.getSize();
-
-                while (ptr < endPtr)
-                {
-                    if (memcmp(ptr, firstPatch[b].getCharPointer(), 15) == 0)
+                    else while (ptr < endPtr)
                     {
-
-                        for (int p = 0; p < 50; ++p)
+                        if (memcmp(ptr, firstPatch[b].getCharPointer(), 10) == 0)
                         {
-                            //*(ptr + 16) = 0; // null terminate on Mac
-                            String name = ptr;
-                            name = name.replaceCharacters("\x7f", " ");
-                            rack.m_overridePatches[b].push_back(name.trimEnd().toStdString());
-                            ptr += patchSize;
+                            if (b == 27 || b == 29 || b == 34 || b == 14 || b == 33 || b == 35 || b == 3 || b == 5 || b == 31)
+                                ptr -= patchSize * 19;
+
+                            for (int p = 0; p < patches[b]; ++p)
+                            {
+                                //*(ptr + 16) = 0; // null terminate on Mac
+                                String name = ptr;
+
+                                rack.m_overridePatches[b].push_back(name.trimEnd().toStdString());
+                                ptr += patchSize;
+                            }
+                            break;
                         }
-                        break;
+                        ptr++;
                     }
-                    ptr++;
                 }
             }
-        }
-#endif
 
-        if (rack.PluginName == "TRITON")
-        {
-#ifdef JUCE_WINDOWS
-            auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
-#else
-            auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/TRITON")).createInputStream();
-#endif
-
-            MemoryBlock memblock;
-            input->readIntoMemoryBlock(memblock);
-
-            int bankRemap[] = { 0,1,2,3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8,9,10,11,12,13,14,15,16 };
-            const int numBanks = sizeof(bankRemap) / sizeof(bankRemap[0]);
-                
-            String firstPatch[numBanks];
-            firstPatch[0] = "Noisy Stabber    ";
-            firstPatch[1] = "Synth Sweeper    ";
-            firstPatch[2] = "Techno Phonic    ";
-            firstPatch[3] = "Ribbon Morpher   ";
-            firstPatch[16] = "Stereo Grand 1+2";
-            firstPatch[17] = "Mmmmoooaaah Vib.";
-            firstPatch[18] = "Groove00:114-Hip";
-            firstPatch[19] = "Falling Stars   ";
-            firstPatch[20] = "Synth Brass     ";
-            firstPatch[21] = "Marcato Str Orch";
-            firstPatch[22] = "EXP Strings Vib ";
-            firstPatch[23] = "C. Grand Piano  ";
-            firstPatch[24] = "MassiveKillerPad";
-
-#ifdef JUCE_WINDOWS
-            auto patchSize = 22;
-#else
-            auto patchSize = 540;
-#endif
-
-            rack.m_overridePatches.resize(numBanks);
-
-            for (int b = 0; b < numBanks; ++b)
+            if (rack.PluginName == "WAVESTATION")
             {
-                if (bankRemap[b] == -1)
-                    continue;
-                char* ptr = (char*)memblock.getData();
-                char* endPtr = ptr + memblock.getSize();
+                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/WAVESTATION")).createInputStream();
 
-                while (ptr < endPtr)
+                MemoryBlock memblock;
+                input->readIntoMemoryBlock(memblock);
+
+                const int numBanks = 18;
+                //int patches[numBanks] = { 100,100,100,50,50,50,50, 50,50,50,50, 50,50,50,50, 50,50,50,100,100,100,100,50,50,50,50 ,100,20,20,20,20,20,20,20,20,20,20 };
+                String firstPatch[numBanks];
+                firstPatch[0] = "Ski Jam        ";
+                firstPatch[1] = "Pharoah's Jig  ";
+                firstPatch[2] = "ResoPad 1      ";
+                firstPatch[3] = "Mr.Terminator\x7f ";
+                firstPatch[4] = "HousePianoSplt ";
+                firstPatch[5] = "Funky\x7fPlanet   ";
+                firstPatch[6] = String("Toto'ly\x7f")+"6/8\x7f \x7f\x7f";
+                firstPatch[7] = "Layers Of Funk ";
+                firstPatch[8] = "Life\x7fGoes\x7fOn...";
+                firstPatch[9] = "Mizik\x7fSplit\x7f\x7f\x7f ";
+                firstPatch[10] = "The\x7fWave\x7fSong\x7f\x7f";
+                firstPatch[11] = String("Piano\x7f\x7f")+"16' \x7f\x7f\x7f\x7f";
+                firstPatch[12] = "Kit 1: Hall  *w";
+                firstPatch[13] = "Power Monsters\x7f";
+                firstPatch[14] = "Pop Man        ";
+                firstPatch[15] = "Toolbox Jam !! ";
+                firstPatch[16] = "Bali Dancer\x7f\x7f\x7f\x7f";
+                firstPatch[17] = "TurtleBeats    ";
+
+                rack.m_overridePatches.resize(numBanks);
+
+                for (int b = 0; b < numBanks; ++b)
                 {
-                    if (memcmp(ptr, firstPatch[b].getCharPointer(), 16) == 0)
-                    {
-                        for (int p = 0; p < 128; ++p)
-                        {
-                            *(ptr + 16) = 0; // null terminate on Mac
-                            String name = ptr;
+                    auto patchSize = 181;
 
-                            rack.m_overridePatches[bankRemap[b]].push_back(name.trimEnd().toStdString());
-                            ptr += patchSize;
+                    char* ptr = (char*)memblock.getData();
+                    char* endPtr = ptr + memblock.getSize();
+
+                    while (ptr < endPtr)
+                    {
+                        if (memcmp(ptr, firstPatch[b].getCharPointer(), 15) == 0)
+                        {
+
+                            for (int p = 0; p < 50; ++p)
+                            {
+                                //*(ptr + 16) = 0; // null terminate on Mac
+                                String name = ptr;
+                                name = name.replaceCharacters("\x7f", " ");
+                                rack.m_overridePatches[b].push_back(name.trimEnd().toStdString());
+                                ptr += patchSize;
+                            }
+                            break;
                         }
-                        break;
+                        ptr++;
                     }
-                    ptr++;
                 }
             }
+#endif
 
-            if (auto processorPtr = processor.get())
-			    if (rack.InitialState.size())
-				    SendChunkString(processorPtr, rack.InitialState);
+            if (rack.PluginName == "TRITON")
+            {
+#ifdef JUCE_WINDOWS
+                auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
+#else
+                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/TRITON")).createInputStream();
+#endif
+
+                MemoryBlock memblock;
+                input->readIntoMemoryBlock(memblock);
+
+                int bankRemap[] = { 0,1,2,3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8,9,10,11,12,13,14,15,16 };
+                const int numBanks = sizeof(bankRemap) / sizeof(bankRemap[0]);
+
+                String firstPatch[numBanks];
+                firstPatch[0] = "Noisy Stabber    ";
+                firstPatch[1] = "Synth Sweeper    ";
+                firstPatch[2] = "Techno Phonic    ";
+                firstPatch[3] = "Ribbon Morpher   ";
+                firstPatch[16] = "Stereo Grand 1+2";
+                firstPatch[17] = "Mmmmoooaaah Vib.";
+                firstPatch[18] = "Groove00:114-Hip";
+                firstPatch[19] = "Falling Stars   ";
+                firstPatch[20] = "Synth Brass     ";
+                firstPatch[21] = "Marcato Str Orch";
+                firstPatch[22] = "EXP Strings Vib ";
+                firstPatch[23] = "C. Grand Piano  ";
+                firstPatch[24] = "MassiveKillerPad";
+
+#ifdef JUCE_WINDOWS
+                auto patchSize = 22;
+#else
+                auto patchSize = 540;
+#endif
+
+                rack.m_overridePatches.resize(numBanks);
+
+                for (int b = 0; b < numBanks; ++b)
+                {
+                    if (bankRemap[b] == -1)
+                        continue;
+                    char* ptr = (char*)memblock.getData();
+                    char* endPtr = ptr + memblock.getSize();
+
+                    while (ptr < endPtr)
+                    {
+                        if (memcmp(ptr, firstPatch[b].getCharPointer(), 16) == 0)
+                        {
+                            for (int p = 0; p < 128; ++p)
+                            {
+                                *(ptr + 16) = 0; // null terminate on Mac
+                                String name = ptr;
+
+                                rack.m_overridePatches[bankRemap[b]].push_back(name.trimEnd().toStdString());
+                                ptr += patchSize;
+                            }
+                            break;
+                        }
+                        ptr++;
+                    }
+                }
+            }
+			if (rack.InitialState.size())
+				SendChunkString(processorPtr, rack.InitialState);
 			
 			AddRack(processor, rack);
         }
