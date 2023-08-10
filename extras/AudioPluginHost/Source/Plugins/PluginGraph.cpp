@@ -780,11 +780,10 @@ void PluginGraph::setupPerformer()
         if (auto processorPtr = processor.get())
         {
 
-#ifndef JUCE_WINDOWS
 
             if (rack.PluginName == "M1")
             {
-                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/M1")).createInputStream();
+                auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream()
 
                 MemoryBlock memblock;
                 input->readIntoMemoryBlock(memblock);
@@ -872,7 +871,7 @@ void PluginGraph::setupPerformer()
 
             if (rack.PluginName == "WAVESTATION")
             {
-                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/WAVESTATION")).createInputStream();
+                auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream()
 
                 MemoryBlock memblock;
                 input->readIntoMemoryBlock(memblock);
@@ -927,15 +926,13 @@ void PluginGraph::setupPerformer()
                     }
                 }
             }
-#endif
+
 
             if (rack.PluginName == "TRITON")
             {
-#ifdef JUCE_WINDOWS
+
                 auto input = File(pd.fileOrIdentifier.getCharPointer()).createInputStream();
-#else
-                auto input = File(String("/Library/Audio/Plug-Ins/Components/TRITON.component/Contents/MacOS/TRITON")).createInputStream();
-#endif
+
 
                 MemoryBlock memblock;
                 input->readIntoMemoryBlock(memblock);
@@ -991,6 +988,27 @@ void PluginGraph::setupPerformer()
                     }
                 }
             }
+
+
+                for (int i = 0; i < rack.m_overridePatches.size(); ++i)
+                {
+                    if (rack.m_overridePatches[i].size() > 0)
+                    {
+                        File file(File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(rack.PluginName).replace("(VST2 64bit)", "") + "\\" + String::formatted("%03d.txt", i));
+                        file.createOutputStream();
+                        for (int j = 0; j < rack.m_overridePatches[i].size(); ++j)
+
+                        {
+                            StringArray lines;
+                            file.appendText(rack.m_overridePatches[i][j]);
+                            if (j != rack.m_overridePatches[i].size() - 1)
+                                file.appendText("\n");
+                        }
+                    }
+
+
+                }
+
 			if (rack.InitialState.size())
 				SendChunkString(processorPtr, rack.InitialState);
 			
