@@ -718,7 +718,7 @@ void PluginGraph::setupPerformer()
 #ifdef JUCE_WINDOWS
             auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(rack.PluginName).replace("(VST2 64bit)", "") + "\\Banknames.txt";
 #else
-            auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(device.PluginName) + "/Banknames.txt");
+            auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(rack.PluginName) + "/Banknames.txt";
 #endif
 
             if (File(bankFile).exists())
@@ -739,7 +739,7 @@ void PluginGraph::setupPerformer()
 #ifdef JUCE_WINDOWS
                             auto bankFile2 = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(rack.PluginName).replace("(VST2 64bit)", "") + "\\" + String::formatted("%03d.txt", i);
 #else
-                            auto bankFile2 = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(device.PluginName) + "/" + String::formatted("%03d.txt", i));
+                            auto bankFile2 = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(rack.PluginName) + "/" + String::formatted("%03d.txt", i);
 #endif
                             StringArray lines2;
                             File(bankFile2).readLines(lines2);
@@ -747,7 +747,9 @@ void PluginGraph::setupPerformer()
                                 rack.m_overridePatches[i].push_back(lines2[j].toStdString());
                         }
                     }
+#ifdef JUCE_WINDOWS
                 }
+#endif
             }
 
 			if (rack.InitialState.size())
