@@ -1,0 +1,128 @@
+EXP Strings Vib
+QuartetStr D.Vib
+Wide Oct Strings
+StringsAtk->Trem
+Staccato Strings
+EnglishHorn Vib2
+Flute Section
+OrchBs.Clarinet2
+Clarinet Section
+Orch. Bassoon 2
+F.Horns SFZ
+StereoTrombones
+PiccoloTrp Spicc
+Bright Trumpets
+SoftTipsMarimba
+EXP TubularBells
+Going to Gong
+StringPhraseMix1
+Legato Violins
+ExpressViolns ST
+Staccato Violins
+Legato Violas
+Staccato Violas
+LargoRosinViolas
+ExpressCelli ST
+Staccato Celli
+ExpressBasses ST
+Staccato Basses
+String Orch. ST
+Wide Strings
+EXP Strings ST
+EXP LiteStrings
+LargoWideStrings
+Few Camera Str
+1st LinesStrings
+EXP Vlins&Vlas
+EXP Vlins&Celli
+EXP Vlas&Celli
+EXP Celli&Bass
+EXP Oct Vlin&Cl
+EXP Oct Cl&Bs
+Strings&Brass1-Y
+Strings&Brass2-Y
+Largo Brs&Str
+Marc/Trem Violns
+Marc/Trem Violas
+Marc/Trem Celli
+Marc/Trem Basses
+Marc/TremStrings
+TremoloToStrings
+StringsToTremolo
+Violins Pizz ST
+Violas Pizz ST
+Celli Pizz ST
+Basses Pizz ST
+Str Orch.Pizz ST
+String Quartet 2
+ViolinSolo D.Vib
+Viola Solo D.Vib
+Cello Solo D.Vib
+Alto Flute Attak
+Orch.Flute Vib 2
+Flutes Spiccato
+Orchestral Oboe2
+Orch.OboeD'Amore
+Orch. Oboe Vib 2
+OrchEnglishHorn2
+BeBop Clarinet
+BsClarnt+Trl<SW>
+ClarinetsSpiccat
+OrchContraBasson
+Flute & Eng.Horn
+EXP WindEnsemble
+Wind Mixture
+TrumpetsSpiccato
+Trumpets SFZ
+St. Trumpets mf
+Stereo F.Horns
+F.Horns Spiccato
+Stereo DarkHorns
+F.Horns D Spicc.
+F.Horns D SFZ
+Largo F.Horns D
+Trombones Spicc.
+Trombones SFZ
+St. Trombones mf
+TBones&Brass Oct
+TBones&TPets Oct
+TBones & FHorns
+Orchestral Brass
+EXP PiccoloTrp
+Largo PiccoloTrp
+Bright Trumpet
+Solo Trumpet 2
+Trumpet Spiccato
+Trumpet pp
+Express Trombone
+TromboneSpiccato
+Trombone mp
+Trombone pp
+Slow Trombone
+Open F.Horn
+F.Horn Spiccato
+Closed F.Horn
+Expressive Tuba
+Tuba Spiccato
+Tuba mp
+Orch. Xylophone
+HardTipsMarimba
+Vibraphone <Sw1>
+Orchestra Bell 2
+Orch. Timpani
+Tuned Timpani 2
+Gran Cassa ff
+Gran Cassa mf
+Orch. Cymbal
+Orch. Harp
+Celtic Harp
+StringPhraseMix2
+StringPhrase Hit
+Velocity HarpSFX
+Velo Angel Harps
+ROM-OrchestraKit
+EXB Orch. Kit 2
+Major Hit Kit
+Minor Hit Kit
+Major Harp Kit
+Minor Harp Kit

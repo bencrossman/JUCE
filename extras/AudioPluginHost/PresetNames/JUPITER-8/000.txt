@@ -1,0 +1,64 @@
+PD Jupiter Glide
+PD Jupiter Str
+BR JP PWM Brass
+SQ JP Arpeggio
+PL Poly Stack
+SY 1964 SciWiFi
+BS Ba-Bass
+LD Siren's Chant
+PD JP Square Pad
+KY XMod Electric
+PD JP Soft Pad
+KY Warship
+SQ 8th Peaks
+LD Hawk Lead
+PD JP Phaser Pad
+BR Grind Tpt
+LD Jupiter Lead
+BS So Smooth
+PD Lush City
+SQ Jumpin' Arpg
+SY Spit Sinker
+BS Thrillin' Bs
+PD Phased Dirt
+PD Jupiter Str2
+SQ Deep Ocean
+SY Silk Fives
+LD ELK Sitar
+BS Waver Bass
+PD Warm Pad
+PD 4-Seen Voices
+SQ Compu-Spike
+DR Percussion
+SQ Arpg Hardball
+PD JP Pad Mach
+SQ Arpg Terra
+PD Lunar Breeze
+PL Stac Echo
+PL PWM Plucking
+SY Jupiter PWM
+SQ Peppercorn
+1981 NEG Pluck
+1981 Cars Sync
+1981 Hammer Lead
+1981 Clav
+1981 Echo Piano
+1981 Honky Tonk
+1981 Xylo
+1981 Harp
+1981 Lo Strings
+1981 Hi Strings
+1981 Mellow Str
+1981 Lo Brass
+1981 Hi Brass
+1981 S/H Brass
+1981 Pipe Organ
+1981 Drawbar Org
+1981 Solo Voice
+1981 Choir Voice
+1981 Fat Fifth
+1981 Fuzzy Fifth
+1981 Hard Blip
+1981 Flute
+1981 Whistle
+1981 Chime
