@@ -1,0 +1,50 @@
+Kit 1: Hall  *w
+Psycho:Hall  *w
+JoystickJam!*vw
+WickedSynBass*w
+Psycho Nuclear
+Big Hit Split*w
+Kit1:PtchDwn *w
+Psyco:PtchDwn*w
+Attack Brass *w
+ModWh Cannon Eb
+Kit 1:Gated  *w
+Psycho:Gated *w
+Amazon Life *vw
+Slap-n-Pick  *w
+Gated Noises *w
+MelodiBells  *w
+Kit1:FixFlang*w
+Psyco:Flange *w
+Log Drum     *w
+DistrtedPhase*w
+Kit 1: Room  *w
+Psycho:Room  *w
+R&B Funk-Jam *w
+Ele/Ac Bass  *w
+Massive Noises
+Marimba      *w
+Kit 1:PitchShft
+Psycho:PtchShft
+Voices       *w
+Industry Hits 1
+Kit 1:Plate  *w
+Psycho:Plate *w
+Mr. Demo Man *w
+Justa Pickin'*w
+Reversed Noises
+SynPizzMallet*w
+Kit1:InSpace *w
+Psyco:InSpace*w
+Synth Kit
+Industry Hits 2
+Kit1:Dry+EQ  *w
+Psycho:Dry+EQ*w
+WaveSong+Drms*w
+Justa Slapin'*w
+PitchSlapBack*w
+Jekyl & Hyde *w
+Kit1:Chorusx2*w
+Psyco:Chorusx2w
+Psycho Freak *w
+DistrtdFlange*w

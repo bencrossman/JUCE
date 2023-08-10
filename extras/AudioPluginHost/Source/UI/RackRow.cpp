@@ -780,9 +780,9 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     m_id = device.ID;
 
 #ifdef JUCE_WINDOWS
-    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.PluginName + "_Banks.txt").replace("(VST2 64bit)", "");
+    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(device.PluginName).replace("(VST2 64bit)", "") + "\\Banknames.txt";
 #else
-    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.PluginName + "_Banks.txt");
+    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(device.PluginName) + "/Banknames.txt";
 #endif
 
     if (File(bankFile).exists())
