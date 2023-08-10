@@ -339,10 +339,10 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             {
                 MemoryBlock mb;
                 ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
-
-                /*VSTPluginFormat::getChunkData((AudioPluginInstance * )((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor(), mb, true);
+                
+                /*static int num = 0;
                 MemoryInputStream input(mb, false);
-                auto output3 = File(String("C:\\Users\\ben\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\") + m_current->Device->PluginName + String::formatted("\\%03d_%03d.bin", m_current->Bank, num)).createOutputStream();
+                auto output3 = File(String("C:\\Users\\bencr\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\") + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("\\%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
                 output3->writeFromInputStream(input,-1);*/
 
                 MemoryInputStream uncompressedInput(mb.getData(), mb.getSize(), false);
@@ -927,11 +927,7 @@ void RackRow::SendPresetStateData()
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-#ifdef JUCE_WINDOWS
-            VSTPluginFormat::setChunkData((AudioPluginInstance*)processor, memblock.getData(), (int)memblock.getSize(), true);
-#else
             processor->setStateInformation(memblock.getData(), memblock.getSize());
-#endif
         }
     }
 }

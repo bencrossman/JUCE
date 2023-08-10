@@ -1,7 +1,5 @@
 Next
 ~~~~
--Roland AU's would need presets all redumped (Could load from old and save as new, may even work on Mac), also see if can extract straight from bin file
--Korg M1/WS isn't reporting program names (Just do what I did for Triton) - Will be able to remove m_pendingProgramNames
 -Replacement for DirectWave (my own?)
  Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
  https://github.com/Birch-san/juicysfplugin.git could be good basis
