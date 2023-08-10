@@ -1,0 +1,128 @@
+Marcato Str Orch
+Maestro Violin
+Largo Strings
+StrOrch. Trem ST
+Medium Strings
+Pizz Str Section
+SFZ String Orch.
+Orch.Flute Vib 1
+Orch. Oboe Vib 1
+Clarinet
+4FrenchHorns ST
+Bright Trombones
+Solo Trumpet 1
+EXP Vibraphone
+Concert Harp
+EXP Velo Timpani
+EXB Orch. Kit 1
+Harp Phrase Set
+Xpressiv Violins
+14 Violins ST
+Marcato Violins
+Largo Violins
+Largo RosinVlins
+Rosin Violins
+Xpressiv Violas
+10 Violas ST
+Marcato Violas
+ExpressViolas ST
+Largo Violas
+Rosin Violas
+Xpressiv Celli
+8 Celli ST
+Marcato Celli
+Largo Celli
+Largo RosinCelli
+Xpressiv Basses
+6 Basses ST
+Marcato Basses
+Largo Basses
+String Orchestra
+Rosin Strings
+Cinemagic Str
+Philharmonic Str
+Clear Strings
+Power Strings
+Slow EXP Strings
+Pad Strings
+Octave Str Orch.
+Producer Strings
+Str & Brass<vel>
+Violins Trem ST
+Violas Trem ST
+Celli Trem ST
+Basses Trem ST
+SFZ String Trem
+Pizz Violins
+Pizz Violas
+Pizz Celli
+Pizz Basses
+EXPVeloPizzicato
+Solo Violin Vib.
+Solo Viola Vib.
+Solo Cello Vib.
+Solo Bass Vib.
+String Quartet 1
+Solace Strings
+Two Violins
+Two Violas
+Two Celli
+Viola & Cello
+Pizz Solo Violin
+Pizz Solo Viola
+Pizz Solo Cello
+Pizz Solo Bass
+Pizz Str Quartet
+Alto Flute Vib.
+3 Flutes
+Orchestral Oboe1
+OrchEnglishHorn1
+EnglishHorn Vib1
+OrchBs.Clarinet1
+2 Clarinets
+Clarinets ST
+Orch. Bassoon 1
+Contra Bassoon
+2 Double Reeds
+Stereo Trumpets
+Trumpet Section1
+Trumpet Section2
+Largo Trumpets
+French Horns
+F.Horns Mix
+Largo F.Horns
+Horns of France
+TromboneSection1
+ff Trombones
+TromboneSection2
+Largo Trombones
+SFZ Brass Sect.
+Symphonic Brass
+ff Brass Section
+BrightPiccoloTrp
+Piccolo Trumpet
+Express Trumpet
+Largo Trumpet
+Flugelhorn
+Express F.Horn
+Largo F.Horn
+Bright Trombone
+Solo Trombone
+Largo Trombone
+Bright Tuba
+Solo Tuba
+Largo Tuba
+Xylophone
+EXP Marimba
+Orch. Marimba
+Soft Vibraphone
+Orchestra Bell 1
+Tubular Bells
+Tuned Timpani 1
+SFZ Timp Roll
+Orch. Bass Drum
+Cymbal SFX Swell
+Concert Gong
+Classic Harp
+String PhraseSet
+Mixed Harp Gliss
