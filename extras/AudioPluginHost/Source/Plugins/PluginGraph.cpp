@@ -726,7 +726,7 @@ void PluginGraph::setupPerformer()
                 rack.m_usesBanks = true;
 
 #ifdef JUCE_WINDOWS
-                if (rack.PluginName != "M1" && rack.PluginName != "Wavestation") // Get patches live on Windows since VST supports it (gets any user patches)
+                if (rack.PluginName != "M1" && rack.PluginName != "WAVESTATION") // Get patches live on Windows since VST supports it (gets any user patches)
                 {
 #endif
                     StringArray lines;
