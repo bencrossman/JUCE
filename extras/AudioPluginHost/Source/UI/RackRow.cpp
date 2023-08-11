@@ -342,8 +342,14 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                 
                 /*static int num = 0;
                 MemoryInputStream input(mb, false);
-                auto output3 = File(String("C:\\Users\\bencr\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\") + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("\\%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
-                output3->writeFromInputStream(input,-1);*/
+#ifdef JUCE_WINDOWS
+                auto output3 = File(String("C:\\Users\\bencr\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\VST\\") + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("\\%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
+#else
+                auto output3 = File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
+#endif
+                output3->writeFromInputStream(input,-1);
+                if (num>=128)
+                    num = 0;*/
 
                 MemoryInputStream uncompressedInput(mb.getData(), mb.getSize(), false);
                 MemoryOutputStream output;
@@ -916,9 +922,9 @@ void RackRow::SendPresetStateData()
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
 #ifdef JUCE_WINDOWS
-        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\" + String(m_current->Device->PluginName).replace("(VST2 64bit)","") + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
+        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\VST\\" + String(m_current->Device->PluginName).replace("(VST2 64bit)","") + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
 #else
-        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + "PresetStates/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
+        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
 #endif
         auto input = File(sendPresetStateDataFilename).createInputStream();
         if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)
