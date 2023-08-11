@@ -1,35 +1,35 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="-1979937417">
+<Root CurrentSetListID="1564106639">
     <SetLists>
         <SetList ID="-1979937417" Name="New Setlist">
-            <Song ID="782716634" />
+            <Song ID="473981104" />
         </SetList>
     </SetLists>
     <Racks>
-        <Rack ID="1972536097" Name="Piano" PluginName="TruePianos"></Rack>
-        <Rack ID="-1263294741" Name="Yamaha DX7" PluginName="FM8"></Rack>
-        <Rack ID="-1454637391" Name="Roland JV-1080" PluginName="JV-1080"></Rack>
-        <Rack ID="401752497" Name="Roland Jupiter-8" PluginName="JUPITER-8"></Rack>
-        <Rack ID="-1410258127" Name="Korg M1" PluginName="M1"></Rack>
-        <Rack ID="1574775199" Name="Korg Wavestation" PluginName="WAVESTATION"></Rack>
-        <Rack ID="1440531609" Name="Korg Triton" PluginName="TRITON"></Rack>
-        <Rack ID="227096078" Name="Oberheim OP-X" PluginName="OP-X PRO-II"></Rack>
+        <Rack ID="-1986602202" Name="TruePianos" PluginName="TruePianos"></Rack>
+        <Rack ID="999048182" Name="FM7" PluginName="FM8">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</Rack>
+        <Rack ID="1909092243" Name="Korg Wavestation" PluginName="WAVESTATION"></Rack>
+        <Rack ID="825758735" Name="Korg M1" PluginName="M1"></Rack>
+        <Rack ID="-1568747717" Name="Korg Triton" PluginName="TRITON"></Rack>
+        <Rack ID="-538217212" Name="Roland JV-1080" PluginName="JV-1080"></Rack>
+        <Rack ID="-1418327909" Name="Roland Jupiter-8" PluginName="JUPITER-8"></Rack>
+        <Rack ID="1500878420" Name="OP-X PRO-II" PluginName="OP-X PRO-II"></Rack>
     </Racks>
     <Songs>
-        <Song ID="782716634" Name="New Song">
-            <Performance ID="-1165828820" />
+        <Song ID="473981104" Name="New Song">
+            <Performance ID="-564872042" />
         </Song>
     </Songs>
     <Performances>
-        <Performance ID="-1165828820" Name="New performance">
-            <Zone DeviceID="227096078" Program="0"></Zone>
-            <Zone DeviceID="-1263294741" Program="0"></Zone>
-            <Zone DeviceID="-1454637391" Program="0"></Zone>
-            <Zone DeviceID="1972536097" Program="0"></Zone>
-            <Zone DeviceID="-1410258127" Program="0"></Zone>
-            <Zone DeviceID="1574775199" Program="0"></Zone>
-            <Zone DeviceID="401752497" Program="0"></Zone>
-            <Zone DeviceID="1440531609" Program="0"></Zone>
+        <Performance ID="-564872042" Name="New performance">
+            <Zone DeviceID="825758735" Program="0"></Zone>
+            <Zone DeviceID="1909092243" Program="0"></Zone>
+            <Zone DeviceID="-538217212" Program="0"></Zone>
+            <Zone DeviceID="-1418327909" Program="0"></Zone>
+            <Zone DeviceID="-1986602202" Program="0"></Zone>
+            <Zone DeviceID="999048182" Program="0"></Zone>
+            <Zone DeviceID="-1568747717" Program="0"></Zone>
+            <Zone DeviceID="1500878420" Program="0"></Zone>
         </Performance>
     </Performances>
 </Root>
