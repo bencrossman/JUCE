@@ -5,8 +5,8 @@ Next
  https://github.com/Birch-san/juicysfplugin.git could be good basis
  Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files.
 
-Plugins
-~~~~~~~
+Plugin licensing
+~~~~~~~~~~~~~~~~
 I don't like internet licenses because worry about legacy support
 What currently uses licenses that require Internet check:
 -Truepianos (Always have old version to full back on but actually might not need Internet)
@@ -17,7 +17,16 @@ Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -OPX (Crash if set state too quick, State only saved of current preset and number is 1 [Shame because does respond to PC's], No names saved or can be queried). Would have to simply use as state plugin (or extreme write a script to cycle through / dump / get names from opxbank file - would be hard to maintain)
 -DirectWave (Fruityloops does work although possible bug with PC send, no pirate version so buy)
--Won't be able to get P8 (Windows only) / B4II(Old)
+-Won't be able to get P8 (Windows only - Have fired off email)) / B4II(Old)
+
+B4II notes
+~~~~~~~~~~
+Looks like I changed the following from default on patch 1:
+- Pedal bass sliders all up
+- Treble rotor spread up max
+- Bass rotor distance down min
+- Rotorer run not set to "T" mode
+- All CC's assigned (although probably doesn't do anything)
 
 Next cover band
 ~~~~~~~~~~~~~~~
