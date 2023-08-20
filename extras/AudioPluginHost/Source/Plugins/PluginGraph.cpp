@@ -660,7 +660,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	auto types = internalFormat.getAllTypes();
 
     auto audioInputs = processor->getTotalNumInputChannels();
-    if (String(rack.PluginName).contains("DirectWave"))
+    if (!String(rack.PluginName).contains("AmpliTube"))
         audioInputs = 0;
 
     auto node = graph.addNode(std::unique_ptr<AudioProcessor>(std::move(processor)), (NodeID)rack.ID);

@@ -818,7 +818,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         else if (device.m_node)
         {
             auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
-            if (processor->getNumPrograms() == 0 || (processor->getNumPrograms() == 1 && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default")))
+            if (processor->getNumPrograms() == 0 || ((processor->getNumPrograms() == 1 || processor->getNumPrograms() == 128) && (processor->getProgramName(0) == "" || processor->getProgramName(0) == "Default")))
                 m_hasPrograms = false; // Used by Guitar and Disco Strings
         }
     }
@@ -902,7 +902,8 @@ void RackRow::handleCommandMessage(int id)
 		else if (m_hasPrograms)
 		{
 			for (int i = 0; i < processor->getNumPrograms(); ++i)
-				m_program->addItem(processor->getProgramName(i), i + 1);
+				if (processor->getProgramName(i) != "") 
+                    m_program->addItem(processor->getProgramName(i), i + 1);
 		}
         m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
     }
