@@ -1,35 +1,17 @@
 Next
 ~~~~
--Replacement for DirectWave (my own - would then be Mac compatible?) or https://www.tx16wx.com/ (free)
+-Replacement for DirectWave (my own - would then be Mac compatible and future proof?) or https://www.tx16wx.com/ (free, mac, text format, stream too)
  Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
  https://github.com/Birch-san/juicysfplugin.git could be good basis
- Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files. Could try resaving dwp's and translater again
  Start with DiscoStrings / Brass
+ Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files. Could try resaving dwp's and translater again
+-Look at integrating Guitar plugin into code [great because doesn't have UI anyway] (and sampler & streamer if tx16wx no good)
  
-
-
-Plugin licensing
-~~~~~~~~~~~~~~~~
-I don't like internet licenses because worry about legacy support
-What currently uses licenses that require Internet check:
--Truepianos (Always have old version to full back on but actually might not need Internet)
--Korg (because just couldn't find Triton hacked but have M1/WS old versions to fall back on)
--Amplitube (Also have old version to fall back on)
-
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
--OPX (Crash if set state too quick, State only saved of current preset and number is 1 [Shame because does respond to PC's], No names saved or can be queried). Would have to simply use as state plugin (or extreme write a script to cycle through / dump / get names from opxbank file - would be hard to maintain)
 -DirectWave (Fruityloops but bug with PC send, support ticket logged)
--Won't be able to get P8 (Windows only - Have fired off email)) / B4II(Old)
-
-B4II notes
-~~~~~~~~~~
-Looks like I changed the following from default on patch 1:
-- Pedal bass sliders all up
-- Treble rotor spread up max
-- Bass rotor distance down min
-- Rotorer run not set to "T" mode
-- All CC's assigned (although probably doesn't do anything)
+-P8 - No Windows (Have fired off email))
+-B4II - Old but just replace
 
 Next cover band
 ~~~~~~~~~~~~~~~
@@ -51,7 +33,7 @@ Notification of overrides (hide programs/banks)
 Clear override (easy)
 Load doesn't work
 Need UI to enable/disable #CC16
-Disconnect guitar on device change (stop ASIO4ALL crash)
+Disconnect guitar on device change (stop ASIO4ALL crash), also if loading a guitar before others, will be active while loading.
 Crash with empty scene and adding performance only?
 After adding first song/setlist/performance going back to rack doesnt update titles
 Option to select an image for plugin
@@ -75,4 +57,3 @@ MainHostWindow
                                                                                 +panel(added so we can notify of solo)
 
 
-VST specific was something to do with import I think (13/1/20)
