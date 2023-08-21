@@ -136,7 +136,8 @@ public:
 
     std::function<void()> m_onProgramChange = NULL;
     std::function<void(int)> m_onMasterVolume = NULL;
-    
+    bool m_initializing = true;
+
     void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
