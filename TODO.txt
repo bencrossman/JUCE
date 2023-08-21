@@ -1,11 +1,16 @@
 Next
 ~~~~
 -Replacement for DirectWave (my own - would then be Mac compatible and future proof?) or https://www.tx16wx.com/ (free, mac, text format, stream too)
+
+ Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files. Could try resaving dwp's and translater again
+
  Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
  https://github.com/Birch-san/juicysfplugin.git could be good basis
- Start with DiscoStrings / Brass
- Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files. Could try resaving dwp's and translater again
+
 -Look at integrating Guitar plugin into code [great because doesn't have UI anyway] (and sampler & streamer if tx16wx no good)
+-TruePianos to just state pc5
+
+
  
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
