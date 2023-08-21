@@ -581,6 +581,9 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
     int arpeggiatorSample = 0;
 
+    if (graph->m_initializing)
+        return;
+
     if (!midiBuffer.isEmpty())
     {
         MidiBuffer output;

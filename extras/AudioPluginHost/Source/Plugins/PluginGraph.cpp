@@ -751,13 +751,22 @@ void PluginGraph::setupPerformer()
                 }
 #endif
             }
-
-			if (rack.InitialState.size())
-				SendChunkString(processorPtr, rack.InitialState);
 			
 			AddRack(processor, rack);
         }
     }
+
+    for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
+    {
+        if (m_performer.Root.Racks.Rack[i].m_node && m_performer.Root.Racks.Rack[i].InitialState.size())
+        {
+            auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)m_performer.Root.Racks.Rack[i].m_node)->getProcessor();
+            SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialState);
+        }
+    }
+
+    m_initializing = false;
+
     m_keylabReady = true;
 }
 
