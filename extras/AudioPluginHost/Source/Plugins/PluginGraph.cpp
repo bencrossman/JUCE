@@ -756,6 +756,9 @@ void PluginGraph::setupPerformer()
         }
     }
 
+    // Mute while we are sending global chunks (otherwise guitar will kick off)
+    ((AudioProcessorGraph::Node*)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue(0);
+
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
         if (m_performer.Root.Racks.Rack[i].m_node && m_performer.Root.Racks.Rack[i].InitialState.size())
@@ -764,6 +767,9 @@ void PluginGraph::setupPerformer()
             SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialState);
         }
     }
+
+    ((AudioProcessorGraph::Node*)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue(0.25f);
+
 
     m_initializing = false;
 
