@@ -1,26 +1,36 @@
 Next
 ~~~~
--Replacement for DirectWave (my own - would then be Mac compatible and future proof?) or https://www.tx16wx.com/ (free, mac, text format, stream too)
+-Replacement for DirectWave, Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
 
- Need to convert dwp files. Chicken Systems Translator doesn't seem to use the wav files. Could try resaving dwp's and translater again
+Translator
+-'Oneshot' lost (for EXS and no support in SF2)
+-EXS exports seem to have region/att set to -60db, Logic 9.1+ fixes this
+-Can only convert DWP's from version 1.6.3
+-Exports a filter (on Alto Express at least)
 
- Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
- https://github.com/Birch-san/juicysfplugin.git could be good basis
-
--Look at integrating Guitar plugin into code [great because doesn't have UI anyway] (and sampler & streamer if tx16wx no good)
--TruePianos to just state pc5
-
-
+My own
+-Mac and future proof
+-Use https://github.com/Birch-san/juicysfplugin.git as basis
+-Polyphone good although no UI to change root note
  
+TX16WX
+-Kinda free, Mac, text format and streaming too
+-Can't work out how to set root without typing it in first
+-Various UI bugs
+-Over complicated with regions(streaming defaults to DFD which is stupid, OUT set to FX1 for reverb), groups(has oneshot), programs, sounds('release' doesn't import from SF2, 'fixed velocity' doesn't import from SF2[as velocity sensitivity=0] and doesn't import whatever EXS would use[although the way I do it post volume is crap])
+-Reverb(damp is percent rather then frequency, no decay, wet is probably send) 
+ 
+-Look at integrating Guitar plugin into code [great because doesn't have UI anyway and brings guitar to Mac] (and sampler & streamer if tx16wx no good)
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
--DirectWave (Fruityloops but bug with PC send, support ticket logged)
+-DirectWave (Fruityloops but bug with PC send, support ticket logged, also options above)
 -P8 - No Windows (Have fired off email))
 -B4II - Old but just replace
 
 Next cover band
 ~~~~~~~~~~~~~~~
-Police - 1 song - King Of Pain
+Police - 1 song - King Of Pain 
 Dire Straits - 4 songs
 John Farnham(Still loads in Forte) - 5 songs, Voice already done
 Pink Floyd - 11 songs, Brick already done (On the run is OBX patch)
