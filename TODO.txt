@@ -1,30 +1,16 @@
 Next
 ~~~~
--Replacement for DirectWave, Needs velocity ranges, creation UI, reverb, velcoity ignore, one shot, program changes
-
-Translator
--'Oneshot' lost (for EXS and no support in SF2)
--EXS exports seem to have region/att set to -60db, Logic 9.1+ fixes this
--Can only convert DWP's from version 1.6.3
--Exports a filter (on Alto Express at least)
-
-My own
--Mac and future proof
+Sampler
+-Use DirectWave 1.6.3 to put DWP's in newer format
+-Use Translator to convert to SF2's
+-Use Polyphone to edit (good although no UI to change root note but there is source code). Need to mark Oneshots (Release to 100), velocity insensitive (Fixed velocity) and remove filters (Alto had one)
 -Use https://github.com/Birch-san/juicysfplugin.git as basis
--Polyphone good although no UI to change root note
- 
-TX16WX
--Kinda free, Mac, text format and streaming too
--Can't work out how to set root without typing it in first
--Various UI bugs
--Over complicated with regions(streaming defaults to DFD which is stupid, OUT set to FX1 for reverb), groups(has oneshot), programs, sounds('release' doesn't import from SF2, 'fixed velocity' doesn't import from SF2[as velocity sensitivity=0] and doesn't import whatever EXS would use[although the way I do it post volume is crap])
--Reverb(damp is percent rather then frequency, no decay, wet is probably send) 
- 
+-Implement reverb
+
 -Look at integrating Guitar plugin into code [great because doesn't have UI anyway and brings guitar to Mac] (and sampler & streamer if tx16wx no good)
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
--DirectWave (Fruityloops but bug with PC send, support ticket logged, also options above)
 -P8 - No Windows (Have fired off email))
 -B4II - Old but just replace
 
