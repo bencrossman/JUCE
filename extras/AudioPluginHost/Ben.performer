@@ -1575,7 +1575,7 @@
             <Zone DeviceID="-2048222834" Program="2" Volume="-12"></Zone>
         </Performance>
         <Performance ID="2029587695" Name="One Vision|Intro" Tempo="80">
-            <Zone DeviceID="1555279137" Bank="21" Program="17" Transpose="24"></Zone>
+            <Zone DeviceID="1555279137" Bank="21" Program="17" Transpose="24" LowKey="24" HighKey="27"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24"></Zone>
             <Zone DeviceID="546031377" Program="9"></Zone>
         </Performance>
