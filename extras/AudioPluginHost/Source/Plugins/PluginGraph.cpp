@@ -680,6 +680,8 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	rack.m_gainNode = (void*)gain.get();
 	rack.m_midiFilterNode = (void*)midi.get();
 
+    ((AudioProcessorGraph::Node*)(rack.m_gainNode))->getProcessor()->getParameters()[0]->setValue(0);
+
 	graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ midi->nodeID, 4096 } });
 	graph.addConnection({ { midi->nodeID, 4096 },{ node->nodeID, 4096 } });
 
@@ -765,9 +767,6 @@ void PluginGraph::setupPerformer()
         }
     }
 
-    // Mute while we are sending global chunks (otherwise guitar will kick off)
-    ((AudioProcessorGraph::Node*)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue(0);
-
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
         if (m_performer.Root.Racks.Rack[i].m_node && m_performer.Root.Racks.Rack[i].InitialState.size())
@@ -776,8 +775,6 @@ void PluginGraph::setupPerformer()
             SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialState);
         }
     }
-
-    ((AudioProcessorGraph::Node*)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue(0.25f);
 
 
     m_initializing = false;
