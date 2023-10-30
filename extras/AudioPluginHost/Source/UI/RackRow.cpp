@@ -828,6 +828,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 
     m_program->setVisible(m_hasPrograms);
     m_bank->setVisible(m_bank->getNumItems() > 0);
+    m_volume->setValue(-100); // So in Assign we do something
 }
 
 void RackRow::Assign(Zone *zone)
@@ -860,10 +861,11 @@ void RackRow::Assign(Zone *zone)
 		m_missing->setVisible(false);
 	}
 
-    m_volume->setValue(zone->Volume);
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification);
-	m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
+    if (!m_mute->getToggleState())
+        m_volume->setValue(zone->Volume);
+    m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
     m_transpose->setText(String(zone->Transpose));
