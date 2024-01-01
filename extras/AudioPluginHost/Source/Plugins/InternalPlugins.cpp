@@ -38,7 +38,6 @@
 
 #include "InternalPlugins.h"
 #include "PluginGraph.h"
-#include "GuitarStrummer/PluginProcessor.h"
 
 #define PIP_DEMO_UTILITIES_INCLUDED 1
 
@@ -69,6 +68,8 @@ static std::unique_ptr<InputStream> createAssetInputStream (const char* resource
 #include "../../../../examples/Plugins/NoiseGatePluginDemo.h"
 #include "../../../../examples/Plugins/SamplerPluginDemo.h"
 #include "../../../../examples/Plugins/SurroundPluginDemo.h"
+#include "GuitarStrummer/PluginProcessor.h"
+
 
 //==============================================================================
 class InternalPlugin final : public AudioPluginInstance
