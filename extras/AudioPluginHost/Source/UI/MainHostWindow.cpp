@@ -605,7 +605,7 @@ void MainHostWindow::menuItemSelected (int menuItemID, int /*topLevelMenuIndex*/
     }
     else
     {
-        if (getIndexChosenByMenu (menuItemID) >= 0)
+        if (getIndexChosenByMenu (menuItemID) >= 0 || (menuItemID > 0 && menuItemID < (int)(1 + internalTypes.size())))
             createPlugin (getChosenType (menuItemID), { proportionOfWidth  (0.3f + Random::getSystemRandom().nextFloat() * 0.6f),
                                                         proportionOfHeight (0.3f + Random::getSystemRandom().nextFloat() * 0.6f) });
     }
@@ -684,9 +684,10 @@ void MainHostWindow::addPluginsToMenu (PopupMenu& m)
 
         for (auto& t : internalTypes)
         {
-            //if (t.name != "GuitarStrummer")
-            //    continue;
-            m.addItem(++i, t.name + " (" + t.pluginFormatName + ")");
+            ++i;
+            if (t.name != "GuitarStrummer")
+                continue;
+            m.addItem(i, t.name + " (" + t.pluginFormatName + ")");
         }
     }
 
