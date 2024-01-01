@@ -689,19 +689,19 @@ static void addToMenu (const KnownPluginList::PluginTree& tree,
 
 void MainHostWindow::addPluginsToMenu (PopupMenu& m)
 {
-    // Don't add the Internal plugins into the menu bar
-    /*
     if (graphHolder != nullptr)
     {
         int i = 0;
 
         for (auto& t : internalTypes)
-            m.addItem (++i, t.name + " (" + t.pluginFormatName + ")");
+        {
+            //if (t.name != "GuitarStrummer")
+            //    continue;
+            m.addItem(++i, t.name + " (" + t.pluginFormatName + ")");
+        }
     }
 
     m.addSeparator();
-    */
-
     auto pluginDescriptions = knownPluginList.getTypes();
 
     // This avoids showing the internal types again later on in the list

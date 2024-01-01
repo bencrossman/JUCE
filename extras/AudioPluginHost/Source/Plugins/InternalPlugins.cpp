@@ -29,6 +29,7 @@
 
 #include "InternalPlugins.h"
 #include "PluginGraph.h"
+#include "GuitarStrummer/PluginProcessor.h"
 
 #define PIP_DEMO_UTILITIES_INCLUDED 1
 
@@ -516,8 +517,9 @@ InternalPluginFormat::InternalPluginFormat()
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<MultiOutSynth>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<NoiseGate>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<SamplerAudioProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); }
-    }
+        [] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); },
+        [] { return std::make_unique<InternalPlugin>(std::make_unique<GuitarStrummerAudioProcessor>()); }
+}
 {
 }
 
