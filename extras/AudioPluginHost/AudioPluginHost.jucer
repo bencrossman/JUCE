@@ -200,6 +200,86 @@
         </GROUP>
       </GROUP>
       <GROUP id="{6F257CD6-CE86-9BBC-54C1-45E43249E414}" name="Plugins">
+        <GROUP id="{23CCF3A0-6597-A1EC-63EE-6E4F38051706}" name="GuitarStrummer">
+          <GROUP id="{7D60D3E9-6892-9A37-A684-3927D7B277F2}" name="Fluidlite">
+            <GROUP id="{883C8414-90CA-CA2D-F183-B5E87965ED34}" name="include">
+              <GROUP id="{DF6510E0-F785-86AB-C189-CD7DF1E3ACB6}" name="fluidsynth">
+                <FILE id="SPU28e" name="gen.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/gen.h"/>
+                <FILE id="XZg6wU" name="log.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/log.h"/>
+                <FILE id="p5lgvT" name="misc.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/misc.h"/>
+                <FILE id="GiIdx9" name="mod.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/mod.h"/>
+                <FILE id="jND2fm" name="ramsfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/ramsfont.h"/>
+                <FILE id="Qe5rl4" name="settings.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/settings.h"/>
+                <FILE id="iH866Q" name="sfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/sfont.h"/>
+                <FILE id="sayQYr" name="synth.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/synth.h"/>
+                <FILE id="VDosb2" name="types.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/types.h"/>
+                <FILE id="P96k08" name="version.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/version.h"/>
+                <FILE id="aOeS2x" name="voice.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/voice.h"/>
+              </GROUP>
+              <FILE id="Cjhkdk" name="fluidlite.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidlite.h"/>
+            </GROUP>
+            <GROUP id="{7D689DFE-F2F5-83F7-AF25-B0396B507F7D}" name="src">
+              <FILE id="rEo525" name="fluid_chan.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.c"/>
+              <FILE id="d1J3XZ" name="fluid_chan.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.h"/>
+              <FILE id="yhilAY" name="fluid_chorus.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chorus.c"/>
+              <FILE id="P90vJh" name="fluid_chorus.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chorus.h"/>
+              <FILE id="zKT2oa" name="fluid_config.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_config.h"/>
+              <FILE id="JmL3nT" name="fluid_conv.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_conv.c"/>
+              <FILE id="T85D02" name="fluid_conv.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_conv.h"/>
+              <FILE id="dPIylu" name="fluid_defsfont.c" compile="1" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.c"/>
+              <FILE id="pwsbcM" name="fluid_defsfont.h" compile="0" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.h"/>
+              <FILE id="VW9LsH" name="fluid_dsp_float.c" compile="1" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_float.c"/>
+              <FILE id="I2UpPf" name="fluid_dsp_simple.c" compile="1" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_simple.c"/>
+              <FILE id="fKigRl" name="fluid_gen.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_gen.c"/>
+              <FILE id="uyqOpO" name="fluid_gen.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_gen.h"/>
+              <FILE id="fHlhMU" name="fluid_hash.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_hash.c"/>
+              <FILE id="B50YBK" name="fluid_hash.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_hash.h"/>
+              <FILE id="JtMwGI" name="fluid_list.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.c"/>
+              <FILE id="Sj7wSf" name="fluid_list.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.h"/>
+              <FILE id="YdeYwT" name="fluid_midi.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_midi.h"/>
+              <FILE id="IJNIHi" name="fluid_mod.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_mod.c"/>
+              <FILE id="eMl2Ak" name="fluid_mod.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_mod.h"/>
+              <FILE id="uHc5NR" name="fluid_phase.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_phase.h"/>
+              <FILE id="hRAfk7" name="fluid_ramsfont.c" compile="1" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.c"/>
+              <FILE id="vT44Dv" name="fluid_ramsfont.h" compile="0" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.h"/>
+              <FILE id="rEvadv" name="fluid_rev.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_rev.c"/>
+              <FILE id="F0SJ11" name="fluid_rev.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_rev.h"/>
+              <FILE id="a7dCnP" name="fluid_settings.c" compile="1" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_settings.c"/>
+              <FILE id="uGi4yx" name="fluid_settings.h" compile="0" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_settings.h"/>
+              <FILE id="PdMvGJ" name="fluid_sfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sfont.h"/>
+              <FILE id="yojMVt" name="fluid_synth.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_synth.c"/>
+              <FILE id="LrWODQ" name="fluid_synth.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_synth.h"/>
+              <FILE id="nmFqsr" name="fluid_sys.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.c"/>
+              <FILE id="gSeM8i" name="fluid_sys.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.h"/>
+              <FILE id="yuAn22" name="fluid_tuning.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_tuning.c"/>
+              <FILE id="hdfipg" name="fluid_tuning.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_tuning.h"/>
+              <FILE id="FrdEe4" name="fluid_voice.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_voice.c"/>
+              <FILE id="vvR30y" name="fluid_voice.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_voice.h"/>
+              <FILE id="BRc5i5" name="fluidsynth.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth.c"/>
+              <FILE id="XT78ve" name="fluidsynth_priv.h" compile="0" resource="0"
+                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth_priv.h"/>
+            </GROUP>
+          </GROUP>
+          <FILE id="CKYS0c" name="PluginEditor.cpp" compile="1" resource="0"
+                file="Source/Plugins/GuitarStrummer/PluginEditor.cpp"/>
+          <FILE id="T3hQuH" name="PluginEditor.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/PluginEditor.h"/>
+          <FILE id="UKBnaX" name="PluginProcessor.cpp" compile="1" resource="0"
+                file="Source/Plugins/GuitarStrummer/PluginProcessor.cpp"/>
+          <FILE id="srdcQ6" name="PluginProcessor.h" compile="0" resource="0"
+                file="Source/Plugins/GuitarStrummer/PluginProcessor.h"/>
+          <FILE id="eucP84" name="SoundfontAudioSource.cpp" compile="1" resource="0"
+                file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.cpp"/>
+          <FILE id="gh92I9" name="SoundfontAudioSource.h" compile="0" resource="0"
+                file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
+        </GROUP>
         <FILE id="rcuPqK" name="ARAPlugin.cpp" compile="1" resource="0" file="Source/Plugins/ARAPlugin.cpp"/>
         <FILE id="gR1tiA" name="ARAPlugin.h" compile="0" resource="0" file="Source/Plugins/ARAPlugin.h"/>
         <FILE id="pov6wS" name="InternalPlugins.cpp" compile="1" resource="0"
@@ -249,7 +329,7 @@
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_WASAPI="1" JUCE_DIRECTSOUND="1" JUCE_ALSA="1" JUCE_USE_FLAC="0"
-               JUCE_USE_OGGVORBIS="0" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
+               JUCE_USE_OGGVORBIS="1" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
                JUCE_USE_CAMERA="0" JUCE_PLUGINHOST_AU="1" JUCE_WEB_BROWSER="0"
                JUCE_PLUGINHOST_VST3="1" JUCE_PLUGINHOST_LADSPA="0" JUCE_PLUGINHOST_LV2="0"
                JUCE_PLUGINHOST_VST="1" JUCE_ASIO="1" JUCE_WASAPI_EXCLUSIVE="1"/>
