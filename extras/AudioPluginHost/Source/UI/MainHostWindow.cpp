@@ -695,9 +695,10 @@ void MainHostWindow::addPluginsToMenu (PopupMenu& m)
 
         for (auto& t : internalTypes)
         {
-            //if (t.name != "GuitarStrummer")
-            //    continue;
-            m.addItem(++i, t.name + " (" + t.pluginFormatName + ")");
+            ++i;
+            if (t.name != "GuitarStrummer")
+                continue;
+            m.addItem(i, t.name + " (" + t.pluginFormatName + ")");
         }
     }
 
