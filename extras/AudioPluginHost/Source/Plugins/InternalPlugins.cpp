@@ -36,16 +36,6 @@
 // that fetches resources from embedded binary data instead of files
 static std::unique_ptr<InputStream> createAssetInputStream (const char* resourcePath)
 {
-    for (int i = 0; i < BinaryData::namedResourceListSize; ++i)
-    {
-        if (String (BinaryData::originalFilenames[i]) == String (resourcePath))
-        {
-            int dataSizeInBytes;
-            auto* resource = BinaryData::getNamedResource (BinaryData::namedResourceList[i], dataSizeInBytes);
-            return std::make_unique<MemoryInputStream> (resource, dataSizeInBytes, false);
-        }
-    }
-
     return {};
 }
 
@@ -510,15 +500,15 @@ InternalPluginFormat::InternalPluginFormat()
 
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<AUv3SynthProcessor>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<Arpeggiator>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<DspModulePluginDemoAudioProcessor>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<DspModulePluginDemoAudioProcessor>()); },
 		[] { return std::make_unique<InternalPlugin> (std::make_unique<GainProcessor>()); },
 		[] { return std::make_unique<InternalPlugin> (std::make_unique<MidiFilter>()); },
-		[] { return std::make_unique<InternalPlugin> (std::make_unique<JuceDemoPluginAudioProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<MidiLoggerPluginDemoProcessor>()); },
+		//[] { return std::make_unique<InternalPlugin> (std::make_unique<JuceDemoPluginAudioProcessor>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<MidiLoggerPluginDemoProcessor>()); },
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<MultiOutSynth>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<NoiseGate>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<SamplerAudioProcessor>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<NoiseGate>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<SamplerAudioProcessor>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); },
         [] { return std::make_unique<InternalPlugin>(std::make_unique<GuitarStrummerAudioProcessor>()); }
 }
 {
