@@ -75,7 +75,7 @@ void GuitarStrummerAudioProcessor::changeProgramName (int, const String&)
 //==============================================================================
 void GuitarStrummerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    m_guitarChordPlayer.loadSoundfont(File(File::getSpecialLocation(File::SpecialLocationType::currentExecutableFile).getParentDirectory().getFullPathName() + "\\GuitarStrummer.sf2"));
+    m_guitarChordPlayer.loadSoundfont(File(File::getCurrentWorkingDirectory().getFullPathName() + "\\GuitarStrummer.sf2"));
     m_guitarChordPlayer.prepareToPlay(samplesPerBlock, sampleRate);
     m_lastChordKey = -1;
     m_lastChordType = -1;
