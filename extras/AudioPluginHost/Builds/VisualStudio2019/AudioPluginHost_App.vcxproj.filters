@@ -11,6 +11,21 @@
     <Filter Include="AudioPluginHost\Source\ForteEmulator">
       <UniqueIdentifier>{EFB891B5-0D63-68DC-9270-4CE1482C0D58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth">
+      <UniqueIdentifier>{BF726B01-ADED-43F5-45A5-D33E0251BCA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include">
+      <UniqueIdentifier>{BB1BBB07-BEA8-7763-3D31-BB5F68568BE5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src">
+      <UniqueIdentifier>{D50E1F96-6BF6-B73F-96AC-F6B066E86152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite">
+      <UniqueIdentifier>{982DC7E5-044B-1838-C798-6F56442EFB33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer">
+      <UniqueIdentifier>{BB0CEF32-73E3-4DB3-9999-2D102FE8E4DD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins">
       <UniqueIdentifier>{346E906D-8A2B-A93A-4C90-BCD3C60D2FD0}</UniqueIdentifier>
     </Filter>
@@ -645,6 +660,69 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlparser.cpp">
       <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_float.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_simple.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth.c">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\PluginEditor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\PluginProcessor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\ARAPlugin.cpp">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
@@ -3158,6 +3236,111 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\XmlArchive.h">
       <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\gen.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\log.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\misc.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\mod.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\ramsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\settings.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\sfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\synth.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\types.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\version.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\voice.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidlite.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_config.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_midi.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_phase.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth_priv.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginEditor.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginProcessor.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h">
+      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
