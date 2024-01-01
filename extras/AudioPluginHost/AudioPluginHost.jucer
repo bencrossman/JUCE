@@ -318,15 +318,7 @@
       <FILE id="TuhBFg" name="Performer.cpp" compile="1" resource="0" file="Source/Performer.cpp"/>
       <FILE id="HPKay8" name="Performer.h" compile="0" resource="0" file="Source/Performer.h"/>
     </GROUP>
-    <GROUP id="{63C773C8-4305-87DD-DB3F-6D1143EFEC61}" name="BinaryData">
-      <FILE id="sId0Lj" name="cassette_recorder.wav" compile="0" resource="1"
-            file="../../examples/Assets/cassette_recorder.wav"/>
-      <FILE id="VVFrYQ" name="cello.wav" compile="0" resource="1" file="../../examples/Assets/cello.wav"/>
-      <FILE id="lVsCge" name="guitar_amp.wav" compile="0" resource="1" file="../../examples/Assets/guitar_amp.wav"/>
-      <FILE id="Qs6X5l" name="proaudio.path" compile="0" resource="1" file="../../examples/Assets/proaudio.path"/>
-      <FILE id="M2ySFI" name="reverb_ir.wav" compile="0" resource="1" file="../../examples/Assets/reverb_ir.wav"/>
-      <FILE id="tlFmWJ" name="singing.ogg" compile="0" resource="1" file="../../examples/Assets/singing.ogg"/>
-    </GROUP>
+    <GROUP id="{63C773C8-4305-87DD-DB3F-6D1143EFEC61}" name="BinaryData"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_WASAPI="1" JUCE_DIRECTSOUND="1" JUCE_ALSA="1" JUCE_USE_FLAC="0"
                JUCE_USE_OGGVORBIS="1" JUCE_USE_CDBURNER="0" JUCE_USE_CDREADER="0"
