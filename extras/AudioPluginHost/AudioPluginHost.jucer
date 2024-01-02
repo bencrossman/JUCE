@@ -280,6 +280,15 @@
           <FILE id="gh92I9" name="SoundfontAudioSource.h" compile="0" resource="0"
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
+        <GROUP id="{845DC96D-73A2-2F91-4F5C-F83F1CCAAC70}" name="WavStreamer">
+          <FILE id="t1rjss" name="PluginEditor.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/PluginEditor.cpp"/>
+          <FILE id="OGKpj0" name="PluginEditor.h" compile="0" resource="0" file="Source/Plugins/WavStreamer/PluginEditor.h"/>
+          <FILE id="o3fvBQ" name="PluginProcessor.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/PluginProcessor.cpp"/>
+          <FILE id="WaLVBG" name="PluginProcessor.h" compile="0" resource="0"
+                file="Source/Plugins/WavStreamer/PluginProcessor.h"/>
+        </GROUP>
         <FILE id="rcuPqK" name="ARAPlugin.cpp" compile="1" resource="0" file="Source/Plugins/ARAPlugin.cpp"/>
         <FILE id="gR1tiA" name="ARAPlugin.h" compile="0" resource="0" file="Source/Plugins/ARAPlugin.h"/>
         <FILE id="pov6wS" name="InternalPlugins.cpp" compile="1" resource="0"

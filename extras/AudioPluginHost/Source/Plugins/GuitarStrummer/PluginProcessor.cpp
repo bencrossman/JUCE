@@ -9,7 +9,6 @@
 */
 
 #include "PluginProcessor.h"
-#include "PluginEditor.h"
 #include "stdio.h"
 
 //==============================================================================
@@ -24,7 +23,7 @@ GuitarStrummerAudioProcessor::~GuitarStrummerAudioProcessor()
 //==============================================================================
 const String GuitarStrummerAudioProcessor::getName() const
 {
-    return "GuitarStrummer";
+    return "Guitar Strummer";
 }
 
 bool GuitarStrummerAudioProcessor::acceptsMidi() const
@@ -255,12 +254,12 @@ void GuitarStrummerAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
 //==============================================================================
 bool GuitarStrummerAudioProcessor::hasEditor() const
 {
-    return true; // (change this to false if you choose to not supply an editor)
+    return false;
 }
 
 AudioProcessorEditor* GuitarStrummerAudioProcessor::createEditor()
 {
-    return new GuitarStrummerAudioProcessorEditor (*this);
+    return nullptr;
 }
 
 //==============================================================================
@@ -275,11 +274,4 @@ void GuitarStrummerAudioProcessor::setStateInformation (const void* , int )
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-}
-
-//==============================================================================
-// This creates new instances of the plugin..
-AudioProcessor* JUCE_CALLTYPE createPluginFilter()
-{
-    return new GuitarStrummerAudioProcessor();
 }
