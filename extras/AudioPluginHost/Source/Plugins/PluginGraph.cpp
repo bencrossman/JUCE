@@ -259,7 +259,7 @@ PluginWindow* PluginGraph::getOrCreateWindowFor (AudioProcessorGraph::Node* node
 
             if (! plugin->hasEditor() && description.pluginFormatName == "Internal")
             {
-                getCommandManager().invokeDirectly (CommandIDs::showAudioSettings, false);
+                //getCommandManager().invokeDirectly (CommandIDs::showAudioSettings, false);
                 return nullptr;
             }
 

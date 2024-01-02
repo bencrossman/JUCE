@@ -11,17 +11,23 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "SoundfontAudioSource.h"
+
+struct Patch
+{ 
+  Patch() : m_loop(false) {}
+  std::string m_file;
+  bool m_loop;
+};
 
 //==============================================================================
 /**
 */
-class GuitarStrummerAudioProcessor  : public AudioProcessor
+class FilePlaybackPluginAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    GuitarStrummerAudioProcessor();
-    ~GuitarStrummerAudioProcessor();
+    FilePlaybackPluginAudioProcessor();
+    ~FilePlaybackPluginAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -30,8 +36,6 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
 
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
-	void processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages);
-
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
@@ -55,13 +59,20 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    void Play();
+    void Stop();
+    std::vector<Patch> *GetList() { return &m_patches; }
+	
 private:
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GuitarStrummerAudioProcessor)
+    ResamplingAudioSource *m_resamplerSource;
+    std::vector<Patch> m_patches;
+    int m_currentFile;
+	int m_samplesPerBlock;
+	AudioFormatManager m_formatManager;
+    bool m_triggered = false;
 
-    SoundfontAudioSource m_guitarChordPlayer;
-    int m_lastChordKey;
-    int m_lastChordType;    std::shared_ptr<dsp::Reverb> m_reverb;
-	bool m_reverbActive = false;
-    std::vector<std::vector<MidiMessage>> m_buffer;
+
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilePlaybackPluginAudioProcessor)
 };
+

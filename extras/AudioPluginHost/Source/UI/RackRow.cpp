@@ -863,8 +863,7 @@ void RackRow::Assign(Zone *zone)
 
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification);
-    if (!m_mute->getToggleState())
-        m_volume->setValue(zone->Volume);
+    m_volume->setValue(zone->Volume);
     m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
     m_lowKey->setText(FormatKey(zone->LowKey));
     m_highKey->setText(FormatKey(zone->HighKey));
