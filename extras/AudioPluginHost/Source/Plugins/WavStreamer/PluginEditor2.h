@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 7.0.2
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -39,12 +39,13 @@ public:
         table.getHeader().addColumn ("Mode",3,40);
 
         //table.setMultipleSelectionEnabled (true);
+        table.selectRow(0);
     }
 
     // This is overloaded from TableListBoxModel, and must return the total number of rows in our table
     int getNumRows() override
     {
-        return m_patches?(*m_patches).size():0;
+        return 127;
     }
 
     void SetList(std::vector<Patch> *patches) { m_patches=patches; }
@@ -90,10 +91,13 @@ public:
 
     void AddItem(const char*newItem)
     {
-      Patch newPatch;
-      newPatch.m_file=newItem;
-      (*m_patches).push_back(newPatch);
+        int i = table.getSelectedRow();
+      (*m_patches)[i].m_file = newItem;
+      SparseSet<int> sel;
+      table.setSelectedRows(sel);
       table.updateContent();
+      table.selectRow(i);
+
     }
 
     void DeleteSelected()
@@ -101,32 +105,12 @@ public:
       int i=table.getSelectedRow();
       if (i!=-1)
       {
-        (*m_patches).erase((*m_patches).begin() + i);
+          ((*m_patches)[i]).m_file = "";
+          SparseSet<int> sel;
+          table.setSelectedRows(sel);
         table.updateContent();
-      }
-    }
-
-    void MoveUpSelected()
-    {
-      int i=table.getSelectedRow();
-      if (i>0)
-      {
-        std::swap((*m_patches)[i],(*m_patches)[i-1]);
-        SparseSet<int> sel;
-        sel.addRange(Range<int>(i-1,i));
-        table.setSelectedRows(sel);
-      }
-    }
-
-    void MoveDownSelected()
-    {
-      int i=table.getSelectedRow();
-      if (i<(int)m_patches->size()-1)
-      {
-        std::swap((*m_patches)[i],(*m_patches)[i+1]);
-        SparseSet<int> sel;
-        sel.addRange(Range<int>(i+1,i+2));
-        table.setSelectedRows(sel);
+        table.selectRow(i);
+       
       }
     }
 
@@ -139,6 +123,7 @@ public:
         SparseSet<int> sel;
         table.setSelectedRows(sel);
         table.updateContent();
+        table.selectRow(i);
       }
     }
 
@@ -168,20 +153,20 @@ private:
                                                                     //[/Comments]
 */
 class FilePlaybackPluginAudioProcessorEditor  : public AudioProcessorEditor,
-                                                public Button::Listener
+                                                public juce::Button::Listener
 {
 public:
     //==============================================================================
     FilePlaybackPluginAudioProcessorEditor (AudioProcessor& processor);
-    ~FilePlaybackPluginAudioProcessorEditor();
+    ~FilePlaybackPluginAudioProcessorEditor() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     //[/UserMethods]
 
-    void paint (Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
 
 
@@ -192,12 +177,10 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<TextButton> m_addButton;
-    std::unique_ptr<TextButton> m_deleteButton;
-    std::unique_ptr<TextButton> m_moveUp;
-    std::unique_ptr<TextButton> m_moveDown;
+    std::unique_ptr<juce::TextButton> m_addButton;
+    std::unique_ptr<juce::TextButton> m_deleteButton;
     std::unique_ptr<TableDemoComponent> m_table;
-    std::unique_ptr<TextButton> m_toggleLoop;
+    std::unique_ptr<juce::TextButton> m_toggleLoop;
 
 
     //==============================================================================

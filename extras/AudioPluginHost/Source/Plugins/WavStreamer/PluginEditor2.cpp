@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 7.0.2
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -21,7 +21,7 @@
 #include "PluginProcessor.h"
 //[/Headers]
 
-#include "PluginEditor.h"
+#include "PluginEditor2.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -35,45 +35,31 @@ FilePlaybackPluginAudioProcessorEditor::FilePlaybackPluginAudioProcessorEditor (
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    m_addButton.reset (new TextButton (String()));
+    m_addButton.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_addButton.get());
-    m_addButton->setButtonText (TRANS("Add"));
+    m_addButton->setButtonText (TRANS("Set"));
     m_addButton->addListener (this);
 
     m_addButton->setBounds (8, 8, 80, 24);
 
-    m_deleteButton.reset (new TextButton (String()));
+    m_deleteButton.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_deleteButton.get());
-    m_deleteButton->setButtonText (TRANS("Delete"));
+    m_deleteButton->setButtonText (TRANS("Clear"));
     m_deleteButton->addListener (this);
 
     m_deleteButton->setBounds (96, 8, 80, 24);
-
-    m_moveUp.reset (new TextButton (String()));
-    addAndMakeVisible (m_moveUp.get());
-    m_moveUp->setButtonText (TRANS("Move Up"));
-    m_moveUp->addListener (this);
-
-    m_moveUp->setBounds (184, 8, 80, 24);
-
-    m_moveDown.reset (new TextButton (String()));
-    addAndMakeVisible (m_moveDown.get());
-    m_moveDown->setButtonText (TRANS("Move Down"));
-    m_moveDown->addListener (this);
-
-    m_moveDown->setBounds (272, 8, 80, 24);
 
     m_table.reset (new TableDemoComponent());
     addAndMakeVisible (m_table.get());
 
     m_table->setBounds (8, 40, 432, 352);
 
-    m_toggleLoop.reset (new TextButton (String()));
+    m_toggleLoop.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_toggleLoop.get());
-    m_toggleLoop->setButtonText (TRANS("Toggle Loop"));
+    m_toggleLoop->setButtonText (TRANS("Cycle Mode"));
     m_toggleLoop->addListener (this);
 
-    m_toggleLoop->setBounds (360, 8, 80, 24);
+    m_toggleLoop->setBounds (336, 8, 104, 24);
 
 
     //[UserPreSize]
@@ -95,8 +81,6 @@ FilePlaybackPluginAudioProcessorEditor::~FilePlaybackPluginAudioProcessorEditor(
 
     m_addButton = nullptr;
     m_deleteButton = nullptr;
-    m_moveUp = nullptr;
-    m_moveDown = nullptr;
     m_table = nullptr;
     m_toggleLoop = nullptr;
 
@@ -106,12 +90,12 @@ FilePlaybackPluginAudioProcessorEditor::~FilePlaybackPluginAudioProcessorEditor(
 }
 
 //==============================================================================
-void FilePlaybackPluginAudioProcessorEditor::paint (Graphics& g)
+void FilePlaybackPluginAudioProcessorEditor::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colours::white);
+    g.fillAll (juce::Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -127,7 +111,7 @@ void FilePlaybackPluginAudioProcessorEditor::resized()
     //[/UserResized]
 }
 
-void FilePlaybackPluginAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
+void FilePlaybackPluginAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
@@ -151,18 +135,6 @@ void FilePlaybackPluginAudioProcessorEditor::buttonClicked (Button* buttonThatWa
         //[UserButtonCode_m_deleteButton] -- add your button handler code here..
         m_table->DeleteSelected();
         //[/UserButtonCode_m_deleteButton]
-    }
-    else if (buttonThatWasClicked == m_moveUp.get())
-    {
-        //[UserButtonCode_m_moveUp] -- add your button handler code here..
-        m_table->MoveUpSelected();
-        //[/UserButtonCode_m_moveUp]
-    }
-    else if (buttonThatWasClicked == m_moveDown.get())
-    {
-        //[UserButtonCode_m_moveDown] -- add your button handler code here..
-        m_table->MoveDownSelected();
-        //[/UserButtonCode_m_moveDown]
     }
     else if (buttonThatWasClicked == m_toggleLoop.get())
     {
@@ -197,22 +169,16 @@ BEGIN_JUCER_METADATA
                  fixedSize="1" initialWidth="448" initialHeight="400">
   <BACKGROUND backgroundColour="ffffffff"/>
   <TEXTBUTTON name="" id="62dcb6cad5fd83b" memberName="m_addButton" virtualName=""
-              explicitFocusOrder="0" pos="8 8 80 24" buttonText="Add" connectedEdges="0"
+              explicitFocusOrder="0" pos="8 8 80 24" buttonText="Set" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="ee0ae4bd0107d78c" memberName="m_deleteButton" virtualName=""
-              explicitFocusOrder="0" pos="96 8 80 24" buttonText="Delete" connectedEdges="0"
+              explicitFocusOrder="0" pos="96 8 80 24" buttonText="Clear" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="" id="1b0fe6caa5b71f46" memberName="m_moveUp" virtualName=""
-              explicitFocusOrder="0" pos="184 8 80 24" buttonText="Move Up"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="" id="b6031428c6fd9778" memberName="m_moveDown" virtualName=""
-              explicitFocusOrder="0" pos="272 8 80 24" buttonText="Move Down"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <GENERICCOMPONENT name="" id="2e2e5afc809d8716" memberName="m_table" virtualName=""
                     explicitFocusOrder="0" pos="8 40 432 352" class="TableDemoComponent"
                     params=""/>
   <TEXTBUTTON name="" id="74227fc19ec4b7cc" memberName="m_toggleLoop" virtualName=""
-              explicitFocusOrder="0" pos="360 8 80 24" buttonText="Toggle Loop"
+              explicitFocusOrder="0" pos="336 8 104 24" buttonText="Cycle Mode"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
