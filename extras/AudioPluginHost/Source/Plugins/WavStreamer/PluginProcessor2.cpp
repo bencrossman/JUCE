@@ -87,12 +87,6 @@ const String FilePlaybackPluginAudioProcessor::getProgramName (int index)
       res = found+1;
     res.resize(res.size()-4);
   }
-  else
-  {
-    char buffer[256];
-    sprintf(buffer,"Program%03d",index);
-    res=buffer;
-  }
 
   return res;
 }
