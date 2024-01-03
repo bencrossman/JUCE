@@ -36,7 +36,7 @@ public:
 
         table.getHeader().addColumn ("PC",1,30);
         table.getHeader().addColumn ("Wav file",2,330);
-        table.getHeader().addColumn ("Loop",3,40);
+        table.getHeader().addColumn ("Mode",3,40);
 
         //table.setMultipleSelectionEnabled (true);
     }
@@ -54,8 +54,8 @@ public:
     {
         if (rowIsSelected)
             g.fillAll (Colours::lightblue);
-        else if (rowNumber % 2)
-            g.fillAll (Colour (0xffeeeeee));
+        else
+            g.fillAll (Colours::white);
     }
 
     // This is overloaded from TableListBoxModel, and must paint any cells that aren't using custom
@@ -68,8 +68,16 @@ public:
         text=String(rowNumber+1);
       else if (columnId==2)
         text=(*m_patches)[rowNumber].m_file.c_str();
-      else if (columnId==3)
-        text=(*m_patches)[rowNumber].m_loop?"yes":"no";
+      else if (columnId == 3)
+      {
+          switch ((*m_patches)[rowNumber].m_mode)
+          {
+          case MODE_NORMAL:text = "normal"; break;
+          case MODE_LOOP:text = "loop"; break;
+          case MODE_ONNOTE:text = "onnote"; break;
+
+          }
+      }
       g.drawText (text, 2, 0, width - 4, height, Justification::centredLeft, true);
 
     }
@@ -84,7 +92,6 @@ public:
     {
       Patch newPatch;
       newPatch.m_file=newItem;
-      newPatch.m_loop=false;
       (*m_patches).push_back(newPatch);
       table.updateContent();
     }
@@ -128,7 +135,7 @@ public:
       int i=table.getSelectedRow();
       if (i!=-1)
       {
-        (*m_patches)[i].m_loop=!(*m_patches)[i].m_loop;
+        (*m_patches)[i].m_mode =((*m_patches)[i].m_mode + 1) % MODE_COUNT;
         SparseSet<int> sel;
         table.setSelectedRows(sel);
         table.updateContent();
