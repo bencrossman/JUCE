@@ -2527,7 +2527,7 @@
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h"/>
-    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginEditor.h"/>
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginEditor2.h"/>
     <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h"/>
     <ClInclude Include="..\..\Source\Plugins\InternalPlugins.h"/>

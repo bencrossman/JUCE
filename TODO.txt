@@ -5,9 +5,7 @@ Sampler
 -Use Translator to convert to SF2's
 -Use Polyphone to edit (good although no UI to change root note but there is source code). Need to mark Oneshots (Release to 100), velocity insensitive (Fixed velocity) and remove filters (Alto had one)
 -Use https://github.com/Birch-san/juicysfplugin.git as basis
--Implement reverb
-
--Look at integrating Guitar plugin into code [great because doesn't have UI anyway and brings guitar to Mac] (and sampler & streamer if tx16wx no good)
+-Implement reverb (or maybe don't need to?)
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
