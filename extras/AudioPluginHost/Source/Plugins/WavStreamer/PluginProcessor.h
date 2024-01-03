@@ -12,11 +12,19 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+enum
+{
+    MODE_NORMAL,
+    MODE_LOOP,
+    MODE_ONNOTE,
+    MODE_COUNT
+};
+
 struct Patch
 { 
-  Patch() : m_loop(false) {}
+  Patch() : m_mode(MODE_NORMAL) {}
   std::string m_file;
-  bool m_loop;
+  int m_mode;
 };
 
 //==============================================================================

@@ -66,7 +66,7 @@ void FilePlaybackPluginAudioProcessor::setCurrentProgram (int index)
   if (index>0 && index<(int)m_patches.size()+1)
   {
     m_currentFile=index-1;
-    bool onNote = String(m_patches[m_currentFile].m_file).toLowerCase().contains("onnote");
+    bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
     if (onNote)
         m_triggered = false;
     else
@@ -141,7 +141,7 @@ void FilePlaybackPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                 if (b[1]>0 && b[1]-1<(int)m_patches.size())
                 {
                     m_currentFile=b[1]-1;
-                    bool onNote = String(m_patches[m_currentFile].m_file).toLowerCase().contains("onnote");
+                    bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
                     if (onNote)
                         m_triggered = false;
                     else
@@ -149,7 +149,7 @@ void FilePlaybackPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                 }
             }
 
-            bool onNote = String(m_patches[m_currentFile].m_file).toLowerCase().contains("onnote");
+            bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
             if (midi_message.isNoteOn() && !m_triggered && onNote)
             {
                 m_triggered = true;
@@ -200,7 +200,7 @@ void FilePlaybackPluginAudioProcessor::getStateInformation (MemoryBlock& destDat
   data.push_back((uint8)m_patches.size());
   for(int i=0;i<(int)m_patches.size();++i)
   {
-    data.push_back((uint8)m_patches[i].m_loop);
+    data.push_back((uint8)m_patches[i].m_mode);
     data.push_back((uint8)m_patches[i].m_file.size());
     for(int j=0;j<(int)m_patches[i].m_file.size();++j)
       data.push_back(m_patches[i].m_file[j]);
@@ -217,7 +217,7 @@ void FilePlaybackPluginAudioProcessor::setStateInformation (const void* data, in
   m_patches.resize(*ptr++);
   for(int i=0;i<(int)m_patches.size();++i)
   {
-    m_patches[i].m_loop = (*ptr++)!=0;
+    m_patches[i].m_mode = (*ptr++);
     m_patches[i].m_file.resize(*ptr++);
     for(int j=0;j<(int)m_patches[i].m_file.size();++j)
       m_patches[i].m_file[j]=*ptr++;
@@ -231,7 +231,7 @@ void FilePlaybackPluginAudioProcessor::Play()
 	if (reader != nullptr)
 	{
 		auto fileSource = new AudioFormatReaderSource(reader, true);
-		fileSource->setLooping(m_patches[m_currentFile].m_loop);
+		fileSource->setLooping(m_patches[m_currentFile].m_mode == MODE_LOOP);
 
 		m_resamplerSource = new ResamplingAudioSource(fileSource, true);
 		m_resamplerSource->setResamplingRatio(reader->sampleRate / getSampleRate());
