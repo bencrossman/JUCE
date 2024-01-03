@@ -281,9 +281,9 @@
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
         <GROUP id="{845DC96D-73A2-2F91-4F5C-F83F1CCAAC70}" name="WavStreamer">
-          <FILE id="OGKpj0" name="PluginEditor.h" compile="0" resource="0" file="Source/Plugins/WavStreamer/PluginEditor.h"/>
           <FILE id="OnOSss" name="PluginEditor2.cpp" compile="1" resource="0"
                 file="Source/Plugins/WavStreamer/PluginEditor2.cpp"/>
+          <FILE id="ZYA5Se" name="PluginEditor2.h" compile="0" resource="0" file="Source/Plugins/WavStreamer/PluginEditor2.h"/>
           <FILE id="WaLVBG" name="PluginProcessor.h" compile="0" resource="0"
                 file="Source/Plugins/WavStreamer/PluginProcessor.h"/>
           <FILE id="JnXbW6" name="PluginProcessor2.cpp" compile="1" resource="0"

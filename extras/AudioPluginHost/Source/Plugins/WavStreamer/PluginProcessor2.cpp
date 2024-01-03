@@ -9,7 +9,7 @@
 */
 
 #include "PluginProcessor.h"
-#include "PluginEditor.h"
+#include "PluginEditor2.h"
 
 //==============================================================================
 FilePlaybackPluginAudioProcessor::FilePlaybackPluginAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
@@ -80,7 +80,7 @@ const String FilePlaybackPluginAudioProcessor::getProgramName (int index)
     return "Disabled";
 
   std::string res;
-  if (index<(int)m_patches.size()+1)
+  if (m_patches[index - 1].m_file != "")
   {
     res = m_patches[index-1].m_file;
     if(const char *found=strrchr(m_patches[index-1].m_file.c_str(),'\\'))
@@ -197,7 +197,6 @@ void FilePlaybackPluginAudioProcessor::getStateInformation (MemoryBlock& destDat
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
   std::vector<uint8> data;
-  data.push_back((uint8)m_patches.size());
   for(int i=0;i<(int)m_patches.size();++i)
   {
     data.push_back((uint8)m_patches[i].m_mode);
@@ -214,7 +213,7 @@ void FilePlaybackPluginAudioProcessor::setStateInformation (const void* data, in
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
   uint8*ptr=(uint8*)data;
-  m_patches.resize(*ptr++);
+  m_patches.resize(127);
   for(int i=0;i<(int)m_patches.size();++i)
   {
     m_patches[i].m_mode = (*ptr++);
