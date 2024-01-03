@@ -81,10 +81,10 @@
     </VS2017>
     <VS2019 targetFolder="Builds/VisualStudio2019" smallIcon="c97aUr" bigIcon="c97aUr"
             extraCompilerFlags="/w44265 /w45038 /w44062" extraLinkerFlags="/NXCOMPAT:NO"
-            extraDefs="JUCE_MODAL_LOOPS_PERMITTED" vstLegacyFolder="C:\VST_SDK\VST2_SDK">
+            extraDefs="JUCE_MODAL_LOOPS_PERMITTED" vstLegacyFolder="..\..\VST_SDK\VST2_SDK">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" headerPath="C:\asiosdk_2.3.3_2019-06-14\common"/>
-        <CONFIGURATION isDebug="0" name="Release" headerPath="C:\asiosdk_2.3.3_2019-06-14\common"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="..\..\..\..\asiosdk_2.3.3_2019-06-14\common"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="..\..\..\..\asiosdk_2.3.3_2019-06-14\common"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../modules"/>
@@ -281,13 +281,13 @@
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
         <GROUP id="{845DC96D-73A2-2F91-4F5C-F83F1CCAAC70}" name="WavStreamer">
-          <FILE id="t1rjss" name="PluginEditor.cpp" compile="1" resource="0"
-                file="Source/Plugins/WavStreamer/PluginEditor.cpp"/>
           <FILE id="OGKpj0" name="PluginEditor.h" compile="0" resource="0" file="Source/Plugins/WavStreamer/PluginEditor.h"/>
-          <FILE id="o3fvBQ" name="PluginProcessor.cpp" compile="1" resource="0"
-                file="Source/Plugins/WavStreamer/PluginProcessor.cpp"/>
+          <FILE id="OnOSss" name="PluginEditor2.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/PluginEditor2.cpp"/>
           <FILE id="WaLVBG" name="PluginProcessor.h" compile="0" resource="0"
                 file="Source/Plugins/WavStreamer/PluginProcessor.h"/>
+          <FILE id="JnXbW6" name="PluginProcessor2.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/PluginProcessor2.cpp"/>
         </GROUP>
         <FILE id="rcuPqK" name="ARAPlugin.cpp" compile="1" resource="0" file="Source/Plugins/ARAPlugin.cpp"/>
         <FILE id="gR1tiA" name="ARAPlugin.h" compile="0" resource="0" file="Source/Plugins/ARAPlugin.h"/>
