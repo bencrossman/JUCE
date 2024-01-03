@@ -26,6 +26,9 @@
     <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer">
       <UniqueIdentifier>{BB0CEF32-73E3-4DB3-9999-2D102FE8E4DD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\WavStreamer">
+      <UniqueIdentifier>{4BD01C88-5F06-99B9-1603-E183D51AD444}</UniqueIdentifier>
+    </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins">
       <UniqueIdentifier>{346E906D-8A2B-A93A-4C90-BCD3C60D2FD0}</UniqueIdentifier>
     </Filter>
@@ -720,6 +723,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\PluginEditor2.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\PluginProcessor2.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\ARAPlugin.cpp">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
@@ -3335,6 +3344,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginEditor.h">
+      <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginProcessor.h">
+      <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h">
       <Filter>AudioPluginHost\Source\Plugins</Filter>
