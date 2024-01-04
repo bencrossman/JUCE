@@ -12,30 +12,18 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-enum
-{
-    MODE_NORMAL,
-    MODE_LOOP,
-    MODE_ONNOTE,
-    MODE_COUNT
-};
 
-struct Patch
-{ 
-  Patch() : m_mode(MODE_NORMAL) {}
-  std::string m_file;
-  int m_mode;
-};
+
 
 //==============================================================================
 /**
 */
-class WavStreamerAudioProcessor  : public AudioProcessor
+class SoundFontPlayerAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    WavStreamerAudioProcessor();
-    ~WavStreamerAudioProcessor();
+    SoundFontPlayerAudioProcessor();
+    ~SoundFontPlayerAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -69,11 +57,11 @@ public:
 
     void Play();
     void Stop();
-    std::vector<Patch> *GetList() { return &m_patches; }
+    std::vector<std::string> *GetList() { return &m_patches; }
 	
 private:
     ResamplingAudioSource *m_resamplerSource;
-    std::vector<Patch> m_patches;
+    std::vector<std::string> m_patches;
     int m_currentFile;
 	int m_samplesPerBlock;
 	AudioFormatManager m_formatManager;
@@ -81,6 +69,6 @@ private:
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WavStreamerAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerAudioProcessor)
 };
 

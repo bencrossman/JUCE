@@ -8,11 +8,11 @@
   ==============================================================================
 */
 
-#include "WavStreamerProcessor.h"
-#include "WavStreamerEditor.h"
+#include "SoundFontPlayerProcessor.h"
+#include "SoundFontPlayerEditor.h"
 
 //==============================================================================
-WavStreamerAudioProcessor::WavStreamerAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
+SoundFontPlayerAudioProcessor::SoundFontPlayerAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
 {
   m_patches.resize(127);
   m_currentFile=0;
@@ -20,71 +20,64 @@ WavStreamerAudioProcessor::WavStreamerAudioProcessor() : AudioProcessor (BusesPr
   m_formatManager.registerBasicFormats();
 }
 
-WavStreamerAudioProcessor::~WavStreamerAudioProcessor()
+SoundFontPlayerAudioProcessor::~SoundFontPlayerAudioProcessor()
 {
     Stop();
 }
 
 //==============================================================================
-const String WavStreamerAudioProcessor::getName() const
+const String SoundFontPlayerAudioProcessor::getName() const
 {
-    return "Wav Streamer";
+    return "Sound Font Player";
 }
 
-bool WavStreamerAudioProcessor::acceptsMidi() const
+bool SoundFontPlayerAudioProcessor::acceptsMidi() const
 {
     return true;
 }
 
-bool WavStreamerAudioProcessor::producesMidi() const
+bool SoundFontPlayerAudioProcessor::producesMidi() const
 {
     return false;
 }
 
-bool WavStreamerAudioProcessor::isMidiEffect() const
+bool SoundFontPlayerAudioProcessor::isMidiEffect() const
 {
     return false;
 }
 
-double WavStreamerAudioProcessor::getTailLengthSeconds() const
+double SoundFontPlayerAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int WavStreamerAudioProcessor::getNumPrograms()
+int SoundFontPlayerAudioProcessor::getNumPrograms()
 {
     return 127;
 }
 
-int WavStreamerAudioProcessor::getCurrentProgram()
+int SoundFontPlayerAudioProcessor::getCurrentProgram()
 {
     return m_currentFile;
 }
 
-void WavStreamerAudioProcessor::setCurrentProgram (int index)
+void SoundFontPlayerAudioProcessor::setCurrentProgram (int index)
 {
   Stop();
   if (index>0 && index<(int)m_patches.size()+1)
-  {
     m_currentFile=index-1;
-    bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
-    if (onNote)
-        m_triggered = false;
-    else
-        Play();
-  }
 }
 
-const String WavStreamerAudioProcessor::getProgramName (int index)
+const String SoundFontPlayerAudioProcessor::getProgramName (int index)
 {
   if (index==0)
     return "Disabled";
 
   std::string res;
-  if (m_patches[index - 1].m_file != "")
+  if (m_patches[index - 1] != "")
   {
-    res = m_patches[index-1].m_file;
-    if(const char *found=strrchr(m_patches[index-1].m_file.c_str(),'\\'))
+    res = m_patches[index-1];
+    if(const char *found=strrchr(m_patches[index-1].c_str(),'\\'))
       res = found+1;
     res.resize(res.size()-4);
   }
@@ -94,17 +87,17 @@ const String WavStreamerAudioProcessor::getProgramName (int index)
 
 
 //==============================================================================
-void WavStreamerAudioProcessor::prepareToPlay (double , int samplesPerBlock)
+void SoundFontPlayerAudioProcessor::prepareToPlay (double , int samplesPerBlock)
 {
 	m_samplesPerBlock = samplesPerBlock;
 }
 
-void WavStreamerAudioProcessor::releaseResources()
+void SoundFontPlayerAudioProcessor::releaseResources()
 {
 }
 
 
-bool WavStreamerAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool SoundFontPlayerAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
     // This is the place where you check if the layout is supported.
     // In this template code we only support mono or stereo.
@@ -116,7 +109,7 @@ bool WavStreamerAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
 }
 
 
-void WavStreamerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     //midi input part
     if (!midiMessages.isEmpty() && m_patches.size())
@@ -128,28 +121,6 @@ void WavStreamerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
         MidiBuffer::Iterator midi_buffer_iter(midiMessages);
         while(midi_buffer_iter.getNextEvent(midi_message,sample_number))
         {
-            const uint8 *b=midi_message.getRawData();
-            if ((b[0]&0xf0)==0xc0) // program change
-            {
-                Stop();
-
-                if (b[1]>0 && b[1]-1<(int)m_patches.size())
-                {
-                    m_currentFile=b[1]-1;
-                    bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
-                    if (onNote)
-                        m_triggered = false;
-                    else
-                        Play();
-                }
-            }
-
-            bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
-            if (midi_message.isNoteOn() && !m_triggered && onNote)
-            {
-                m_triggered = true;
-                Play();
-            }
         }
     }
 
@@ -168,25 +139,25 @@ void WavStreamerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
 }
 
 
-void WavStreamerAudioProcessor::changeProgramName (int , const String& )
+void SoundFontPlayerAudioProcessor::changeProgramName (int , const String& )
 {
 }
 
 
 
 //==============================================================================
-bool WavStreamerAudioProcessor::hasEditor() const
+bool SoundFontPlayerAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-AudioProcessorEditor* WavStreamerAudioProcessor::createEditor()
+AudioProcessorEditor* SoundFontPlayerAudioProcessor::createEditor()
 {
-    return new WavStreamerEditor (*this);
+    return new SoundFontPlayerEditor (*this);
 }
 
 //==============================================================================
-void WavStreamerAudioProcessor::getStateInformation (MemoryBlock& destData)
+void SoundFontPlayerAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
@@ -194,37 +165,34 @@ void WavStreamerAudioProcessor::getStateInformation (MemoryBlock& destData)
   std::vector<uint8> data;
   for(int i=0;i<(int)m_patches.size();++i)
   {
-    data.push_back((uint8)m_patches[i].m_mode);
-    data.push_back((uint8)m_patches[i].m_file.size());
-    for(int j=0;j<(int)m_patches[i].m_file.size();++j)
-      data.push_back(m_patches[i].m_file[j]);
+    data.push_back((uint8)m_patches[i].size());
+    for(int j=0;j<(int)m_patches[i].size();++j)
+      data.push_back(m_patches[i][j]);
   }
   destData.setSize(data.size());
   destData.copyFrom(data.data(),0,data.size());
 }
 
-void WavStreamerAudioProcessor::setStateInformation (const void* data, int )
+void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
   uint8*ptr=(uint8*)data;
   for(int i=0;i<(int)m_patches.size();++i)
   {
-    m_patches[i].m_mode = (*ptr++);
-    m_patches[i].m_file.resize(*ptr++);
-    for(int j=0;j<(int)m_patches[i].m_file.size();++j)
-      m_patches[i].m_file[j]=*ptr++;
+    m_patches[i].resize(*ptr++);
+    for(int j=0;j<(int)m_patches[i].size();++j)
+      m_patches[i][j]=*ptr++;
   }
 }
 
-void WavStreamerAudioProcessor::Play()
+void SoundFontPlayerAudioProcessor::Play()
 {
-	File audioFile(m_patches[m_currentFile].m_file);
+	File audioFile(m_patches[m_currentFile]);
 	AudioFormatReader* reader = m_formatManager.createReaderFor(audioFile);
 	if (reader != nullptr)
 	{
 		auto fileSource = new AudioFormatReaderSource(reader, true);
-		fileSource->setLooping(m_patches[m_currentFile].m_mode == MODE_LOOP);
 
 		m_resamplerSource = new ResamplingAudioSource(fileSource, true);
 		m_resamplerSource->setResamplingRatio(reader->sampleRate / getSampleRate());
@@ -232,7 +200,7 @@ void WavStreamerAudioProcessor::Play()
 	}
 }
 
-void WavStreamerAudioProcessor::Stop()
+void SoundFontPlayerAudioProcessor::Stop()
 {
   if (m_resamplerSource)
   {

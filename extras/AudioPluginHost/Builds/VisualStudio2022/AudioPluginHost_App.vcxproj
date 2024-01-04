@@ -167,6 +167,8 @@
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth.c"/>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerProcessor.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\ARAPlugin.cpp"/>
@@ -2523,6 +2525,8 @@
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth_priv.h"/>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h"/>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.h"/>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.h"/>
     <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h"/>
