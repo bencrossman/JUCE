@@ -277,6 +277,16 @@
           <FILE id="gh92I9" name="SoundfontAudioSource.h" compile="0" resource="0"
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
+        <GROUP id="{4E83DF42-61B1-8F24-9859-AD1FABF02D69}" name="SoundFontPlayer">
+          <FILE id="JeMbom" name="SoundFontPlayerEditor.cpp" compile="1" resource="0"
+                file="Source/Plugins/SoundFontPlayer/SoundFontPlayerEditor.cpp"/>
+          <FILE id="wJ8esL" name="SoundFontPlayerEditor.h" compile="0" resource="0"
+                file="Source/Plugins/SoundFontPlayer/SoundFontPlayerEditor.h"/>
+          <FILE id="aJn7Fk" name="SoundFontPlayerProcessor.cpp" compile="1" resource="0"
+                file="Source/Plugins/SoundFontPlayer/SoundFontPlayerProcessor.cpp"/>
+          <FILE id="hEjOwh" name="SoundFontPlayerProcessor.h" compile="0" resource="0"
+                file="Source/Plugins/SoundFontPlayer/SoundFontPlayerProcessor.h"/>
+        </GROUP>
         <GROUP id="{845DC96D-73A2-2F91-4F5C-F83F1CCAAC70}" name="WavStreamer">
           <FILE id="jfaUet" name="WavStreamerEditor.cpp" compile="1" resource="0"
                 file="Source/Plugins/WavStreamer/WavStreamerEditor.cpp"/>

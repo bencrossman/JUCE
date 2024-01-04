@@ -696,7 +696,7 @@ void MainHostWindow::addPluginsToMenu (PopupMenu& m)
         for (auto& t : internalTypes)
         {
             ++i;
-            if (t.name != "Guitar Strummer" && t.name != "Wav Streamer")
+            if (t.name != "Guitar Strummer" && t.name != "Wav Streamer" && t.name != "Sound Font Player")
                 continue;
             m.addItem(i, t.name);
         }

@@ -18,10 +18,10 @@
 */
 
 //[Headers] You can add your own extra header files here...
-#include "WavStreamerProcessor.h"
+#include "SoundFontPlayerProcessor.h"
 //[/Headers]
 
-#include "WavStreamerEditor.h"
+#include "SoundFontPlayerEditor.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -29,7 +29,7 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
+SoundFontPlayerEditor::SoundFontPlayerEditor (AudioProcessor& processor)
     : AudioProcessorEditor(processor)
 {
     //[Constructor_pre] You can add your own custom stuff here..
@@ -54,16 +54,9 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
 
     m_table->setBounds (8, 40, 432, 352);
 
-    m_toggleLoop.reset (new juce::TextButton (juce::String()));
-    addAndMakeVisible (m_toggleLoop.get());
-    m_toggleLoop->setButtonText (TRANS("Cycle Mode"));
-    m_toggleLoop->addListener (this);
-
-    m_toggleLoop->setBounds (336, 8, 104, 24);
-
 
     //[UserPreSize]
-    m_table->SetList(((WavStreamerAudioProcessor*)&processor)->GetList());
+    m_table->SetList(((SoundFontPlayerAudioProcessor*)&processor)->GetList());
 
     //[/UserPreSize]
 
@@ -74,7 +67,7 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
     //[/Constructor]
 }
 
-WavStreamerEditor::~WavStreamerEditor()
+SoundFontPlayerEditor::~SoundFontPlayerEditor()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
@@ -82,7 +75,6 @@ WavStreamerEditor::~WavStreamerEditor()
     m_addButton = nullptr;
     m_deleteButton = nullptr;
     m_table = nullptr;
-    m_toggleLoop = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -90,7 +82,7 @@ WavStreamerEditor::~WavStreamerEditor()
 }
 
 //==============================================================================
-void WavStreamerEditor::paint (juce::Graphics& g)
+void SoundFontPlayerEditor::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
@@ -101,7 +93,7 @@ void WavStreamerEditor::paint (juce::Graphics& g)
     //[/UserPaint]
 }
 
-void WavStreamerEditor::resized()
+void SoundFontPlayerEditor::resized()
 {
     //[UserPreResize] Add your own custom resize code here..
 
@@ -111,7 +103,7 @@ void WavStreamerEditor::resized()
     //[/UserResized]
 }
 
-void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
+void SoundFontPlayerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
@@ -136,12 +128,6 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
         m_table->DeleteSelected();
         //[/UserButtonCode_m_deleteButton]
     }
-    else if (buttonThatWasClicked == m_toggleLoop.get())
-    {
-        //[UserButtonCode_m_toggleLoop] -- add your button handler code here..
-		m_table->ToggleSelectedLoop();
-        //[/UserButtonCode_m_toggleLoop]
-    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -162,11 +148,11 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="WavStreamerEditor"
-                 componentName="" parentClasses="public AudioProcessorEditor"
-                 constructorParams="AudioProcessor&amp; processor" variableInitialisers="AudioProcessorEditor(processor)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="1" initialWidth="448" initialHeight="400">
+<JUCER_COMPONENT documentType="Component" className="SoundFontPlayerEditor" componentName=""
+                 parentClasses="public AudioProcessorEditor" constructorParams="AudioProcessor&amp; processor"
+                 variableInitialisers="AudioProcessorEditor(processor)" snapPixels="8"
+                 snapActive="1" snapShown="1" overlayOpacity="0.330" fixedSize="1"
+                 initialWidth="448" initialHeight="400">
   <BACKGROUND backgroundColour="ffffffff"/>
   <TEXTBUTTON name="" id="62dcb6cad5fd83b" memberName="m_addButton" virtualName=""
               explicitFocusOrder="0" pos="8 8 80 24" buttonText="Set" connectedEdges="0"
@@ -177,9 +163,6 @@ BEGIN_JUCER_METADATA
   <GENERICCOMPONENT name="" id="2e2e5afc809d8716" memberName="m_table" virtualName=""
                     explicitFocusOrder="0" pos="8 40 432 352" class="TableDemoComponent"
                     params=""/>
-  <TEXTBUTTON name="" id="74227fc19ec4b7cc" memberName="m_toggleLoop" virtualName=""
-              explicitFocusOrder="0" pos="336 8 104 24" buttonText="Cycle Mode"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

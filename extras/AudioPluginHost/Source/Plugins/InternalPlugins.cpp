@@ -51,6 +51,7 @@ static std::unique_ptr<InputStream> createAssetInputStream (const char* resource
 #include "../../../../examples/Plugins/SurroundPluginDemo.h"
 #include "GuitarStrummer/GuitarStrummerProcessor.h"
 #include "WavStreamer/WavStreamerProcessor.h"
+#include "SoundFontPlayer/SoundFontPlayerProcessor.h"
 
 
 //==============================================================================
@@ -511,7 +512,8 @@ InternalPluginFormat::InternalPluginFormat()
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<SamplerAudioProcessor>()); },
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<SurroundProcessor>()); },
         [] { return std::make_unique<InternalPlugin>(std::make_unique<GuitarStrummerAudioProcessor>()); },
-        [] { return std::make_unique<InternalPlugin>(std::make_unique<FilePlaybackPluginAudioProcessor>()); }
+        [] { return std::make_unique<InternalPlugin>(std::make_unique<WavStreamerAudioProcessor>()); },
+        [] { return std::make_unique<InternalPlugin>(std::make_unique<SoundFontPlayerAudioProcessor>()); }
 }
 {
 }
