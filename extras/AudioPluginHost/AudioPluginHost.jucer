@@ -268,26 +268,24 @@
                     file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth_priv.h"/>
             </GROUP>
           </GROUP>
-          <FILE id="CKYS0c" name="PluginEditor.cpp" compile="1" resource="0"
-                file="Source/Plugins/GuitarStrummer/PluginEditor.cpp"/>
-          <FILE id="T3hQuH" name="PluginEditor.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/PluginEditor.h"/>
-          <FILE id="UKBnaX" name="PluginProcessor.cpp" compile="1" resource="0"
-                file="Source/Plugins/GuitarStrummer/PluginProcessor.cpp"/>
-          <FILE id="srdcQ6" name="PluginProcessor.h" compile="0" resource="0"
-                file="Source/Plugins/GuitarStrummer/PluginProcessor.h"/>
+          <FILE id="tCA6zX" name="GuitarStrummerProcessor.cpp" compile="1" resource="0"
+                file="Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.cpp"/>
+          <FILE id="XpbUwW" name="GuitarStrummerProcessor.h" compile="0" resource="0"
+                file="Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.h"/>
           <FILE id="eucP84" name="SoundfontAudioSource.cpp" compile="1" resource="0"
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.cpp"/>
           <FILE id="gh92I9" name="SoundfontAudioSource.h" compile="0" resource="0"
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
         <GROUP id="{845DC96D-73A2-2F91-4F5C-F83F1CCAAC70}" name="WavStreamer">
-          <FILE id="OnOSss" name="PluginEditor2.cpp" compile="1" resource="0"
-                file="Source/Plugins/WavStreamer/PluginEditor2.cpp"/>
-          <FILE id="ZYA5Se" name="PluginEditor2.h" compile="0" resource="0" file="Source/Plugins/WavStreamer/PluginEditor2.h"/>
-          <FILE id="WaLVBG" name="PluginProcessor.h" compile="0" resource="0"
-                file="Source/Plugins/WavStreamer/PluginProcessor.h"/>
-          <FILE id="JnXbW6" name="PluginProcessor2.cpp" compile="1" resource="0"
-                file="Source/Plugins/WavStreamer/PluginProcessor2.cpp"/>
+          <FILE id="jfaUet" name="WavStreamerEditor.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/WavStreamerEditor.cpp"/>
+          <FILE id="EqWYsh" name="WavStreamerEditor.h" compile="0" resource="0"
+                file="Source/Plugins/WavStreamer/WavStreamerEditor.h"/>
+          <FILE id="ozk6fA" name="WavStreamerProcessor.cpp" compile="1" resource="0"
+                file="Source/Plugins/WavStreamer/WavStreamerProcessor.cpp"/>
+          <FILE id="bhtCvR" name="WavStreamerProcessor.h" compile="0" resource="0"
+                file="Source/Plugins/WavStreamer/WavStreamerProcessor.h"/>
         </GROUP>
         <FILE id="rcuPqK" name="ARAPlugin.cpp" compile="1" resource="0" file="Source/Plugins/ARAPlugin.cpp"/>
         <FILE id="gR1tiA" name="ARAPlugin.h" compile="0" resource="0" file="Source/Plugins/ARAPlugin.h"/>

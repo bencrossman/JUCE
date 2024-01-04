@@ -18,10 +18,10 @@
 */
 
 //[Headers] You can add your own extra header files here...
-#include "PluginProcessor.h"
+#include "WavStreamerProcessor.h"
 //[/Headers]
 
-#include "PluginEditor2.h"
+#include "WavStreamerEditor.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
