@@ -8,8 +8,8 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
-#include "PluginEditor2.h"
+#include "WavStreamerProcessor.h"
+#include "WavStreamerEditor.h"
 
 //==============================================================================
 FilePlaybackPluginAudioProcessor::FilePlaybackPluginAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
