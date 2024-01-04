@@ -112,10 +112,10 @@ void SoundFontPlayerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_m_addButton] -- add your button handler code here..
 
-        FileChooser ChooseFile("Select wav file:",File(),"*.wav");
+        FileChooser ChooseFile("Select wav file:",File(),"*.sf2");
         if(ChooseFile.browseForFileToOpen())
         {
-          File fileName2=ChooseFile.getResult().withFileExtension("wav");//make sure you end with desired extension
+          File fileName2=ChooseFile.getResult().withFileExtension("sf2");//make sure you end with desired extension
 
           m_table->AddItem(fileName2.getFullPathName().toUTF8());
         }
