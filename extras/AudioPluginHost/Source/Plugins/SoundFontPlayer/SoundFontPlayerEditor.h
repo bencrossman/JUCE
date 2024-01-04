@@ -21,7 +21,7 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "WavStreamerProcessor.h"
+#include "SoundFontPlayerProcessor.h"
 
 
 class TableDemoComponent    : public Component, public TableListBoxModel
@@ -35,8 +35,7 @@ public:
         table.setModel (this);
 
         table.getHeader().addColumn ("PC",1,30);
-        table.getHeader().addColumn ("Wav file",2,330);
-        table.getHeader().addColumn ("Mode",3,40);
+        table.getHeader().addColumn ("SF2 File",2,330);
 
         //table.setMultipleSelectionEnabled (true);
         table.selectRow(0);
@@ -48,7 +47,7 @@ public:
         return 127;
     }
 
-    void SetList(std::vector<Patch> *patches) { m_patches=patches; }
+    void SetList(std::vector<std::string> *patches) { m_patches=patches; }
 
     // This is overloaded from TableListBoxModel, and should fill in the background of the whole row
     void paintRowBackground (Graphics& g, int rowNumber, int /*width*/, int /*height*/, bool rowIsSelected) override
@@ -68,17 +67,8 @@ public:
       if (columnId==1)
         text=String(rowNumber+1);
       else if (columnId==2)
-        text=(*m_patches)[rowNumber].m_file.c_str();
-      else if (columnId == 3)
-      {
-          switch ((*m_patches)[rowNumber].m_mode)
-          {
-          case MODE_NORMAL:text = "normal"; break;
-          case MODE_LOOP:text = "loop"; break;
-          case MODE_ONNOTE:text = "onnote"; break;
+        text=(*m_patches)[rowNumber].c_str();
 
-          }
-      }
       g.drawText (text, 2, 0, width - 4, height, Justification::centredLeft, true);
 
     }
@@ -92,7 +82,7 @@ public:
     void AddItem(const char*newItem)
     {
         int i = table.getSelectedRow();
-      (*m_patches)[i].m_file = newItem;
+      (*m_patches)[i] = newItem;
       SparseSet<int> sel;
       table.setSelectedRows(sel);
       table.updateContent();
@@ -105,25 +95,12 @@ public:
       int i=table.getSelectedRow();
       if (i!=-1)
       {
-          ((*m_patches)[i]).m_file = "";
+          ((*m_patches)[i]) = "";
           SparseSet<int> sel;
           table.setSelectedRows(sel);
         table.updateContent();
         table.selectRow(i);
-       
-      }
-    }
 
-    void ToggleSelectedLoop()
-    {
-      int i=table.getSelectedRow();
-      if (i!=-1)
-      {
-        (*m_patches)[i].m_mode =((*m_patches)[i].m_mode + 1) % MODE_COUNT;
-        SparseSet<int> sel;
-        table.setSelectedRows(sel);
-        table.updateContent();
-        table.selectRow(i);
       }
     }
 
@@ -133,7 +110,7 @@ private:
 
 
 
-    std::vector<Patch> *m_patches;
+    std::vector<std::string> *m_patches;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TableDemoComponent)
 };
@@ -152,13 +129,13 @@ private:
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class WavStreamerEditor  : public AudioProcessorEditor,
-                                                public juce::Button::Listener
+class SoundFontPlayerEditor  : public AudioProcessorEditor,
+                               public juce::Button::Listener
 {
 public:
     //==============================================================================
-    WavStreamerEditor (AudioProcessor& processor);
-    ~WavStreamerEditor() override;
+    SoundFontPlayerEditor (AudioProcessor& processor);
+    ~SoundFontPlayerEditor() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
@@ -180,11 +157,10 @@ private:
     std::unique_ptr<juce::TextButton> m_addButton;
     std::unique_ptr<juce::TextButton> m_deleteButton;
     std::unique_ptr<TableDemoComponent> m_table;
-    std::unique_ptr<juce::TextButton> m_toggleLoop;
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WavStreamerEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerEditor)
 };
 
 //[EndFile] You can add extra defines here...
