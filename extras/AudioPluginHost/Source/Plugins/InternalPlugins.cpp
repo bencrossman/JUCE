@@ -496,8 +496,8 @@ InternalPluginFormat::InternalPluginFormat()
         [] { return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::audioOutputNode); },
         [] { return std::make_unique<AudioProcessorGraph::AudioGraphIOProcessor> (AudioProcessorGraph::AudioGraphIOProcessor::midiOutputNode); },
 
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<SineWaveSynth>()); },
-        [] { return std::make_unique<InternalPlugin> (std::make_unique<ReverbPlugin>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<SineWaveSynth>()); },
+        //[] { return std::make_unique<InternalPlugin> (std::make_unique<ReverbPlugin>()); },
 
         //[] { return std::make_unique<InternalPlugin> (std::make_unique<AUv3SynthProcessor>()); },
         [] { return std::make_unique<InternalPlugin> (std::make_unique<Arpeggiator>()); },
