@@ -14,6 +14,7 @@
 //==============================================================================
 FilePlaybackPluginAudioProcessor::FilePlaybackPluginAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
 {
+  m_patches.resize(127);
   m_currentFile=0;
   m_resamplerSource = NULL;
   m_formatManager.registerBasicFormats();
@@ -207,7 +208,6 @@ void FilePlaybackPluginAudioProcessor::setStateInformation (const void* data, in
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
   uint8*ptr=(uint8*)data;
-  m_patches.resize(127);
   for(int i=0;i<(int)m_patches.size();++i)
   {
     m_patches[i].m_mode = (*ptr++);

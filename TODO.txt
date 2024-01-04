@@ -37,6 +37,7 @@ Crash with empty scene and adding performance only?
 After adding first song/setlist/performance going back to rack doesnt update titles
 Option to select an image for plugin
 "Select an image" texture
+WavStreamer/SoundFontPlayer needs to refresh on dropdown
 
 Future features
 ~~~~~~~~~~~~~~~
