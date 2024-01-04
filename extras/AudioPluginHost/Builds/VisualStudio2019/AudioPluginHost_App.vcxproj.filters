@@ -715,19 +715,16 @@
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth.c">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\PluginEditor.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\PluginProcessor.cpp">
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\WavStreamer\PluginEditor2.cpp">
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\WavStreamer\PluginProcessor2.cpp">
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\ARAPlugin.cpp">
@@ -3336,19 +3333,16 @@
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth_priv.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginEditor.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\PluginProcessor.h">
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginEditor2.h">
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.h">
       <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\WavStreamer\PluginProcessor.h">
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.h">
       <Filter>AudioPluginHost\Source\Plugins\WavStreamer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h">

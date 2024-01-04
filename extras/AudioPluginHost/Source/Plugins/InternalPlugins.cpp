@@ -49,8 +49,8 @@ static std::unique_ptr<InputStream> createAssetInputStream (const char* resource
 #include "../../../../examples/Plugins/NoiseGatePluginDemo.h"
 #include "../../../../examples/Plugins/SamplerPluginDemo.h"
 #include "../../../../examples/Plugins/SurroundPluginDemo.h"
-#include "GuitarStrummer/PluginProcessor.h"
-#include "WavStreamer/PluginProcessor.h"
+#include "GuitarStrummer/GuitarStrummerProcessor.h"
+#include "WavStreamer/WavStreamerProcessor.h"
 
 
 //==============================================================================

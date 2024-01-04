@@ -64,7 +64,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\..\..\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\..\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=0;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=0;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=1;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=1;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -79,7 +79,7 @@
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\..\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\..\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=0;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=0;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=1;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=1;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
       <OutputFile>$(OutDir)\AudioPluginHost.exe</OutputFile>
@@ -107,7 +107,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <AdditionalIncludeDirectories>..\..\..\..\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\..\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=0;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=0;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=1;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=1;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -122,7 +122,7 @@
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\..\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\..\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=0;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=0;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70002;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_opengl=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_FLAC=0;JUCE_USE_OGGVORBIS=1;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=1;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=0;JUCE_PLUGINHOST_LV2=0;JUCE_USE_CDREADER=0;JUCE_USE_CDBURNER=0;JUCE_WEB_BROWSER=0;JUCE_STANDALONE_APPLICATION=1;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=0;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=0;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
       <OutputFile>$(OutDir)\AudioPluginHost.exe</OutputFile>
@@ -147,6 +147,28 @@
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxml.cpp"/>
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlerror.cpp"/>
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlparser.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_float.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_simple.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth.c"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.cpp"/>
+    <ClCompile Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\ARAPlugin.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\InternalPlugins.cpp"/>
     <ClCompile Include="..\..\Source\Plugins\IOConfigurationWindow.cpp"/>
@@ -2441,7 +2463,6 @@
     <ClCompile Include="..\..\..\..\modules\juce_opengl\juce_opengl.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -2468,6 +2489,42 @@
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxml.h"/>
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\ForteTypes.h"/>
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\XmlArchive.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\gen.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\log.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\misc.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\mod.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\ramsfont.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\settings.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\sfont.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\synth.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\types.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\version.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\voice.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidlite.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_config.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_midi.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_phase.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sfont.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth_priv.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.h"/>
+    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h"/>
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerEditor.h"/>
+    <ClInclude Include="..\..\Source\Plugins\WavStreamer\WavStreamerProcessor.h"/>
     <ClInclude Include="..\..\Source\Plugins\ARAPlugin.h"/>
     <ClInclude Include="..\..\Source\Plugins\InternalPlugins.h"/>
     <ClInclude Include="..\..\Source\Plugins\IOConfigurationWindow.h"/>
@@ -3445,17 +3502,10 @@
     <ClInclude Include="..\..\..\..\modules\juce_opengl\opengl\juce_wgl.h"/>
     <ClInclude Include="..\..\..\..\modules\juce_opengl\utils\juce_OpenGLAppComponent.h"/>
     <ClInclude Include="..\..\..\..\modules\juce_opengl\juce_opengl.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\JUCEAppIcon.png"/>
-    <None Include="..\..\..\..\examples\Assets\cassette_recorder.wav"/>
-    <None Include="..\..\..\..\examples\Assets\cello.wav"/>
-    <None Include="..\..\..\..\examples\Assets\guitar_amp.wav"/>
-    <None Include="..\..\..\..\examples\Assets\proaudio.path"/>
-    <None Include="..\..\..\..\examples\Assets\reverb_ir.wav"/>
-    <None Include="..\..\..\..\examples\Assets\singing.ogg"/>
     <None Include="..\..\..\..\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="..\..\..\..\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>
