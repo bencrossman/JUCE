@@ -1683,9 +1683,14 @@
             <Zone DeviceID="-2048222834" Program="22"></Zone>
         </Performance>
         <Performance ID="-406176206" Name="Radio Ga Ga|" Tempo="118">
+            <Zone DeviceID="627145948" Program="4" Volume="-5" LowKey="51" HighKey="83"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-4" Transpose="12" LowKey="23" HighKey="83"></Zone>
+            <Zone DeviceID="522416168" Program="33" Volume="-12" Transpose="12" LowKey="23" HighKey="48"></Zone>
+            <Zone DeviceID="-1973686393" Program="38" Volume="-9" NoteMode="5" LowKey="23" HighKey="52"></Zone>
             <Zone DeviceID="-789407354" Program="6" Volume="-5"></Zone>
         </Performance>
         <Performance ID="1200003438" Name="Radio Ga Ga|Intro" Tempo="118">
+            <Zone DeviceID="-1973686393" Program="38" Volume="-5" NoteMode="5" LowKey="22"></Zone>
             <Zone DeviceID="-789407354" Program="6" Volume="-6"></Zone>
         </Performance>
         <Performance ID="904347925" Name="Radio Ga Ga|Solo" Tempo="118">
