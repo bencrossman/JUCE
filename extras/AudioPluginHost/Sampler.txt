@@ -1,10 +1,10 @@
-Claps
+Empty
 Show Must Go On
 One Vision
 We Will Rock You
 A Kinda Magic
 Under Pressure
-Radio Ga Ga
+
 Killer Queen
 Another One Bites The Dust
 Flash
@@ -34,8 +34,8 @@ Wouldn't It Be Good
 You May Be Right
 Locked Out Of Heaven
 Time Warp
----
----
+
+
 Eyes Without A Face
 Flesh For Fantasy
 Heart Of Glass

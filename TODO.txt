@@ -1,11 +1,8 @@
 Next
 ~~~~
-Sampler
--Use DirectWave 1.6.3 to put DWP's in newer format
--Use Translator to convert to SF2's
--Use Polyphone to edit (good although no UI to change root note but there is source code). Need to mark Oneshots (Release to 100), velocity insensitive (Fixed velocity) and remove filters (Alto had one)
--Use https://github.com/Birch-san/juicysfplugin.git as basis
--Implement reverb (or maybe don't need to?)
+Better reverb on sf2's?
+Convert more samples (maybe just keep wavs for simple non used), Priority would be DiscoStrings / Brass / Wulizter / Queen. Could then flush DirectWave
+Test on Mac
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
