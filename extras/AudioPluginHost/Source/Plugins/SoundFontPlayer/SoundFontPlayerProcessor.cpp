@@ -14,15 +14,17 @@
 //==============================================================================
 SoundFontPlayerAudioProcessor::SoundFontPlayerAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
 {
-  m_patches.resize(127);
-  m_currentFile=0;
-  m_resamplerSource = NULL;
-  m_formatManager.registerBasicFormats();
+    m_patches.resize(128);
+    m_players.resize(128);
+    for (int i = 0; i < 128; ++i)
+        m_players[i] = nullptr;
+    m_currentFile=0;
 }
 
 SoundFontPlayerAudioProcessor::~SoundFontPlayerAudioProcessor()
 {
-    Stop();
+    for (int i = 0; i < 128; ++i)
+        delete m_players[i];
 }
 
 //==============================================================================
@@ -53,43 +55,36 @@ double SoundFontPlayerAudioProcessor::getTailLengthSeconds() const
 
 int SoundFontPlayerAudioProcessor::getNumPrograms()
 {
-    return 127;
+    return 128;
 }
 
 int SoundFontPlayerAudioProcessor::getCurrentProgram()
 {
-    return m_currentFile;
+    return 0;
 }
 
-void SoundFontPlayerAudioProcessor::setCurrentProgram (int index)
+void SoundFontPlayerAudioProcessor::setCurrentProgram (int)
 {
-  Stop();
-  if (index>0 && index<(int)m_patches.size()+1)
-    m_currentFile=index-1;
 }
 
 const String SoundFontPlayerAudioProcessor::getProgramName (int index)
 {
-  if (index==0)
-    return "Disabled";
-
-  std::string res;
-  if (m_patches[index - 1] != "")
-  {
-    res = m_patches[index-1];
-    if(const char *found=strrchr(m_patches[index-1].c_str(),'\\'))
-      res = found+1;
-    res.resize(res.size()-4);
-  }
-
-  return res;
+    std::string res;
+    if (m_patches[index].m_file != "")
+    {
+        res = m_patches[index].m_file;
+        if(const char *found=strrchr(m_patches[index].m_file.c_str(),'\\'))
+            res = found+1;
+        res.resize(res.size()-4);
+    }
+    return res;
 }
 
 
 //==============================================================================
-void SoundFontPlayerAudioProcessor::prepareToPlay (double , int samplesPerBlock)
+void SoundFontPlayerAudioProcessor::prepareToPlay (double sampleRate, int)
 {
-	m_samplesPerBlock = samplesPerBlock;
+    m_sampleRate = sampleRate;
 }
 
 void SoundFontPlayerAudioProcessor::releaseResources()
@@ -111,31 +106,47 @@ bool SoundFontPlayerAudioProcessor::isBusesLayoutSupported (const BusesLayout& l
 
 void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    //midi input part
-    if (!midiMessages.isEmpty() && m_patches.size())
-    {
-        MidiMessage midi_message(0xf0);
-        MidiBuffer output;
-        int sample_number;
+    if (m_loading)
+        return;
 
-        MidiBuffer::Iterator midi_buffer_iter(midiMessages);
-        while(midi_buffer_iter.getNextEvent(midi_message,sample_number))
+    if (m_patches[m_currentFile].m_file == "" && m_players[m_currentFile])
+    {
+        delete m_players[m_currentFile];
+        m_players[m_currentFile] = nullptr;
+    }
+
+
+    if (m_patches[m_currentFile].m_file != "" && m_patches[m_currentFile].m_reload)
+    {
+        m_patches[m_currentFile].m_reload = false;
+        delete m_players[m_currentFile];
+        m_players[m_currentFile] = new SoundfontAudioSource();
+        m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
+        m_players[m_currentFile]->loadSoundfont(File(m_patches[m_currentFile].m_file));
+    }
+
+
+    for (const auto meta : midiMessages)
+    {
+        if (meta.getMessage().isProgramChange())
         {
+            m_currentFile = meta.getMessage().getProgramChangeNumber();
+            if (m_players[m_currentFile])
+                m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
+        }
+        else
+        {
+            if (m_players[m_currentFile])
+                m_players[m_currentFile]->processMidi(meta.getMessage());
         }
     }
 
-    midiMessages.clear();
-
-	if (m_resamplerSource)
-	{
-		AudioSourceChannelInfo sourceChannelInfo;
-		sourceChannelInfo.buffer = &buffer;
-		sourceChannelInfo.startSample = 0;
-		sourceChannelInfo.numSamples = buffer.getNumSamples();
-		m_resamplerSource->getNextAudioBlock(sourceChannelInfo);
-	}
-	else
-        buffer.clear();
+	AudioSourceChannelInfo sourceChannelInfo;
+	sourceChannelInfo.buffer = &buffer;
+	sourceChannelInfo.startSample = 0;
+	sourceChannelInfo.numSamples = buffer.getNumSamples();
+    if (m_players[m_currentFile])
+	    m_players[m_currentFile]->getNextAudioBlock(sourceChannelInfo);
 }
 
 
@@ -162,49 +173,38 @@ void SoundFontPlayerAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
-  std::vector<uint8> data;
-  for(int i=0;i<(int)m_patches.size();++i)
-  {
-    data.push_back((uint8)m_patches[i].size());
-    for(int j=0;j<(int)m_patches[i].size();++j)
-      data.push_back(m_patches[i][j]);
-  }
-  destData.setSize(data.size());
-  destData.copyFrom(data.data(),0,data.size());
+    std::vector<uint8> data;
+    for(int i=0;i<(int)m_patches.size();++i)
+    {
+        data.push_back((uint8)m_patches[i].m_file.size());
+        for(int j=0;j<(int)m_patches[i].m_file.size();++j)
+            data.push_back(m_patches[i].m_file[j]);
+    }
+    destData.setSize(data.size());
+    destData.copyFrom(data.data(),0,data.size());
 }
 
 void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-  uint8*ptr=(uint8*)data;
-  for(int i=0;i<(int)m_patches.size();++i)
-  {
-    m_patches[i].resize(*ptr++);
-    for(int j=0;j<(int)m_patches[i].size();++j)
-      m_patches[i][j]=*ptr++;
-  }
-}
+    uint8*ptr=(uint8*)data;
+    for(int i=0;i<(int)m_patches.size();++i)
+    {
+        m_patches[i].m_file.resize(*ptr++);
+        for(int j=0;j<(int)m_patches[i].m_file.size();++j)
+            m_patches[i].m_file[j] =*ptr++;
+    }
 
-void SoundFontPlayerAudioProcessor::Play()
-{
-	File audioFile(m_patches[m_currentFile]);
-	AudioFormatReader* reader = m_formatManager.createReaderFor(audioFile);
-	if (reader != nullptr)
-	{
-		auto fileSource = new AudioFormatReaderSource(reader, true);
-
-		m_resamplerSource = new ResamplingAudioSource(fileSource, true);
-		m_resamplerSource->setResamplingRatio(reader->sampleRate / getSampleRate());
-		m_resamplerSource->prepareToPlay(m_samplesPerBlock, getSampleRate());
-	}
-}
-
-void SoundFontPlayerAudioProcessor::Stop()
-{
-  if (m_resamplerSource)
-  {
-	  delete m_resamplerSource;
-	  m_resamplerSource = nullptr;
-  }
+    m_loading = true;
+    for (int i = 0; i < (int)m_patches.size(); ++i)
+    {
+        if (m_patches[i].m_file != "")
+        {
+            m_players[i] = new SoundfontAudioSource();
+            m_players[i]->prepareToPlay(0, m_sampleRate);
+            m_players[i]->loadSoundfont(File(m_patches[i].m_file));
+        }
+    }
+    m_loading = false;
 }
