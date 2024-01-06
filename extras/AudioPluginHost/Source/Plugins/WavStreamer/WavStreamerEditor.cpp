@@ -25,7 +25,6 @@
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
-#define _CRT_SECURE_NO_WARNINGS
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -49,7 +48,7 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
 
     m_deleteButton->setBounds (96, 8, 80, 24);
 
-    m_table.reset (new TableDemoComponent());
+    m_table.reset (new WavStreamerTableComponent());
     addAndMakeVisible (m_table.get());
 
     m_table->setBounds (8, 40, 432, 352);
@@ -125,7 +124,7 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
         {
           File fileName2=ChooseFile.getResult().withFileExtension("wav");//make sure you end with desired extension
 
-          m_table->AddItem(fileName2.getFullPathName().toUTF8());
+          m_table->SetSelected(fileName2.getFullPathName().toUTF8());
         }
 
         //[/UserButtonCode_m_addButton]

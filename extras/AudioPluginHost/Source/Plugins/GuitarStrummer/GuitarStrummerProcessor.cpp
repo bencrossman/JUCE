@@ -106,7 +106,7 @@ bool GuitarStrummerAudioProcessor::isBusesLayoutSupported (const BusesLayout& la
     return true;
 }
 
-void GuitarStrummerAudioProcessor::processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+void GuitarStrummerAudioProcessor::processBlockBypassed(AudioBuffer<float>&, MidiBuffer&)
 {
 	if (m_reverbActive)
 	{
@@ -119,18 +119,16 @@ void GuitarStrummerAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
 {
     ScopedNoDenormals noDenormals;
     
-    int midiEventPos;
-    MidiMessage m;
-    MidiBuffer::Iterator midiIterator(midiMessages);
-
     // shuffle down
     for (int i = 1; i < m_buffer.size(); ++i)
         m_buffer[i - 1] = m_buffer[i];
 
     m_buffer.back().clear();
 
-    while (auto found = midiIterator.getNextEvent(m, midiEventPos))
+    for (const auto meta : midiMessages)
     {
+        auto m = meta.getMessage();
+
         if (m.isNoteOn())
             m_buffer.back().push_back(m);
         if (m.isController())
@@ -218,7 +216,7 @@ void GuitarStrummerAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
             for (int i = 0; i < chord.size(); ++i)
                 if (chord[i].isNoteOn())
                     averageVelocity += chord[i].getVelocity();
-            averageVelocity /= chord.size();
+            averageVelocity /= (int)chord.size();
             int baseNote = 36;
             m_guitarChordPlayer.noteOn(baseNote + chordType * 12 + key, averageVelocity);
             m_guitarChordPlayer.noteOff(baseNote + chordType * 12 + key); // always noteoff next block, let sustain do the work
