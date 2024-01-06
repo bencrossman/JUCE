@@ -11,8 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
-
+#include "../GuitarStrummer/SoundfontAudioSource.h"
 
 
 //==============================================================================
@@ -21,6 +20,13 @@
 class SoundFontPlayerAudioProcessor  : public AudioProcessor
 {
 public:
+
+    struct Patch
+    {
+        std::string m_file;
+        bool m_reload = false;
+    };
+
     //==============================================================================
     SoundFontPlayerAudioProcessor();
     ~SoundFontPlayerAudioProcessor();
@@ -55,18 +61,14 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    void Play();
-    void Stop();
-    std::vector<std::string> *GetList() { return &m_patches; }
+    std::vector<Patch> *GetList() { return &m_patches; }
 	
 private:
-    ResamplingAudioSource *m_resamplerSource;
-    std::vector<std::string> m_patches;
+    std::vector<Patch> m_patches;
+    std::vector<SoundfontAudioSource*> m_players;
     int m_currentFile;
-	int m_samplesPerBlock;
-	AudioFormatManager m_formatManager;
-    bool m_triggered = false;
-
+    double m_sampleRate;
+    bool m_loading = false;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerAudioProcessor)

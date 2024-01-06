@@ -25,6 +25,10 @@ Madonna - 23 performances (Borderline is OPX patch)
 Integrate for Access database with edit? (library linked already)
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
 
+Bug
+~~~
+Add a plugin and songs double up (although doesn't save like that)
+
 If released
 ~~~~~~~~~~~~
 Solo - Visually mutes other zones

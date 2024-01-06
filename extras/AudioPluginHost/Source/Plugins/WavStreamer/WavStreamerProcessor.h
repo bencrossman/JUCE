@@ -12,20 +12,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-enum
-{
-    MODE_NORMAL,
-    MODE_LOOP,
-    MODE_ONNOTE,
-    MODE_COUNT
-};
-
-struct Patch
-{ 
-  Patch() : m_mode(MODE_NORMAL) {}
-  std::string m_file;
-  int m_mode;
-};
 
 //==============================================================================
 /**
@@ -33,6 +19,23 @@ struct Patch
 class WavStreamerAudioProcessor  : public AudioProcessor
 {
 public:
+
+    enum
+    {
+        MODE_NORMAL,
+        MODE_LOOP,
+        MODE_ONNOTE,
+        MODE_COUNT
+    };
+
+    struct Patch
+    {
+        Patch() : m_mode(MODE_NORMAL) {}
+        std::string m_file;
+        int m_mode;
+    };
+
+
     //==============================================================================
     WavStreamerAudioProcessor();
     ~WavStreamerAudioProcessor();

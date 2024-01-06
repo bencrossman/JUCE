@@ -34,7 +34,7 @@
 
 // An alternative version of createAssetInputStream from the demo utilities header
 // that fetches resources from embedded binary data instead of files
-static std::unique_ptr<InputStream> createAssetInputStream (const char* resourcePath)
+static std::unique_ptr<InputStream> createAssetInputStream (const char*)
 {
     return {};
 }

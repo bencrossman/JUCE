@@ -58,21 +58,11 @@ int WavStreamerAudioProcessor::getNumPrograms()
 
 int WavStreamerAudioProcessor::getCurrentProgram()
 {
-    return m_currentFile;
+    return 0;
 }
 
-void WavStreamerAudioProcessor::setCurrentProgram (int index)
+void WavStreamerAudioProcessor::setCurrentProgram (int)
 {
-  Stop();
-  if (index>0 && index<(int)m_patches.size()+1)
-  {
-    m_currentFile=index-1;
-    bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
-    if (onNote)
-        m_triggered = false;
-    else
-        Play();
-  }
 }
 
 const String WavStreamerAudioProcessor::getProgramName (int index)
@@ -121,14 +111,9 @@ void WavStreamerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     //midi input part
     if (!midiMessages.isEmpty() && m_patches.size())
     {
-        MidiMessage midi_message(0xf0);
-        MidiBuffer output;
-        int sample_number;
-
-        MidiBuffer::Iterator midi_buffer_iter(midiMessages);
-        while(midi_buffer_iter.getNextEvent(midi_message,sample_number))
+        for (const auto meta : midiMessages)
         {
-            const uint8 *b=midi_message.getRawData();
+            const uint8 *b= meta.getMessage().getRawData();
             if ((b[0]&0xf0)==0xc0) // program change
             {
                 Stop();
@@ -145,7 +130,7 @@ void WavStreamerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
             }
 
             bool onNote = m_patches[m_currentFile].m_mode == MODE_ONNOTE;
-            if (midi_message.isNoteOn() && !m_triggered && onNote)
+            if (meta.getMessage().isNoteOn() && !m_triggered && onNote)
             {
                 m_triggered = true;
                 Play();
