@@ -24,10 +24,10 @@
 #include "SoundFontPlayerProcessor.h"
 
 
-class TableDemoComponent    : public Component, public TableListBoxModel
+class SoundFontPlayerTableComponent    : public Component, public TableListBoxModel
 {
 public:
-    TableDemoComponent()
+    SoundFontPlayerTableComponent()
     {
         m_patches=NULL;
         // Create our table component and add it to this component..
@@ -47,10 +47,10 @@ public:
         return 127;
     }
 
-    void SetList(std::vector<std::string> *patches) { m_patches=patches; }
+    void SetList(std::vector<SoundFontPlayerAudioProcessor::Patch> *patches) { m_patches=patches; }
 
     // This is overloaded from TableListBoxModel, and should fill in the background of the whole row
-    void paintRowBackground (Graphics& g, int rowNumber, int /*width*/, int /*height*/, bool rowIsSelected) override
+    void paintRowBackground (Graphics& g, int, int /*width*/, int /*height*/, bool rowIsSelected) override
     {
         if (rowIsSelected)
             g.fillAll (Colours::lightblue);
@@ -65,9 +65,9 @@ public:
     {
       String text;
       if (columnId==1)
-        text=String(rowNumber+1);
+        text=String(rowNumber);
       else if (columnId==2)
-        text=(*m_patches)[rowNumber].c_str();
+        text=(*m_patches)[rowNumber].m_file.c_str();
 
       g.drawText (text, 2, 0, width - 4, height, Justification::centredLeft, true);
 
@@ -79,29 +79,29 @@ public:
         table.setBoundsInset (BorderSize<int> (8));
     }
 
-    void AddItem(const char*newItem)
+    void SetSelected(const char*newItem)
     {
         int i = table.getSelectedRow();
-      (*m_patches)[i] = newItem;
-      SparseSet<int> sel;
-      table.setSelectedRows(sel);
-      table.updateContent();
-      table.selectRow(i);
-
+        (*m_patches)[i].m_file = newItem;
+        (*m_patches)[i].m_reload = true;
+        SparseSet<int> sel;
+        table.setSelectedRows(sel);
+        table.updateContent();
+        table.selectRow(i);
     }
 
     void DeleteSelected()
     {
-      int i=table.getSelectedRow();
-      if (i!=-1)
-      {
-          ((*m_patches)[i]) = "";
-          SparseSet<int> sel;
-          table.setSelectedRows(sel);
-        table.updateContent();
-        table.selectRow(i);
+        int i=table.getSelectedRow();
+        if (i!=-1)
+        {
+            ((*m_patches)[i]).m_file = "";
 
-      }
+            SparseSet<int> sel;
+            table.setSelectedRows(sel);
+            table.updateContent();
+            table.selectRow(i);
+        }
     }
 
 
@@ -110,9 +110,9 @@ private:
 
 
 
-    std::vector<std::string> *m_patches;
+    std::vector<SoundFontPlayerAudioProcessor::Patch> *m_patches;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TableDemoComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerTableComponent)
 };
 
 
@@ -156,7 +156,7 @@ private:
     //==============================================================================
     std::unique_ptr<juce::TextButton> m_addButton;
     std::unique_ptr<juce::TextButton> m_deleteButton;
-    std::unique_ptr<TableDemoComponent> m_table;
+    std::unique_ptr<SoundFontPlayerTableComponent> m_table;
 
 
     //==============================================================================
