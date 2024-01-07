@@ -76,6 +76,8 @@ public:
     /** Returns the raw settings for use with the Fluidsynth API. */
     fluid_settings_t* getSettings() { return settings; }
     
+    void SetReverb(dsp::Reverb* reverb) { m_reverb = reverb; }
+
 private:
     
     CriticalSection lock;
@@ -84,6 +86,6 @@ private:
     int sfontID;
     File loadedSoundfont;
 
-    std::shared_ptr<dsp::Reverb> m_reverb;
+    dsp::Reverb* m_reverb = nullptr;
     bool m_reverbActive = false;
 };

@@ -73,6 +73,8 @@ private:
     bool m_loading = false;
     bool m_preload = true;
 
+    std::shared_ptr<dsp::Reverb> m_reverb;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerAudioProcessor)
 };

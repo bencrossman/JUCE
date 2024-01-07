@@ -30,7 +30,6 @@ void SoundfontAudioSource::prepareToPlay(int samplesPerBlock, double sampleRate)
     spec.numChannels = 2;
     spec.sampleRate = sampleRate;
     spec.maximumBlockSize = samplesPerBlock;
-    m_reverb.reset(new dsp::Reverb());
     m_reverb->prepare(spec);
 }
 
