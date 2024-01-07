@@ -105,7 +105,8 @@ bool SoundFontPlayerAudioProcessor::isBusesLayoutSupported (const BusesLayout& l
 
 void SoundFontPlayerAudioProcessor::processBlockBypassed(AudioBuffer<float>&, MidiBuffer&)
 {
-    m_players[m_currentFile]->process_bypassed();
+    if (m_players[m_currentFile])
+        m_players[m_currentFile]->process_bypassed();
 }
 
 void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
@@ -178,6 +179,7 @@ void SoundFontPlayerAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
     std::vector<uint8> data;
+    data.push_back(m_preload);
     for(int i=0;i<(int)m_patches.size();++i)
     {
         data.push_back((uint8)m_patches[i].m_file.size());
@@ -193,12 +195,16 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
     uint8*ptr=(uint8*)data;
+    m_preload = *ptr++;
     for(int i=0;i<(int)m_patches.size();++i)
     {
         m_patches[i].m_file.resize(*ptr++);
         for(int j=0;j<(int)m_patches[i].m_file.size();++j)
             m_patches[i].m_file[j] =*ptr++;
     }
+
+    if (!m_preload)
+        return;
 
     m_loading = true;
     for (int i = 0; i < (int)m_patches.size(); ++i)
