@@ -63,4 +63,6 @@ private:
     int m_lastChordKey;
     int m_lastChordType;
     std::vector<std::vector<MidiMessage>> m_buffer;
+
+    std::shared_ptr<dsp::Reverb> m_reverb;
 };

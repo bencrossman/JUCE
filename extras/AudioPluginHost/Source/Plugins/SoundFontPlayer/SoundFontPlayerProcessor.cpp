@@ -85,6 +85,8 @@ const String SoundFontPlayerAudioProcessor::getProgramName (int index)
 void SoundFontPlayerAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     m_sampleRate = sampleRate;
+
+    m_reverb.reset(new dsp::Reverb());
 }
 
 void SoundFontPlayerAudioProcessor::releaseResources()
@@ -126,8 +128,9 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         m_patches[m_currentFile].m_reload = false;
         delete m_players[m_currentFile];
         m_players[m_currentFile] = new SoundfontAudioSource();
-        m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
         m_players[m_currentFile]->loadSoundfont(File(m_patches[m_currentFile].m_file));
+        m_players[m_currentFile]->SetReverb(m_reverb.get());
+        m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
     }
 
 
@@ -137,7 +140,10 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         {
             m_currentFile = meta.getMessage().getProgramChangeNumber();
             if (m_players[m_currentFile])
+            {
+                m_players[m_currentFile]->SetReverb(m_reverb.get());
                 m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
+            }
         }
         else
         {
@@ -212,7 +218,6 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
         if (m_patches[i].m_file != "")
         {
             m_players[i] = new SoundfontAudioSource();
-            m_players[i]->prepareToPlay(0, m_sampleRate);
             m_players[i]->loadSoundfont(File(m_patches[i].m_file));
         }
     }
