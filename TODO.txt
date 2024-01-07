@@ -1,8 +1,9 @@
 Next
 ~~~~
-Better reverb on sf2's?
-Convert more samples (maybe just keep wavs for simple non used), Priority would be DiscoStrings / Brass / Wulizter / Queen. Could then flush DirectWave
+Better reverb on sf2's
+Convert more samples (maybe just keep wavs for simple non used), Priority would be DiscoStrings / Brass / Wulizter / Queen. Could then remove DirectWave and search/replace all dw with sf (even if empty)
 Test on Mac
+Got Qt working?
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
