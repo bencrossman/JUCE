@@ -124,6 +124,7 @@ struct _fluid_synth_t
   fluid_real_t** fx_right_buf;
 
   fluid_revmodel_t* reverb;
+  float last_voice_reverb;
   fluid_chorus_t* chorus;
   int cur;                           /** the current sample in the audio buffers to be output */
   int dither_index;		/* current index in random dither value buffer: fluid_synth_(write_s16|dither_s16) */

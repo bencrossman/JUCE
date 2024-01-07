@@ -630,6 +630,8 @@ FLUIDSYNTH_API int fluid_synth_write_s16(fluid_synth_t* synth, int len,
    *  \returns 0 if no error occured, non-zero otherwise
    */
 
+FLUIDSYNTH_API float fluid_synth_get_reverb(fluid_synth_t* synth);
+
 FLUIDSYNTH_API int fluid_synth_write_float(fluid_synth_t* synth, int len, 
 					 void* lout, int loff, int lincr, 
 					 void* rout, int roff, int rincr);

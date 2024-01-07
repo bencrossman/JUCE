@@ -61,7 +61,6 @@ private:
 
     SoundfontAudioSource m_guitarChordPlayer;
     int m_lastChordKey;
-    int m_lastChordType;    std::shared_ptr<dsp::Reverb> m_reverb;
-	bool m_reverbActive = false;
+    int m_lastChordType;
     std::vector<std::vector<MidiMessage>> m_buffer;
 };
