@@ -110,7 +110,7 @@ public:
           table.setSelectedRows(sel);
         table.updateContent();
         table.selectRow(i);
-       
+
       }
     }
 
@@ -153,7 +153,7 @@ private:
                                                                     //[/Comments]
 */
 class WavStreamerEditor  : public AudioProcessorEditor,
-                                                public juce::Button::Listener
+                           public juce::Button::Listener
 {
 public:
     //==============================================================================
@@ -177,10 +177,10 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<juce::TextButton> m_addButton;
-    std::unique_ptr<juce::TextButton> m_deleteButton;
+    std::unique_ptr<juce::TextButton> m_setButton;
+    std::unique_ptr<juce::TextButton> m_clearButton;
     std::unique_ptr<WavStreamerTableComponent> m_table;
-    std::unique_ptr<juce::TextButton> m_toggleLoop;
+    std::unique_ptr<juce::TextButton> m_cycleButton;
 
 
     //==============================================================================
