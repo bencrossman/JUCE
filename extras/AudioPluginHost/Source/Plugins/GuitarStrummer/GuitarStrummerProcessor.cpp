@@ -78,13 +78,6 @@ void GuitarStrummerAudioProcessor::prepareToPlay (double sampleRate, int samples
     m_guitarChordPlayer.prepareToPlay(samplesPerBlock, sampleRate);
     m_lastChordKey = -1;
     m_lastChordType = -1;
-    dsp::ProcessSpec spec;
-    spec.numChannels = 2;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = samplesPerBlock;
-    m_reverb.reset(new dsp::Reverb());
-    m_reverb->prepare(spec);
-
     auto buffers = int(sampleRate * 0.08 / samplesPerBlock);
     if (buffers < 2)
         buffers = 2;
@@ -108,11 +101,7 @@ bool GuitarStrummerAudioProcessor::isBusesLayoutSupported (const BusesLayout& la
 
 void GuitarStrummerAudioProcessor::processBlockBypassed(AudioBuffer<float>&, MidiBuffer&)
 {
-	if (m_reverbActive)
-	{
-		m_reverb->reset();
-		m_reverbActive = false;
-	}
+    m_guitarChordPlayer.process_bypassed();
 }
 
 void GuitarStrummerAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
@@ -234,17 +223,6 @@ void GuitarStrummerAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
     channelInfo.numSamples = buffer.getNumSamples();
     channelInfo.startSample = 0;
     m_guitarChordPlayer.getNextAudioBlock(channelInfo);
-
-    dsp::Reverb::Parameters parameters;
-    const float wetScaleFactor = 3.0f;
-    const float dryScaleFactor = 2.0f;
-    parameters.wetLevel = 0.5f / wetScaleFactor;
-    parameters.dryLevel = 1.f / dryScaleFactor;
-    m_reverb->setParameters(parameters);
-    auto block = dsp::AudioBlock<float>(buffer);
-    dsp::ProcessContextReplacing<float> context(block);
-    m_reverb->process(context);
-	m_reverbActive = true;
 
     midiMessages.clear();
 }

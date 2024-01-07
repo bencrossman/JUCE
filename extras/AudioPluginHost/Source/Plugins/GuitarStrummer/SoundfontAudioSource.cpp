@@ -5,6 +5,10 @@
 SoundfontAudioSource::SoundfontAudioSource(int numberOfVoices)
 {
     settings = new_fluid_settings();
+
+    fluid_settings_setstr(settings, "synth.reverb.active", "no"); // in-built reverb sucks
+    fluid_settings_setstr(settings, "synth.chorus.active", "no");
+
     synth = new_fluid_synth(settings);
     
     fluid_synth_set_polyphony(synth, numberOfVoices);
@@ -17,14 +21,31 @@ SoundfontAudioSource::~SoundfontAudioSource()
     delete_fluid_settings(settings);
 }
 
-void SoundfontAudioSource::prepareToPlay(int, double sampleRate)
+void SoundfontAudioSource::prepareToPlay(int samplesPerBlock, double sampleRate)
 {
     fluid_synth_set_sample_rate(synth, (float) sampleRate);
+
+
+    dsp::ProcessSpec spec;
+    spec.numChannels = 2;
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    m_reverb.reset(new dsp::Reverb());
+    m_reverb->prepare(spec);
 }
 
 void SoundfontAudioSource::releaseResources()
 {
     systemReset();
+}
+
+void SoundfontAudioSource::process_bypassed()
+{
+    if (m_reverbActive)
+    {
+        m_reverb->reset();
+        m_reverbActive = false;
+    }
 }
 
 void SoundfontAudioSource::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
@@ -40,6 +61,20 @@ void SoundfontAudioSource::getNextAudioBlock(const AudioSourceChannelInfo& buffe
                             bufferToFill.numSamples,
                             bufferToFill.buffer->getWritePointer(0), 0, 1,
                             bufferToFill.buffer->getWritePointer(1), 0, 1);
+
+    if (fluid_synth_get_reverb(synth) > 0)
+    {
+        dsp::Reverb::Parameters parameters;
+        const float wetScaleFactor = 3.0f;
+        const float dryScaleFactor = 2.0f;
+        parameters.wetLevel = 0.5f / wetScaleFactor;
+        parameters.dryLevel = 1.f / dryScaleFactor;
+        m_reverb->setParameters(parameters);
+        auto block = dsp::AudioBlock<float>(*bufferToFill.buffer);
+        dsp::ProcessContextReplacing<float> context(block);
+        m_reverb->process(context);
+        m_reverbActive = true;
+    }
 }
 
 bool SoundfontAudioSource::loadSoundfont(const File file)
@@ -48,6 +83,10 @@ bool SoundfontAudioSource::loadSoundfont(const File file)
         // Don't reload an already loaded soundfont
         return false;
     }
+
+    if (!file.exists())
+        return false;
+
     loadedSoundfont = file;
     
     // Lock while switching soundfonts

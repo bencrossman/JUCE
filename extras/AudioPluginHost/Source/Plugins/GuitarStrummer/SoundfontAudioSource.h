@@ -23,6 +23,8 @@ public:
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
     void releaseResources() override;
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
+
+    void process_bypassed();
     
     /** Load a .sf2 file. Will not reload a file if it is already loaded.
         If another file is loaded, it will unload that first. */
@@ -81,4 +83,7 @@ private:
     fluid_synth_t* synth;
     int sfontID;
     File loadedSoundfont;
+
+    std::shared_ptr<dsp::Reverb> m_reverb;
+    bool m_reverbActive = false;
 };
