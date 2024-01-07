@@ -38,6 +38,7 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
 
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
+    void processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages);
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;

@@ -532,6 +532,7 @@ new_fluid_synth(fluid_settings_t *settings)
   synth->dither_index = 0;
 
   /* allocate the reverb module */
+  synth->last_voice_reverb = 0;
   synth->reverb = new_fluid_revmodel();
   if (synth->reverb == NULL) {
     FLUID_LOG(FLUID_ERR, "Out of memory");
@@ -1959,6 +1960,11 @@ fluid_synth_nwrite_float(fluid_synth_t* synth, int len,
 }
 
 
+float fluid_synth_get_reverb(fluid_synth_t* synth)
+{
+    return synth->last_voice_reverb;
+}
+
 int fluid_synth_process(fluid_synth_t* synth, int len,
 		       int nin, float** in,
 		       int nout, float** out)
@@ -2496,6 +2502,8 @@ void fluid_synth_start_voice(fluid_synth_t* synth, fluid_voice_t* voice)
   /* Start the new voice */
 
   fluid_voice_start(voice);
+
+  synth->last_voice_reverb = voice->reverb_send;
 }
 
 /*
