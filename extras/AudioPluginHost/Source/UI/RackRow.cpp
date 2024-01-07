@@ -817,18 +817,19 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
             StringArray lines;
             File(programFile).readLines(lines);
             for (int i = 0; i < lines.size(); ++i)
-                m_program->addItem(lines[i], i + 1);
+                if (lines[i] != "")
+                    m_program->addItem(lines[i], i + 1);
         }
         else if (device.m_node)
         {
             auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)device.m_node)->getProcessor();
 
-            bool anyNames = false;
+            int anyNames = -1;
             for (int i = 0; i < processor->getNumPrograms(); ++i)
                 if (processor->getProgramName(i) != "")
-                    anyNames = true;
+                    anyNames = i;
 
-            if (processor->getNumPrograms() == 0 || ((processor->getNumPrograms() == 1 || processor->getNumPrograms() == 128) && (!anyNames || processor->getProgramName(0) == "Default")))
+            if (processor->getNumPrograms() == 1 || anyNames == 0)
                 m_hasPrograms = false; // Used by Guitar and Disco Strings
         }
     }
