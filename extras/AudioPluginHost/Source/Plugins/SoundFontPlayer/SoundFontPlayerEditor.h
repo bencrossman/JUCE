@@ -150,13 +150,15 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
 
+    bool* m_preload = nullptr;
 
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<juce::TextButton> m_addButton;
-    std::unique_ptr<juce::TextButton> m_deleteButton;
+    std::unique_ptr<juce::TextButton> m_setButton;
+    std::unique_ptr<juce::TextButton> m_clearButton;
     std::unique_ptr<SoundFontPlayerTableComponent> m_table;
+    std::unique_ptr<juce::ToggleButton> m_loadToggle;
 
 
     //==============================================================================

@@ -34,31 +34,31 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    m_addButton.reset (new juce::TextButton (juce::String()));
-    addAndMakeVisible (m_addButton.get());
-    m_addButton->setButtonText (TRANS("Set"));
-    m_addButton->addListener (this);
+    m_setButton.reset (new juce::TextButton (juce::String()));
+    addAndMakeVisible (m_setButton.get());
+    m_setButton->setButtonText (TRANS("Set"));
+    m_setButton->addListener (this);
 
-    m_addButton->setBounds (8, 8, 80, 24);
+    m_setButton->setBounds (8, 8, 80, 24);
 
-    m_deleteButton.reset (new juce::TextButton (juce::String()));
-    addAndMakeVisible (m_deleteButton.get());
-    m_deleteButton->setButtonText (TRANS("Clear"));
-    m_deleteButton->addListener (this);
+    m_clearButton.reset (new juce::TextButton (juce::String()));
+    addAndMakeVisible (m_clearButton.get());
+    m_clearButton->setButtonText (TRANS("Clear"));
+    m_clearButton->addListener (this);
 
-    m_deleteButton->setBounds (96, 8, 80, 24);
+    m_clearButton->setBounds (96, 8, 80, 24);
 
     m_table.reset (new WavStreamerTableComponent());
     addAndMakeVisible (m_table.get());
 
     m_table->setBounds (8, 40, 432, 352);
 
-    m_toggleLoop.reset (new juce::TextButton (juce::String()));
-    addAndMakeVisible (m_toggleLoop.get());
-    m_toggleLoop->setButtonText (TRANS("Cycle Mode"));
-    m_toggleLoop->addListener (this);
+    m_cycleButton.reset (new juce::TextButton (juce::String()));
+    addAndMakeVisible (m_cycleButton.get());
+    m_cycleButton->setButtonText (TRANS("Cycle Mode"));
+    m_cycleButton->addListener (this);
 
-    m_toggleLoop->setBounds (336, 8, 104, 24);
+    m_cycleButton->setBounds (336, 8, 104, 24);
 
 
     //[UserPreSize]
@@ -78,10 +78,10 @@ WavStreamerEditor::~WavStreamerEditor()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    m_addButton = nullptr;
-    m_deleteButton = nullptr;
+    m_setButton = nullptr;
+    m_clearButton = nullptr;
     m_table = nullptr;
-    m_toggleLoop = nullptr;
+    m_cycleButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -94,7 +94,7 @@ void WavStreamerEditor::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::white);
+    g.fillAll (juce::Colour (0xff5f5aae));
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -115,9 +115,10 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == m_addButton.get())
+    if (buttonThatWasClicked == m_setButton.get())
     {
-        //[UserButtonCode_m_addButton] -- add your button handler code here..
+        //[UserButtonCode_m_setButton] -- add your button handler code here..
+
 
         FileChooser ChooseFile("Select wav file:",File(),"*.wav");
         if(ChooseFile.browseForFileToOpen())
@@ -127,19 +128,19 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
           m_table->SetSelected(fileName2.getFullPathName().toUTF8());
         }
 
-        //[/UserButtonCode_m_addButton]
+        //[/UserButtonCode_m_setButton]
     }
-    else if (buttonThatWasClicked == m_deleteButton.get())
+    else if (buttonThatWasClicked == m_clearButton.get())
     {
-        //[UserButtonCode_m_deleteButton] -- add your button handler code here..
+        //[UserButtonCode_m_clearButton] -- add your button handler code here..
         m_table->DeleteSelected();
-        //[/UserButtonCode_m_deleteButton]
+        //[/UserButtonCode_m_clearButton]
     }
-    else if (buttonThatWasClicked == m_toggleLoop.get())
+    else if (buttonThatWasClicked == m_cycleButton.get())
     {
-        //[UserButtonCode_m_toggleLoop] -- add your button handler code here..
+        //[UserButtonCode_m_cycleButton] -- add your button handler code here..
 		m_table->ToggleSelectedLoop();
-        //[/UserButtonCode_m_toggleLoop]
+        //[/UserButtonCode_m_cycleButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -161,22 +162,22 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="WavStreamerEditor"
-                 componentName="" parentClasses="public AudioProcessorEditor"
-                 constructorParams="AudioProcessor&amp; processor" variableInitialisers="AudioProcessorEditor(processor)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="1" initialWidth="448" initialHeight="400">
-  <BACKGROUND backgroundColour="ffffffff"/>
-  <TEXTBUTTON name="" id="62dcb6cad5fd83b" memberName="m_addButton" virtualName=""
+<JUCER_COMPONENT documentType="Component" className="WavStreamerEditor" componentName=""
+                 parentClasses="public AudioProcessorEditor" constructorParams="AudioProcessor&amp; processor"
+                 variableInitialisers="AudioProcessorEditor(processor)" snapPixels="8"
+                 snapActive="1" snapShown="1" overlayOpacity="0.330" fixedSize="1"
+                 initialWidth="448" initialHeight="400">
+  <BACKGROUND backgroundColour="ff5f5aae"/>
+  <TEXTBUTTON name="" id="62dcb6cad5fd83b" memberName="m_setButton" virtualName=""
               explicitFocusOrder="0" pos="8 8 80 24" buttonText="Set" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="" id="ee0ae4bd0107d78c" memberName="m_deleteButton" virtualName=""
+  <TEXTBUTTON name="" id="ee0ae4bd0107d78c" memberName="m_clearButton" virtualName=""
               explicitFocusOrder="0" pos="96 8 80 24" buttonText="Clear" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
   <GENERICCOMPONENT name="" id="2e2e5afc809d8716" memberName="m_table" virtualName=""
-                    explicitFocusOrder="0" pos="8 40 432 352" class="TableDemoComponent"
+                    explicitFocusOrder="0" pos="8 40 432 352" class="WavStreamerTableComponent"
                     params=""/>
-  <TEXTBUTTON name="" id="74227fc19ec4b7cc" memberName="m_toggleLoop" virtualName=""
+  <TEXTBUTTON name="" id="74227fc19ec4b7cc" memberName="m_cycleButton" virtualName=""
               explicitFocusOrder="0" pos="336 8 104 24" buttonText="Cycle Mode"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>

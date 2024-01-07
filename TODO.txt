@@ -1,6 +1,6 @@
 Next
 ~~~~
-Convert more samples (maybe just keep wavs for simple non used), Priority would be Brass / Queen(including Wulizter). Could then remove DirectWave and search/replace all dw with sf (even if empty)
+Convert more samples (maybe just keep wavs for simple non used), Priority would be Queen(including Wulizter). Could then remove DirectWave and search/replace all dw with sf (even if empty)
 Test on Mac
 Got Qt working?
 
@@ -11,6 +11,8 @@ Mac support missing
 
 Next cover band
 ~~~~~~~~~~~~~~~
+Brass volumes will be wrong
+
 Police - 1 song - King Of Pain 
 Dire Straits - 4 songs
 John Farnham(Still loads in Forte) - 5 songs, Voice already done
