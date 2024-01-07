@@ -167,6 +167,8 @@ void PluginGraph::addPlugin (const PluginDescriptionAndPreference& desc, Point<d
         name = "Roland JV-1080";
     else if (name == "JUPITER-8")
         name = "Roland Jupiter-8";
+    else if (name == "Sound Font Player")
+        name = "Sampler";
     newRack.Name = name.toStdString();
 
 	if (processor.get())
