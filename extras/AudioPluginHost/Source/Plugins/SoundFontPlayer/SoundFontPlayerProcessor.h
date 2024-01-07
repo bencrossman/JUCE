@@ -63,6 +63,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     std::vector<Patch> *GetList() { return &m_patches; }
+    bool* GetPreload() { return &m_preload; }
 	
 private:
     std::vector<Patch> m_patches;
@@ -70,6 +71,7 @@ private:
     int m_currentFile;
     double m_sampleRate;
     bool m_loading = false;
+    bool m_preload = true;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SoundFontPlayerAudioProcessor)
