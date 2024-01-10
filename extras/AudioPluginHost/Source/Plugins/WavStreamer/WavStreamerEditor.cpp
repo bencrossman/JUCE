@@ -94,7 +94,7 @@ void WavStreamerEditor::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colour (0xff5f5aae));
+    g.fillAll (juce::Colour (0xff8c72ff));
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -167,7 +167,7 @@ BEGIN_JUCER_METADATA
                  variableInitialisers="AudioProcessorEditor(processor)" snapPixels="8"
                  snapActive="1" snapShown="1" overlayOpacity="0.330" fixedSize="1"
                  initialWidth="448" initialHeight="400">
-  <BACKGROUND backgroundColour="ff5f5aae"/>
+  <BACKGROUND backgroundColour="ff8c72ff"/>
   <TEXTBUTTON name="" id="62dcb6cad5fd83b" memberName="m_setButton" virtualName=""
               explicitFocusOrder="0" pos="8 8 80 24" buttonText="Set" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
