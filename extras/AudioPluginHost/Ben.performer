@@ -19,8 +19,8 @@
             <Song ID="-209972973" />
             <Song ID="1030967864" />
             <Song ID="1351634846" />
-            <Song ID="-1203166635" />
             <Song ID="1278192846" />
+            <Song ID="-1203166635" />
             <Song ID="-1320569983" />
             <Song ID="-1558578634" />
             <Song ID="-584579934" />
@@ -284,7 +284,6 @@
         <Song ID="-2044191071" Name="Crazy Little Thing Called Love">
             <Performance ID="-812800143" />
             <Performance ID="-1104081288" />
-            <Performance ID="-812800143" />
         </Song>
         <Song ID="1539962914" Name="Cry me">
             <Performance ID="-1593823047" />
