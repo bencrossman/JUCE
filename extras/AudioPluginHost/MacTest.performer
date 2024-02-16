@@ -14,6 +14,9 @@
         <Rack ID="-538217212" Name="Roland JV-1080" PluginName="JV-1080"></Rack>
         <Rack ID="-1418327909" Name="Roland Jupiter-8" PluginName="JUPITER-8"></Rack>
         <Rack ID="1500878420" Name="OP-X PRO-II" PluginName="OP-X PRO-II"></Rack>
+        <Rack ID="1357074752" Name="Guitar Strummer" PluginName="Guitar Strummer"></Rack>
+        <Rack ID="-866456452" Name="Wav Streamer" PluginName="Wav Streamer">eJzlwUsOQEAMAFAn0jP4RiywYV80MpnRyrSD4zuI97IFZqWosBJvUVRPZKhJvckF/Vw1QK9FVCjS7mQK6XDciRq0jjFUkth2ebjEzTs+Rh7EKH/wzn7sAyZTIQ0=</Rack>
+        <Rack ID="-1846840175" Name="Sampler" PluginName="Sound Font Player">eJxjdNcPLU4tKtZPSs1LLsovLs5NzNN3SS3OLskv0PcKdXbVT60oKUos1ncsTcnMD8gpTc/M88gvLtF3ySxOzg8uKcrMSy/WK04zopY5DAMKALMjNdQ=</Rack>
     </Racks>
     <Songs>
         <Song ID="473981104" Name="New Song">
@@ -30,6 +33,9 @@
             <Zone DeviceID="999048182" Program="0"></Zone>
             <Zone DeviceID="-1568747717" Program="0"></Zone>
             <Zone DeviceID="1500878420" Program="0"></Zone>
+            <Zone DeviceID="1357074752" Program="0"></Zone>
+            <Zone DeviceID="-866456452" Program="0"></Zone>
+            <Zone DeviceID="-1846840175" Program="0"></Zone>
         </Performance>
     </Performances>
 </Root>
