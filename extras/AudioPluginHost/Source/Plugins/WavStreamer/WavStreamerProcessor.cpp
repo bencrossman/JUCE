@@ -76,6 +76,8 @@ const String WavStreamerAudioProcessor::getProgramName (int index)
     res = m_patches[index-1].m_file;
     if(const char *found=strrchr(m_patches[index-1].m_file.c_str(),'\\'))
       res = found+1;
+    if(const char *found=strrchr(m_patches[index-1].m_file.c_str(),'/'))
+      res = found+1;
     res.resize(res.size()-4);
   }
 
