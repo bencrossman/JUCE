@@ -1,9 +1,8 @@
 Some system to auto enable correct sound card?
 
-
 Next
 ~~~~
-Convert more samples (maybe just keep wavs for simple non used), Priority would be Queen. Could then remove DirectWave and search/replace all dw with sf (even if empty)
+Reverb too metallic, RockYou2 is good example
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
