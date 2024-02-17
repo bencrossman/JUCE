@@ -419,9 +419,12 @@ void RackRow::sliderValueChanged (juce::Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == m_volume.get())
     {
         //[UserSliderCode_m_volume] -- add your slider handling code here..
-        m_current->Volume = (float)sliderThatWasMoved->getValue();
-		if (m_current->Device->m_gainNode) // in case plugin missing
-            ((AudioProcessorGraph::Node *)(m_current->Device->m_gainNode))->getProcessor()->getParameters()[0]->setValue(Decibels::decibelsToGain(m_current->Volume) * 0.25f);
+        if (m_current)
+        {
+            m_current->Volume = (float)sliderThatWasMoved->getValue();
+            if (m_current->Device->m_gainNode) // in case plugin missing
+                ((AudioProcessorGraph::Node*)(m_current->Device->m_gainNode))->getProcessor()->getParameters()[0]->setValue(Decibels::decibelsToGain(m_current->Volume) * 0.25f);
+        }
         //[/UserSliderCode_m_volume]
     }
 
