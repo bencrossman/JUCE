@@ -38,7 +38,7 @@ Clear override (easy)
 Load doesn't work
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash), also if loading a guitar before others, will be active while loading.
-Crash with empty scene and adding performance only?
+Crash with empty scene and adding performance only? Yes if no setlist
 After adding first song/setlist/performance going back to rack doesnt update titles
 Option to select an image for plugin
 "Select an image" texture
