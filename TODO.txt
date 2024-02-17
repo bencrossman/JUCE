@@ -28,7 +28,7 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 Bug
 ~~~
 Add a plugin and songs double up (although doesn't save like that)
-Mac (or maybe both) - Just have Guitar Strummer & Streamer - Noise if Strummer muted
+Mac - Just have Guitar Strummer & Streamer - Noise if Strummer muted
 
 If released
 ~~~~~~~~~~~~
