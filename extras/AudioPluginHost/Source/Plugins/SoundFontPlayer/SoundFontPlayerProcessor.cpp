@@ -134,7 +134,7 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         m_players[m_currentFile] = new SoundfontAudioSource();
         m_players[m_currentFile]->loadSoundfont(File(m_patches[m_currentFile].m_file));
         m_players[m_currentFile]->SetReverb(m_reverb.get());
-        m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
+        m_players[m_currentFile]->prepareToPlay(buffer.getNumSamples(), m_sampleRate);
     }
 
 
@@ -146,7 +146,7 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
             if (m_players[m_currentFile])
             {
                 m_players[m_currentFile]->SetReverb(m_reverb.get());
-                m_players[m_currentFile]->prepareToPlay(0, m_sampleRate);
+                m_players[m_currentFile]->prepareToPlay(buffer.getNumSamples(), m_sampleRate);
             }
         }
         else

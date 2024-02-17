@@ -66,8 +66,9 @@ void SoundfontAudioSource::getNextAudioBlock(const AudioSourceChannelInfo& buffe
         dsp::Reverb::Parameters parameters;
         const float wetScaleFactor = 3.0f;
         const float dryScaleFactor = 2.0f;
-        parameters.wetLevel = 0.5f / wetScaleFactor;
-        parameters.dryLevel = 1.f / dryScaleFactor;
+        parameters.wetLevel = 0.15f / wetScaleFactor;
+        parameters.dryLevel = 1.f / dryScaleFactor; // Effectively 100%)
+        parameters.roomSize = 0.7f;
         m_reverb->setParameters(parameters);
         auto block = dsp::AudioBlock<float>(*bufferToFill.buffer);
         dsp::ProcessContextReplacing<float> context(block);
