@@ -107,8 +107,10 @@ bool SoundFontPlayerAudioProcessor::isBusesLayoutSupported (const BusesLayout& l
     return true;
 }
 
-void SoundFontPlayerAudioProcessor::processBlockBypassed(AudioBuffer<float>&, MidiBuffer&)
+void SoundFontPlayerAudioProcessor::processBlockBypassed(AudioBuffer<float>&buffer, MidiBuffer& midiMessages)
 {
+    AudioProcessor::processBlockBypassed(buffer, midiMessages);
+    
     if (m_players[m_currentFile])
         m_players[m_currentFile]->process_bypassed();
 }
