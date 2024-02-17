@@ -108,8 +108,9 @@ bool GuitarStrummerAudioProcessor::isBusesLayoutSupported (const BusesLayout& la
     return true;
 }
 
-void GuitarStrummerAudioProcessor::processBlockBypassed(AudioBuffer<float>&, MidiBuffer&)
+void GuitarStrummerAudioProcessor::processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+    AudioProcessor::processBlockBypassed(buffer, midiMessages);
     m_guitarChordPlayer.process_bypassed();
 }
 
