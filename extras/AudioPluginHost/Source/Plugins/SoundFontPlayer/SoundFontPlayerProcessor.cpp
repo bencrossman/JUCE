@@ -223,6 +223,7 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
         {
             m_players[i] = new SoundfontAudioSource();
             m_players[i]->loadSoundfont(File(m_patches[i].m_file));
+            m_players[i]->SetReverb(m_reverb.get());
         }
     }
     m_loading = false;
