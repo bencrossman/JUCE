@@ -25,12 +25,7 @@ void SoundfontAudioSource::prepareToPlay(int samplesPerBlock, double sampleRate)
 {
     fluid_synth_set_sample_rate(synth, (float) sampleRate);
 
-
-    dsp::ProcessSpec spec;
-    spec.numChannels = 2;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = samplesPerBlock;
-    m_reverb->prepare(spec);
+    m_reverb->prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void SoundfontAudioSource::releaseResources()
@@ -63,16 +58,10 @@ void SoundfontAudioSource::getNextAudioBlock(const AudioSourceChannelInfo& buffe
 
     if (fluid_synth_get_reverb(synth) > 0)
     {
-        dsp::Reverb::Parameters parameters;
-        const float wetScaleFactor = 3.0f;
-        const float dryScaleFactor = 2.0f;
-        parameters.wetLevel = 0.15f / wetScaleFactor;
-        parameters.dryLevel = 1.f / dryScaleFactor; // Effectively 100%)
-        parameters.roomSize = 0.7f;
-        m_reverb->setParameters(parameters);
-        auto block = dsp::AudioBlock<float>(*bufferToFill.buffer);
-        dsp::ProcessContextReplacing<float> context(block);
-        m_reverb->process(context);
+
+
+        MidiBuffer midiBuffer;
+        m_reverb->processBlock(*bufferToFill.buffer, midiBuffer);
         m_reverbActive = true;
     }
 }

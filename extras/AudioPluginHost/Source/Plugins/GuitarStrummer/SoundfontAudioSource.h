@@ -2,6 +2,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Fluidlite/include/fluidlite.h"
+#include "../SoundFontPlayer/RoomReverb/PluginProcessor.h"
 
 //==========================================================================
 //==========================================================================
@@ -76,7 +77,7 @@ public:
     /** Returns the raw settings for use with the Fluidsynth API. */
     fluid_settings_t* getSettings() { return settings; }
     
-    void SetReverb(dsp::Reverb* reverb) { m_reverb = reverb; }
+    void SetReverb(ReverbAudioProcessor* reverb) { m_reverb = reverb; }
 
 private:
     
@@ -86,6 +87,6 @@ private:
     int sfontID;
     File loadedSoundfont;
 
-    dsp::Reverb* m_reverb = nullptr;
+    ReverbAudioProcessor* m_reverb = nullptr;
     bool m_reverbActive = false;
 };
