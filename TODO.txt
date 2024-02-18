@@ -1,9 +1,6 @@
 Some system to auto enable correct sound card?
 
-Next
-~~~~
-Reverb too metallic, RockYou2 is good example
-
+Move a few SF2 files around
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
