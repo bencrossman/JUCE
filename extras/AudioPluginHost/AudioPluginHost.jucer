@@ -10,7 +10,7 @@
                microphonePermissionNeeded="1" sendAppleEventsPermissionNeeded="1"
                sendAppleEventsPermissionText="This is required for some third-party plug-ins to function correctly."
                customXcodeResourceFolders="../../examples/Assets" applicationCategory="public.app-category.developer-tools"
-               extraDefs="JUCE_MODAL_LOOPS_PERMITTED;JUCE_SILENCE_XCODE_15_LINKER_WARNING=1" extraLinkerFlags="-Wl,-weak_reference_mismatches,weak" vstLegacyFolder="../../VST_SDK/VST2_SDK">
+               extraDefs="JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT;JUCE_SILENCE_XCODE_15_LINKER_WARNING=1" extraLinkerFlags="-Wl,-weak_reference_mismatches,weak" vstLegacyFolder="../../VST_SDK/VST2_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost" recommendedWarnings="LLVM"
                        binaryPath="./"/>
@@ -81,7 +81,7 @@
     </VS2017>
     <VS2019 targetFolder="Builds/VisualStudio2019" smallIcon="c97aUr" bigIcon="c97aUr"
             extraCompilerFlags="/w44265 /w45038 /w44062" extraLinkerFlags="/NXCOMPAT:NO"
-            extraDefs="JUCE_MODAL_LOOPS_PERMITTED" vstLegacyFolder="..\..\VST_SDK\VST2_SDK">
+            extraDefs="JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT" vstLegacyFolder="..\..\VST_SDK\VST2_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" headerPath="..\..\..\..\asiosdk_2.3.3_2019-06-14\common"/>
         <CONFIGURATION isDebug="0" name="Release" headerPath="..\..\..\..\asiosdk_2.3.3_2019-06-14\common"/>
@@ -104,7 +104,7 @@
       </MODULEPATHS>
     </VS2019>
     <VS2022 targetFolder="Builds/VisualStudio2022" smallIcon="c97aUr" bigIcon="c97aUr"
-            extraCompilerFlags="/w44265 /w45038 /w44062" extraDefs="JUCE_MODAL_LOOPS_PERMITTED"
+            extraCompilerFlags="/w44265 /w45038 /w44062" extraDefs="JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT"
             vstLegacyFolder="..\..\VST_SDK\VST2_SDK" extraLinkerFlags="/NXCOMPAT:NO">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost" headerPath="..\..\..\..\asiosdk_2.3.3_2019-06-14\common"/>
@@ -280,6 +280,59 @@
                 file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
         </GROUP>
         <GROUP id="{4E83DF42-61B1-8F24-9859-AD1FABF02D69}" name="SoundFontPlayer">
+          <GROUP id="{3684B1F4-F87F-2D61-8CF4-419AA05B4AD6}" name="RoomReverb">
+            <GROUP id="{A2643A15-ADC1-4AEF-D188-AA19C0DF43A5}" name="freeverb">
+              <FILE id="Ixrz3z" name="allpass.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.cpp"/>
+              <FILE id="pbwRmC" name="allpass.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.hpp"/>
+              <FILE id="MTK2is" name="allpass_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass_t.hpp"/>
+              <FILE id="F4loBY" name="biquad.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.cpp"/>
+              <FILE id="BtbFiC" name="biquad.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.hpp"/>
+              <FILE id="UjNrds" name="biquad_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad_t.hpp"/>
+              <FILE id="BlEu0k" name="comb.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.cpp"/>
+              <FILE id="bf6lQz" name="comb.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.hpp"/>
+              <FILE id="YNbaho" name="comb_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb_t.hpp"/>
+              <FILE id="LW9ows" name="delay.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.cpp"/>
+              <FILE id="R2xDM1" name="delay.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.hpp"/>
+              <FILE id="Nftc9x" name="delay_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay_t.hpp"/>
+              <FILE id="kg5DNf" name="delayline.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.cpp"/>
+              <FILE id="Kpl2In" name="delayline.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.hpp"/>
+              <FILE id="vfkmlN" name="delayline_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline_t.hpp"/>
+              <FILE id="WjqXsS" name="earlyref.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.cpp"/>
+              <FILE id="Jg5Q68" name="earlyref.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.hpp"/>
+              <FILE id="jp7hvD" name="earlyref_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref_t.hpp"/>
+              <FILE id="cTrGqA" name="efilter.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.cpp"/>
+              <FILE id="M7WAC5" name="efilter.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.hpp"/>
+              <FILE id="tiMOkN" name="efilter_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter_t.hpp"/>
+              <FILE id="mTyIfm" name="fv3_defs.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_defs.h"/>
+              <FILE id="k6nsri" name="fv3_ns_end.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_end.h"/>
+              <FILE id="TI4G3M" name="fv3_ns_start.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_start.h"/>
+              <FILE id="X1VHKg" name="fv3_type_float.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_type_float.h"/>
+              <FILE id="nracnq" name="progenitor.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.cpp"/>
+              <FILE id="f50BYh" name="progenitor.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.hpp"/>
+              <FILE id="SNbThR" name="progenitor_t.hpp" compile="0" resource="0"
+                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor_t.hpp"/>
+              <FILE id="vBgSOk" name="progenitor2.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.cpp"/>
+              <FILE id="staYFx" name="progenitor2.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.hpp"/>
+              <FILE id="pw6D3O" name="progenitor2_t.hpp" compile="0" resource="0"
+                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2_t.hpp"/>
+              <FILE id="FCmbqy" name="revbase.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.cpp"/>
+              <FILE id="TSZq1K" name="revbase.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.hpp"/>
+              <FILE id="naXL94" name="revbase_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase_t.hpp"/>
+              <FILE id="fdEtsV" name="slot.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.cpp"/>
+              <FILE id="yLIE1R" name="slot.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.hpp"/>
+              <FILE id="HDg3vg" name="slot_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot_t.hpp"/>
+              <FILE id="CPNkGA" name="utils.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.cpp"/>
+              <FILE id="qGTw76" name="utils.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.hpp"/>
+              <FILE id="ndQPsY" name="utils_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils_t.hpp"/>
+            </GROUP>
+            <FILE id="QIQy3m" name="PluginProcessor.cpp" compile="1" resource="0"
+                  file="Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.cpp"/>
+            <FILE id="Di4KMG" name="PluginProcessor.h" compile="0" resource="0"
+                  file="Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.h"/>
+            <FILE id="VFOioK" name="RoomReverb.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.cpp"/>
+            <FILE id="Vh09DP" name="RoomReverb.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.h"/>
+          </GROUP>
           <FILE id="JeMbom" name="SoundFontPlayerEditor.cpp" compile="1" resource="0"
                 file="Source/Plugins/SoundFontPlayer/SoundFontPlayerEditor.cpp"/>
           <FILE id="wJ8esL" name="SoundFontPlayerEditor.h" compile="0" resource="0"

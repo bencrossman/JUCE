@@ -10,6 +10,7 @@
 
 #include "SoundFontPlayerProcessor.h"
 #include "SoundFontPlayerEditor.h"
+#include "RoomReverb/PluginProcessor.h"
 
 //==============================================================================
 SoundFontPlayerAudioProcessor::SoundFontPlayerAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))
@@ -88,7 +89,7 @@ void SoundFontPlayerAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     m_sampleRate = sampleRate;
 
-    m_reverb.reset(new dsp::Reverb());
+    m_reverb.reset(new ReverbAudioProcessor());
 }
 
 void SoundFontPlayerAudioProcessor::releaseResources()
