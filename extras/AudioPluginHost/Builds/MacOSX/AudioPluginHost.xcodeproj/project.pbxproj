@@ -15,6 +15,7 @@
 		0F20A4AE04736634F097F5A6 /* include_juce_audio_utils.mm */ = {isa = PBXBuildFile; fileRef = B285CAB91AE928C476CA4F9C; };
 		15CCE43D7DCFC649638919D4 /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = 4C7D82F9274A4F9DBF11235C; };
 		19BAE2C0ECA6DE9B486EB838 /* fluid_list.c */ = {isa = PBXBuildFile; fileRef = 8F1EE2930A3F381C3CE17312; };
+		1E50DFFDD9F13A6DE815A959 /* comb.cpp */ = {isa = PBXBuildFile; fileRef = 8647F651115F2F12AA3CCBE1; };
 		21D330A5B13178B12BEAFC3C /* AudioToolbox.framework */ = {isa = PBXBuildFile; fileRef = D4EBC17BDB7F88CCBC76730B; };
 		2727A191DB1BAAC9C04B9081 /* include_juce_opengl.mm */ = {isa = PBXBuildFile; fileRef = 37E4D5C341406B7072120006; };
 		2C3D221D2AA87F07B3F1044D /* include_juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = 8FE7B37CDE0818DB27BDDEBD; };
@@ -24,8 +25,10 @@
 		4BAFDB08D91A3C33B7F8AA82 /* SoundFontPlayerEditor.cpp */ = {isa = PBXBuildFile; fileRef = 1755AE01A07EACA3D8B7D331; };
 		4DB15177DDC357F4503F88CF /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = B457EE687507BF1DEEA7581F; };
 		4FD05447794D40F0EC39871C /* fluid_rev.c */ = {isa = PBXBuildFile; fileRef = 5EF7CAD42C2E934F2EE43906; };
+		517BF24297A0CF76767BD5BD /* efilter.cpp */ = {isa = PBXBuildFile; fileRef = 9B0C106912C59D6134572C6E; };
 		5C4D406B924230F83E3580AD /* include_juce_audio_devices.mm */ = {isa = PBXBuildFile; fileRef = 65968EA1B476D71F14DE1D58; };
 		5D985122EA94EA81D52DDCA9 /* RackRow.cpp */ = {isa = PBXBuildFile; fileRef = E05CB359B96C699D5CF432F7; };
+		600035F941B3EEEE7B70AEE5 /* earlyref.cpp */ = {isa = PBXBuildFile; fileRef = E9C5B981028F56CE54855D5F; };
 		60BBD03840ABDD719FED194F /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXBuildFile; fileRef = 5183A94449F6317518C48B0C; };
 		63627256F97673178A7EE2E3 /* SoundFontPlayerProcessor.cpp */ = {isa = PBXBuildFile; fileRef = 48743118748482F4B833E1FF; };
 		664567284CBAE7422D8B2705 /* fluid_dsp_float.c */ = {isa = PBXBuildFile; fileRef = B586049A8D6BCC783F9CE930; };
@@ -34,8 +37,10 @@
 		6A3C1E5A0E85173C4EA5D040 /* fluid_tuning.c */ = {isa = PBXBuildFile; fileRef = EC1A8EB619F1A8FAB847BC69; };
 		6B54C8D9FBE2CB29C8ADD41F /* WavStreamerProcessor.cpp */ = {isa = PBXBuildFile; fileRef = CEA131ECABEA3E6E6A2A438D; };
 		70580743C3D5695F065FF698 /* CoreAudioKit.framework */ = {isa = PBXBuildFile; fileRef = E68018DE199135B7F738FB17; };
+		70A7986FA8D12A52253A9123 /* delay.cpp */ = {isa = PBXBuildFile; fileRef = 00A2313C6DFEB18121B7F5F7; };
 		70C852A0F916E181AA4DBC69 /* WavStreamerEditor.cpp */ = {isa = PBXBuildFile; fileRef = 22C11691AF44E90982851E9B; };
 		72B23C9E490E6F9239325BB0 /* tinyxmlparser.cpp */ = {isa = PBXBuildFile; fileRef = E50B5942799878FB2DD28CB7; };
+		737A9995472979EBDA5797A5 /* revbase.cpp */ = {isa = PBXBuildFile; fileRef = 980D02CA08078F6D38771FD2; };
 		73E371F1B912FCCAE0CD7E5D /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = 86CA337014D3F67E906FFD28; };
 		76A80851698FC773D2479B4E /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 683CEE986A2467C850FE99E6; };
 		7A9726B8339DA0CA0ABA9B30 /* fluid_hash.c */ = {isa = PBXBuildFile; fileRef = F3D49C80B3F862061F20D8BE; };
@@ -43,6 +48,7 @@
 		7E794D6F038C3051EF82B396 /* SoundfontAudioSource.cpp */ = {isa = PBXBuildFile; fileRef = FA8155F691C14758FFBCDE4F; };
 		7F1AF2AB76F8E5870A2D3C2C /* RackTitleBar.cpp */ = {isa = PBXBuildFile; fileRef = FBAA456614A3D0B4BA5D81CC; };
 		7FF8A938915488310A7F5921 /* InternalPlugins.cpp */ = {isa = PBXBuildFile; fileRef = 87A7AAB053051C49EAF4EE88; };
+		803F41F84D822D0B4D8D6B2A /* slot.cpp */ = {isa = PBXBuildFile; fileRef = B4EFAC4C4E74809CB688A596; };
 		83D06828F9D6B115BCE77B17 /* fluid_chan.c */ = {isa = PBXBuildFile; fileRef = E10B8F74422FC053AC1347B4; };
 		8BD65ECEF479A070A9D094D6 /* tinyxml.cpp */ = {isa = PBXBuildFile; fileRef = 203540DB55D16D0E9F959106; };
 		8DBCFA78F47129150B8DF6CA /* fluid_settings.c */ = {isa = PBXBuildFile; fileRef = C25037549273515C6E18E1E9; };
@@ -55,11 +61,16 @@
 		A0B5EEB69305D79D628D39F1 /* fluid_gen.c */ = {isa = PBXBuildFile; fileRef = 64F562D85345BEE714EC6917; };
 		A1B0416DA378BB0C3AD6F74B /* HostStartup.cpp */ = {isa = PBXBuildFile; fileRef = A66EFAC64B1B67B536C73415; };
 		A1EF3307CFB5940608618CC9 /* tinystr.cpp */ = {isa = PBXBuildFile; fileRef = 7A79D151C4DB2C5E1371A49C; };
+		A229556B9A462BC35DA88226 /* progenitor2.cpp */ = {isa = PBXBuildFile; fileRef = BF451FCA5DFCB37D1D136305; };
 		A5F0B3B7175766C8AF1D6C3E /* include_juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = 36689CA4EFC2AF183A0848AE; };
 		AC3BED74AC7C6D9F5739F38B /* Cocoa.framework */ = {isa = PBXBuildFile; fileRef = 9794142D24966F93FFDE51A1; };
 		B09C90134B9CB4F44BB443EA /* fluid_synth.c */ = {isa = PBXBuildFile; fileRef = C2B730707CD32C2634F8EBB2; };
+		B23EF3A1C07334EF14648B74 /* allpass.cpp */ = {isa = PBXBuildFile; fileRef = EA2FDD781864212D60687C61; };
 		B288A89F96704F142ED8E939 /* AudioUnit.framework */ = {isa = PBXBuildFile; fileRef = 5ACC21AA45BBF48C3C64D56D; };
+		B3447D8A2C7AF820B34046FA /* progenitor.cpp */ = {isa = PBXBuildFile; fileRef = 8362104FC1156F42AF4BE744; };
 		B4D548F7AD2DA8BD6104FFCA /* Performer.cpp */ = {isa = PBXBuildFile; fileRef = F78307CABC2AC94A3ACA52BC; };
+		B55ABD3D9568B0F58CA3009B /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = 2511C5DE097F6F56C57B1DDE; };
+		BB578C54C84087A2013524AA /* utils.cpp */ = {isa = PBXBuildFile; fileRef = D915766076A061CCAE1E4DE4; };
 		BBA1733CF8B064A5FD0B4CF4 /* OpenGL.framework */ = {isa = PBXBuildFile; fileRef = D313CF37B25D7FD313C4F336; };
 		BD8601B0C542AAAEBAF3DCE8 /* tinyxmlerror.cpp */ = {isa = PBXBuildFile; fileRef = 65F343ADF0790E3083BDA69D; };
 		C38D14DC58F1941DD5E4BF60 /* include_juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = 2BE6C2DFD6EBB9A89109AEB5; };
@@ -67,11 +78,14 @@
 		C78B415EF87EB6D19180EF01 /* fluid_ramsfont.c */ = {isa = PBXBuildFile; fileRef = AD438F4BBA98430C19238596; };
 		CAC10E4345428CAEE6F0DA1B /* include_juce_audio_processors_ara.cpp */ = {isa = PBXBuildFile; fileRef = A43CE79CB190C2D69E17E1E3; };
 		CAF0DE157C8F7D9F168AA3B6 /* include_juce_audio_processors.mm */ = {isa = PBXBuildFile; fileRef = 5FBD6C402617272052BB4D81; };
+		CE6A9ABF0F4E629B53B346C2 /* biquad.cpp */ = {isa = PBXBuildFile; fileRef = FC19824D628F6C09FB988BEA; };
+		D13567EE5F2E4CD707A47E02 /* RoomReverb.cpp */ = {isa = PBXBuildFile; fileRef = 51B33D91FBDAC1C8B1ADEAEC; };
 		D92C7BF86C9CCF6B4D14F809 /* RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = 7DA35787B5F6F7440D667CC8; };
 		E092A70431B046BF1F50A482 /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = 5AF0CA7CDFCA90B4DE1F55C3; };
 		E2BAA7CFC729809530FD71EE /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = B8774D8AD307D798831C0DF7; };
 		E3CB85BA817BC9E3942A8AB0 /* CoreAudio.framework */ = {isa = PBXBuildFile; fileRef = 9F9B445E6755CAA19E4344ED; };
 		E4A926EF695823F0F13268FF /* include_juce_cryptography.mm */ = {isa = PBXBuildFile; fileRef = B8E24A5CEE6B7055537725CF; };
+		ED95DB803B87293F0AA09F22 /* delayline.cpp */ = {isa = PBXBuildFile; fileRef = 460FDEA065B977D141644EF5; };
 		EE743CBE820DAB60F5151C26 /* SetlistManager.cpp */ = {isa = PBXBuildFile; fileRef = 220FD22A16F384676A3E7A7E; };
 		F4DD98B9310B679D50A2C8A6 /* include_juce_audio_formats.mm */ = {isa = PBXBuildFile; fileRef = 5D250A57C7DEA80248F30EED; };
 		F635D974599DEC2ED91E6A88 /* MainHostWindow.cpp */ = {isa = PBXBuildFile; fileRef = 04AABCD3491318FB32E844B4; };
@@ -82,6 +96,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00A2313C6DFEB18121B7F5F7 /* delay.cpp */ /* delay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = delay.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.cpp; sourceTree = SOURCE_ROOT; };
 		03FA420AACDD03D50AA16E4A /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04908A39EB13DE67D0041FAD /* ramsfont.h */ /* ramsfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ramsfont.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/ramsfont.h; sourceTree = SOURCE_ROOT; };
 		04AABCD3491318FB32E844B4 /* MainHostWindow.cpp */ /* MainHostWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainHostWindow.cpp; path = ../../Source/UI/MainHostWindow.cpp; sourceTree = SOURCE_ROOT; };
@@ -98,11 +113,15 @@
 		1BAB55266B2AA2BB80ED599E /* fluid_rev.h */ /* fluid_rev.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_rev.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_rev.h; sourceTree = SOURCE_ROOT; };
 		203540DB55D16D0E9F959106 /* tinyxml.cpp */ /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml.cpp; path = ../../Source/ForteEmulator/ForteSDK/tinyxml/tinyxml.cpp; sourceTree = SOURCE_ROOT; };
 		220FD22A16F384676A3E7A7E /* SetlistManager.cpp */ /* SetlistManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SetlistManager.cpp; path = ../../Source/UI/SetlistManager.cpp; sourceTree = SOURCE_ROOT; };
+		221284E22C15D873AE8A8613 /* efilter_t.hpp */ /* efilter_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = efilter_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter_t.hpp; sourceTree = SOURCE_ROOT; };
 		22C11691AF44E90982851E9B /* WavStreamerEditor.cpp */ /* WavStreamerEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = WavStreamerEditor.cpp; path = ../../Source/Plugins/WavStreamer/WavStreamerEditor.cpp; sourceTree = SOURCE_ROOT; };
+		2511C5DE097F6F56C57B1DDE /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
+		293CB567BA136A17A999EE59 /* delayline.hpp */ /* delayline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = delayline.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.hpp; sourceTree = SOURCE_ROOT; };
 		2A6983F82B13F9E8B10299AE /* Icon.icns */ /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = file.icns; name = Icon.icns; path = Icon.icns; sourceTree = SOURCE_ROOT; };
 		2AC8390BCFD2E49E8FC0094F /* voice.h */ /* voice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = voice.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/voice.h; sourceTree = SOURCE_ROOT; };
 		2BE6C2DFD6EBB9A89109AEB5 /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		35BEC0BE50320E2939A7739D /* XmlArchive.h */ /* XmlArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XmlArchive.h; path = ../../Source/ForteEmulator/ForteSDK/XmlArchive.h; sourceTree = SOURCE_ROOT; };
+		36188AFAD8F00ACDCA3BABFC /* utils_t.hpp */ /* utils_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils_t.hpp; sourceTree = SOURCE_ROOT; };
 		36689CA4EFC2AF183A0848AE /* include_juce_dsp.mm */ /* include_juce_dsp.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_dsp.mm; path = ../../JuceLibraryCode/include_juce_dsp.mm; sourceTree = SOURCE_ROOT; };
 		37E4D5C341406B7072120006 /* include_juce_opengl.mm */ /* include_juce_opengl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_opengl.mm; path = ../../JuceLibraryCode/include_juce_opengl.mm; sourceTree = SOURCE_ROOT; };
 		3BEA4C5C6149468DE3F90447 /* fluid_conv.h */ /* fluid_conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_conv.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_conv.h; sourceTree = SOURCE_ROOT; };
@@ -110,18 +129,24 @@
 		3D57FE2A8877F12A61054726 /* juce_core */ /* juce_core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_core; path = ../../../../modules/juce_core; sourceTree = SOURCE_ROOT; };
 		3D78A731234A833CA112AE45 /* GraphEditorPanel.cpp */ /* GraphEditorPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GraphEditorPanel.cpp; path = ../../Source/UI/GraphEditorPanel.cpp; sourceTree = SOURCE_ROOT; };
 		3E4AE4ECAF26A864DE38B049 /* fluid_list.h */ /* fluid_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_list.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.h; sourceTree = SOURCE_ROOT; };
+		41071A019BC72557141D1BED /* efilter.hpp */ /* efilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = efilter.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.hpp; sourceTree = SOURCE_ROOT; };
+		460FDEA065B977D141644EF5 /* delayline.cpp */ /* delayline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = delayline.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.cpp; sourceTree = SOURCE_ROOT; };
 		46C3C2CD301CD59C51FD02D6 /* PluginGraph.h */ /* PluginGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginGraph.h; path = ../../Source/Plugins/PluginGraph.h; sourceTree = SOURCE_ROOT; };
 		48743118748482F4B833E1FF /* SoundFontPlayerProcessor.cpp */ /* SoundFontPlayerProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SoundFontPlayerProcessor.cpp; path = ../../Source/Plugins/SoundFontPlayer/SoundFontPlayerProcessor.cpp; sourceTree = SOURCE_ROOT; };
+		489BFCA123F6125AA91D06D5 /* revbase.hpp */ /* revbase.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = revbase.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.hpp; sourceTree = SOURCE_ROOT; };
+		49A3E3119565B7559EDB393D /* utils.hpp */ /* utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.hpp; sourceTree = SOURCE_ROOT; };
 		4BD8F3BB5064E4A946B9ABDE /* SoundFontPlayerEditor.h */ /* SoundFontPlayerEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundFontPlayerEditor.h; path = ../../Source/Plugins/SoundFontPlayer/SoundFontPlayerEditor.h; sourceTree = SOURCE_ROOT; };
 		4C7D82F9274A4F9DBF11235C /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		4DF6E6E41E10965AD169143B /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		5183A94449F6317518C48B0C /* include_juce_audio_processors_lv2_libs.cpp */ /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_lv2_libs.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp; sourceTree = SOURCE_ROOT; };
+		51B33D91FBDAC1C8B1ADEAEC /* RoomReverb.cpp */ /* RoomReverb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RoomReverb.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.cpp; sourceTree = SOURCE_ROOT; };
 		5313EB852E41EE58B199B9A2 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = ../../../../modules/juce_audio_devices; sourceTree = SOURCE_ROOT; };
 		53C73A5D3A905954FC50F9D4 /* fluid_midi.h */ /* fluid_midi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_midi.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_midi.h; sourceTree = SOURCE_ROOT; };
 		57DF618F1DE781556B7AFC32 /* Info-App.plist */ /* Info-App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-App.plist"; path = "Info-App.plist"; sourceTree = SOURCE_ROOT; };
 		59842A98E5EBBC54B50C04CD /* juce_events */ /* juce_events */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_events; path = ../../../../modules/juce_events; sourceTree = SOURCE_ROOT; };
 		5ACC21AA45BBF48C3C64D56D /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		5AF0CA7CDFCA90B4DE1F55C3 /* CoreMIDI.framework */ /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		5BCBD826D194135C50996D71 /* comb.hpp */ /* comb.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = comb.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.hpp; sourceTree = SOURCE_ROOT; };
 		5C873D5B6519D8E58D15861E /* fluidlite.h */ /* fluidlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluidlite.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidlite.h; sourceTree = SOURCE_ROOT; };
 		5D250A57C7DEA80248F30EED /* include_juce_audio_formats.mm */ /* include_juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_formats.mm; path = ../../JuceLibraryCode/include_juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
 		5EF1D381F42AA8764597F189 /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
@@ -140,22 +165,29 @@
 		6A01D5F304346E0332264056 /* ARAPlugin.cpp */ /* ARAPlugin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ARAPlugin.cpp; path = ../../Source/Plugins/ARAPlugin.cpp; sourceTree = SOURCE_ROOT; };
 		6A71B2BCAC4239072BC2BD7E /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = ../../../../modules/juce_audio_basics; sourceTree = SOURCE_ROOT; };
 		6AA43D7D2CBDEA64CBD31919 /* RackTitleBar.h */ /* RackTitleBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RackTitleBar.h; path = ../../Source/UI/RackTitleBar.h; sourceTree = SOURCE_ROOT; };
+		736A51A93647A003859229F4 /* allpass_t.hpp */ /* allpass_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = allpass_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass_t.hpp; sourceTree = SOURCE_ROOT; };
 		748069F917DCFABE27F8AD66 /* ForteTypes.h */ /* ForteTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ForteTypes.h; path = ../../Source/ForteEmulator/ForteSDK/ForteTypes.h; sourceTree = SOURCE_ROOT; };
 		771740EFA0F064B5DDC552A3 /* settings.h */ /* settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = settings.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/settings.h; sourceTree = SOURCE_ROOT; };
+		7717A8FA01913F3EFF160007 /* PluginProcessor.h */ /* PluginProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginProcessor.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.h; sourceTree = SOURCE_ROOT; };
 		7A79D151C4DB2C5E1371A49C /* tinystr.cpp */ /* tinystr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tinystr.cpp; path = ../../Source/ForteEmulator/ForteSDK/tinyxml/tinystr.cpp; sourceTree = SOURCE_ROOT; };
 		7AD6820C9FD500CCE9B1A39A /* fluid_voice.c */ /* fluid_voice.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_voice.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_voice.c; sourceTree = SOURCE_ROOT; };
 		7C8BCF14AC7A7310778E3315 /* SetlistManager.h */ /* SetlistManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SetlistManager.h; path = ../../Source/UI/SetlistManager.h; sourceTree = SOURCE_ROOT; };
 		7DA35787B5F6F7440D667CC8 /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
 		7EC5A2B43CAA77A3E252842D /* SoundFontPlayerProcessor.h */ /* SoundFontPlayerProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundFontPlayerProcessor.h; path = ../../Source/Plugins/SoundFontPlayer/SoundFontPlayerProcessor.h; sourceTree = SOURCE_ROOT; };
+		7F0AA4D7118D51F56C6805B7 /* RoomReverb.h */ /* RoomReverb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoomReverb.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.h; sourceTree = SOURCE_ROOT; };
 		801E33A4FB21630A8F09E6DF /* tinystr.h */ /* tinystr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tinystr.h; path = ../../Source/ForteEmulator/ForteSDK/tinyxml/tinystr.h; sourceTree = SOURCE_ROOT; };
 		81C1A7770E082F56FE5A90A7 /* juce_opengl */ /* juce_opengl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_opengl; path = ../../../../modules/juce_opengl; sourceTree = SOURCE_ROOT; };
 		82800DBA287EF4BAB13B42FB /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
 		8290D7BAC160B3A56B66891A /* include_juce_events.mm */ /* include_juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_events.mm; path = ../../JuceLibraryCode/include_juce_events.mm; sourceTree = SOURCE_ROOT; };
+		8362104FC1156F42AF4BE744 /* progenitor.cpp */ /* progenitor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = progenitor.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.cpp; sourceTree = SOURCE_ROOT; };
+		8647F651115F2F12AA3CCBE1 /* comb.cpp */ /* comb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = comb.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.cpp; sourceTree = SOURCE_ROOT; };
 		86B0504D48E6083F572912C6 /* fluid_defsfont.h */ /* fluid_defsfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_defsfont.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.h; sourceTree = SOURCE_ROOT; };
 		86CA337014D3F67E906FFD28 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		87A7AAB053051C49EAF4EE88 /* InternalPlugins.cpp */ /* InternalPlugins.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = InternalPlugins.cpp; path = ../../Source/Plugins/InternalPlugins.cpp; sourceTree = SOURCE_ROOT; };
+		889811A8571CF6F06A4DCDBD /* slot.hpp */ /* slot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = slot.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.hpp; sourceTree = SOURCE_ROOT; };
 		89309C0C5F3269BD06BE7F27 /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D8BBC353637DA442C5575DA /* App */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioPluginHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E4018B3AAC78630C25A97DB /* fv3_defs.h */ /* fv3_defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fv3_defs.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_defs.h; sourceTree = SOURCE_ROOT; };
 		8F1EE2930A3F381C3CE17312 /* fluid_list.c */ /* fluid_list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_list.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.c; sourceTree = SOURCE_ROOT; };
 		8FE7B37CDE0818DB27BDDEBD /* include_juce_gui_basics.mm */ /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
 		90412B68C3AD5185D16E8EB4 /* tinyxml.h */ /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tinyxml.h; path = ../../Source/ForteEmulator/ForteSDK/tinyxml/tinyxml.h; sourceTree = SOURCE_ROOT; };
@@ -164,52 +196,74 @@
 		9320A145F2A8ACD687D6608E /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = ../../../../modules/juce_dsp; sourceTree = SOURCE_ROOT; };
 		938AE72315C6C93949F6220E /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = ../../../../modules/juce_gui_basics; sourceTree = SOURCE_ROOT; };
 		94CB96C8E4B51F52776C2638 /* juce_graphics */ /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_graphics; path = ../../../../modules/juce_graphics; sourceTree = SOURCE_ROOT; };
+		959541E313CEB30229F80EB5 /* delay.hpp */ /* delay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = delay.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.hpp; sourceTree = SOURCE_ROOT; };
 		96771BD337EDE07F2E2A5A66 /* log.h */ /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = log.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/log.h; sourceTree = SOURCE_ROOT; };
+		96B4F370D317FCB87EF66785 /* earlyref.hpp */ /* earlyref.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = earlyref.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.hpp; sourceTree = SOURCE_ROOT; };
 		97918AB43AD460AFA8FA2FFE /* PluginWindow.h */ /* PluginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginWindow.h; path = ../../Source/UI/PluginWindow.h; sourceTree = SOURCE_ROOT; };
 		9794142D24966F93FFDE51A1 /* Cocoa.framework */ /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		980D02CA08078F6D38771FD2 /* revbase.cpp */ /* revbase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = revbase.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.cpp; sourceTree = SOURCE_ROOT; };
+		9A63BE62E040DD96E956BC4D /* fv3_ns_end.h */ /* fv3_ns_end.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fv3_ns_end.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_end.h; sourceTree = SOURCE_ROOT; };
+		9B0C106912C59D6134572C6E /* efilter.cpp */ /* efilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = efilter.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.cpp; sourceTree = SOURCE_ROOT; };
 		9F9B445E6755CAA19E4344ED /* CoreAudio.framework */ /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A33950489CFC0FABEE285E04 /* fluid_chorus.c */ /* fluid_chorus.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_chorus.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chorus.c; sourceTree = SOURCE_ROOT; };
 		A43CE79CB190C2D69E17E1E3 /* include_juce_audio_processors_ara.cpp */ /* include_juce_audio_processors_ara.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_ara.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_ara.cpp; sourceTree = SOURCE_ROOT; };
 		A5DFC13E4F09134B0D226A3E /* MainHostWindow.h */ /* MainHostWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainHostWindow.h; path = ../../Source/UI/MainHostWindow.h; sourceTree = SOURCE_ROOT; };
 		A5E7CA8A71D049BE2BD33861 /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
 		A66EFAC64B1B67B536C73415 /* HostStartup.cpp */ /* HostStartup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HostStartup.cpp; path = ../../Source/HostStartup.cpp; sourceTree = SOURCE_ROOT; };
+		A83EDA37C2912273380D9AA1 /* allpass.hpp */ /* allpass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = allpass.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.hpp; sourceTree = SOURCE_ROOT; };
 		A8B40832A84C6CCA1C90205A /* GuitarStrummerProcessor.cpp */ /* GuitarStrummerProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GuitarStrummerProcessor.cpp; path = ../../Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		AD3E2FA09AA951FC9CBA7F58 /* fluid_phase.h */ /* fluid_phase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_phase.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_phase.h; sourceTree = SOURCE_ROOT; };
 		AD438F4BBA98430C19238596 /* fluid_ramsfont.c */ /* fluid_ramsfont.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_ramsfont.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.c; sourceTree = SOURCE_ROOT; };
+		AE8564911317954708187C60 /* progenitor.hpp */ /* progenitor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = progenitor.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.hpp; sourceTree = SOURCE_ROOT; };
 		AEFADBAE157F78DFD500F8A5 /* gen.h */ /* gen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gen.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/gen.h; sourceTree = SOURCE_ROOT; };
 		B10453A3585F6F9F83D60D58 /* version.h */ /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/version.h; sourceTree = SOURCE_ROOT; };
+		B14122B20C690B248C0D9040 /* biquad_t.hpp */ /* biquad_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = biquad_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad_t.hpp; sourceTree = SOURCE_ROOT; };
 		B197DBECB1B39EB996F413AC /* fluid_sys.c */ /* fluid_sys.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_sys.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.c; sourceTree = SOURCE_ROOT; };
 		B285CAB91AE928C476CA4F9C /* include_juce_audio_utils.mm */ /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		B2A1E626CC120982805754F6 /* JUCEAppIcon.png */ /* JUCEAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JUCEAppIcon.png; path = ../../Source/JUCEAppIcon.png; sourceTree = SOURCE_ROOT; };
 		B457EE687507BF1DEEA7581F /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		B4EE8D2EA956BEF4690498C6 /* earlyref_t.hpp */ /* earlyref_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = earlyref_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref_t.hpp; sourceTree = SOURCE_ROOT; };
+		B4EFAC4C4E74809CB688A596 /* slot.cpp */ /* slot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = slot.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.cpp; sourceTree = SOURCE_ROOT; };
 		B586049A8D6BCC783F9CE930 /* fluid_dsp_float.c */ /* fluid_dsp_float.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_dsp_float.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_float.c; sourceTree = SOURCE_ROOT; };
 		B86B918291E1090C6A720971 /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = ../../../../modules/juce_data_structures; sourceTree = SOURCE_ROOT; };
 		B8774D8AD307D798831C0DF7 /* DiscRecording.framework */ /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		B8E24A5CEE6B7055537725CF /* include_juce_cryptography.mm */ /* include_juce_cryptography.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_cryptography.mm; path = ../../JuceLibraryCode/include_juce_cryptography.mm; sourceTree = SOURCE_ROOT; };
 		B938ABEA28E441ABE343D02E /* GuitarStrummerProcessor.h */ /* GuitarStrummerProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GuitarStrummerProcessor.h; path = ../../Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.h; sourceTree = SOURCE_ROOT; };
 		B95B9D6774059DBB19F2B4E2 /* InternalPlugins.h */ /* InternalPlugins.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InternalPlugins.h; path = ../../Source/Plugins/InternalPlugins.h; sourceTree = SOURCE_ROOT; };
+		BBC28A858EF0FC34F86FCF24 /* fv3_ns_start.h */ /* fv3_ns_start.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fv3_ns_start.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_start.h; sourceTree = SOURCE_ROOT; };
 		BD6424A7A62BED1A28C1978F /* fluid_ramsfont.h */ /* fluid_ramsfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_ramsfont.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.h; sourceTree = SOURCE_ROOT; };
+		BF451FCA5DFCB37D1D136305 /* progenitor2.cpp */ /* progenitor2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = progenitor2.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.cpp; sourceTree = SOURCE_ROOT; };
 		C25037549273515C6E18E1E9 /* fluid_settings.c */ /* fluid_settings.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_settings.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_settings.c; sourceTree = SOURCE_ROOT; };
 		C2B730707CD32C2634F8EBB2 /* fluid_synth.c */ /* fluid_synth.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_synth.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_synth.c; sourceTree = SOURCE_ROOT; };
 		C37B2E77AAB6C9E13729BF99 /* IOConfigurationWindow.cpp */ /* IOConfigurationWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = IOConfigurationWindow.cpp; path = ../../Source/Plugins/IOConfigurationWindow.cpp; sourceTree = SOURCE_ROOT; };
 		C99AE94BFD4FFC1BDE90E32D /* fluid_sys.h */ /* fluid_sys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_sys.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.h; sourceTree = SOURCE_ROOT; };
 		CA726B9AA0EC87B58D005C8D /* ARAPlugin.h */ /* ARAPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARAPlugin.h; path = ../../Source/Plugins/ARAPlugin.h; sourceTree = SOURCE_ROOT; };
+		CBD23D4EB3BA995D967A55ED /* progenitor2.hpp */ /* progenitor2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = progenitor2.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.hpp; sourceTree = SOURCE_ROOT; };
 		CC9F703E5CD9416167F181D5 /* fluidsynth.c */ /* fluidsynth.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluidsynth.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth.c; sourceTree = SOURCE_ROOT; };
 		CEA131ECABEA3E6E6A2A438D /* WavStreamerProcessor.cpp */ /* WavStreamerProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = WavStreamerProcessor.cpp; path = ../../Source/Plugins/WavStreamer/WavStreamerProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		D1ABB0BF37243E47EF329BF2 /* synth.h */ /* synth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = synth.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/synth.h; sourceTree = SOURCE_ROOT; };
 		D313CF37B25D7FD313C4F336 /* OpenGL.framework */ /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D4EBC17BDB7F88CCBC76730B /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D7D0E465C90AC900D2F1189E /* fluid_hash.h */ /* fluid_hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_hash.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_hash.h; sourceTree = SOURCE_ROOT; };
+		D915766076A061CCAE1E4DE4 /* utils.cpp */ /* utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = utils.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.cpp; sourceTree = SOURCE_ROOT; };
+		D984CBC42954B497349EF590 /* biquad.hpp */ /* biquad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = biquad.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.hpp; sourceTree = SOURCE_ROOT; };
 		DA920184E2247406CD8593AB /* fluid_chan.h */ /* fluid_chan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_chan.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.h; sourceTree = SOURCE_ROOT; };
+		DA978232C563EE5F841ACCAA /* delayline_t.hpp */ /* delayline_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = delayline_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline_t.hpp; sourceTree = SOURCE_ROOT; };
 		DAA5211B783C2AB365DEF2EB /* fluid_dsp_simple.c */ /* fluid_dsp_simple.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_dsp_simple.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_simple.c; sourceTree = SOURCE_ROOT; };
 		DC1845E3BB906F252768524E /* RackRow.h */ /* RackRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RackRow.h; path = ../../Source/UI/RackRow.h; sourceTree = SOURCE_ROOT; };
+		DF89D7B5EEAAF5EB2712B54C /* progenitor2_t.hpp */ /* progenitor2_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = progenitor2_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2_t.hpp; sourceTree = SOURCE_ROOT; };
 		E05CB359B96C699D5CF432F7 /* RackRow.cpp */ /* RackRow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RackRow.cpp; path = ../../Source/UI/RackRow.cpp; sourceTree = SOURCE_ROOT; };
 		E10B8F74422FC053AC1347B4 /* fluid_chan.c */ /* fluid_chan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_chan.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.c; sourceTree = SOURCE_ROOT; };
 		E2D4D62420FC7340D3732C32 /* SoundfontAudioSource.h */ /* SoundfontAudioSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundfontAudioSource.h; path = ../../Source/Plugins/GuitarStrummer/SoundfontAudioSource.h; sourceTree = SOURCE_ROOT; };
 		E35CADEBA5860B9B47FDA49A /* Performer.h */ /* Performer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Performer.h; path = ../../Source/Performer.h; sourceTree = SOURCE_ROOT; };
 		E50B5942799878FB2DD28CB7 /* tinyxmlparser.cpp */ /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxmlparser.cpp; path = ../../Source/ForteEmulator/ForteSDK/tinyxml/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
 		E68018DE199135B7F738FB17 /* CoreAudioKit.framework */ /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		E8B6B8822CFDABE1E1CAF71D /* revbase_t.hpp */ /* revbase_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = revbase_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase_t.hpp; sourceTree = SOURCE_ROOT; };
+		E9C5B981028F56CE54855D5F /* earlyref.cpp */ /* earlyref.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = earlyref.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.cpp; sourceTree = SOURCE_ROOT; };
+		EA2FDD781864212D60687C61 /* allpass.cpp */ /* allpass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = allpass.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.cpp; sourceTree = SOURCE_ROOT; };
 		EC1A8EB619F1A8FAB847BC69 /* fluid_tuning.c */ /* fluid_tuning.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_tuning.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_tuning.c; sourceTree = SOURCE_ROOT; };
+		ED054891C1EFEE192A58101E /* comb_t.hpp */ /* comb_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = comb_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb_t.hpp; sourceTree = SOURCE_ROOT; };
+		EEFB230E714DAFDA9DCD002C /* fv3_type_float.h */ /* fv3_type_float.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fv3_type_float.h; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_type_float.h; sourceTree = SOURCE_ROOT; };
 		EF1EE313C2BC54D30D3A7615 /* fluid_gen.h */ /* fluid_gen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_gen.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_gen.h; sourceTree = SOURCE_ROOT; };
 		EF9A3BB9AAEF948E8485663D /* fluid_defsfont.c */ /* fluid_defsfont.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fluid_defsfont.c; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.c; sourceTree = SOURCE_ROOT; };
 		F14CDB17EFE157DA3C3A5A91 /* IOConfigurationWindow.h */ /* IOConfigurationWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IOConfigurationWindow.h; path = ../../Source/Plugins/IOConfigurationWindow.h; sourceTree = SOURCE_ROOT; };
@@ -222,6 +276,10 @@
 		FA8155F691C14758FFBCDE4F /* SoundfontAudioSource.cpp */ /* SoundfontAudioSource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SoundfontAudioSource.cpp; path = ../../Source/Plugins/GuitarStrummer/SoundfontAudioSource.cpp; sourceTree = SOURCE_ROOT; };
 		FAF867E9E731D0880D40511F /* juce_audio_processors */ /* juce_audio_processors */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_processors; path = ../../../../modules/juce_audio_processors; sourceTree = SOURCE_ROOT; };
 		FBAA456614A3D0B4BA5D81CC /* RackTitleBar.cpp */ /* RackTitleBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RackTitleBar.cpp; path = ../../Source/UI/RackTitleBar.cpp; sourceTree = SOURCE_ROOT; };
+		FC19824D628F6C09FB988BEA /* biquad.cpp */ /* biquad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = biquad.cpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.cpp; sourceTree = SOURCE_ROOT; };
+		FD0F6FBA0D9C0B988A44816E /* progenitor_t.hpp */ /* progenitor_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = progenitor_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor_t.hpp; sourceTree = SOURCE_ROOT; };
+		FD54C1DD6719703261A2AB82 /* slot_t.hpp */ /* slot_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = slot_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot_t.hpp; sourceTree = SOURCE_ROOT; };
+		FD592CB642575C81FFEE76D0 /* delay_t.hpp */ /* delay_t.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = delay_t.hpp; path = ../../Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay_t.hpp; sourceTree = SOURCE_ROOT; };
 		FEEA702D177AB241AF8C4CAF /* fluid_config.h */ /* fluid_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fluid_config.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_config.h; sourceTree = SOURCE_ROOT; };
 		FFF98E74601930673739B5FF /* misc.h */ /* misc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = misc.h; path = ../../Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/misc.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -250,6 +308,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		178F4F12D60A47C22C48698C /* freeverb */ = {
+			isa = PBXGroup;
+			children = (
+				EA2FDD781864212D60687C61,
+				A83EDA37C2912273380D9AA1,
+				736A51A93647A003859229F4,
+				FC19824D628F6C09FB988BEA,
+				D984CBC42954B497349EF590,
+				B14122B20C690B248C0D9040,
+				8647F651115F2F12AA3CCBE1,
+				5BCBD826D194135C50996D71,
+				ED054891C1EFEE192A58101E,
+				00A2313C6DFEB18121B7F5F7,
+				959541E313CEB30229F80EB5,
+				FD592CB642575C81FFEE76D0,
+				460FDEA065B977D141644EF5,
+				293CB567BA136A17A999EE59,
+				DA978232C563EE5F841ACCAA,
+				E9C5B981028F56CE54855D5F,
+				96B4F370D317FCB87EF66785,
+				B4EE8D2EA956BEF4690498C6,
+				9B0C106912C59D6134572C6E,
+				41071A019BC72557141D1BED,
+				221284E22C15D873AE8A8613,
+				8E4018B3AAC78630C25A97DB,
+				9A63BE62E040DD96E956BC4D,
+				BBC28A858EF0FC34F86FCF24,
+				EEFB230E714DAFDA9DCD002C,
+				8362104FC1156F42AF4BE744,
+				AE8564911317954708187C60,
+				FD0F6FBA0D9C0B988A44816E,
+				BF451FCA5DFCB37D1D136305,
+				CBD23D4EB3BA995D967A55ED,
+				DF89D7B5EEAAF5EB2712B54C,
+				980D02CA08078F6D38771FD2,
+				489BFCA123F6125AA91D06D5,
+				E8B6B8822CFDABE1E1CAF71D,
+				B4EFAC4C4E74809CB688A596,
+				889811A8571CF6F06A4DCDBD,
+				FD54C1DD6719703261A2AB82,
+				D915766076A061CCAE1E4DE4,
+				49A3E3119565B7559EDB393D,
+				36188AFAD8F00ACDCA3BABFC,
+			);
+			name = freeverb;
+			sourceTree = "<group>";
+		};
 		1C67B67CDB888A8A57A9DCF1 /* ForteSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +417,18 @@
 				5C873D5B6519D8E58D15861E,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		43C07276E1BD98AF5C3F41F2 /* RoomReverb */ = {
+			isa = PBXGroup;
+			children = (
+				178F4F12D60A47C22C48698C,
+				2511C5DE097F6F56C57B1DDE,
+				7717A8FA01913F3EFF160007,
+				51B33D91FBDAC1C8B1ADEAEC,
+				7F0AA4D7118D51F56C6805B7,
+			);
+			name = RoomReverb;
 			sourceTree = "<group>";
 		};
 		4735DE436F7C00D8420EBCDE /* GuitarStrummer */ = {
@@ -535,6 +652,7 @@
 		E9B3730294C264E93A1095DD /* SoundFontPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				43C07276E1BD98AF5C3F41F2,
 				1755AE01A07EACA3D8B7D331,
 				4BD8F3BB5064E4A946B9ABDE,
 				48743118748482F4B833E1FF,
@@ -662,6 +780,20 @@
 				0774BB56C699297CB7A28180,
 				670987EB20F8AFF635AD9797,
 				7E794D6F038C3051EF82B396,
+				B23EF3A1C07334EF14648B74,
+				CE6A9ABF0F4E629B53B346C2,
+				1E50DFFDD9F13A6DE815A959,
+				70A7986FA8D12A52253A9123,
+				ED95DB803B87293F0AA09F22,
+				600035F941B3EEEE7B70AEE5,
+				517BF24297A0CF76767BD5BD,
+				B3447D8A2C7AF820B34046FA,
+				A229556B9A462BC35DA88226,
+				737A9995472979EBDA5797A5,
+				803F41F84D822D0B4D8D6B2A,
+				BB578C54C84087A2013524AA,
+				B55ABD3D9568B0F58CA3009B,
+				D13567EE5F2E4CD707A47E02,
 				4BAFDB08D91A3C33B7F8AA82,
 				63627256F97673178A7EE2E3,
 				70C852A0F916E181AA4DBC69,
@@ -748,7 +880,7 @@
 					"JUCE_USE_CDBURNER=0",
 					"JUCE_WEB_BROWSER=0",
 					"JUCE_STANDALONE_APPLICATION=1",
-					"JUCE_MODAL_LOOPS_PERMITTED",
+					"JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
 					"JUCE_APP_VERSION=1.0.0",
 					"JUCE_APP_VERSION_HEX=0x10000",
@@ -884,7 +1016,7 @@
 					"JUCE_USE_CDBURNER=0",
 					"JUCE_WEB_BROWSER=0",
 					"JUCE_STANDALONE_APPLICATION=1",
-					"JUCE_MODAL_LOOPS_PERMITTED",
+					"JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
 					"JUCE_APP_VERSION=1.0.0",
 					"JUCE_APP_VERSION_HEX=0x10000",

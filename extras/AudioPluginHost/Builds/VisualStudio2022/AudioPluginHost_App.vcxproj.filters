@@ -26,6 +26,12 @@
     <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer">
       <UniqueIdentifier>{BB0CEF32-73E3-4DB3-9999-2D102FE8E4DD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb">
+      <UniqueIdentifier>{9ED8B439-B76B-0EE7-F060-366636E74469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb">
+      <UniqueIdentifier>{BAB92C36-5CB3-A598-712C-3F17620CC859}</UniqueIdentifier>
+    </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer">
       <UniqueIdentifier>{BB943149-4E19-E83A-4DBE-369B3A93F83C}</UniqueIdentifier>
     </Filter>
@@ -723,6 +729,48 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\PluginProcessor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\RoomReverb.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer</Filter>
@@ -3347,6 +3395,96 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_defs.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_ns_end.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_ns_start.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_type_float.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\PluginProcessor.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\RoomReverb.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.h">
       <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer</Filter>

@@ -80,7 +80,7 @@ void GuitarStrummerAudioProcessor::prepareToPlay (double sampleRate, int samples
     m_guitarChordPlayer.loadSoundfont(File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" +  + "GuitarStrummer.sf2"));
 #endif
     
-    m_reverb.reset(new dsp::Reverb());
+    m_reverb.reset(new ReverbAudioProcessor());
 
     m_guitarChordPlayer.SetReverb(m_reverb.get());
 
