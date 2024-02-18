@@ -19,7 +19,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "../Performer.h"
-
+#include "../Plugins/WavStreamer/WavStreamerProcessor.h"
 //[/Headers]
 
 #include "RackRow.h"
@@ -300,15 +300,17 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                     ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(bypass);
 			}
         }
+
+        bool nonKeyboardPlugin = m_current->Device->PluginName == "Wav Streamer" || m_current->Device->m_audioInputNode;
         m_program->setVisible(!m_current->Mute && m_hasPrograms);
         m_bank->setVisible(!m_current->Mute && m_bank->getNumItems() > 0);
-        m_keyboard->setVisible(!m_current->Mute);
+        m_keyboard->setVisible(!nonKeyboardPlugin && !m_current->Mute);
         m_volume->setVisible(!m_current->Mute);
-        m_transpose->setVisible(!m_current->Mute);
-        m_lowKey->setVisible(!m_current->Mute);
-        m_highKey->setVisible(!m_current->Mute);
-        m_noteMode->setVisible(!m_current->Mute);
-        m_to->setVisible(!m_current->Mute);
+        m_transpose->setVisible(!nonKeyboardPlugin && !m_current->Mute);
+        m_lowKey->setVisible(!nonKeyboardPlugin && !m_current->Mute);
+        m_highKey->setVisible(!nonKeyboardPlugin && !m_current->Mute);
+        m_noteMode->setVisible(!nonKeyboardPlugin && m_current->Device->PluginName != "Guitar Strummer" && !m_current->Mute);
+        m_to->setVisible(!nonKeyboardPlugin && !m_current->Mute);
         //[/UserButtonCode_m_mute]
     }
     else if (buttonThatWasClicked == m_deviceSettings.get())
