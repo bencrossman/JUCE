@@ -35,7 +35,7 @@ public:
         table.setModel (this);
 
         table.getHeader().addColumn ("PC",1,30);
-        table.getHeader().addColumn ("SF2 File",2,330);
+        table.getHeader().addColumn ("SF2 File",2,370);
 
         //table.setMultipleSelectionEnabled (true);
         table.selectRow(0);
