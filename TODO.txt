@@ -18,11 +18,21 @@ Dire Straits - 4 songs
 John Farnham(Still loads in Forte) - 5 songs, Voice already done
 Pink Floyd - 11 songs, Brick already done (On the run is OBX patch)
 Bon Jovi - 15 songs, Living Prayer already done (runaway is OBX patch)
-Pink(Still loads in Forte) - 20 performances, 
-Madonna - 23 performances (Borderline is OPX patch)
+Pink(Still loads in Forte) - 20 performances, ditch a lot of the vocal samples
+Madonna - 23 performances (Borderline is OPX patch), alot of samples got lost.
 
 Integrate for Access database with edit? (library linked already)
 Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
+
+Improvements
+~~~~~~~~~~~~
+Per zone SF2 reverb
+
+As required
+~~~~~~~~~~~
+-Use DirectWave 1.6.3 (use Simplehost) to put DWP's in newer format
+-Use Translator to convert to SF2's
+-Use Polyphone to edit. Need to mark Oneshots (Release to 100), velocity insensitive (Fixed velocity) and remove filters (Alto had one), reverb on. Watch out for panning when mixing mono samples.
 
 Bug
 ~~~
