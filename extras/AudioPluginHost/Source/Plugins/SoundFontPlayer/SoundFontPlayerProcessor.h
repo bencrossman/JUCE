@@ -11,8 +11,8 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../GuitarStrummer/SoundfontAudioSource.h"
-#include "RoomReverb/PluginProcessor.h"
+#include "../SoundfontAudioSource/SoundfontAudioSource.h"
+#include "../SoundfontAudioSource/RoomReverb/PluginProcessor.h"
 
 //==============================================================================
 /**

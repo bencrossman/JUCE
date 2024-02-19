@@ -10,7 +10,7 @@
 
 #include "SoundFontPlayerProcessor.h"
 #include "SoundFontPlayerEditor.h"
-#include "RoomReverb/PluginProcessor.h"
+#include "../SoundfontAudioSource/RoomReverb/PluginProcessor.h"
 
 //==============================================================================
 SoundFontPlayerAudioProcessor::SoundFontPlayerAudioProcessor() : AudioProcessor (BusesProperties().withOutput ("Output", AudioChannelSet::stereo(), true))

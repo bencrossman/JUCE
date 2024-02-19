@@ -203,136 +203,139 @@
       </GROUP>
       <GROUP id="{6F257CD6-CE86-9BBC-54C1-45E43249E414}" name="Plugins">
         <GROUP id="{23CCF3A0-6597-A1EC-63EE-6E4F38051706}" name="GuitarStrummer">
-          <GROUP id="{7D60D3E9-6892-9A37-A684-3927D7B277F2}" name="Fluidlite">
-            <GROUP id="{883C8414-90CA-CA2D-F183-B5E87965ED34}" name="include">
-              <GROUP id="{DF6510E0-F785-86AB-C189-CD7DF1E3ACB6}" name="fluidsynth">
-                <FILE id="SPU28e" name="gen.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/gen.h"/>
-                <FILE id="XZg6wU" name="log.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/log.h"/>
-                <FILE id="p5lgvT" name="misc.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/misc.h"/>
-                <FILE id="GiIdx9" name="mod.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/mod.h"/>
-                <FILE id="jND2fm" name="ramsfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/ramsfont.h"/>
-                <FILE id="Qe5rl4" name="settings.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/settings.h"/>
-                <FILE id="iH866Q" name="sfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/sfont.h"/>
-                <FILE id="sayQYr" name="synth.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/synth.h"/>
-                <FILE id="VDosb2" name="types.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/types.h"/>
-                <FILE id="P96k08" name="version.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/version.h"/>
-                <FILE id="aOeS2x" name="voice.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidsynth/voice.h"/>
-              </GROUP>
-              <FILE id="Cjhkdk" name="fluidlite.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/include/fluidlite.h"/>
-            </GROUP>
-            <GROUP id="{7D689DFE-F2F5-83F7-AF25-B0396B507F7D}" name="src">
-              <FILE id="rEo525" name="fluid_chan.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.c"/>
-              <FILE id="d1J3XZ" name="fluid_chan.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chan.h"/>
-              <FILE id="yhilAY" name="fluid_chorus.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chorus.c"/>
-              <FILE id="P90vJh" name="fluid_chorus.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_chorus.h"/>
-              <FILE id="zKT2oa" name="fluid_config.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_config.h"/>
-              <FILE id="JmL3nT" name="fluid_conv.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_conv.c"/>
-              <FILE id="T85D02" name="fluid_conv.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_conv.h"/>
-              <FILE id="dPIylu" name="fluid_defsfont.c" compile="1" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.c"/>
-              <FILE id="pwsbcM" name="fluid_defsfont.h" compile="0" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_defsfont.h"/>
-              <FILE id="VW9LsH" name="fluid_dsp_float.c" compile="1" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_float.c"/>
-              <FILE id="I2UpPf" name="fluid_dsp_simple.c" compile="1" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_dsp_simple.c"/>
-              <FILE id="fKigRl" name="fluid_gen.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_gen.c"/>
-              <FILE id="uyqOpO" name="fluid_gen.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_gen.h"/>
-              <FILE id="fHlhMU" name="fluid_hash.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_hash.c"/>
-              <FILE id="B50YBK" name="fluid_hash.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_hash.h"/>
-              <FILE id="JtMwGI" name="fluid_list.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.c"/>
-              <FILE id="Sj7wSf" name="fluid_list.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_list.h"/>
-              <FILE id="YdeYwT" name="fluid_midi.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_midi.h"/>
-              <FILE id="IJNIHi" name="fluid_mod.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_mod.c"/>
-              <FILE id="eMl2Ak" name="fluid_mod.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_mod.h"/>
-              <FILE id="uHc5NR" name="fluid_phase.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_phase.h"/>
-              <FILE id="hRAfk7" name="fluid_ramsfont.c" compile="1" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.c"/>
-              <FILE id="vT44Dv" name="fluid_ramsfont.h" compile="0" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_ramsfont.h"/>
-              <FILE id="rEvadv" name="fluid_rev.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_rev.c"/>
-              <FILE id="F0SJ11" name="fluid_rev.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_rev.h"/>
-              <FILE id="a7dCnP" name="fluid_settings.c" compile="1" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_settings.c"/>
-              <FILE id="uGi4yx" name="fluid_settings.h" compile="0" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_settings.h"/>
-              <FILE id="PdMvGJ" name="fluid_sfont.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sfont.h"/>
-              <FILE id="yojMVt" name="fluid_synth.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_synth.c"/>
-              <FILE id="LrWODQ" name="fluid_synth.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_synth.h"/>
-              <FILE id="nmFqsr" name="fluid_sys.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.c"/>
-              <FILE id="gSeM8i" name="fluid_sys.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_sys.h"/>
-              <FILE id="yuAn22" name="fluid_tuning.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_tuning.c"/>
-              <FILE id="hdfipg" name="fluid_tuning.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_tuning.h"/>
-              <FILE id="FrdEe4" name="fluid_voice.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_voice.c"/>
-              <FILE id="vvR30y" name="fluid_voice.h" compile="0" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluid_voice.h"/>
-              <FILE id="BRc5i5" name="fluidsynth.c" compile="1" resource="0" file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth.c"/>
-              <FILE id="XT78ve" name="fluidsynth_priv.h" compile="0" resource="0"
-                    file="Source/Plugins/GuitarStrummer/Fluidlite/src/fluidsynth_priv.h"/>
-            </GROUP>
-          </GROUP>
           <FILE id="tCA6zX" name="GuitarStrummerProcessor.cpp" compile="1" resource="0"
                 file="Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.cpp"/>
           <FILE id="XpbUwW" name="GuitarStrummerProcessor.h" compile="0" resource="0"
                 file="Source/Plugins/GuitarStrummer/GuitarStrummerProcessor.h"/>
-          <FILE id="eucP84" name="SoundfontAudioSource.cpp" compile="1" resource="0"
-                file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.cpp"/>
-          <FILE id="gh92I9" name="SoundfontAudioSource.h" compile="0" resource="0"
-                file="Source/Plugins/GuitarStrummer/SoundfontAudioSource.h"/>
+        </GROUP>
+        <GROUP id="{358CB2F7-485B-1657-D567-089D5C67E423}" name="SoundfontAudioSource">
+          <GROUP id="{6EFADE8B-98F3-84FA-39F0-FEE6BC678D78}" name="Fluidlite">
+            <GROUP id="{72029ADC-D3C6-6D44-2785-F73563A7F13E}" name="include">
+              <GROUP id="{3DC5F177-FDC9-6A6B-3D38-2FC6B82B1A35}" name="fluidsynth">
+                <FILE id="ub2v6c" name="gen.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/gen.h"/>
+                <FILE id="XWU856" name="log.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/log.h"/>
+                <FILE id="sea45o" name="misc.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/misc.h"/>
+                <FILE id="wzL3yU" name="mod.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/mod.h"/>
+                <FILE id="JeA0F3" name="ramsfont.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/ramsfont.h"/>
+                <FILE id="pTR2i1" name="settings.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/settings.h"/>
+                <FILE id="sslw4u" name="sfont.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/sfont.h"/>
+                <FILE id="Y7kfxo" name="synth.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/synth.h"/>
+                <FILE id="yWBLOK" name="types.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/types.h"/>
+                <FILE id="MzXmcm" name="version.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/version.h"/>
+                <FILE id="HWfWsT" name="voice.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidsynth/voice.h"/>
+              </GROUP>
+              <FILE id="uSwKbz" name="fluidlite.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/include/fluidlite.h"/>
+            </GROUP>
+            <GROUP id="{DB202634-D189-082C-CA13-29BFBED2D3A5}" name="src">
+              <FILE id="JZVGEQ" name="fluid_chan.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_chan.c"/>
+              <FILE id="JgIT39" name="fluid_chan.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_chan.h"/>
+              <FILE id="cH9eUJ" name="fluid_chorus.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_chorus.c"/>
+              <FILE id="xycxOq" name="fluid_chorus.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_chorus.h"/>
+              <FILE id="lZEqjl" name="fluid_config.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_config.h"/>
+              <FILE id="NuLlzX" name="fluid_conv.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_conv.c"/>
+              <FILE id="b5YCY5" name="fluid_conv.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_conv.h"/>
+              <FILE id="cJsGcY" name="fluid_defsfont.c" compile="1" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_defsfont.c"/>
+              <FILE id="t7KjA3" name="fluid_defsfont.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_defsfont.h"/>
+              <FILE id="YWHFjs" name="fluid_dsp_float.c" compile="1" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_dsp_float.c"/>
+              <FILE id="Ip13V4" name="fluid_dsp_simple.c" compile="1" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_dsp_simple.c"/>
+              <FILE id="uG8xR8" name="fluid_gen.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_gen.c"/>
+              <FILE id="kvRxuJ" name="fluid_gen.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_gen.h"/>
+              <FILE id="r8nvX6" name="fluid_hash.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_hash.c"/>
+              <FILE id="NIgF6f" name="fluid_hash.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_hash.h"/>
+              <FILE id="ocpa3j" name="fluid_list.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_list.c"/>
+              <FILE id="SNpCFM" name="fluid_list.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_list.h"/>
+              <FILE id="aQVtRf" name="fluid_midi.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_midi.h"/>
+              <FILE id="ftErmc" name="fluid_mod.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_mod.c"/>
+              <FILE id="KOmlEq" name="fluid_mod.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_mod.h"/>
+              <FILE id="IpAXQL" name="fluid_phase.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_phase.h"/>
+              <FILE id="wfpCpP" name="fluid_ramsfont.c" compile="1" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_ramsfont.c"/>
+              <FILE id="NSL3ih" name="fluid_ramsfont.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_ramsfont.h"/>
+              <FILE id="uhAkLk" name="fluid_rev.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_rev.c"/>
+              <FILE id="TiUlI0" name="fluid_rev.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_rev.h"/>
+              <FILE id="G59uzI" name="fluid_settings.c" compile="1" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_settings.c"/>
+              <FILE id="fSXWwB" name="fluid_settings.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_settings.h"/>
+              <FILE id="Htiw2w" name="fluid_sfont.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_sfont.h"/>
+              <FILE id="ZaCW6P" name="fluid_synth.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_synth.c"/>
+              <FILE id="G76pS2" name="fluid_synth.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_synth.h"/>
+              <FILE id="lwtjcZ" name="fluid_sys.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_sys.c"/>
+              <FILE id="h9s4dF" name="fluid_sys.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_sys.h"/>
+              <FILE id="r8nhHA" name="fluid_tuning.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_tuning.c"/>
+              <FILE id="GQZxjS" name="fluid_tuning.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_tuning.h"/>
+              <FILE id="MP30xZ" name="fluid_voice.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_voice.c"/>
+              <FILE id="WCZeXu" name="fluid_voice.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluid_voice.h"/>
+              <FILE id="DcHu0V" name="fluidsynth.c" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluidsynth.c"/>
+              <FILE id="i8pqmT" name="fluidsynth_priv.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/Fluidlite/src/fluidsynth_priv.h"/>
+            </GROUP>
+          </GROUP>
+          <GROUP id="{BC71C0BD-3137-B637-127C-A3DBF97E0F8D}" name="RoomReverb">
+            <GROUP id="{A70D4114-9B6D-BC30-78CA-FA340450E53A}" name="freeverb">
+              <FILE id="Z0vZym" name="allpass.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/allpass.cpp"/>
+              <FILE id="HUiOof" name="allpass.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/allpass.hpp"/>
+              <FILE id="BzGpN4" name="allpass_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/allpass_t.hpp"/>
+              <FILE id="LpYAwq" name="biquad.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/biquad.cpp"/>
+              <FILE id="cXBi1u" name="biquad.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/biquad.hpp"/>
+              <FILE id="kYlNsN" name="biquad_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/biquad_t.hpp"/>
+              <FILE id="ydpM0n" name="comb.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/comb.cpp"/>
+              <FILE id="HSyeiH" name="comb.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/comb.hpp"/>
+              <FILE id="zdtvvJ" name="comb_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/comb_t.hpp"/>
+              <FILE id="hVi7xu" name="delay.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delay.cpp"/>
+              <FILE id="pvIBM3" name="delay.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delay.hpp"/>
+              <FILE id="Tglste" name="delay_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delay_t.hpp"/>
+              <FILE id="WrIHCI" name="delayline.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delayline.cpp"/>
+              <FILE id="N6NaPr" name="delayline.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delayline.hpp"/>
+              <FILE id="X8CA41" name="delayline_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/delayline_t.hpp"/>
+              <FILE id="YiaRdx" name="earlyref.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/earlyref.cpp"/>
+              <FILE id="ERzgDJ" name="earlyref.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/earlyref.hpp"/>
+              <FILE id="xUa7Kz" name="earlyref_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/earlyref_t.hpp"/>
+              <FILE id="PXZ0eR" name="efilter.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/efilter.cpp"/>
+              <FILE id="u2ZPM8" name="efilter.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/efilter.hpp"/>
+              <FILE id="AyMjMt" name="efilter_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/efilter_t.hpp"/>
+              <FILE id="TJOvjg" name="fv3_config.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/fv3_config.h"/>
+              <FILE id="othDex" name="fv3_defs.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/fv3_defs.h"/>
+              <FILE id="KkIgXR" name="fv3_ns_end.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/fv3_ns_end.h"/>
+              <FILE id="zGQ230" name="fv3_ns_start.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/fv3_ns_start.h"/>
+              <FILE id="cNQIBl" name="fv3_type_float.h" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/fv3_type_float.h"/>
+              <FILE id="drUH3j" name="progenitor.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor.cpp"/>
+              <FILE id="J5wONi" name="progenitor.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor.hpp"/>
+              <FILE id="QPdFRC" name="progenitor_t.hpp" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor_t.hpp"/>
+              <FILE id="FLuild" name="progenitor2.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor2.cpp"/>
+              <FILE id="LZP6bb" name="progenitor2.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor2.hpp"/>
+              <FILE id="k4uUn7" name="progenitor2_t.hpp" compile="0" resource="0"
+                    file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/progenitor2_t.hpp"/>
+              <FILE id="kgEAaE" name="revbase.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/revbase.cpp"/>
+              <FILE id="pXXgWw" name="revbase.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/revbase.hpp"/>
+              <FILE id="DMFpSK" name="revbase_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/revbase_t.hpp"/>
+              <FILE id="Ph3Q3k" name="slot.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/slot.cpp"/>
+              <FILE id="UZxu5R" name="slot.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/slot.hpp"/>
+              <FILE id="WDk4Rw" name="slot_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/slot_t.hpp"/>
+              <FILE id="lj1xdB" name="utils.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/utils.cpp"/>
+              <FILE id="nYTO1y" name="utils.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/utils.hpp"/>
+              <FILE id="jyokCx" name="utils_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/freeverb/utils_t.hpp"/>
+            </GROUP>
+            <FILE id="bc56e3" name="PluginProcessor.cpp" compile="1" resource="0"
+                  file="Source/Plugins/SoundfontAudioSource/RoomReverb/PluginProcessor.cpp"/>
+            <FILE id="T8Ivib" name="PluginProcessor.h" compile="0" resource="0"
+                  file="Source/Plugins/SoundfontAudioSource/RoomReverb/PluginProcessor.h"/>
+            <FILE id="d5eL2W" name="RoomReverb.cpp" compile="1" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/RoomReverb.cpp"/>
+            <FILE id="EcMBFj" name="RoomReverb.h" compile="0" resource="0" file="Source/Plugins/SoundfontAudioSource/RoomReverb/RoomReverb.h"/>
+          </GROUP>
+          <FILE id="L3IMb5" name="SoundfontAudioSource.cpp" compile="1" resource="0"
+                file="Source/Plugins/SoundfontAudioSource/SoundfontAudioSource.cpp"/>
+          <FILE id="sK9qAk" name="SoundfontAudioSource.h" compile="0" resource="0"
+                file="Source/Plugins/SoundfontAudioSource/SoundfontAudioSource.h"/>
         </GROUP>
         <GROUP id="{4E83DF42-61B1-8F24-9859-AD1FABF02D69}" name="SoundFontPlayer">
-          <GROUP id="{3684B1F4-F87F-2D61-8CF4-419AA05B4AD6}" name="RoomReverb">
-            <GROUP id="{A2643A15-ADC1-4AEF-D188-AA19C0DF43A5}" name="freeverb">
-              <FILE id="Ixrz3z" name="allpass.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.cpp"/>
-              <FILE id="pbwRmC" name="allpass.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass.hpp"/>
-              <FILE id="MTK2is" name="allpass_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/allpass_t.hpp"/>
-              <FILE id="F4loBY" name="biquad.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.cpp"/>
-              <FILE id="BtbFiC" name="biquad.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad.hpp"/>
-              <FILE id="UjNrds" name="biquad_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/biquad_t.hpp"/>
-              <FILE id="BlEu0k" name="comb.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.cpp"/>
-              <FILE id="bf6lQz" name="comb.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb.hpp"/>
-              <FILE id="YNbaho" name="comb_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/comb_t.hpp"/>
-              <FILE id="LW9ows" name="delay.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.cpp"/>
-              <FILE id="R2xDM1" name="delay.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay.hpp"/>
-              <FILE id="Nftc9x" name="delay_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delay_t.hpp"/>
-              <FILE id="kg5DNf" name="delayline.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.cpp"/>
-              <FILE id="Kpl2In" name="delayline.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline.hpp"/>
-              <FILE id="vfkmlN" name="delayline_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/delayline_t.hpp"/>
-              <FILE id="WjqXsS" name="earlyref.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.cpp"/>
-              <FILE id="Jg5Q68" name="earlyref.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref.hpp"/>
-              <FILE id="jp7hvD" name="earlyref_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/earlyref_t.hpp"/>
-              <FILE id="cTrGqA" name="efilter.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.cpp"/>
-              <FILE id="M7WAC5" name="efilter.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter.hpp"/>
-              <FILE id="tiMOkN" name="efilter_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/efilter_t.hpp"/>
-              <FILE id="mTyIfm" name="fv3_defs.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_defs.h"/>
-              <FILE id="k6nsri" name="fv3_ns_end.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_end.h"/>
-              <FILE id="TI4G3M" name="fv3_ns_start.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_ns_start.h"/>
-              <FILE id="X1VHKg" name="fv3_type_float.h" compile="0" resource="0"
-                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/fv3_type_float.h"/>
-              <FILE id="nracnq" name="progenitor.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.cpp"/>
-              <FILE id="f50BYh" name="progenitor.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor.hpp"/>
-              <FILE id="SNbThR" name="progenitor_t.hpp" compile="0" resource="0"
-                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor_t.hpp"/>
-              <FILE id="vBgSOk" name="progenitor2.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.cpp"/>
-              <FILE id="staYFx" name="progenitor2.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2.hpp"/>
-              <FILE id="pw6D3O" name="progenitor2_t.hpp" compile="0" resource="0"
-                    file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/progenitor2_t.hpp"/>
-              <FILE id="FCmbqy" name="revbase.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.cpp"/>
-              <FILE id="TSZq1K" name="revbase.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase.hpp"/>
-              <FILE id="naXL94" name="revbase_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/revbase_t.hpp"/>
-              <FILE id="fdEtsV" name="slot.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.cpp"/>
-              <FILE id="yLIE1R" name="slot.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot.hpp"/>
-              <FILE id="HDg3vg" name="slot_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/slot_t.hpp"/>
-              <FILE id="CPNkGA" name="utils.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.cpp"/>
-              <FILE id="qGTw76" name="utils.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils.hpp"/>
-              <FILE id="ndQPsY" name="utils_t.hpp" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/freeverb/utils_t.hpp"/>
-            </GROUP>
-            <FILE id="QIQy3m" name="PluginProcessor.cpp" compile="1" resource="0"
-                  file="Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.cpp"/>
-            <FILE id="Di4KMG" name="PluginProcessor.h" compile="0" resource="0"
-                  file="Source/Plugins/SoundFontPlayer/RoomReverb/PluginProcessor.h"/>
-            <FILE id="VFOioK" name="RoomReverb.cpp" compile="1" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.cpp"/>
-            <FILE id="Vh09DP" name="RoomReverb.h" compile="0" resource="0" file="Source/Plugins/SoundFontPlayer/RoomReverb/RoomReverb.h"/>
-          </GROUP>
           <FILE id="JeMbom" name="SoundFontPlayerEditor.cpp" compile="1" resource="0"
                 file="Source/Plugins/SoundFontPlayer/SoundFontPlayerEditor.cpp"/>
           <FILE id="wJ8esL" name="SoundFontPlayerEditor.h" compile="0" resource="0"
