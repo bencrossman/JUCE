@@ -1,6 +1,5 @@
 Some system to auto enable correct sound card?
 
-Move a few SF2 files around
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
@@ -33,7 +32,7 @@ Add a plugin and songs double up (although doesn't save like that)
 If released
 ~~~~~~~~~~~~
 Solo - Visually mutes other zones
-Notification of overrides (hide programs/banks)
+Notification of global/overrides (hide programs/banks)
 Clear override (easy)
 Load doesn't work
 Need UI to enable/disable #CC16

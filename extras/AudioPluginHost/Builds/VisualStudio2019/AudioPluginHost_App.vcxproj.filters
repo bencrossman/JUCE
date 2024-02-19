@@ -11,26 +11,29 @@
     <Filter Include="AudioPluginHost\Source\ForteEmulator">
       <UniqueIdentifier>{EFB891B5-0D63-68DC-9270-4CE1482C0D58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth">
-      <UniqueIdentifier>{BF726B01-ADED-43F5-45A5-D33E0251BCA0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include">
-      <UniqueIdentifier>{BB1BBB07-BEA8-7763-3D31-BB5F68568BE5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src">
-      <UniqueIdentifier>{D50E1F96-6BF6-B73F-96AC-F6B066E86152}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite">
-      <UniqueIdentifier>{982DC7E5-044B-1838-C798-6F56442EFB33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins\GuitarStrummer">
       <UniqueIdentifier>{BB0CEF32-73E3-4DB3-9999-2D102FE8E4DD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb">
-      <UniqueIdentifier>{9ED8B439-B76B-0EE7-F060-366636E74469}</UniqueIdentifier>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth">
+      <UniqueIdentifier>{FF0D2F32-F76F-9FF7-182C-7028AE34B2C6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb">
-      <UniqueIdentifier>{BAB92C36-5CB3-A598-712C-3F17620CC859}</UniqueIdentifier>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include">
+      <UniqueIdentifier>{E95959C4-6624-D155-FF52-7787CB19EAF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src">
+      <UniqueIdentifier>{534F0607-8EE7-9C9E-6C1C-1B9EF2123B71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite">
+      <UniqueIdentifier>{CCA87CF2-A586-E053-B2E4-E3C6E950AB99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb">
+      <UniqueIdentifier>{5AD8F3D4-7DB6-2CC2-F26D-7D8FB15B8579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb">
+      <UniqueIdentifier>{2B6C0C6A-BB25-3339-C245-0C53662B80E5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioPluginHost\Source\Plugins\SoundfontAudioSource">
+      <UniqueIdentifier>{8B2D2A7E-9098-2A22-165B-434690015CD2}</UniqueIdentifier>
     </Filter>
     <Filter Include="AudioPluginHost\Source\Plugins\SoundFontPlayer">
       <UniqueIdentifier>{BB943149-4E19-E83A-4DBE-369B3A93F83C}</UniqueIdentifier>
@@ -670,107 +673,107 @@
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlparser.cpp">
       <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_float.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_dsp_simple.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth.c">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_chan.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_chorus.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_conv.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_defsfont.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_dsp_float.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_dsp_simple.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_gen.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_hash.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_list.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_mod.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_ramsfont.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_rev.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_settings.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\PluginProcessor.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_synth.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\RoomReverb.cpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_sys.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_tuning.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_voice.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluidsynth.c">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\allpass.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\biquad.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\comb.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delay.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delayline.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\earlyref.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\efilter.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor2.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\revbase.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\slot.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\utils.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\PluginProcessor.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\RoomReverb.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Plugins\SoundfontAudioSource\SoundfontAudioSource.cpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.cpp">
       <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer</Filter>
@@ -3294,197 +3297,200 @@
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\XmlArchive.h">
       <Filter>AudioPluginHost\Source\ForteEmulator\ForteSDK</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\gen.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\log.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\misc.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\mod.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\ramsfont.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\settings.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\sfont.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\synth.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\types.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\version.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth\voice.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidsynth</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\include\fluidlite.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chan.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_chorus.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_config.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_conv.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_defsfont.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_gen.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_hash.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_list.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_midi.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_mod.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_phase.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_ramsfont.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_rev.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_settings.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sfont.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_synth.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_sys.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_tuning.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluid_voice.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\Fluidlite\src\fluidsynth_priv.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer\Fluidlite\src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.h">
       <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\SoundfontAudioSource.h">
-      <Filter>AudioPluginHost\Source\Plugins\GuitarStrummer</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\gen.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\log.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\allpass_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\misc.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\mod.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\biquad_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\ramsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\settings.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\comb_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\sfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\synth.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delay_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\types.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\version.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\delayline_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth\voice.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidsynth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\include\fluidlite.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\earlyref_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_chan.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_chorus.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\efilter_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_config.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_defs.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_conv.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_ns_end.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_defsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_ns_start.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_gen.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\fv3_type_float.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_hash.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_list.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_midi.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_mod.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\progenitor2_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_phase.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_ramsfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\revbase_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_rev.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_settings.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\slot_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_sfont.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_synth.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb\utils_t.hpp">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb\freeverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_sys.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\PluginProcessor.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_tuning.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\RoomReverb\RoomReverb.h">
-      <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer\RoomReverb</Filter>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluid_voice.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\Fluidlite\src\fluidsynth_priv.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\Fluidlite\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\allpass.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\allpass_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\biquad.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\biquad_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\comb.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\comb_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delay.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delay_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delayline.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\delayline_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\earlyref.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\earlyref_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\efilter.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\efilter_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\fv3_config.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\fv3_defs.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\fv3_ns_end.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\fv3_ns_start.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\fv3_type_float.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor2.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\progenitor2_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\revbase.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\revbase_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\slot.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\slot_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\utils.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb\utils_t.hpp">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb\freeverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\PluginProcessor.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\RoomReverb\RoomReverb.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource\RoomReverb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Plugins\SoundfontAudioSource\SoundfontAudioSource.h">
+      <Filter>AudioPluginHost\Source\Plugins\SoundfontAudioSource</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\SoundFontPlayer\SoundFontPlayerEditor.h">
       <Filter>AudioPluginHost\Source\Plugins\SoundFontPlayer</Filter>

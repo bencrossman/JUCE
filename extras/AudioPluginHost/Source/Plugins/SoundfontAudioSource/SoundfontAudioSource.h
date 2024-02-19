@@ -2,7 +2,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Fluidlite/include/fluidlite.h"
-#include "../SoundFontPlayer/RoomReverb/PluginProcessor.h"
+#include "RoomReverb/PluginProcessor.h"
 
 //==========================================================================
 //==========================================================================
