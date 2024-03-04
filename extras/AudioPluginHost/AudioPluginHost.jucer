@@ -10,7 +10,7 @@
                microphonePermissionNeeded="1" sendAppleEventsPermissionNeeded="1"
                sendAppleEventsPermissionText="This is required for some third-party plug-ins to function correctly."
                customXcodeResourceFolders="../../examples/Assets" applicationCategory="public.app-category.developer-tools"
-               extraDefs="JUCE_MODAL_LOOPS_PERMITTED;LIBFV3_FLOAT" vstLegacyFolder="../../VST_SDK/VST2_SDK">
+               extraDefs="JUCE_MODAL_LOOPS_PERMITTED LIBFV3_FLOAT" vstLegacyFolder="../../VST_SDK/VST2_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" targetName="AudioPluginHost" recommendedWarnings="LLVM"
                        binaryPath="./"/>

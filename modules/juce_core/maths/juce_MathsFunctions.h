@@ -429,7 +429,7 @@ inline bool juce_isfinite (float value) noexcept
    #if JUCE_WINDOWS && ! JUCE_MINGW
     return _finite (value) != 0;
    #else
-    return std::isfinite (value);
+    return isfinite (value);
    #endif
 }
 
@@ -439,7 +439,7 @@ inline bool juce_isfinite (double value) noexcept
    #if JUCE_WINDOWS && ! JUCE_MINGW
     return _finite (value) != 0;
    #else
-    return std::isfinite (value);
+    return isfinite (value);
    #endif
 }
 
