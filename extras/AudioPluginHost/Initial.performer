@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<Root CurrentSetListID="-1029110814">
+    <SetLists>
+        <SetList ID="-1029110814" Name="New Setlist">
+            <Song ID="888373407" />
+        </SetList>
+    </SetLists>
+    <Songs>
+        <Song ID="888373407" Name="New Song">
+            <Performance ID="624077428" />
+        </Song>
+    </Songs>
+    <Performances>
+        <Performance ID="624077428" Name="New performance"/>
+    </Performances>
+</Root>
