@@ -75,9 +75,9 @@ void GuitarStrummerAudioProcessor::changeProgramName (int, const String&)
 void GuitarStrummerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
 #ifdef JUCE_WINDOWS
-    m_guitarChordPlayer.loadSoundfont(File(File::getCurrentWorkingDirectory().getFullPathName() + "\\GuitarStrummer.sf2"));
+    m_guitarChordPlayer.loadSoundfont(File(File::getCurrentWorkingDirectory().getFullPathName() + "\\Sounds\\GuitarStrummer.sf2"));
 #else
-    m_guitarChordPlayer.loadSoundfont(File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" +  + "GuitarStrummer.sf2"));
+    m_guitarChordPlayer.loadSoundfont(File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Sounds/" +  + "GuitarStrummer.sf2"));
 #endif
     
     m_reverb.reset(new ReverbAudioProcessor());
