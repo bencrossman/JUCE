@@ -203,9 +203,9 @@ public:
         if (!fileToOpen.existsAsFile())
         {
 #ifdef JUCE_WINDOWS
-            fileToOpen = File(File::getCurrentWorkingDirectory().getFullPathName() + "\\Initial.performer");
+            fileToOpen = File(File::getCurrentWorkingDirectory().getFullPathName() + "\\Performances\\Initial.performer");
 #else
-            fileToOpen = File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Initial.performer");
+            fileToOpen = File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Performances/Initial.performer");
 #endif
         }
 
