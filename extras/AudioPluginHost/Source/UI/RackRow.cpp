@@ -782,9 +782,9 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         imageName = "Yamaha DX7";
 
 #ifdef JUCE_WINDOWS
-    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(imageName + ".png"));
+    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\Images\\" + String(imageName + ".png"));
 #else
-    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(imageName + ".png"));
+    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Images/" + String(imageName + ".png"));
 #endif
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
