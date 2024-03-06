@@ -200,6 +200,15 @@ public:
                 fileToOpen = recentFiles.getFile (0);
         }
 
+        if (!fileToOpen.existsAsFile())
+        {
+#ifdef JUCE_WINDOWS
+            fileToOpen = File(File::getCurrentWorkingDirectory().getFullPathName() + "\\Initial.performer");
+#else
+            fileToOpen = File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Initial.performer");
+#endif
+        }
+
         if (fileToOpen.existsAsFile())
             if (auto* graph = mainWindow->graphHolder.get())
                 if (auto* ioGraph = graph->graph.get())
