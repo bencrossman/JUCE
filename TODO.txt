@@ -28,6 +28,7 @@ Per zone SF2 reverb
 Bug
 ~~~
 Add a plugin and songs double up (although doesn't save like that)
+Load next performer doesn't update UI
 
 If released
 ~~~~~~~~~~~~
