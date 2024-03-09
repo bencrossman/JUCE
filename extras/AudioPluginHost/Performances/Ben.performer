@@ -3,8 +3,6 @@
     <SetLists>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
-            <Song ID="1191735498" />
-            <Song ID="1242631649" />
             <Song ID="446469300" />
             <Song ID="-967273087" />
             <Song ID="1753321041" />
@@ -14,8 +12,6 @@
             <Song ID="-472499682" />
             <Song ID="30129188" />
             <Song ID="-768071340" />
-            <Song ID="-1790375015" />
-            <Song ID="292042218" />
             <Song ID="-209972973" />
             <Song ID="1030967864" />
             <Song ID="1351634846" />
@@ -26,14 +22,16 @@
             <Song ID="-584579934" />
             <Song ID="807221933" />
             <Song ID="-2044191071" />
+            <Song ID="971289612" />
+            <Song ID="2057125125" />
+            <Song ID="-2044191071" />
             <Song ID="749494757" />
             <Song ID="1908421785" />
-            <Song ID="-1679580072" />
             <Song ID="-240073372" />
             <Song ID="-208230145" />
             <Song ID="1513500925" />
             <Song ID="-1029964192" />
-            <Song ID="2057125125" />
+            <Song ID="-740596650" />
         </SetList>
         <SetList ID="230290255" Name="Billy and Blondie">
             <Song ID="800911578" />
@@ -196,6 +194,13 @@
         <Song ID="1111104538" Name="Back 2 Good">
             <Performance ID="53664735" />
         </Song>
+        <Song ID="-740596650" Name="Backup">
+            <Performance ID="1212709940" />
+            <Performance ID="-1777169755" />
+            <Performance ID="-791094913" />
+            <Performance ID="-34862330" />
+            <Performance ID="-252811566" />
+        </Song>
         <Song ID="2048429966" Name="Bad Romance">
             <Performance ID="-1151704603" />
         </Song>
@@ -222,7 +227,7 @@
         </Song>
         <Song ID="-209972973" Name="Bohemiam Rhapsody">
             <Performance ID="853792618" />
-            <Performance ID="-34862330" />
+            <Performance ID="325567451" />
             <Performance ID="853792618" />
         </Song>
         <Song ID="-524070619" Name="Born to be alive">
@@ -283,7 +288,6 @@
         </Song>
         <Song ID="-2044191071" Name="Crazy Little Thing Called Love">
             <Performance ID="-812800143" />
-            <Performance ID="-1104081288" />
         </Song>
         <Song ID="1539962914" Name="Cry me">
             <Performance ID="-1593823047" />
@@ -416,9 +420,6 @@
         <Song ID="1091369720" Name="Give me the meltdown">
             <Performance ID="39757196" />
         </Song>
-        <Song ID="-1679580072" Name="God Save The Queen">
-            <Performance ID="-252811566" />
-        </Song>
         <Song ID="1978461487" Name="Gold on the ceiling">
             <Performance ID="1577014809" />
             <Performance ID="477761605" />
@@ -526,12 +527,6 @@
         </Song>
         <Song ID="1766141482" Name="I&apos;m outta love">
             <Performance ID="-1171420260" />
-        </Song>
-        <Song ID="-1790375015" Name="Intermission">
-            <Performance ID="-791094913" />
-        </Song>
-        <Song ID="1242631649" Name="Intro">
-            <Performance ID="1212709940" />
         </Song>
         <Song ID="-1070487912" Name="Is This Love">
             <Performance ID="-1893591430" />
