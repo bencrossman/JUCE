@@ -35,7 +35,7 @@ class MainHostWindow;
 */
 class GraphEditorPanel final : public Component,
                                public ChangeListener,
-                               private Timer,
+                               //private Timer,
                                public KeyListener
 {
 public:

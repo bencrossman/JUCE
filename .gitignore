@@ -68,3 +68,7 @@ CMakeUserPresets.json
 .editorconfig
 
 /extras/AudioPluginHost/AudioPluginHost.app
+/extras/AudioPluginHost/Builds/VisualStudio2017/Performer.sln
+/extras/AudioPluginHost/Builds/VisualStudio2017/Performer_App.vcxproj
+/extras/AudioPluginHost/Builds/VisualStudio2017/Performer_App.vcxproj.filters
+/extras/AudioPluginHost/Builds/iOS/Performer*

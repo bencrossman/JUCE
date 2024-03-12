@@ -15,11 +15,10 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
-      VALUE "CompanyName",  "Raw Material Software Limited\0"
-      VALUE "LegalCopyright",  "Raw Material Software Limited\0"
-      VALUE "FileDescription",  "AudioPluginHost\0"
+      VALUE "CompanyName",  "Cross Product Software\0"
+      VALUE "FileDescription",  "Performer\0"
       VALUE "FileVersion",  "1.0.0\0"
-      VALUE "ProductName",  "AudioPluginHost\0"
+      VALUE "ProductName",  "Performer\0"
       VALUE "ProductVersion",  "1.0.0\0"
     END
   END
