@@ -25,17 +25,14 @@ Improvements
 ~~~~~~~~~~~~
 Per zone SF2 reverb
 
-Bug
-~~~
-Add a plugin and songs double up (although doesn't save like that)
-Load next performer doesn't update UI
+
 
 If released
 ~~~~~~~~~~~~
 Solo - Visually mutes other zones
 Notification of global/overrides (hide programs/banks)
 Clear override (easy)
-Load doesn't work
+Load doesn't work, also doesn't clear previous causing crash
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash), also if loading a guitar before others, will be active while loading.
 Crash with empty scene and adding performance only? Yes if no setlist
