@@ -27,13 +27,7 @@
 #include "../UI/MainHostWindow.h"
 #include "PluginGraph.h"
 #include "InternalPlugins.h"
-#ifdef JUCE_WINDOWS
-#include <windows.h>
-#else
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#endif
+
 #include "../examples/Plugins/GainPluginDemo.h"
 
 static std::unique_ptr<ScopedDPIAwarenessDisabler> makeDPIAwarenessDisablerForPlugin (const PluginDescription& desc)
@@ -799,28 +793,6 @@ int m_pendingSet = 0;
 
 void PluginGraph::PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2)
 {
-    std::string ip;
-
-    if (strcmp(text1, " ") == 0 && strcmp(text2, " ") == 0)
-    {
-#ifdef WIN32
-        WSADATA wsa;
-        WSAStartup(MAKEWORD(2, 2), &wsa);
-#endif
-        char szHostName[255];
-        gethostname(szHostName, 255);
-        struct hostent *host_entry;
-        host_entry = gethostbyname(szHostName);
-        text1 = szHostName;
-        ip = inet_ntoa(*(struct in_addr *)*host_entry->h_addr_list);
-        if (ip.length() <= 13)
-            ip = "IP:" + ip;
-        text2 = ip.c_str();
-#ifdef WIN32
-        WSACleanup();
-#endif
-    }
-
     unsigned char mes[12 + 16 * 2];
     int meslen = 0;
     memcpy(mes, "\x00\x20\x6B\x7F\x42\x04\x00\x60\x01", 9); meslen += 9;
