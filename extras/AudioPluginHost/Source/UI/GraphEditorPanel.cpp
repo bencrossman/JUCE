@@ -904,11 +904,11 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 void GraphEditorPanel::updateComponents()
 {
     for (int i = nodes.size(); --i >= 0;)
-        if (graph.graph.getNodeForId (nodes.getUnchecked(i)->pluginID) == nullptr)
+        if (graph.graph.getNodeForId (nodes.getUnchecked (i)->pluginID) == nullptr)
             nodes.remove (i);
 
     for (int i = connectors.size(); --i >= 0;)
-        if (! graph.graph.isConnected (connectors.getUnchecked(i)->connection))
+        if (! graph.graph.isConnected (connectors.getUnchecked (i)->connection))
             connectors.remove (i);
 
     for (auto* fc : nodes)
@@ -951,9 +951,10 @@ void GraphEditorPanel::showPopupMenu (Point<int> mousePos)
         menu->showMenuAsync ({},
                              ModalCallbackFunction::create ([this, mousePos] (int r)
                                                             {
-                                                                if (r > 0)
-                                                                    if (auto* mainWin = findParentComponentOfClass<MainHostWindow>())
-                                                                        createNewPlugin (mainWin->getChosenType (r), mousePos);
+dfghdfgh
+                                                                if (auto* mainWin = findParentComponentOfClass<MainHostWindow>())
+                                                                    if (const auto chosen = mainWin->getChosenType (r))
+                                                                        createNewPlugin (*chosen, mousePos);
                                                             }));
     }
 }
