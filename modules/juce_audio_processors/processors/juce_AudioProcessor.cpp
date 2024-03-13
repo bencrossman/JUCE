@@ -62,8 +62,8 @@ AudioProcessor::~AudioProcessor()
     {
         const ScopedLock sl (activeEditorLock);
 
-    // ooh, nasty - the editor should have been deleted before its AudioProcessor.
-    jassert (activeEditor == nullptr);
+        // ooh, nasty - the editor should have been deleted before its AudioProcessor.
+        jassert (activeEditor == nullptr);
     }
 
    #if JUCE_DEBUG && ! JUCE_DISABLE_AUDIOPROCESSOR_BEGIN_END_GESTURE_CHECKING
@@ -907,7 +907,7 @@ AudioProcessorEditor* AudioProcessor::createEditorIfNeeded()
     if (ed != nullptr)
     {
         // you must give your editor comp a size before returning it..
-        //jassert (ed->getWidth() > 0 && ed->getHeight() > 0); // Commented this out for FM7 hitting
+        jassert (ed->getWidth() > 0 && ed->getHeight() > 0);
         activeEditor = ed;
     }
 
