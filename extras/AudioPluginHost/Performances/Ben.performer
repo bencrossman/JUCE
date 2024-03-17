@@ -22,8 +22,8 @@
             <Song ID="-584579934" />
             <Song ID="807221933" />
             <Song ID="-2044191071" />
-            <Song ID="971289612" />
             <Song ID="2057125125" />
+            <Song ID="971289612" />
             <Song ID="-2044191071" />
             <Song ID="749494757" />
             <Song ID="1908421785" />
@@ -1292,7 +1292,7 @@
             <Zone DeviceID="522416168" Program="78" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-841590045" Program="3" Volume="-4" Transpose="12" HighKey="39"></Zone>
         </Performance>
-        <Performance ID="-252811566" Name="God save our Queen|">
+        <Performance ID="-252811566" Name="God save our Queen">
             <Zone DeviceID="-1202024641" Program="17" Transpose="2" LowKey="22"></Zone>
             <Zone DeviceID="546031377" Program="8"></Zone>
         </Performance>
@@ -1435,7 +1435,7 @@
             <Zone DeviceID="627145948" Program="4" Transpose="-12" LowKey="39"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" HighKey="38"></Zone>
         </Performance>
-        <Performance ID="-791094913" Name="Intermission|">
+        <Performance ID="-791094913" Name="Intermission">
             <Zone DeviceID="546031377" Program="3"></Zone>
         </Performance>
         <Performance ID="-2078396232" Name="Its a beautiful day|">
@@ -1552,7 +1552,7 @@
         <Performance ID="146441954" Name="Mr Brightside|">
             <Zone DeviceID="-841590045" Program="13"></Zone>
         </Performance>
-        <Performance ID="-1777169755" Name="Music|">
+        <Performance ID="-1777169755" Name="Music">
             <Zone DeviceID="546031377" Program="1"></Zone>
         </Performance>
         <Performance ID="-1393871096" Name="Never tear us apart|">
@@ -1917,7 +1917,7 @@
             <Zone DeviceID="522416168" Program="92" Volume="-10" Transpose="24"></Zone>
             <Zone DeviceID="-841590045" Program="13" Volume="-14" Transpose="12"></Zone>
         </Performance>
-        <Performance ID="1212709940" Name="Tom Crane Intro|">
+        <Performance ID="1212709940" Name="Tom Crane Intro">
             <Zone DeviceID="546031377" Program="5"></Zone>
         </Performance>
         <Performance ID="1207408049" Name="Tom Crane Outro|" Tempo="202">
