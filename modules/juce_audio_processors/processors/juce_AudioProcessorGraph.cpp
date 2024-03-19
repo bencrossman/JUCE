@@ -965,7 +965,10 @@ private:
         void processWithBuffer (const GlobalIO& g, bool bypass, AudioBuffer<FloatType>& audio, MidiBuffer&) final
         {
             if (bypass)
+            {
+                audio.clear();
                 return;
+            }
 
             for (int i = jmin (g.audioIn.getNumChannels(), audio.getNumChannels()); --i >= 0;)
                 audio.copyFrom (i, 0, g.audioIn, i, 0, audio.getNumSamples());
