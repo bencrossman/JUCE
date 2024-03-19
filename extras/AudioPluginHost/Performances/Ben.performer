@@ -23,7 +23,9 @@
             <Song ID="807221933" />
             <Song ID="-2044191071" />
             <Song ID="2057125125" />
+            <Song ID="740917624" />
             <Song ID="971289612" />
+            <Song ID="2007377656" />
             <Song ID="-2044191071" />
             <Song ID="749494757" />
             <Song ID="1908421785" />
@@ -649,6 +651,9 @@
         <Song ID="1191735498" Name="Music">
             <Performance ID="-1777169755" />
         </Song>
+        <Song ID="740917624" Name="My Sharona">
+            <Performance ID="538273237" />
+        </Song>
         <Song ID="1274345564" Name="Never can say goodbye">
             <Performance ID="-1497732245" />
         </Song>
@@ -814,6 +819,9 @@
         </Song>
         <Song ID="-725953381" Name="Smells like teen spirit">
             <Performance ID="325567451" />
+        </Song>
+        <Song ID="2007377656" Name="Smoke On The Water">
+            <Performance ID="1594201225" />
         </Song>
         <Song ID="1755086497" Name="Smooth">
             <Performance ID="1835026396" />
@@ -1569,6 +1577,9 @@
         </Performance>
         <Performance ID="-1893591431" Name="Old Organ">
             <Zone DeviceID="1024611825" Program="0" Volume="-6" Transpose="12"></Zone>
+        </Performance>
+        <Performance ID="1594201225" Name="Old Organ 2">
+            <Zone DeviceID="1024611825" Program="18" Volume="-6" Transpose="12"></Zone>
         </Performance>
         <Performance ID="1293133469" Name="One Vision|">
             <Zone DeviceID="627145948" Program="4" Volume="-3" Transpose="-24" LowKey="67" HighKey="92"></Zone>
