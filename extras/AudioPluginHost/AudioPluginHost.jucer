@@ -2,9 +2,8 @@
 
 <JUCERPROJECT id="NTe0XB0ij" name="Performer" projectType="guiapp" version="1.0.0"
               juceFolder="../../../juce" bundleIdentifier="com.crossproduct.performer"
-              companyName="Cross Product Software" displaySplashScreen="1"
-              reportAppUsage="0" useAppConfig="0" addUsingNamespaceToJuceHeader="1"
-              jucerFormatVersion="1" companyWebsite="www.crossproduct.com.au">
+              companyName="Cross Product Software" reportAppUsage="0" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" companyWebsite="www.crossproduct.com.au">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" smallIcon="c97aUr" bigIcon="c97aUr"
                microphonePermissionNeeded="1" sendAppleEventsPermissionNeeded="1"
