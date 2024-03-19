@@ -2,8 +2,8 @@
 
 <JUCERPROJECT id="NTe0XB0ij" name="Performer" projectType="guiapp" version="1.0.0"
               juceFolder="../../../juce" bundleIdentifier="com.crossproduct.performer"
-              companyName="Raw Material Software Limited"
-              companyCopyright="Raw Material Software Limited"
+              companyName="Cross Product Software"
+              companyCopyright="Cross Product Software Pty Ltd"
               useAppConfig="0" addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" smallIcon="c97aUr" bigIcon="c97aUr"
