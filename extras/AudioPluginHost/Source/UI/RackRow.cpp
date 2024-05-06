@@ -714,7 +714,12 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     {
         m_pendingProgram = false;
         if (m_hasPrograms)
-            midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
+        {
+            if (m_current->Device->PluginName == "OP-X PRO-3")
+                midiBuffer.addEvent(MidiMessage(0xB0, 0x09, m_current->Program), 0);
+            else
+                midiBuffer.addEvent(MidiMessage(0xC0, m_current->Program), 0); // I think this is needed to trigger the bank change too
+        }
     }
     else if (m_pendingProgramNames) // need bank to change first
     {
@@ -815,6 +820,21 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 #else
         auto programFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
 #endif
+        
+        if (device.PluginName == "OP-X PRO-3")
+        {
+            File f ("/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
+            Array<File> list = f.findChildFiles (2, false, "*.opxpreset");
+            list.sort();
+            m_manualPatchNames = true;
+            for (int i = 0; i < list.size(); ++i)
+            {
+                auto str =list[i].getFileName().substring(5);
+                if (int index = str.indexOf("#"))
+                    str = str.substring(0,index - 1);
+                m_program->addItem(str, i + 1);
+            }
+        }
         
         if (File(programFile).exists())
         {
