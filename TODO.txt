@@ -1,7 +1,9 @@
 Some system to auto enable correct sound card?
 
-Might be problem with OPX not changing when not active?
+
+Need to tweak Radio Arpeggio
 Need to do CC16
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))

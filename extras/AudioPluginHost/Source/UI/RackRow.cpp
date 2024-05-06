@@ -922,6 +922,9 @@ void RackRow::Assign(Zone *zone)
     m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
 
     UpdateKeyboard();
+
+    if (m_current->Device->m_node && m_current->Device->PluginName == "OP-X PRO-3")
+        graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal);
 }
 
 void RackRow::SetSoloMode(bool mode)
