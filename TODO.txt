@@ -1,12 +1,7 @@
 Some system to auto enable correct sound card?
 
-Read OPX3 patch names on PC&Mac
-CC9 to change patches
-Try out new ones
-
-
-
-
+Might be problem with OPX not changing when not active?
+Need to do CC16
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
