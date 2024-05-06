@@ -823,14 +823,29 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
         
         if (device.PluginName == "OP-X PRO-3")
         {
-            File f ("/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
+            /*for (int i = 0; i < 128; ++i)
+            {
+                String filename("C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK\\");
+                filename += String::formatted("%03d# Empty #.opxpreset",i + 1);
+                File f(filename);
+                f.create();
+            }*/
+
+
+#ifdef JUCE_WINDOWS
+            File f("C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK");
+#else
+            File f("/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
+#endif
+            // 
             Array<File> list = f.findChildFiles (2, false, "*.opxpreset");
             list.sort();
             m_manualPatchNames = true;
             for (int i = 0; i < list.size(); ++i)
             {
                 auto str =list[i].getFileName().substring(5);
-                if (int index = str.indexOf("#"))
+                int index = str.indexOf("#");
+                if (index >= 0)
                     str = str.substring(0,index - 1);
                 m_program->addItem(str, i + 1);
             }
