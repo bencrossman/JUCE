@@ -849,6 +849,10 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
                     str = str.substring(0,index - 1);
                 m_program->addItem(str, i + 1);
             }
+
+            // Hack to get OPX3 accepting CC9 for program changes
+            auto window = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)device.m_node, PluginWindow::Type::normal);
+            window->closeButtonPressed();
         }
         
         if (File(programFile).exists())
@@ -922,9 +926,6 @@ void RackRow::Assign(Zone *zone)
     m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
 
     UpdateKeyboard();
-
-    if (m_current->Device->m_node && m_current->Device->PluginName == "OP-X PRO-3")
-        graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)m_current->Device->m_node, PluginWindow::Type::normal);
 }
 
 void RackRow::SetSoloMode(bool mode)
