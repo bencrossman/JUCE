@@ -1,9 +1,9 @@
 Some system to auto enable correct sound card?
 
-Copy new release build
-Remove muted breakfree strings
+
 OPX3 hangs over to next patch
 Breakfree sync not right
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
