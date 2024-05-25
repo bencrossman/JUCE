@@ -1422,7 +1422,6 @@
         </Performance>
         <Performance ID="-181299492" Name="I want to break free|Strings">
             <Zone DeviceID="1555279137" Bank="1" Program="40" Transpose="12"></Zone>
-            <Zone DeviceID="-1973686393" Program="34" Volume="-109"></Zone>
         </Performance>
         <Performance ID="-1102562470" Name="I want to break free|Sync">
             <Zone DeviceID="1555279137" Bank="7" Program="43" Volume="7"></Zone>
