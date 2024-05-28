@@ -599,7 +599,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
 
-			if (m_current == NULL/* || m_current->Mute*/) // Mute checking here seemed to make noteOff all keys work for OPX when I was testing. Hoping it's not needed for a performance change.
+			if (m_current == NULL/* || m_current->Mute*/) // Mute checking here seemed to make noteOff all keys work for OPX when I was testing after one second hold.
                 continue; // whilst I test the song knobs
             midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff())
@@ -691,7 +691,8 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (m_pendingSoundOff)
     {
-		// turn off all notes, OPX2/3 didnt work with MidiMessage::AllNotesOff
+		// turn off all notes, OPX2/3 didnt work with MidiMessage::AllNotesOff. 
+        // OPX also stops the notes on program change but this makes it happen quicker (even though it still overhangs till next unbypass)
 		for (int note = 0; note <= 127; ++note)
 			midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
         if (m_notesDown.size() > 0)
