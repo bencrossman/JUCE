@@ -599,7 +599,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
 
-			if (m_current == NULL)
+			if (m_current == NULL/* || m_current->Mute*/) // Mute checking here seemed to make noteOff all keys work for OPX when I was testing. Hoping it's not needed for a performance change.
                 continue; // whilst I test the song knobs
             midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff())
@@ -684,21 +684,21 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             else if (midi_message.isControllerOfType(0x01) && m_allowCC16) // Modulation can map to CC16 as well in case midi controller only has one assign
                 output.addEvent(MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()), sample_number); 
             else if (((midi_message.isControllerOfType(16) && m_allowCC16) || !midi_message.isControllerOfType(16)) && m_current->NoteMode != NoteMode::NoSustain)
-            output.addEvent(midi_message, sample_number); // other events like sustain
+                output.addEvent(midi_message, sample_number); // other events like sustain
         }
         midiBuffer = output;
     }
 
     if (m_pendingSoundOff)
     {
-		// turn off all notes, OPX didnt work with just MidiMessage::AllNotesOff
+		// turn off all notes, OPX2/3 didnt work with MidiMessage::AllNotesOff
 		for (int note = 0; note <= 127; ++note)
 			midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
 
-        midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (OPX just kept going with sustain lifted elsewhere and then change back even with all notes off event)
-        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
+        midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (Only way to stop notes on OPX if sustain lifted after bypass)
+        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0); // No affect on OPX3
         m_pendingSoundOff = false;
     }
     else if (m_pendingBank)
