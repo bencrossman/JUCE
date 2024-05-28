@@ -1,9 +1,5 @@
 Some system to auto enable correct sound card?
 
-
-OPX3 hangs over to next patch
-Breakfree sync not right
-
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
@@ -28,7 +24,7 @@ Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, pl
 Improvements
 ~~~~~~~~~~~~
 Per zone SF2 reverb
-
+OPX doesnt sound off - Need to maybe not bypass 
 
 
 If released
