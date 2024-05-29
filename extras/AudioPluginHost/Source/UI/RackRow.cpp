@@ -691,15 +691,22 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
     if (m_pendingSoundOff)
     {
-		// turn off all notes, OPX2/3 didnt work with MidiMessage::AllNotesOff. 
-        // OPX also stops the notes on program change but this makes it happen quicker (even though it still overhangs till next unbypass)
-		for (int note = 0; note <= 127; ++note)
-			midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
-        if (m_notesDown.size() > 0)
-            m_notesDown.clear();
-
-        midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (Only way to stop notes on OPX if sustain lifted after bypass)
-        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0); // No affect on OPX3
+        if (m_current->Device->PluginName == "OP-X PRO-3")
+        {
+            midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (Only way to stop notes on OPX if sustain lifted after bypass)
+            // allNotesOff and allSoundOff didn't work on OPX but CC9 patch change will stop notes and we now consume after this to account for crossfade
+            // Also this just to make sure notes don't get stuck because patch didn't change
+		    for (int note = 0; note <= 127; ++note)
+			    midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
+        }
+        else
+        {
+            // turn off all notes
+            midiBuffer.addEvent(MidiMessage::allNotesOff(1), 0);
+            midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
+            if (m_notesDown.size() > 0)
+                m_notesDown.clear();
+        }
         m_pendingSoundOff = false;
     }
     else if (m_pendingBank)
@@ -964,7 +971,7 @@ void RackRow::handleCommandMessage(int id)
 		}
         m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
     }
-    if (id == CommandBypass)
+    if (id == CommandBypass) // This will happen later than sound off and program changes
     {
 		((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
 		//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
@@ -972,7 +979,7 @@ void RackRow::handleCommandMessage(int id)
         if (m_current->Device->m_audioInputNode)
             ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
 	}
-}
+ }
 
 
 void RackRow::SendPresetStateData()
@@ -991,7 +998,7 @@ void RackRow::SendPresetStateData()
             MemoryBlock memblock;
             input->readIntoMemoryBlock(memblock);
             auto processor = ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor();
-            processor->setStateInformation(memblock.getData(), memblock.getSize());
+            processor->setStateInformation(memblock.getData(), (int)memblock.getSize());
         }
     }
 }
