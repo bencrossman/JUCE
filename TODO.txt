@@ -1,5 +1,7 @@
 Some system to auto enable correct sound card?
 
+Mute when consuming (not sure where)
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email))
