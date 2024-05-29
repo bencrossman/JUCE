@@ -2670,7 +2670,7 @@ public:
             int extraConsume = buffer.getNumSamples();
 
             for (const auto meta : midiMessages)
-                if (meta.getMessage().isControllerOfType(9) && meta.getMessage().getControllerValue() > 0)
+                if (meta.getMessage().isControllerOfType(9))
                     extraConsume = 96000; // This will stutter low latency devices so will need to add mute support
 
             while (extraConsume > 0)

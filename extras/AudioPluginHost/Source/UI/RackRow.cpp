@@ -695,7 +695,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         {
             midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (Only way to stop notes on OPX if sustain lifted after bypass)
             // allNotesOff and allSoundOff didn't work on OPX but CC9 patch change will stop notes and we now consume after this to account for crossfade
-            // Also this just to make sure notes don't get stuck because patch didn't change
+            // Also this just to make sure notes don't get stuck (was able to get this with "I want it all" bridge
 		    for (int note = 0; note <= 127; ++note)
 			    midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
         }
@@ -704,9 +704,11 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             // turn off all notes
             midiBuffer.addEvent(MidiMessage::allNotesOff(1), 0);
             midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
-            if (m_notesDown.size() > 0)
-                m_notesDown.clear();
         }
+        // Clear arpeggiator
+        if (m_notesDown.size() > 0)
+            m_notesDown.clear();
+
         m_pendingSoundOff = false;
     }
     else if (m_pendingBank)
@@ -721,7 +723,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     else if (m_pendingProgram) // need bank to change first
     {
         m_pendingProgram = false;
-        if (m_hasPrograms)
+        if (m_hasPrograms && !m_current->Mute)
         {
             if (m_current->Device->PluginName == "OP-X PRO-3")
                 midiBuffer.addEvent(MidiMessage(0xB0, 0x09, m_current->Program), 0);
