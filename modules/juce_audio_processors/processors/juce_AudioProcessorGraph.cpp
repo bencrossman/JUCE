@@ -42,6 +42,9 @@
 // The graph implementation currently makes sure to call prepareToPlay on the main thread,
 // without taking the graph's callback lock.
 
+int g_engineDuck = 0;
+
+
 namespace juce
 {
 
@@ -1899,6 +1902,21 @@ public:
         {
             audio.clear();
             midi.clear();
+        }
+
+        switch (g_engineDuck)
+        {
+            case 1:
+                audio.applyGainRamp(0, audio.getNumSamples(), 0, 1);
+                g_engineDuck = 0;
+                break;
+            case 2:
+                audio.clear();
+                break;
+            case 3:
+                audio.applyGainRamp(0, audio.getNumSamples(), 1, 0);
+                g_engineDuck = 2;
+                break;
         }
     }
 

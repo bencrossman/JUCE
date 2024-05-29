@@ -2671,8 +2671,8 @@ public:
 
             for (const auto meta : midiMessages)
                 if (meta.getMessage().isControllerOfType(9))
-                    extraConsume = 96000; // This will stutter low latency devices so will need to add mute support
-
+                    extraConsume = 96000;
+                   
             while (extraConsume > 0)
             {
                 processAudio(buffer, midiMessages, Vst::kSample32, false);
