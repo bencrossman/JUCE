@@ -2659,14 +2659,26 @@ public:
     }
 
     //==============================================================================
-    void processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override
+    void processBlock(AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override
     {
-        jassert (! isUsingDoublePrecision());
+        jassert(!isUsingDoublePrecision());
 
-        const SpinLock::ScopedLockType processLock (processMutex);
+        const SpinLock::ScopedLockType processLock(processMutex);
 
         if (isActive && processor != nullptr)
-            processAudio (buffer, midiMessages, Vst::kSample32, false);
+        {
+            int extraConsume = buffer.getNumSamples();
+
+            for (const auto meta : midiMessages)
+                if (meta.getMessage().isControllerOfType(9) && meta.getMessage().getControllerValue() > 0)
+                    extraConsume = 96000; // This will stutter low latency devices so will need to add mute support
+
+            while (extraConsume > 0)
+            {
+                processAudio(buffer, midiMessages, Vst::kSample32, false);
+                extraConsume -= buffer.getNumSamples();
+            }
+        }
     }
 
     void processBlock (AudioBuffer<double>& buffer, MidiBuffer& midiMessages) override
