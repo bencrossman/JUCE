@@ -1,6 +1,6 @@
 Some system to auto enable correct sound card?
 
-Mute when consuming (not sure where)
+Had a hang over B3 note. Not sure why because tested allNotesOff/Sustain and worked fine
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
