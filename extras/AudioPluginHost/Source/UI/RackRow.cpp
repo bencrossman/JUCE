@@ -694,17 +694,18 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         if (m_current->Device->PluginName == "OP-X PRO-3")
         {
             midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0); // release sustain pedal (Only way to stop notes on OPX if sustain lifted after bypass)
-            // allNotesOff and allSoundOff didn't work on OPX but CC9 patch change will stop notes and we now consume after this to account for crossfade
-            // Also this just to make sure notes don't get stuck (was able to get this with "I want it all" bridge
-		    for (int note = 0; note <= 127; ++note)
-			    midiBuffer.addEvent(MidiMessage::noteOff(1, note),0);
+            // allSoundOff didn't work on OPX but CC9 patch change will stop notes and we now consume after this to account for crossfade
         }
         else
         {
-            // turn off all notes
-            midiBuffer.addEvent(MidiMessage::allNotesOff(1), 0);
-            midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
+            midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0); // Doesn't work for Truepianos/Jupiter8/OPX and in most cases sounds like same as all notes off                                                         
         }
+        // turn off all notes
+        // allNotesOff = Doesn't work for Jupiter8/OPX/Sampler. M1/Wavestation/Triton/FM7/Roland will ignore if sustain down. B4II/Superwave will always work. Effects ring out.
+        // Also this just to make sure notes don't get stuck with OPX (was able to get this with "I want it all" bridge)
+        for (int note = 0; note <= 127; ++note)
+            midiBuffer.addEvent(MidiMessage::noteOff(1, note), 0);
+
         // Clear arpeggiator
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
