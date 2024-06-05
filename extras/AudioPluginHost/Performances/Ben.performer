@@ -2070,7 +2070,7 @@
             <Zone DeviceID="522416168" Program="103" Transpose="24" LowKey="23" HighKey="59"></Zone>
         </Performance>
         <Performance ID="2039328788" Name="Your my best friend|">
-            <Zone DeviceID="-789407354" Program="10" Volume="-1"></Zone>
+            <Zone DeviceID="-789407354" Program="10" Volume="-3"></Zone>
         </Performance>
     </Performances>
 </Root>
