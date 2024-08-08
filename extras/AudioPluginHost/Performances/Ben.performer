@@ -14,7 +14,6 @@
             <Song ID="-209972973" />
             <Song ID="1030967864" />
             <Song ID="1351634846" />
-            <Song ID="1278192846" />
             <Song ID="-1203166635" />
             <Song ID="-1320569983" />
             <Song ID="-1558578634" />
@@ -23,6 +22,7 @@
             <Song ID="-2044191071" />
             <Song ID="2057125125" />
             <Song ID="-2044191071" />
+            <Song ID="747158023" />
             <Song ID="740917624" />
             <Song ID="-2044191071" />
             <Song ID="971289612" />
@@ -142,7 +142,7 @@
         <Rack ID="-841590045" Name="Roland JP-8000" PluginName="P8"></Rack>
         <Rack ID="1317557824" Name="Roland Jupiter-8" PluginName="JUPITER-8(VST2 64bit)"></Rack>
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
-        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkstOwzAQRcufzIKHeEtILGCXBhGhNmppCmyysZJpbdWxq7ENSr8e22wZVowsL6xzx+N7fQTlY7tE2lgahOmwbcSw1+jaUou9u3GbuwsGaKT9gjo4D5WFhUnoCYMuDMK7cspm6pqhPpTWkLeV7XYw2pDoK4Z+8Q4KmCnTC6jFVnUJPmfgN9MjwZLQuUCYyFOGXIleWahEXAk7Y7BZHDN2fA2I+U33DFcY62UEkwNT5dHBWiI8RdeSivP+WQsnE3DMWRVIK39AStAl10V4mFrv7QCVIp3DnNxyHREKwjxdKeNZzOpH8MD9DxKHEebKe51kymyhFNGUHub2M1s8+aW4WZMmZu8l1GPsQ3+FuZYhx9l4Ct2Ou+l/6huFQvlv</Rack>
+        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJyt0ktPAjEQAGD9J3Pw/UxMPOgN1oAGCAirXrhMdgfa0O2QPjTw6217djjZbPbQfJ3OTOcYqufljNyKXYe2oeUCu60hv6wMbv2dXz1cCWCh+Acm0QcYMkxtpqcCnVqCT+01F3UrqC9tDJTfnJsN7DhmfSPot+ChByNtW4QJrnWT8aWAP2xLDmaOvI+OsjwT5BxbzTDE9GV2LrBRSjNFfI9EpaZHwfUsB5Vg7kBfB/JQK4KX1LV8Sur9wKBXGZxIrYrO6LAnl9G1FAUD9DkE7mConfGHGvSKXZfSrBkGaEyW99LVBD1HpYxKpb30qCXyhTRHaEPNsVG10gU+SdDhfgdjHYLJ4bVdQ5VyoRbG/F3e7OiPJRWfz6RhCgomuxTHHSq+VrHMxyK42Gykm/5n/QIUlhfu</Rack>
         <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxj0HC2iglILUrLL8pNzEtOjQlOzC3ISS2OccksTs5XCC4pysxLL9YrTjNiGFgAAMfzDzY=</Rack>
         <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjUHe2iglILUrLL8pNzEtOjQlOzC3ISS2OccwpyVdwrSgoSi0u1itOM1LBoS4kNS+/CKQQpAiXYSFFpbkFqSUKbqU5OSB1mgTUBZen5uSArdUgoDIoswDiPoaBAwDAQEpZ</Rack>
         <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzlzzELwkAMBWDrL3EQFARHBzd7IAhqRcWpS+jFNuglcndt8d+rRboF3M388d5LMjLL/ID+Kt4BF5ifokdwId/VgYp5C81gpohUKnQE7ljBI4h9fnAyUfCGI3pHIZBwl6r1ZnX00ompIs7ijAfGd+RXaqVbanBFtofDhQLXxHA3UnO00nIKxY24zHgvEX8cO9YE44X6p//oXrHfiGc=</Rack>
@@ -268,6 +268,9 @@
         <Song ID="311697932" Name="Call me">
             <Performance ID="985014735" />
             <Performance ID="522832568" />
+        </Song>
+        <Song ID="747158023" Name="Can&apos;t Touch This">
+            <Performance ID="-2001091465" />
         </Song>
         <Song ID="-892581515" Name="Car wash">
             <Performance ID="387241833" />
@@ -612,7 +615,7 @@
             <Performance ID="-456977171" />
         </Song>
         <Song ID="-768071340" Name="Love of my life">
-            <Performance ID="-1066488609" />
+            <Performance ID="215256306" />
         </Song>
         <Song ID="-240073372" Name="Love with my car">
             <Performance ID="1318861176" />
@@ -1143,8 +1146,15 @@
         <Performance ID="522832568" Name="Call me|">
             <Zone DeviceID="-1973686393" Program="23" Transpose="11"></Zone>
         </Performance>
+        <Performance ID="-2001091465" Name="Can&apos;t Touch This|">
+            <Zone DeviceID="-789407354" Program="14" HighKey="22"></Zone>
+            <Zone DeviceID="522416168" Program="17" LowKey="22"></Zone>
+        </Performance>
         <Performance ID="213111818" Name="Cars">
             <Zone DeviceID="-1973686393" Program="7"></Zone>
+        </Performance>
+        <Performance ID="215256306" Name="Cello">
+            <Zone DeviceID="-699955187" Bank="2" Program="51"></Zone>
         </Performance>
         <Performance ID="-832157981" Name="Centrefold|">
             <Zone DeviceID="627145948" Program="4" Transpose="24" HighKey="60"></Zone>
@@ -1324,10 +1334,11 @@
             <Zone DeviceID="-1783610977" Program="0"></Zone>
         </Performance>
         <Performance ID="-1747834684" Name="Hammer to fall|">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="55"></Zone>
+            <Zone DeviceID="627145948" Program="4" Transpose="12" LowKey="22" HighKey="55"></Zone>
             <Zone DeviceID="1555279137" Program="43" Volume="-2" LowKey="71"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-10" Transpose="12" LowKey="71"></Zone>
-            <Zone DeviceID="-985547765" Program="14" Volume="3" Transpose="24" LowKey="56" HighKey="70"></Zone>
+            <Zone DeviceID="-985547765" Program="14" Volume="5" Transpose="24" LowKey="56" HighKey="70"></Zone>
+            <Zone DeviceID="-789407354" Program="12" HighKey="21"></Zone>
         </Performance>
         <Performance ID="-1962429869" Name="Hangin Around|">
             <Zone DeviceID="627145948" Program="4" LowKey="23"></Zone>
