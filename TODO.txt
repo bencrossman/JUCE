@@ -1,6 +1,3 @@
-Some system to auto enable correct sound card?
-
-Had a hang over B3 note. Not sure why because tested allNotesOff/Sustain and worked fine
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
@@ -46,6 +43,7 @@ WavStreamer/SoundFontPlayer needs to refresh on dropdown
 Future features
 ~~~~~~~~~~~~~~~
 Hang over notes from previous patch
+Jam mode?
 
 MainHostWindow
 +graphholder---->GraphDocumentComponent
