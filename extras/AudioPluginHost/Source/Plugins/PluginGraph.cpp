@@ -668,6 +668,7 @@ void PluginGraph::AddRack(std::unique_ptr<AudioPluginInstance> &processor, Devic
 	rack.m_midiFilterNode = (void*)midi.get();
 
     ((AudioProcessorGraph::Node*)(rack.m_gainNode))->getProcessor()->getParameters()[0]->setValue(0);
+    ((AudioProcessorGraph::Node*)(rack.m_gainNode))->getProcessor()->getParameters()[2]->setValue(rack.m_doesntRespectSoundOff);
 
 	graph.addConnection({ { m_midiControlNode->nodeID, 4096 },{ midi->nodeID, 4096 } });
 	graph.addConnection({ { midi->nodeID, 4096 },{ node->nodeID, 4096 } });
@@ -699,6 +700,7 @@ void PluginGraph::setupPerformer()
 
         rack.m_stereoToMonoWillPhase = String(rack.PluginName).startsWith("TruePianos") || rack.PluginName == "P8";
         rack.m_hasStupidCrossfade = (rack.PluginName == "OP-X PRO-3");
+        rack.m_doesntRespectSoundOff = String(rack.PluginName).startsWith("TruePianos") || String(rack.PluginName).startsWith("JUPITER-8");
 
         PluginDescription pd;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)

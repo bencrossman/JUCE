@@ -293,11 +293,12 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             }
 			else
 			{
-				((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(bypass);
-				//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(bypass);
-				((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(bypass);
+                m_pendingBypass = false; // reset this in case one still going
+				((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(false);
+				//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(false);
+				((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(false);
                 if (m_current->Device->m_audioInputNode)
-                    ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(bypass);
+                    ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(false);
 			}
         }
 
@@ -599,7 +600,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 			auto midi_message = meta.getMessage();
 			int sample_number = meta.samplePosition;
 
-			if (m_current == NULL/* || m_current->Mute*/) // Mute checking here seemed to make noteOff all keys work for OPX when I was testing after one second hold.
+			if (m_current == NULL || m_current->Mute)
                 continue; // whilst I test the song knobs
             midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff())
@@ -738,9 +739,8 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         if (!m_manualPatchNames)
             postCommandMessage(CommandUpdateProgramList);
     }
-    else if (m_pendingBypass) // do this last so nothing is buffered up. Streamer should be fine since should be disabled(0)
+    else if (m_pendingBypass) // only set by mute button, do this last so nothing is buffered up. Streamer should be fine since should be disabled(0)
     {
-        m_pendingBypass = false;
         postCommandMessage(CommandBypass);
     }
 
@@ -942,6 +942,7 @@ void RackRow::Assign(Zone *zone)
 void RackRow::SetSoloMode(bool mode)
 {
 	m_soloMode = mode;
+    m_pendingBypass = false; // reset this just in case
 	// Do this here again. Can't rely on Toggle because only works if changed
     if (m_current->Device->m_node)
 	    ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
@@ -976,11 +977,18 @@ void RackRow::handleCommandMessage(int id)
     }
     if (id == CommandBypass) // This will happen later than sound off and program changes
     {
-		((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
-		//((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
-		((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
-        if (m_current->Device->m_audioInputNode)
-            ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
+        extern int g_engineDuck;
+
+        if (g_engineDuck > 0 || !((AudioProcessorGraph::Node*)(m_current->Device->m_gainNode))->getProcessor()->getTailLengthSeconds()) // wait for silence
+        {
+            m_pendingBypass = false;
+
+            ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
+            //((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
+            ((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
+            if (m_current->Device->m_audioInputNode)
+                ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
+        }
 	}
  }
 
