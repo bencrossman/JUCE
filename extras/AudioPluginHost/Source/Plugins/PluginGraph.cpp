@@ -698,6 +698,7 @@ void PluginGraph::setupPerformer()
         auto &rack = m_performer.Root.Racks.Rack[i];
 
         rack.m_stereoToMonoWillPhase = String(rack.PluginName).startsWith("TruePianos") || rack.PluginName == "P8";
+        rack.m_hasStupidCrossfade = (rack.PluginName == "OP-X PRO-3");
 
         PluginDescription pd;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)

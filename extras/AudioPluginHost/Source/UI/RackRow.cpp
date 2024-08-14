@@ -702,7 +702,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         for (int note = 0; note <= 127; ++note)
             midiBuffer.addEvent(MidiMessage::noteOff(1, note), 0);
         
-        // allSoundOff doesn't work for Truepianos/Jupiter8/OPX(but CC9 patch change will stop notes and we now consume after this to account for crossfade)
+        // allSoundOff doesn't work for Truepianos/Jupiter8/OPX(but CC9 patch change will stop notes and will now consume after this to account for crossfade)
         // and in most cases sounds like same as all notes off                                                         
         midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0); 
         
