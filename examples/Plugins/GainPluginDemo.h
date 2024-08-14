@@ -60,7 +60,9 @@ public:
                                            .withOutput ("Output", AudioChannelSet::stereo()))
     {
         addParameter (gain = new AudioParameterFloat ({ "gain", 1 }, "Gain", 0.0f, 1.0f, 0.25f));
-		addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
+        addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
+        addParameter(m_analyse = new AudioParameterFloat("analyse", "Analyse", 0.f, 1.f, 0.f));
+        
 	}
 
     //==============================================================================
@@ -81,6 +83,9 @@ public:
 		{
 			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
 		}
+        if (m_analyse->get() > 0)
+            m_quiet = buffer.getMagnitude(0, buffer.getNumSamples()) < 0.001;
+
     }
 
     void processBlock (AudioBuffer<double>& buffer, MidiBuffer&) override
@@ -97,6 +102,8 @@ public:
 		{
 			buffer.copyFrom(1, 0, buffer, 0, 0, buffer.getNumSamples()); // Copy left to right channel
 		}
+        if (m_analyse->get() > 0)
+            m_quiet = buffer.getMagnitude(0, buffer.getNumSamples()) < 0.001;
     }
 
     //==============================================================================
@@ -107,7 +114,10 @@ public:
     const String getName() const override                  { return "Gain PlugIn"; }
     bool acceptsMidi() const override                      { return false; }
     bool producesMidi() const override                     { return false; }
-    double getTailLengthSeconds() const override           { return 0; }
+    double getTailLengthSeconds() const override           
+    { 
+        return m_quiet ? 0 : 1; 
+    }
 
     //==============================================================================
     int getNumPrograms() override                          { return 1; }
@@ -139,7 +149,10 @@ public:
 private:
     //==============================================================================
     AudioParameterFloat* gain;
-	AudioParameterFloat* m_mixDownMode;
+    AudioParameterFloat* m_mixDownMode;
+    AudioParameterFloat* m_analyse;
+
+    bool m_quiet = true;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainProcessor)
 };
