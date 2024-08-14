@@ -1,7 +1,10 @@
+Do non UI stuff
+- Per zone SF2 reverb
+
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
--P8 - No Windows (Have fired off email))
+-P8 - No Windows (Have fired off email), Used 3,6,7,13,14,21,22,24,30,31,39,41,45,55,59
 -B4II - Old but just replace
 
 Next cover band
@@ -18,16 +21,16 @@ Pink(Still loads in Forte) - 20 performances, ditch a lot of the vocal samples
 Madonna - 23 performances (Borderline is OPX patch), alot of samples got lost.
 
 Integrate for Access database with edit? (library linked already)
-Creator bug : Definitely some "solo" bugs (i.e. play with solo, change patch, plugin not set or playing even though highlighted) - Cant repro at the moment
 
 Improvements
 ~~~~~~~~~~~~
 Per zone SF2 reverb
-OPX doesnt sound off - Need to maybe not bypass 
+OPX doesnt sound off - Need to maybe not bypass or maybe a tail monitor before bypass? ExtraConsume is only done for OPX so could remove this and 50ms delay and duck.
 
 
 If released
-~~~~~~~~~~~~
+~~~~~~~~~~~
+Sometimes racks arnt expanded when active (Go through Queen setlist)
 Solo - Visually mutes other zones
 Notification of global/overrides (hide programs/banks)
 Clear override (easy)
