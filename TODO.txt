@@ -26,10 +26,6 @@ Improvements
 ~~~~~~~~~~~~
 Per zone SF2 reverb
 
-TruePianos/Jupiter8 also doesnt do sounds off. Could add a tail monitor before bypass.
-
-
-
 If released
 ~~~~~~~~~~~
 Sometimes racks arnt expanded when active (Go through Queen setlist)
