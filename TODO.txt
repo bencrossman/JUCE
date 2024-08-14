@@ -25,7 +25,9 @@ Integrate for Access database with edit? (library linked already)
 Improvements
 ~~~~~~~~~~~~
 Per zone SF2 reverb
-OPX doesnt sound off - Need to maybe not bypass or maybe a tail monitor before bypass? ExtraConsume is only done for OPX so could remove this and 50ms delay and duck.
+
+TruePianos/Jupiter8 also doesnt do sounds off. Could add a tail monitor before bypass.
+
 
 
 If released

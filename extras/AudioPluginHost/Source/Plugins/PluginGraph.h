@@ -143,8 +143,30 @@ public:
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
 
+    bool DoesPendingingPerformanceDoConsume(int offset)
+    {
+        auto performer = GetPerformer();
+        PerformanceType* performance;
+        Song* song = NULL;
+        performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex + offset);
+        for (int i = 0; i < performance->Zone.size(); ++i)
+        {
+            if (performance->Zone[i].Device->m_hasStupidCrossfade && !performance->Zone[i].Mute)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void PrevPerformance()
     {
+        if (!DoesPendingingPerformanceDoConsume(-1))
+        {
+            m_manualMidi = 28;
+            return;
+        }
+
         if (m_performanceChangePending)
             return;
 
@@ -163,10 +185,17 @@ public:
     }
     void NextPerformance() 
     { 
+        if (!DoesPendingingPerformanceDoConsume(1))
+        {
+            m_manualMidi = 29;
+            return;
+        }
+
         if (m_performanceChangePending)
             return;
 
         m_performanceChangePending = true;
+
         g_engineDuck = 3;
         Thread::launch([this]() 
         {
