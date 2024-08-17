@@ -977,9 +977,8 @@ void RackRow::handleCommandMessage(int id)
     }
     if (id == CommandBypass) // This will happen later than sound off and program changes
     {
-        extern int g_engineDuck;
-
-        if (g_engineDuck > 0 || !((AudioProcessorGraph::Node*)(m_current->Device->m_gainNode))->getProcessor()->getTailLengthSeconds()) // wait for silence
+        // Final check m_pendingBypass in case of bad timing. Wait for silence (even if audio ducking since that will just push next unmute). 
+        if (m_pendingBypass && !((AudioProcessorGraph::Node*)(m_current->Device->m_gainNode))->getProcessor()->getTailLengthSeconds())
         {
             m_pendingBypass = false;
 
