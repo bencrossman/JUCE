@@ -56,12 +56,10 @@ void SoundfontAudioSource::getNextAudioBlock(const AudioSourceChannelInfo& buffe
                             bufferToFill.buffer->getWritePointer(0), 0, 1,
                             bufferToFill.buffer->getWritePointer(1), 0, 1);
 
-    if (fluid_synth_get_reverb(synth) > 0)
+    if (fluid_synth_get_reverb(synth) > 0) // This is set on start of a voice so will switch on different samples, in-built reverb must be not working
     {
-
-
         MidiBuffer midiBuffer;
-        m_reverb->processBlock(*bufferToFill.buffer, midiBuffer);
+        m_reverb->processBlock(*bufferToFill.buffer, midiBuffer); // Just use standard level, not a simple wet value unfortunately
         m_reverbActive = true;
     }
 }
