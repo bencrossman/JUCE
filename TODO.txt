@@ -20,7 +20,7 @@ Bon Jovi - 15 songs, Living Prayer already done (runaway is OBX patch)
 Pink(Still loads in Forte) - 20 performances, ditch a lot of the vocal samples
 Madonna - 23 performances (Borderline is OPX patch), alot of samples got lost.
 
-Integrate for Access database with edit? (library linked already)
+Integrate for Access database with edit?
 
 Improvements
 ~~~~~~~~~~~~
