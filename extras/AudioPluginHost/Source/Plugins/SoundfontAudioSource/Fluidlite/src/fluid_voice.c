@@ -872,7 +872,7 @@ fluid_voice_calculate_runtime_synthesis_parameters(fluid_voice_t* voice)
    * fluid_gen_set_default_values.
    */
 
-   fluid_voice_update_param(voice, GEN_VELOCITY);
+   fluid_voice_update_param(voice, GEN_VELOCITY); // BC - This way my fix
 
   for (i = 0; i < voice->mod_count; i++) {
     fluid_mod_t* mod = &voice->mod[i];
