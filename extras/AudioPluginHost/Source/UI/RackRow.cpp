@@ -584,6 +584,10 @@ void RackRow::UpdateKeyboard()
         m_keyboardState->noteOn(1, i, 1.0f);
 }
 
+int m_lowestBroken = 73 - 12;
+int m_highestBroken = 80 - 12;
+
+
 void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
     int arpeggiatorSample = 0;
@@ -607,6 +611,11 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
                 {
+                    if (midi_message.getNoteNumber() >= m_lowestBroken && midi_message.getNoteNumber() <= m_highestBroken)
+                    {
+                        m_pendingBrokenKeys = sampleRate;
+                    }
+
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
                     if (note >= 0 && note <= 127)
                     {
@@ -685,9 +694,30 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             else if (midi_message.isControllerOfType(0x01) && m_allowCC16) // Modulation can map to CC16 as well in case midi controller only has one assign
                 output.addEvent(MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()), sample_number); 
             else if (((midi_message.isControllerOfType(16) && m_allowCC16) || !midi_message.isControllerOfType(16)) && m_current->NoteMode != NoteMode::NoSustain)
+            {
                 output.addEvent(midi_message, sample_number); // other events like sustain
+
+                if ((midi_message.isPitchWheel() || midi_message.isControllerOfType(0x01)) && m_pendingBrokenKeys > 0)
+                {
+                    m_pendingBrokenKeys = sampleRate; // Extend time
+                }
+            }
         }
         midiBuffer = output;
+    }
+
+    if (m_pendingBrokenKeys > 0)
+    {
+        m_pendingBrokenKeys -= samples;
+        if (m_pendingBrokenKeys <= 0)
+        {
+            for (int note = m_lowestBroken; note <= m_highestBroken; ++note)
+            {
+                int note2 = note + m_current->Transpose;
+                if (note2 >= 0 && note2 <= 127)
+                    midiBuffer.addEvent(MidiMessage::noteOff(1, note2), 0);
+            }
+        }
     }
 
     if (m_pendingSoundOff)

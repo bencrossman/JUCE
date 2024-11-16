@@ -95,6 +95,7 @@ private:
     bool m_pendingProgramNames = false;
     bool m_pendingBank = false;
     bool m_pendingBypass = false;
+    int m_pendingBrokenKeys = 0;
     bool m_allowCC16 = false;
     bool m_manualPatchNames = false;
     bool m_hasPrograms = true;
