@@ -33,6 +33,7 @@
 String FormatKey(int note);
 int ParseNote(const char *str);
 float RackRow::m_tempo = 120;
+bool RackRow::m_brokenKeysOn = false;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -611,7 +612,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
                 {
-                    if (midi_message.getNoteNumber() >= m_lowestBroken && midi_message.getNoteNumber() <= m_highestBroken)
+                    if (midi_message.getNoteNumber() >= m_lowestBroken && midi_message.getNoteNumber() <= m_highestBroken && m_brokenKeysOn)
                     {
                         m_pendingBrokenKeys = sampleRate;
                     }

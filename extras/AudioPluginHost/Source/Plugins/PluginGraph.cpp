@@ -29,6 +29,7 @@
 #include "InternalPlugins.h"
 
 #include "../examples/Plugins/GainPluginDemo.h"
+#include "../UI/RackRow.h"
 
 static std::unique_ptr<ScopedDPIAwarenessDisabler> makeDPIAwarenessDisablerForPlugin (const PluginDescription& desc)
 {
@@ -947,26 +948,9 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getControllerValue() == 127)
                 {
-                    m_shutdownPressCount++;
-                    if (m_shutdownPressCount == 1)
-                        PrintLCDScreen(output, sample_number, "Are you sure?", " ");
-                    else
-                    {
-                        PrintLCDScreen(output, sample_number, "Shutting Down", " ");
-                        system("shutdown /t 0 /s");
-                    }
+                    RackRow::m_brokenKeysOn = !RackRow::m_brokenKeysOn;
+                    PrintLCDScreen(output, sample_number, "BROKENKEYS", RackRow::m_brokenKeysOn ? "ON" : "OFF");
                 }
-            }
-            else
-            {
-                if (m_shutdownPressCount) // to remove confirm text
-                {
-                    if (m_performer.Root.SetLists.SetList.size() > 0)
-                        UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
-                    else
-                        PrintLCDScreen(output, sample_number, " ", " ");
-                }
-                m_shutdownPressCount = 0;
             }
 
 

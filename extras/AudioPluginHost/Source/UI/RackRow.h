@@ -68,7 +68,7 @@ public:
     void SendPresetStateData();
     bool IsDeleted() { return m_current ? m_current->Device->m_deleted : false; }
     bool IsMuted() { return m_current ? m_current->Mute : false; }
-
+    static bool m_brokenKeysOn;
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
