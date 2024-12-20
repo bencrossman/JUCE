@@ -36,6 +36,7 @@
             <Song ID="1513500925" />
             <Song ID="-1029964192" />
             <Song ID="-740596650" />
+            <Song ID="1423344023" />
         </SetList>
         <SetList ID="230290255" Name="Billy and Blondie">
             <Song ID="800911578" />
@@ -170,8 +171,8 @@
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
         <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJyt0ktPAjEQAGD9J3Pw/UxMPOgN1oAGCAirXrhMdgfa0O2QPjTw6217djjZbPbQfJ3OTOcYqufljNyKXYe2oeUCu60hv6wMbv2dXz1cCWCh+Acm0QcYMkxtpqcCnVqCT+01F3UrqC9tDJTfnJsN7DhmfSPot+ChByNtW4QJrnWT8aWAP2xLDmaOvI+OsjwT5BxbzTDE9GV2LrBRSjNFfI9EpaZHwfUsB5Vg7kBfB/JQK4KX1LV8Sur9wKBXGZxIrYrO6LAnl9G1FAUD9DkE7mConfGHGvSKXZfSrBkGaEyW99LVBD1HpYxKpb30qCXyhTRHaEPNsVG10gU+SdDhfgdjHYLJ4bVdQ5VyoRbG/F3e7OiPJRWfz6RhCgomuxTHHSq+VrHMxyK42Gykm/5n/QIUlhfu</Rack>
         <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxj0HC2iglILUrLL8pNzEtOjQlOzC3ISS2OccksTs5XCC4pysxLL9YrTjNiGFgAAMfzDzY=</Rack>
-        <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjUHe2iglILUrLL8pNzEtOjQlOzC3ISS2OccwpyVdwrSgoSi0u1itOM1LBoS4kNS+/CKQQpAiXYSFFpbkFqSUKbqU5OSB1mgTUBZen5uSArdUgoDIoswDiPoaBAwDAQEpZ</Rack>
-        <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzl0LsKwlAMBmDrkzgICoKjgpsWBPFSUXHqEtpoQz1JyTlt8e3VIsXlgM5m/vLnEvTCWbxHvYga4ATjo1MEY+NtaSkZ11B1Rh6xkAwNgTlkUFhJ7y8cDDx4xQ7VkLUk3KT65kalU2nE0CNOYkIFxmfkW/qGbqjCOaUt7E48cEkMt1BKdqnUvIAkJ75GvBOHXy7b9wnGM7VHT7985RoUJf+48MfGqECFpvFP6gFiG7Pw</Rack>
+        <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjVHe2iglILUrLL8pNzEtOjQlOzC3ISS2OccwpyVdwrSgoSi0u1itOM1LBoS4kNS+/CKQQpAiXYSFFpbkFqSUKbqU5OSB1mgTUBZen5uSArdUgoDIoswDiPoaBAwDBhEpa</Rack>
+        <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzl0E0LAWEQB3B8EgdFKeVCudktJS8rKy57mXaHndYzo3meJd8eS3J5irM5//7zVm+Go2SFuhc1wCkmsVMEY5NFaSntXeBc63pEIDkaArPO4WQluz5wve3BU3aohqwl4aqrb25UOpVKdDxiIyZUYLy3fEnf0DmdcUzZGzYGHjghhmMoJbtMLhxAWhAfIl6Kwy+XbfkE45beRw+/fOUMFKX4uPDHYHRChSrY9wR3wAwBxg7UEcdi0OX0XPIv6gYWkcdH</Rack>
         <Rack ID="-1783610977" Name="Guitar Strummer" PluginName="Guitar Strummer"></Rack>
         <Rack ID="1217705718" Name="Guitar" PluginName="AmpliTube 5">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</Rack>
     </Racks>
@@ -985,7 +986,7 @@
             <Performance ID="643338072" />
         </Song>
         <Song ID="1423344023" Name="Wanna Be Starting Something">
-            <Performance ID="-1494844207" />
+            <Performance ID="-1121557452" />
         </Song>
         <Song ID="1043913962" Name="We Are Family">
             <Performance ID="-685490819" />
@@ -2046,6 +2047,12 @@
         <Performance ID="643338072" Name="Walking on Sunshine|">
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="-2048222836" Program="2" NoteMode="4" LowKey="60"></Zone>
+        </Performance>
+        <Performance ID="-1121557452" Name="Wanna be starting something|">
+            <Zone DeviceID="-2048222836" Program="2" NoteMode="4" LowKey="60"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="12" HighKey="60"></Zone>
+            <Zone DeviceID="-985547765" Program="8" Volume="-3" Transpose="12" HighKey="59"></Zone>
+            <Zone DeviceID="546031377" Program="12" Volume="-6"></Zone>
         </Performance>
         <Performance ID="267872047" Name="We are the champions|">
             <Zone DeviceID="627145948" Program="4" LowKey="26"></Zone>
