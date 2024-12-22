@@ -37,8 +37,6 @@
 #include "PluginGraph.h"
 #include "InternalPlugins.h"
 
-#include "../examples/Plugins/GainPluginDemo.h"
-
 static std::unique_ptr<ScopedDPIAwarenessDisabler> makeDPIAwarenessDisablerForPlugin (const PluginDescription& desc)
 {
     return shouldAutoScalePlugin (desc) ? std::make_unique<ScopedDPIAwarenessDisabler>()
@@ -1118,6 +1116,8 @@ void PluginGraph::CreateDefaultNodes()
     m_midiControlNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_midiSysexNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Midi Filter"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
     m_masterGainNode = graph.addNode(formatManager.createPluginInstance(FindInternalPlugin(types, "Gain PlugIn"), graph.getSampleRate(), graph.getBlockSize(), errorMessage));
+
+    ((AudioProcessorGraph::Node*)(m_masterGainNode))->getProcessor()->getParameters()[3]->setValue(1.0f);
 
     InternalPluginFormat::SetFilterCallback(m_midiSysexNode, &m_nonSysexFilter);
     InternalPluginFormat::SetFilterCallback(m_midiControlNode, this);

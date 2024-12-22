@@ -2049,10 +2049,11 @@
             <Zone DeviceID="-2048222836" Program="2" NoteMode="4" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-1121557452" Name="Wanna be starting something|">
-            <Zone DeviceID="-2048222836" Program="2" NoteMode="4" LowKey="60"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="12" HighKey="60"></Zone>
-            <Zone DeviceID="-985547765" Program="8" Volume="-3" Transpose="12" HighKey="59"></Zone>
+            <Zone DeviceID="-2048222836" Program="2" Transpose="12" LowKey="60"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="24" HighKey="60"></Zone>
+            <Zone DeviceID="-985547765" Program="8" Volume="3" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="546031377" Program="12" Volume="-6"></Zone>
+            <Zone DeviceID="-699955187" Program="105" Volume="6" NoteMode="4" LowKey="60"></Zone>
         </Performance>
         <Performance ID="267872047" Name="We are the champions|">
             <Zone DeviceID="627145948" Program="4" LowKey="26"></Zone>

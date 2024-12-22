@@ -330,7 +330,7 @@ MainHostWindow::MainHostWindow()
    #else
     setResizable (false, false);
     //setResizeLimits (500, 400, 10000, 10000);
-    centreWithSize (966, getParentHeight() - 62); // minus Windows task bar but also not quite working so just a value to make sure entire window visible
+    centreWithSize (966+140, getParentHeight() - 62); // minus Windows task bar but also not quite working so just a value to make sure entire window visible
    #endif
 
     knownPluginList.setCustomScanner (std::make_unique<CustomPluginScanner>());

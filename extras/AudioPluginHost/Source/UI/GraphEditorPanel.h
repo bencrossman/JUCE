@@ -35,6 +35,7 @@
 #pragma once
 
 #include "../Plugins/PluginGraph.h"
+#include "../examples/Audio/AudioRecordingDemo.h"
 
 class MainHostWindow;
 
@@ -161,7 +162,8 @@ public:
     //==============================================================================
     std::unique_ptr<GraphEditorPanel> graphPanel;
     std::unique_ptr<MidiKeyboardComponent> keyboardComp;
-
+    std::unique_ptr<AudioRecordingDemo> recordComp;
+    
     //==============================================================================
     void showSidePanel (bool isSettingsPanel);
     void hideLastSidePanel();
