@@ -62,11 +62,14 @@ public:
         addParameter (gain = new AudioParameterFloat ({ "gain", 1 }, "Gain", 0.0f, 1.0f, 0.25f));
         addParameter(m_mixDownMode = new AudioParameterFloat("mono", "Mono", 0.f, 1.f, 0.f));
         addParameter(m_analyse = new AudioParameterFloat("analyse", "Analyse", 0.f, 1.f, 0.f));
-        
+        addParameter(m_record = new AudioParameterFloat("record", "Record", 0.f, 1.f, 0.f));
 	}
 
     //==============================================================================
-    void prepareToPlay (double, int) override {}
+    void prepareToPlay (double sampleRate, int) override
+    {
+        m_sampleRate = sampleRate;
+    }
     void releaseResources() override {}
 
     void processBlock (AudioBuffer<float>& buffer, MidiBuffer&) override
@@ -85,6 +88,12 @@ public:
 		}
         if (m_analyse->get() > 0)
             m_quiet = buffer.getMagnitude(0, buffer.getNumSamples()) < 0.001;
+
+        if (m_record->get() > 0)
+        {
+            extern std::function<void(int, const float* const*, int, int)> g_audioCallback;
+            g_audioCallback(m_sampleRate, buffer.getArrayOfReadPointers(), buffer.getNumChannels(), buffer.getNumSamples());
+        }
 
     }
 
@@ -151,8 +160,10 @@ private:
     AudioParameterFloat* gain;
     AudioParameterFloat* m_mixDownMode;
     AudioParameterFloat* m_analyse;
+    AudioParameterFloat* m_record;
 
     bool m_quiet = true;
+    int m_sampleRate;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainProcessor)
 };

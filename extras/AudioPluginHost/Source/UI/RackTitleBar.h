@@ -37,7 +37,6 @@ class Song;
 */
 class RackTitleBar  : public Component,
                       public TextEditor::Listener,
-                      public Timer,
                       public juce::Button::Listener,
                       public juce::Slider::Listener
 {
@@ -56,12 +55,6 @@ public:
     std::function<void(int)> m_onSetTempo;
     std::function<void(int)> m_onChangeMasterVolume;
     static int CommandSetMasterVolume;
-
-    void timerCallback() override
-    {
-        auto old = m_heartBeat->getText();
-        m_heartBeat->setText((old == "") ? "." : "", dontSendNotification);
-    };
 
     //[/UserMethods]
 
@@ -95,7 +88,6 @@ private:
     std::unique_ptr<juce::Label> m_tempoLabel;
     std::unique_ptr<juce::Slider> m_tempo;
     std::unique_ptr<juce::Slider> m_masterVolume;
-    std::unique_ptr<juce::Label> m_heartBeat;
 
 
     //==============================================================================

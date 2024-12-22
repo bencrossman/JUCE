@@ -53,15 +53,15 @@ public:
 
         for (int i = 0; i < numberOfSamples; ++i)
         {
-            float inputSample = 0;
+            float inputSample[2] = { 0 };
 
             for (int chan = 0; chan < numInputChannels; ++chan)
                 if (const float* inputChannel = inputChannelData[chan])
-                    inputSample += inputChannel[i];  // find the sum of all the channels
+                    inputSample[chan] += inputChannel[i];  // find the sum of all the channels
 
-            inputSample *= 10.0f; // boost the level to make it more easily visible.
+            //inputSample *= 10.0f; // boost the level to make it more easily visible.
 
-            pushSample (&inputSample, 1);
+            pushSample (inputSample, numInputChannels);
         }
 
         // We need to clear the output buffers before returning, in case they're full of junk..

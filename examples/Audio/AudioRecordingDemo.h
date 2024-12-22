@@ -84,7 +84,7 @@ public:
                 // Now create a WAV writer object that writes to our output stream...
                 WavAudioFormat wavFormat;
 
-                if (auto writer = wavFormat.createWriterFor (fileStream.get(), sampleRate, 1, 16, {}, 0))
+                if (auto writer = wavFormat.createWriterFor (fileStream.get(), sampleRate, 2, 16, {}, 0))
                 {
                     fileStream.release(); // (passes responsibility for deleting the stream to the writer object that is now using it)
 
@@ -127,6 +127,11 @@ public:
     void audioDeviceAboutToStart (AudioIODevice* device) override
     {
         sampleRate = device->getCurrentSampleRate();
+    }
+
+    void setSampleRate(int a_sampleRate)
+    {
+        sampleRate = a_sampleRate;
     }
 
     void audioDeviceStopped() override
@@ -238,12 +243,14 @@ public:
         setOpaque (true);
         addAndMakeVisible (liveAudioScroller);
 
+        /*
         addAndMakeVisible (explanationLabel);
         explanationLabel.setFont (Font (15.0f, Font::plain));
         explanationLabel.setJustificationType (Justification::topLeft);
         explanationLabel.setEditable (false, false, false);
         explanationLabel.setColour (TextEditor::textColourId, Colours::black);
         explanationLabel.setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+        */
 
         addAndMakeVisible (recordButton);
         recordButton.setColour (TextButton::buttonColourId, Colour (0xffff5c5c));
@@ -268,16 +275,18 @@ public:
                                      });
        #endif
 
-        audioDeviceManager.addAudioCallback (&liveAudioScroller);
-        audioDeviceManager.addAudioCallback (&recorder);
+        //audioDeviceManager.addAudioCallback (&liveAudioScroller);
+        //audioDeviceManager.addAudioCallback (&recorder);
+
+        liveAudioScroller.setNumChannels(2);
 
         setSize (500, 500);
     }
 
     ~AudioRecordingDemo() override
     {
-        audioDeviceManager.removeAudioCallback (&recorder);
-        audioDeviceManager.removeAudioCallback (&liveAudioScroller);
+        //audioDeviceManager.removeAudioCallback (&recorder);
+        //audioDeviceManager.removeAudioCallback (&liveAudioScroller);
     }
 
     void paint (Graphics& g) override
@@ -293,6 +302,18 @@ public:
         recordingThumbnail.setBounds (area.removeFromTop (80).reduced (8));
         recordButton      .setBounds (area.removeFromTop (36).removeFromLeft (140).reduced (8));
         explanationLabel  .setBounds (area.reduced (8));
+    }
+
+    void setSampleRate(int sampleRate)
+    {
+        recorder.setSampleRate(sampleRate);
+    }
+
+    void process(const float* const* outputChannelData, int numOutputChannels, int numSamples)
+    {
+        AudioIODeviceCallbackContext context;
+        liveAudioScroller.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
+        recorder.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
     }
 
 private:

@@ -1278,9 +1278,21 @@ GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& fm,
     deviceManager.addChangeListener (this);
 }
 
+std::function<void(int, const float* const*, int, int)> g_audioCallback;
+
+
 void GraphDocumentComponent::init()
 {
     updateMidiOutput();
+
+    recordComp.reset(new AudioRecordingDemo());
+    addAndMakeVisible(recordComp.get());
+
+    g_audioCallback = [this](int sampleRate, const float* const* outputChannelData, int numOutputChannels, int numSamples)
+    {
+        recordComp->setSampleRate(sampleRate);
+        recordComp->process(outputChannelData, numOutputChannels, numSamples);
+    };
 
     graphPanel.reset (new GraphEditorPanel (*graph));
     graphPanel->init(deviceManager.getDefaultMidiOutput() ? deviceManager.getDefaultMidiOutput()->getDeviceInfo().name : "");
@@ -1343,14 +1355,15 @@ void GraphDocumentComponent::resized()
     }();
 
     const int titleBarHeight = 40;
-    const int keysHeight = 60;
-    const int statusHeight = 20;
+    const int keysHeight = 80;
+    const int statusHeight = 0;
 
     if (isOnTouchDevice())
         titleBarComponent->setBounds (r.removeFromTop (titleBarHeight));
 
-    keyboardComp->setBounds (r.removeFromBottom (keysHeight));
+    keyboardComp->setBounds (r.removeFromBottom (statusHeight + keysHeight).withTrimmedBottom(statusHeight));
     statusBar->setBounds (r.removeFromBottom (statusHeight));
+    recordComp->setBounds(r.removeFromRight(150).removeFromTop(200));
     graphPanel->setBounds (r);
 
     checkAvailableWidth();
@@ -1374,6 +1387,7 @@ void GraphDocumentComponent::releaseGraph()
 
     keyboardComp = nullptr;
     statusBar = nullptr;
+    recordComp = nullptr;
 
     graphPlayer.setProcessor (nullptr);
     graph = nullptr;
