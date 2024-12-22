@@ -182,21 +182,8 @@ RackTitleBar::RackTitleBar ()
 
     m_masterVolume->setBounds (189, 54, 69, 16);
 
-    m_heartBeat.reset (new juce::Label (juce::String(),
-                                        TRANS(".")));
-    addAndMakeVisible (m_heartBeat.get());
-    m_heartBeat->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
-    m_heartBeat->setJustificationType (juce::Justification::centredLeft);
-    m_heartBeat->setEditable (false, false, false);
-    m_heartBeat->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    m_heartBeat->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
-    m_heartBeat->setBounds (124, 46, 16, 24);
-
-
     //[UserPreSize]
     m_masterVolume->setValue(127);
-    startTimer(200);
     //[/UserPreSize]
 
     setSize (816, 70);
@@ -226,7 +213,6 @@ RackTitleBar::~RackTitleBar()
     m_tempoLabel = nullptr;
     m_tempo = nullptr;
     m_masterVolume = nullptr;
-    m_heartBeat = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -409,11 +395,6 @@ BEGIN_JUCER_METADATA
           explicitFocusOrder="0" pos="189 54 69 16" min="0.0" max="127.0"
           int="1.0" style="LinearHorizontal" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <LABEL name="" id="378f3a6790f970b4" memberName="m_heartBeat" virtualName=""
-         explicitFocusOrder="0" pos="124 46 16 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="." editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15.0"
-         kerning="0.0" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
