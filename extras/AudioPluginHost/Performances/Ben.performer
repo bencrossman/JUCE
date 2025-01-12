@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="-40733610">
+<Root CurrentSetListID="-1430555626">
     <SetLists>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
@@ -56,82 +56,7 @@
             <Song ID="408432983" />
             <Song ID="547485094" />
         </SetList>
-        <SetList ID="1245596948" Name="Wild So Well">
-            <Song ID="1622943407" />
-            <Song ID="737328479" />
-            <Song ID="2097006384" />
-            <Song ID="1915354647" />
-            <Song ID="-272316000" />
-            <Song ID="1242009781" />
-            <Song ID="285593620" />
-            <Song ID="1691107623" />
-            <Song ID="-2081850605" />
-            <Song ID="1402617184" />
-            <Song ID="337066101" />
-            <Song ID="828020921" />
-            <Song ID="2085868303" />
-            <Song ID="1611254500" />
-            <Song ID="-479079512" />
-            <Song ID="-1886748225" />
-            <Song ID="-1658000739" />
-            <Song ID="1181829818" />
-            <Song ID="-1957313269" />
-            <Song ID="-1607129097" />
-            <Song ID="446556129" />
-            <Song ID="1499851816" />
-            <Song ID="1467102654" />
-            <Song ID="1403592803" />
-            <Song ID="1388958306" />
-            <Song ID="-1687672551" />
-            <Song ID="1309324409" />
-            <Song ID="1285367262" />
-            <Song ID="-1997789996" />
-            <Song ID="-905941878" />
-            <Song ID="1858206394" />
-            <Song ID="-1917133980" />
-            <Song ID="-1456116052" />
-            <Song ID="178705268" />
-            <Song ID="-93852910" />
-            <Song ID="-57815850" />
-            <Song ID="-1453978809" />
-            <Song ID="-1946182156" />
-            <Song ID="1738326295" />
-            <Song ID="-155673966" />
-            <Song ID="-1401739690" />
-            <Song ID="-1893425986" />
-            <Song ID="327771712" />
-            <Song ID="1828933804" />
-            <Song ID="-581663436" />
-            <Song ID="-725953381" />
-            <Song ID="-857372096" />
-            <Song ID="-878477753" />
-        </SetList>
-        <SetList ID="1715665941" Name="Funktastic">
-            <Song ID="-892581515" />
-            <Song ID="-1269189954" />
-            <Song ID="-591035547" />
-            <Song ID="-266478303" />
-            <Song ID="-779573588" />
-            <Song ID="-1048111250" />
-            <Song ID="-1486876295" />
-            <Song ID="1549438206" />
-            <Song ID="1738326295" />
-            <Song ID="-1484974504" />
-            <Song ID="-1730762731" />
-            <Song ID="-397923736" />
-            <Song ID="-729704037" />
-            <Song ID="1042026100" />
-            <Song ID="794541357" />
-            <Song ID="1898205208" />
-            <Song ID="-1833124162" />
-            <Song ID="828020921" />
-            <Song ID="-1776495401" />
-            <Song ID="-82432577" />
-            <Song ID="-57815850" />
-            <Song ID="1423344023" />
-            <Song ID="1043913962" />
-        </SetList>
-        <SetList ID="861529763" Name="Corporate">
+        <SetList ID="861529763" Name="Tom Crane Corporate">
             <Song ID="800911578" />
             <Song ID="687006454" />
             <Song ID="446469300" />
@@ -157,6 +82,55 @@
             <Song ID="1908421785" />
             <Song ID="1436956953" />
         </SetList>
+        <SetList ID="-1430555626" Name="Aussie Anthems">
+            <Song ID="800911578" />
+            <Song ID="1481312858" />
+            <Song ID="1327704953" />
+            <Song ID="-797964621" />
+            <Song ID="1237954918" />
+            <Song ID="641639208" />
+            <Song ID="1731793504" />
+            <Song ID="2095658125" />
+            <Song ID="-605937879" />
+            <Song ID="-1085257693" />
+            <Song ID="-1975115413" />
+            <Song ID="-155673966" />
+            <Song ID="-1082064865" />
+            <Song ID="-1854511723" />
+            <Song ID="1862536279" />
+            <Song ID="3368721" />
+            <Song ID="1974458270" />
+            <Song ID="-217889739" />
+            <Song ID="-1997789996" />
+            <Song ID="1806800684" />
+            <Song ID="1402617184" />
+            <Song ID="-1674716655" />
+            <Song ID="353827135" />
+            <Song ID="-146983603" />
+            <Song ID="496591265" />
+            <Song ID="872585702" />
+            <Song ID="347133768" />
+            <Song ID="-1453285816" />
+            <Song ID="-1038226524" />
+            <Song ID="1508606412" />
+            <Song ID="-2097224620" />
+            <Song ID="1616714348" />
+            <Song ID="-1702606041" />
+            <Song ID="656555816" />
+            <Song ID="-1886748225" />
+            <Song ID="668638383" />
+            <Song ID="603238529" />
+            <Song ID="575013566" />
+            <Song ID="327771712" />
+            <Song ID="-1424463714" />
+            <Song ID="-1456116052" />
+            <Song ID="407481976" />
+            <Song ID="1304339251" />
+            <Song ID="115731966" />
+            <Song ID="-1461222012" />
+            <Song ID="2092782359" />
+            <Song ID="291204879" />
+        </SetList>
     </SetLists>
     <Racks>
         <Rack ID="627145948" Name="Piano" PluginName="TruePianos x64">eJzFjsEKwjAMhjPw6GEHX0NQ8aqCE0H0IOgLlC66YpdK1w52mz6fHnwcbzZawTcwl/B/+fMnmaQ1hFrOsyK0ZLzcbyEZMUrg75VAF+ByFIo+up2xtqhRVMhglgZdo5be1hiXvuygjbGRtZG5wmJVRMZZzpOiI0D/8Zym7+xalMaTC4b7bfNlOUrR/ORf5dmvyCFVqsbJAKAXmK9w15Rn4Qp0Sk6GbA43rqXXTmXGspF92oh8LujE84UK5yiHNPKtcJL/68QfXw2ORMU=</Rack>
@@ -169,12 +143,13 @@
         <Rack ID="-841590045" Name="Roland JP-8000" PluginName="P8"></Rack>
         <Rack ID="1317557824" Name="Roland Jupiter-8" PluginName="JUPITER-8(VST2 64bit)"></Rack>
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
-        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJyt0ktPAjEQAGD9J3Pw/UxMPOgN1oAGCAirXrhMdgfa0O2QPjTw6217djjZbPbQfJ3OTOcYqufljNyKXYe2oeUCu60hv6wMbv2dXz1cCWCh+Acm0QcYMkxtpqcCnVqCT+01F3UrqC9tDJTfnJsN7DhmfSPot+ChByNtW4QJrnWT8aWAP2xLDmaOvI+OsjwT5BxbzTDE9GV2LrBRSjNFfI9EpaZHwfUsB5Vg7kBfB/JQK4KX1LV8Sur9wKBXGZxIrYrO6LAnl9G1FAUD9DkE7mConfGHGvSKXZfSrBkGaEyW99LVBD1HpYxKpb30qCXyhTRHaEPNsVG10gU+SdDhfgdjHYLJ4bVdQ5VyoRbG/F3e7OiPJRWfz6RhCgomuxTHHSq+VrHMxyK42Gykm/5n/QIUlhfu</Rack>
-        <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxj0HC2iglILUrLL8pNzEtOjQlOzC3ISS2OccksTs5XCC4pysxLL9YrTjNiGFgAAMfzDzY=</Rack>
+        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJyt0jtPwzAQB3D4JjfwfkpIDLC1QS2orVraUJYsR3KtrTp25Qco/fTYXkBC1wkryhD9fD7/c4dQPFYzsitjW9Q1VQtst4pcVSjcuhu3urtgwEKYL5gE52FoYKoTPWboVBMspZMmq2tGvUulIL/mpt5AZ0LSV4x+8Q56MJK6QZjgWtYJnzP4TTdkYWbJuWApyRNGzrGRBoYYn8ROGTaKbcaKr4Eo3+mecT1tvIgwJdCXnhyUguApppZ2cdkPFDqRwBEXVbBK+h3ZhC65Kuihb7w3LQylVW5fQM/YtrHN0sAAlUryljuaoGcpX6MQ8Vv8qbnyGTdHqH1pQi1KITN84KDFXQdj6b1K5aVeQxF7oQbG5jP/s4Pfi4tmKT8suji8Pzu4gFLdOHBewKSLZ9l9AZUi5BlaeBvqzZ9u/nV9A+QZJcc=</Rack>
+        <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxj1HC2iglILUrLL8pNzEtOjQlOzC3ISS2OccksTs5XCC4pysxLL9YrTjNiGFgAAMicDzc=</Rack>
         <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjVHe2iglILUrLL8pNzEtOjQlOzC3ISS2OccwpyVdwrSgoSi0u1itOM1LBoS4kNS+/CKQQpAiXYSFFpbkFqSUKbqU5OSB1mgTUBZen5uSArdUgoDIoswDiPoaBAwDBhEpa</Rack>
         <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzl0E0LAWEQB3B8EgdFKeVCudktJS8rKy57mXaHndYzo3meJd8eS3J5irM5//7zVm+Go2SFuhc1wCkmsVMEY5NFaSntXeBc63pEIDkaArPO4WQluz5wve3BU3aohqwl4aqrb25UOpVKdDxiIyZUYLy3fEnf0DmdcUzZGzYGHjghhmMoJbtMLhxAWhAfIl6Kwy+XbfkE45beRw+/fOUMFKX4uPDHYHRChSrY9wR3wAwBxg7UEcdi0OX0XPIv6gYWkcdH</Rack>
         <Rack ID="-1783610977" Name="Guitar Strummer" PluginName="Guitar Strummer"></Rack>
         <Rack ID="1217705718" Name="Guitar" PluginName="AmpliTube 5">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</Rack>
+        <Rack ID="416001909" Name="MP3 Player" PluginName="mp3play2"></Rack>
     </Racks>
     <Songs>
         <Song ID="1997842497" Name="3am">
@@ -194,6 +169,9 @@
         <Song ID="-1658000739" Name="All Fired Up">
             <Performance ID="1102019116" />
         </Song>
+        <Song ID="-1461222012" Name="All Night Long">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="2110017919" Name="All the small things">
             <Performance ID="340469513" />
             <Performance ID="-7907844" />
@@ -211,6 +189,9 @@
             <Performance ID="2000364178" />
         </Song>
         <Song ID="1242009781" Name="April Sun In Cuba">
+            <Performance ID="325567451" />
+        </Song>
+        <Song ID="2095658125" Name="Are You Old Enough">
             <Performance ID="325567451" />
         </Song>
         <Song ID="1181829818" Name="Are You going To Be My Girl">
@@ -234,6 +215,9 @@
         </Song>
         <Song ID="2048429966" Name="Bad Romance">
             <Performance ID="-1151704603" />
+        </Song>
+        <Song ID="603238529" Name="Beds Are Burning">
+            <Performance ID="-1066152518" />
         </Song>
         <Song ID="-1902089942" Name="Bent">
             <Performance ID="1172317043" />
@@ -271,6 +255,9 @@
         <Song ID="-524070619" Name="Born to be alive">
             <Performance ID="-1494844207" />
         </Song>
+        <Song ID="-1674716655" Name="Boys From The Bush">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-1997789996" Name="Boys In Town">
             <Performance ID="1102019116" />
             <Performance ID="-1723119480" />
@@ -303,6 +290,9 @@
             <Performance ID="985014735" />
             <Performance ID="522832568" />
         </Song>
+        <Song ID="-1975115413" Name="Can&apos;t Get You Outta My Head">
+            <Performance ID="-1410133443" />
+        </Song>
         <Song ID="747158023" Name="Can&apos;t Touch This">
             <Performance ID="-2001091465" />
         </Song>
@@ -317,6 +307,15 @@
         </Song>
         <Song ID="16587712" Name="Centerfold">
             <Performance ID="-832157981" />
+        </Song>
+        <Song ID="1731793504" Name="Come Back Again">
+            <Performance ID="325567451" />
+        </Song>
+        <Song ID="3368721" Name="Come Said The Boy">
+            <Performance ID="857594651" />
+        </Song>
+        <Song ID="496591265" Name="Computer Games">
+            <Performance ID="538273237" />
         </Song>
         <Song ID="-955692712" Name="Copperhead Road">
             <Performance ID="-404884278" />
@@ -362,6 +361,10 @@
         <Song ID="-581663436" Name="Doctor Doctor">
             <Performance ID="325567451" />
         </Song>
+        <Song ID="656555816" Name="Don&apos;t Dream It&apos;s Over">
+            <Performance ID="-1066488609" />
+            <Performance ID="-1893591431" />
+        </Song>
         <Song ID="-1558578634" Name="Don&apos;t Stop Me Now">
             <Performance ID="325567451" />
         </Song>
@@ -378,6 +381,9 @@
             <Performance ID="211262094" />
             <Performance ID="-1893591430" />
             <Performance ID="211262094" />
+        </Song>
+        <Song ID="668638383" Name="Eagle Rock">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="-1424463714" Name="Early Warning">
             <Performance ID="-853027829" />
@@ -481,6 +487,9 @@
         <Song ID="243769681" Name="Heart Of Glass">
             <Performance ID="372654456" />
         </Song>
+        <Song ID="-797964621" Name="Heaven  must be there">
+            <Performance ID="1514799087" />
+        </Song>
         <Song ID="1204532810" Name="Her Diamonds">
             <Performance ID="410290269" />
         </Song>
@@ -506,11 +515,20 @@
         <Song ID="-933353772" Name="Hotel California">
             <Performance ID="569138515" />
         </Song>
+        <Song ID="1327704953" Name="Howzat">
+            <Performance ID="636735809" />
+        </Song>
         <Song ID="285593620" Name="Hurt So Good">
             <Performance ID="1270865452" />
         </Song>
         <Song ID="-1491607353" Name="I Saw Her Standing There">
             <Performance ID="1270865452" />
+        </Song>
+        <Song ID="-146983603" Name="I Still Call Australia Home">
+            <Performance ID="325567451" />
+        </Song>
+        <Song ID="1974458270" Name="I Touch Myself">
+            <Performance ID="1957098501" />
         </Song>
         <Song ID="-472499682" Name="I Want It All">
             <Performance ID="-1419315577" />
@@ -560,6 +578,12 @@
             <Performance ID="-1862712331" />
             <Performance ID="1957098501" />
         </Song>
+        <Song ID="-1453285816" Name="I&apos;m Coming Home">
+            <Performance ID="1181864951" />
+        </Song>
+        <Song ID="-1854511723" Name="I&apos;m Living In The 70&apos;s">
+            <Performance ID="636735809" />
+        </Song>
         <Song ID="-1432417486" Name="I&apos;m Yours">
             <Performance ID="-1246458370" />
         </Song>
@@ -572,11 +596,17 @@
         <Song ID="-1070487912" Name="Is This Love">
             <Performance ID="-1893591430" />
         </Song>
+        <Song ID="1508606412" Name="Jailbreak">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-155673966" Name="Jessies girl">
             <Performance ID="1529998716" />
         </Song>
         <Song ID="-1586614904" Name="Joker and the thief">
             <Performance ID="-1893591430" />
+        </Song>
+        <Song ID="1806800684" Name="Jump In My Car">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="1791832546" Name="Just a girl">
             <Performance ID="1423036791" />
@@ -648,6 +678,9 @@
         <Song ID="327291318" Name="Long Way To The Top">
             <Performance ID="-456977171" />
         </Song>
+        <Song ID="-1085257693" Name="Love Is In The Air">
+            <Performance ID="1957098501" />
+        </Song>
         <Song ID="-768071340" Name="Love of my life">
             <Performance ID="215256306" />
         </Song>
@@ -675,6 +708,9 @@
         <Song ID="-1190227636" Name="More than a woman">
             <Performance ID="-1066488609" />
         </Song>
+        <Song ID="-1082064865" Name="Most People I Know">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-1491130557" Name="Moves Like Jagger">
             <Performance ID="-275725803" />
         </Song>
@@ -701,6 +737,12 @@
         </Song>
         <Song ID="-1946182156" Name="New Sensation">
             <Performance ID="-2132768522" />
+        </Song>
+        <Song ID="641639208" Name="Nips Are Getting Bigger">
+            <Performance ID="-1893591430" />
+        </Song>
+        <Song ID="407481976" Name="No Secrets">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="-1234776648" Name="Now I&apos;m here">
             <Performance ID="1012738439" />
@@ -741,6 +783,12 @@
         </Song>
         <Song ID="-729704037" Name="Play that funky music">
             <Performance ID="2055539644" />
+        </Song>
+        <Song ID="-2097224620" Name="Playing To Win">
+            <Performance ID="-109437161" />
+        </Song>
+        <Song ID="-217889739" Name="Pleasure And Pain">
+            <Performance ID="1959770639" />
         </Song>
         <Song ID="1403592803" Name="Poker face">
             <Performance ID="-218604734" />
@@ -868,6 +916,9 @@
         <Song ID="500852117" Name="So What">
             <Performance ID="-1933864056" />
         </Song>
+        <Song ID="1616714348" Name="Solid Rock">
+            <Performance ID="-1066488609" />
+        </Song>
         <Song ID="-584579934" Name="Somebody To Love">
             <Performance ID="-1893591431" />
             <Performance ID="709579329" />
@@ -947,6 +998,9 @@
         <Song ID="416566938" Name="Titanium">
             <Performance ID="1800715814" />
         </Song>
+        <Song ID="1237954918" Name="To Her Door">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="687006454" Name="Tom Crane Intro">
             <Performance ID="1212709940" />
         </Song>
@@ -963,6 +1017,9 @@
             <Performance ID="-1417973421" />
             <Performance ID="633307714" />
             <Performance ID="-1417973421" />
+        </Song>
+        <Song ID="1862536279" Name="Unguarded Moment">
+            <Performance ID="1957098501" />
         </Song>
         <Song ID="1953778449" Name="Unwell">
             <Performance ID="273805059" />
@@ -985,6 +1042,9 @@
         <Song ID="446556129" Name="Walking on sunshine">
             <Performance ID="643338072" />
         </Song>
+        <Song ID="353827135" Name="Waltzing Matilda">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="1423344023" Name="Wanna Be Starting Something">
             <Performance ID="-1121557452" />
         </Song>
@@ -996,6 +1056,12 @@
             <Performance ID="267872047" />
             <Performance ID="-2121879230" />
         </Song>
+        <Song ID="575013566" Name="We Can Get Together">
+            <Performance ID="-401529635" />
+        </Song>
+        <Song ID="291204879" Name="We Gotta Get Out Of This Place">
+            <Performance ID="1102019116" />
+        </Song>
         <Song ID="749494757" Name="We Will Rock You">
             <Performance ID="1887265414" />
         </Song>
@@ -1005,6 +1071,9 @@
         <Song ID="1287877998" Name="We met">
             <Performance ID="325567451" />
             <Performance ID="2029604362" />
+        </Song>
+        <Song ID="-1038226524" Name="What About Me">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="-1492103383" Name="What I Like About You">
             <Performance ID="60332017" />
@@ -1127,6 +1196,13 @@
             <Zone DeviceID="522416168" Program="91" Volume="-3" Transpose="-1" HighKey="71"></Zone>
             <Zone DeviceID="-841590045" Program="6" Volume="-8" Transpose="-13" LowKey="72"></Zone>
         </Performance>
+        <Performance ID="-1066152518" Name="Beds Are Burning|">
+            <Zone DeviceID="-699955187" Program="89" Volume="3"></Zone>
+            <Zone DeviceID="-2048222836" Program="2"></Zone>
+        </Performance>
+        <Performance ID="857594651" Name="Bell PIano">
+            <Zone DeviceID="1555279137" Program="21" Volume="6"></Zone>
+        </Performance>
         <Performance ID="327650012" Name="Bells">
             <Zone DeviceID="1555279137" Bank="1" Program="28" Volume="6"></Zone>
         </Performance>
@@ -1159,7 +1235,7 @@
         </Performance>
         <Performance ID="-1723119480" Name="Boys in town|Chorus">
             <Zone DeviceID="522416168" Program="93" Volume="-4" Transpose="-12"></Zone>
-            <Zone DeviceID="-1973686393" Program="96" Volume="-7.5"></Zone>
+            <Zone DeviceID="-1973686393" Program="124" Volume="-7.5"></Zone>
         </Performance>
         <Performance ID="-1494844207" Name="Brass">
             <Zone DeviceID="-2048222836" Program="2" NoteMode="4" Transpose="12"></Zone>
@@ -1191,6 +1267,11 @@
         <Performance ID="522832568" Name="Call me|">
             <Zone DeviceID="-1973686393" Program="23" Transpose="11"></Zone>
         </Performance>
+        <Performance ID="-1410133443" Name="Can&apos;t Get You Outta My Head|">
+            <Zone DeviceID="-699955187" Bank="1" Program="23" Transpose="12" LowKey="22" HighKey="41"></Zone>
+            <Zone DeviceID="522416168" Program="60" Transpose="36" HighKey="21"></Zone>
+            <Zone DeviceID="-985547765" Bank="3" Program="77" LowKey="42"></Zone>
+        </Performance>
         <Performance ID="-2001091465" Name="Can&apos;t Touch This|">
             <Zone DeviceID="-789407354" Program="14" HighKey="22"></Zone>
             <Zone DeviceID="522416168" Program="17" LowKey="22"></Zone>
@@ -1221,6 +1302,10 @@
         <Performance ID="522842224" Name="Clav">
             <Zone DeviceID="627145948" Program="4" Volume="-6"></Zone>
             <Zone DeviceID="1555279137" Bank="21" Program="11" Volume="3"></Zone>
+        </Performance>
+        <Performance ID="636735809" Name="Clav/Strings">
+            <Zone DeviceID="-789407354" Program="10" Transpose="12" HighKey="59"></Zone>
+            <Zone DeviceID="-2048222835" Program="0" Volume="-3" NoteMode="1" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-404884278" Name="Copperhead road|">
             <Zone DeviceID="1555279137" Bank="1" Program="70"></Zone>
@@ -1411,6 +1496,11 @@
             <Zone DeviceID="-841590045" Program="31" Volume="-6" Transpose="12" LowKey="60" HighKey="82"></Zone>
             <Zone DeviceID="-789407354" Program="40" Volume="-5"></Zone>
         </Performance>
+        <Performance ID="1514799087" Name="Heaven must be there|">
+            <Zone DeviceID="-699955187" Bank="2" Program="127" Transpose="-12" LowKey="48" HighKey="64"></Zone>
+            <Zone DeviceID="522416168" Program="11" Transpose="-12" LowKey="65"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="50" Transpose="24" HighKey="47"></Zone>
+        </Performance>
         <Performance ID="410290269" Name="Her Diamonds|">
             <Zone DeviceID="1555279137" Program="75" Volume="6" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-13" LowKey="60"></Zone>
@@ -1488,6 +1578,10 @@
             <Zone DeviceID="-1202024641" Program="17" Transpose="23" LowKey="39" HighKey="59"></Zone>
             <Zone DeviceID="-789407354" Program="14"></Zone>
         </Performance>
+        <Performance ID="1181864951" Name="I&apos;m Coming Home|">
+            <Zone DeviceID="1555279137" Bank="1" Program="70" Volume="3" Transpose="-12" LowKey="60"></Zone>
+            <Zone DeviceID="-1202024641" Bank="1" Program="41" Transpose="12" HighKey="59"></Zone>
+        </Performance>
         <Performance ID="-1171420260" Name="I&apos;m outta love|">
             <Zone DeviceID="1555279137" Bank="21" Program="11" Volume="1" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="3" Transpose="12" LowKey="59"></Zone>
@@ -1509,7 +1603,7 @@
             <Zone DeviceID="546031377" Program="5"></Zone>
         </Performance>
         <Performance ID="1529998716" Name="Jessies girl|">
-            <Zone DeviceID="-1973686393" Program="95" Volume="-6" Transpose="12"></Zone>
+            <Zone DeviceID="-1973686393" Program="18" Volume="-6" Transpose="12"></Zone>
         </Performance>
         <Performance ID="1949808354" Name="Just a girl|Bridge">
             <Zone DeviceID="1555279137" Bank="3" Program="0" Volume="1" Transpose="12"></Zone>
@@ -1623,8 +1717,8 @@
             <Zone DeviceID="546031377" Program="1"></Zone>
         </Performance>
         <Performance ID="-1393871096" Name="Never tear us apart|">
-            <Zone DeviceID="-2048222836" Program="0" Volume="9.5" Transpose="-12" LowKey="72"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-1" Transpose="12" HighKey="71"></Zone>
+            <Zone DeviceID="-2048222836" Program="0" Volume="9.5" Transpose="-12" LowKey="76"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-1" Transpose="12" HighKey="75"></Zone>
         </Performance>
         <Performance ID="-2132768522" Name="New sensation|">
             <Zone DeviceID="1555279137" Bank="27" Program="17" Volume="-3" HighKey="83"></Zone>
@@ -1719,7 +1813,7 @@
             <Zone DeviceID="1555279137" Bank="1" Program="22" Volume="-2" Transpose="-24" LowKey="84"></Zone>
         </Performance>
         <Performance ID="1957098501" Name="Piano/Strings">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="60"></Zone>
+            <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-1202024641" Program="17" LowKey="60"></Zone>
         </Performance>
         <Performance ID="265751447" Name="Piano/Tenorsax">
@@ -1737,6 +1831,13 @@
         <Performance ID="-1526903426" Name="Play the game|">
             <Zone DeviceID="627145948" Program="4" LowKey="25"></Zone>
             <Zone DeviceID="-789407354" Program="18"></Zone>
+        </Performance>
+        <Performance ID="-109437161" Name="Playing To Win|">
+            <Zone DeviceID="-699955187" Bank="1" Program="47"></Zone>
+        </Performance>
+        <Performance ID="1959770639" Name="Pleasure And Pain|">
+            <Zone DeviceID="1555279137" Program="21" Volume="6" Transpose="12" HighKey="59"></Zone>
+            <Zone DeviceID="-699955187" Bank="8" Program="37" Transpose="-12" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-2137620744" Name="Pony|">
             <Zone DeviceID="1555279137" Bank="8" Program="19" Transpose="12" LowKey="38"></Zone>
@@ -2054,6 +2155,9 @@
             <Zone DeviceID="-985547765" Program="8" Volume="3" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="546031377" Program="12" Volume="-6"></Zone>
             <Zone DeviceID="-699955187" Program="105" Volume="6" NoteMode="4" LowKey="60"></Zone>
+        </Performance>
+        <Performance ID="-401529635" Name="We Can Get Together|">
+            <Zone DeviceID="522416168" Program="82"></Zone>
         </Performance>
         <Performance ID="267872047" Name="We are the champions|">
             <Zone DeviceID="627145948" Program="4" LowKey="26"></Zone>

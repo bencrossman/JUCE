@@ -27,6 +27,7 @@ public:
     bool m_hasStupidCrossfade = false;
     bool m_stereoToMonoWillPhase = false;
     bool m_doesntRespectSoundOff = false;
+    bool m_ignoreMidi = false;
     bool m_deleted = false;
     float m_order = 0;
 
@@ -43,7 +44,7 @@ public:
 enum NoteMode
 {
 	Normal,
-	Scoop,
+	Limit117,
 	Fall,
 	Sixteenth,
 	DoubleOctave,
