@@ -25,6 +25,8 @@ public:
     void releaseResources() override;
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
 
+    bool isPrepared() { return m_prepared; }
+
     void process_bypassed();
     
     /** Load a .sf2 file. Will not reload a file if it is already loaded.
@@ -89,4 +91,5 @@ private:
 
     ReverbAudioProcessor* m_reverb = nullptr;
     bool m_reverbActive = false;
+    bool m_prepared = false;
 };

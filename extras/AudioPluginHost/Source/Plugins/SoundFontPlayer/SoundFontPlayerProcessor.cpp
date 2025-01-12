@@ -153,7 +153,11 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         else
         {
             if (m_players[m_currentFile])
+            {
+                if (!m_players[m_currentFile]->isPrepared())
+                    m_players[m_currentFile]->prepareToPlay(buffer.getNumSamples(), m_sampleRate);
                 m_players[m_currentFile]->processMidi(meta.getMessage());
+            }
         }
     }
 

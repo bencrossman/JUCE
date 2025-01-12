@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.0.1
+  Created with Projucer version: 7.0.10
 
   ------------------------------------------------------------------------------
 
@@ -56,14 +56,14 @@ RackRow::RackRow ()
 
     m_solo.reset (new juce::ToggleButton (juce::String()));
     addAndMakeVisible (m_solo.get());
-    m_solo->setButtonText (TRANS("Solo"));
+    m_solo->setButtonText (TRANS ("Solo"));
     m_solo->addListener (this);
 
     m_solo->setBounds (96, 14, 72, 24);
 
     m_mute.reset (new juce::ToggleButton (juce::String()));
     addAndMakeVisible (m_mute.get());
-    m_mute->setButtonText (TRANS("Mute"));
+    m_mute->setButtonText (TRANS ("Mute"));
     m_mute->addListener (this);
 
     m_mute->setBounds (160, 14, 72, 24);
@@ -112,7 +112,7 @@ RackRow::RackRow ()
     m_transpose->setBounds (648, 14, 32, 24);
 
     m_to.reset (new juce::Label (juce::String(),
-                                 TRANS("to")));
+                                 TRANS ("to")));
     addAndMakeVisible (m_to.get());
     m_to->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     m_to->setJustificationType (juce::Justification::centred);
@@ -148,7 +148,7 @@ RackRow::RackRow ()
 
     m_deviceSettings.reset (new juce::ImageButton (juce::String()));
     addAndMakeVisible (m_deviceSettings.get());
-    m_deviceSettings->setButtonText (TRANS("new button"));
+    m_deviceSettings->setButtonText (TRANS ("new button"));
     m_deviceSettings->addListener (this);
 
     m_deviceSettings->setImages (false, true, true,
@@ -167,20 +167,20 @@ RackRow::RackRow ()
     m_noteMode->setEditableText (false);
     m_noteMode->setJustificationType (juce::Justification::centredLeft);
     m_noteMode->setTextWhenNothingSelected (juce::String());
-    m_noteMode->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    m_noteMode->addItem (TRANS("Normal note mode"), 1);
-    m_noteMode->addItem (TRANS("Scoop"), 2);
-    m_noteMode->addItem (TRANS("Fall"), 3);
-    m_noteMode->addItem (TRANS("Sixteenth"), 4);
-    m_noteMode->addItem (TRANS("Double octave"), 5);
-    m_noteMode->addItem (TRANS("Three octave arpeggio"), 6);
-    m_noteMode->addItem (TRANS("No sustain"), 7);
+    m_noteMode->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
+    m_noteMode->addItem (TRANS ("Normal note mode"), 1);
+    m_noteMode->addItem (TRANS ("Limit 117"), 2);
+    m_noteMode->addItem (TRANS ("Fall"), 3);
+    m_noteMode->addItem (TRANS ("Sixteenth"), 4);
+    m_noteMode->addItem (TRANS ("Double octave"), 5);
+    m_noteMode->addItem (TRANS ("Three octave arpeggio"), 6);
+    m_noteMode->addItem (TRANS ("No sustain"), 7);
     m_noteMode->addListener (this);
 
     m_noteMode->setBounds (400, 14, 232, 24);
 
     m_missing.reset (new juce::Label (juce::String(),
-                                      TRANS("PLUGIN\n"
+                                      TRANS ("PLUGIN\n"
                                       "MISSING")));
     addAndMakeVisible (m_missing.get());
     m_missing->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
@@ -342,7 +342,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
             {
                 MemoryBlock mb;
                 ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
-                
+
                 /*static int num = 0;
                 MemoryInputStream input(mb, false);
 #ifdef JUCE_WINDOWS
@@ -672,7 +672,13 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                         else
                         {
                             midi_message.setNoteNumber(note); // transposed note
-                            output.addEvent(midi_message, sample_number);
+
+                            if (m_current->NoteMode == NoteMode::Limit117 && midi_message.getVelocity() > 117)
+                                midi_message.setVelocity(117.f / 127);                                
+
+                            if (!m_current->Device->m_ignoreMidi)
+                                output.addEvent(midi_message, sample_number);
+
                             if (m_current->NoteMode == NoteMode::DoubleOctave && note < 128 - 12) // double octave
                             {
                                 midi_message.setNoteNumber(note + 12);
@@ -683,7 +689,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 }
             }
             else if (midi_message.isControllerOfType(0x01) && m_allowCC16) // Modulation can map to CC16 as well in case midi controller only has one assign
-                output.addEvent(MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()), sample_number); 
+                output.addEvent(MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()), sample_number);
             else if (((midi_message.isControllerOfType(16) && m_allowCC16) || !midi_message.isControllerOfType(16)) && m_current->NoteMode != NoteMode::NoSustain)
                 output.addEvent(midi_message, sample_number); // other events like sustain
         }
@@ -695,18 +701,18 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         // Release sustain pedal. Only way to stop notes on TruePianos/Jupiter8/OPX/Superwave(current notes lifted but next still sustained)
         // if sustain lifted after bypass
         midiBuffer.addEvent(MidiMessage::controllerEvent(1, 64, 0), 0);
-        
+
         // Turn off all notes
-        // allNotesOff doesn't work for Jupiter8/OPX/Sampler. M1/Wavestation/Triton/FM7/Roland will ignore if sustain down. B4II/Superwave will always work. 
+        // allNotesOff doesn't work for Jupiter8/OPX/Sampler. M1/Wavestation/Triton/FM7/Roland will ignore if sustain down. B4II/Superwave will always work.
         // Effects ring out.
         // Also this just to make sure notes don't get stuck with OPX (was able to get this with "I want it all" bridge)
         for (int note = 0; note <= 127; ++note)
             midiBuffer.addEvent(MidiMessage::noteOff(1, note), 0);
-        
+
         // allSoundOff doesn't work for Truepianos/Jupiter8/OPX(but CC9 patch change will stop notes and will now consume after this to account for crossfade)
-        // and in most cases sounds like same as all notes off                                                         
-        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0); 
-        
+        // and in most cases sounds like same as all notes off
+        midiBuffer.addEvent(MidiMessage::allSoundOff(1), 0);
+
         // Clear arpeggiator
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
@@ -763,7 +769,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 }
 
                 // need new note
-	
+
                 m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio ? 3 : 1));
                 if (m_lastNote < 128)
                     midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
@@ -791,7 +797,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     else if (imageName == "TruePianos")
         imageName = "Piano";
     else if (imageName == "AmpliTube 5")
-        imageName = "Guitar";    
+        imageName = "Guitar";
     else if (imageName == "B4 II")
         imageName = "B3";
     else if (imageName == "fm7")
@@ -831,7 +837,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 #else
         auto programFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
 #endif
-        
+
         if (device.PluginName == "OP-X PRO-3")
         {
             /*for (int i = 0; i < 128; ++i)
@@ -848,7 +854,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 #else
             File f("/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
 #endif
-            // 
+            //
             Array<File> list = f.findChildFiles (2, false, "*.opxpreset");
             list.sort();
             m_manualPatchNames = true;
@@ -865,7 +871,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
             auto window = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)device.m_node, PluginWindow::Type::normal);
             window->closeButtonPressed();
         }
-        
+
         if (File(programFile).exists())
         {
             m_manualPatchNames = true;
@@ -970,14 +976,14 @@ void RackRow::handleCommandMessage(int id)
 		else if (m_hasPrograms)
 		{
 			for (int i = 0; i < processor->getNumPrograms(); ++i)
-				if (processor->getProgramName(i) != "") 
+				if (processor->getProgramName(i) != "")
                     m_program->addItem(processor->getProgramName(i), i + 1);
 		}
         m_program->setSelectedId(m_current->Program + 1, dontSendNotification);
     }
     if (id == CommandBypass) // This will happen later than sound off and program changes
     {
-        // Final check m_pendingBypass in case of bad timing. Wait for silence (even if audio ducking since that will just push next unmute). 
+        // Final check m_pendingBypass in case of bad timing. Wait for silence (even if audio ducking since that will just push next unmute).
         if (m_pendingBypass && !((AudioProcessorGraph::Node*)(m_current->Device->m_gainNode))->getProcessor()->getTailLengthSeconds())
         {
             m_pendingBypass = false;
@@ -1079,7 +1085,7 @@ BEGIN_JUCER_METADATA
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
   <COMBOBOX name="" id="321cb138fb836f9e" memberName="m_noteMode" virtualName=""
             explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
-            items="Normal note mode&#10;Scoop&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
+            items="Normal note mode&#10;Limit 117&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="" id="12f9414bd02d87a4" memberName="m_missing" virtualName=""
          explicitFocusOrder="0" pos="8 14 76 57" edTextCol="ff000000"
