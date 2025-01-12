@@ -23,6 +23,7 @@ SoundfontAudioSource::~SoundfontAudioSource()
 
 void SoundfontAudioSource::prepareToPlay(int samplesPerBlock, double sampleRate)
 {
+    m_prepared = true;
     fluid_synth_set_sample_rate(synth, (float) sampleRate);
 
     m_reverb->prepareToPlay(sampleRate, samplesPerBlock);

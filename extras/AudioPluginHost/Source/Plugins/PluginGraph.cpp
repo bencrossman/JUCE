@@ -708,6 +708,7 @@ void PluginGraph::setupPerformer()
         rack.m_stereoToMonoWillPhase = String(rack.PluginName).startsWith("TruePianos") || rack.PluginName == "P8";
         rack.m_hasStupidCrossfade = (rack.PluginName == "OP-X PRO-3");
         rack.m_doesntRespectSoundOff = String(rack.PluginName).startsWith("TruePianos") || String(rack.PluginName).startsWith("JUPITER-8");
+        rack.m_ignoreMidi = (rack.PluginName == "mp3play2");
 
         PluginDescription pd;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)
