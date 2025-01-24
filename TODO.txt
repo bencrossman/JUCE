@@ -1,3 +1,4 @@
+Add OPX-3 Default bank to Git and copy on launch
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
@@ -11,7 +12,7 @@ Use Polyphone to edit: Need to mark Oneshots (Release to 100), Velocity insensit
 
 Police - 1 song - King Of Pain 
 Dire Straits - 4 songs
-John Farnham(Still loads in Forte) - 5 songs, Voice already done
+John Farnham(Still loads in Forte) - 5 songs, Voice/Playing to win already done
 Pink Floyd - 11 songs, Brick already done (On the run is OBX patch)
 Bon Jovi - 15 songs, Living Prayer already done (runaway is OBX patch)
 Pink(Still loads in Forte) - 20 performances, ditch a lot of the vocal samples
