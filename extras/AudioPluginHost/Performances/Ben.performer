@@ -371,7 +371,7 @@
         </Song>
         <Song ID="1402617184" Name="Dumb Things">
             <Performance ID="211262094" />
-            <Performance ID="-1893591430" />
+            <Performance ID="-569645884" />
             <Performance ID="211262094" />
         </Song>
         <Song ID="668638383" Name="Eagle Rock">
@@ -1491,7 +1491,7 @@
             <Zone DeviceID="-789407354" Program="40" Volume="-5"></Zone>
         </Performance>
         <Performance ID="1514799087" Name="Heaven must be there|">
-            <Zone DeviceID="-699955187" Bank="2" Program="127" NoteMode="4" Transpose="-12" LowKey="48" HighKey="64"></Zone>
+            <Zone DeviceID="-699955187" Bank="2" Program="127" Volume="6" NoteMode="4" Transpose="-12" LowKey="48" HighKey="64"></Zone>
             <Zone DeviceID="522416168" Program="11" Volume="6" Transpose="-12" LowKey="65"></Zone>
             <Zone DeviceID="-985547765" Bank="2" Program="50" Transpose="24" HighKey="47"></Zone>
         </Performance>
@@ -2080,6 +2080,11 @@
             <Zone DeviceID="1024611825" Program="0" Volume="-9" Transpose="10"></Zone>
             <Zone DeviceID="1555279137" Bank="7" Program="16" Volume="-7" Transpose="10"></Zone>
             <Zone DeviceID="-1202024641" Bank="2" Program="12" Volume="-1" Transpose="10"></Zone>
+        </Performance>
+        <Performance ID="-569645884" Name="ThreeOrgansSolo">
+            <Zone DeviceID="1024611825" Program="0" Transpose="12"></Zone>
+            <Zone DeviceID="1555279137" Bank="7" Program="16" Volume="3" Transpose="12"></Zone>
+            <Zone DeviceID="-1202024641" Bank="2" Program="12" Volume="6" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-1650474208" Name="Thunder Struck|">
             <Zone DeviceID="-789407354" Program="37"></Zone>
