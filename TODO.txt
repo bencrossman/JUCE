@@ -35,6 +35,8 @@ After adding first song/setlist/performance going back to rack doesnt update tit
 Option to select an image for plugin
 "Select an image" texture
 WavStreamer/SoundFontPlayer needs to refresh on dropdown
+OPX-3 Preset manager?
+Perhaps a full chunk to program mapper? Could consolidate Roland / OPX-3 hacks
 
 Future features
 ~~~~~~~~~~~~~~~
