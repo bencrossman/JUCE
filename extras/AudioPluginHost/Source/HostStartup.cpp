@@ -157,6 +157,7 @@ public:
 
         system("pskill auxhost.exe");
         system("pskill P8_Core.exe");
+        system("robocopy \"Performances\\OP-X PRO-3 Presets\" /MIR \"C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK\"");
 
         PropertiesFile::Options options;
         options.applicationName     = "Performer";

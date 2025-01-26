@@ -1,4 +1,4 @@
-Add OPX-3 Default bank to Git and copy on launch
+Do robocopy for Mac
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
