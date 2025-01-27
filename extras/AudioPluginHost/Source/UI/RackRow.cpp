@@ -816,10 +816,11 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 
     m_id = device.ID;
 
+    String folder = String(device.PluginName).replace("(VST2 64bit)", "");
 #ifdef JUCE_WINDOWS
-    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(device.PluginName).replace("(VST2 64bit)", "") + "\\Banknames.txt";
+    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\Banknames.txt";
 #else
-    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(device.PluginName) + "/Banknames.txt";
+    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/Banknames.txt";
 #endif
 
     if (File(bankFile).exists())
@@ -1002,10 +1003,11 @@ void RackRow::SendPresetStateData()
 {
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
+        String folder = String(m_current->Device->PluginName).replace("(VST2 64bit)","");
 #ifdef JUCE_WINDOWS
-        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\VST\\" + String(m_current->Device->PluginName).replace("(VST2 64bit)","") + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
+        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\VST\\" + folder + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
 #else
-        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
+        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + folder + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
 #endif
         auto input = File(sendPresetStateDataFilename).createInputStream();
         if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)

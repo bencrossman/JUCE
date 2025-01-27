@@ -628,6 +628,8 @@ static bool compareMagic(int32 magic, const char* name) noexcept
 
 void PluginGraph::SendChunkString(AudioPluginInstance *processorPtr, StringRef str)
 {
+    if (!processorPtr)
+        return;
     MemoryOutputStream output;
     Base64::convertFromBase64(output, str);
 
@@ -701,11 +703,17 @@ void PluginGraph::setupPerformer()
         rack.m_doesntRespectSoundOff = String(rack.PluginName).startsWith("TruePianos") || String(rack.PluginName).startsWith("JUPITER-8");
         rack.m_ignoreMidi = (rack.PluginName == "mp3play2");
 
+        auto test = String(rack.PluginName);
+
         PluginDescription pd;
         for (auto j = 0U; j < (unsigned)knownPlugins.getNumTypes(); ++j)
         {
             auto name = knownPlugins.getTypes()[j].name;
-            if (name.compareIgnoreCase(rack.PluginName) == 0 || name.compareIgnoreCase(String(rack.PluginName).removeCharacters(" ")) == 0 || name.compareIgnoreCase(rack.PluginName + " VSTi") == 0)
+            if (name.compareIgnoreCase(rack.PluginName) == 0
+                || name.compareIgnoreCase(String(rack.PluginName).removeCharacters(" ")) == 0
+                || name.compareIgnoreCase(rack.PluginName + " VSTi") == 0
+                || name.compareIgnoreCase(String(rack.PluginName).replace(" x64", "")) == 0
+                || name.compareIgnoreCase(String(rack.PluginName).replace("(VST2 64bit)", "")) == 0)
                 pd = knownPlugins.getTypes()[j];
         }
 
@@ -715,10 +723,11 @@ void PluginGraph::setupPerformer()
         if (auto processorPtr = processor.get())
         {
 
+            auto folder = String(rack.PluginName).replace("(VST2 64bit)", "");
 #ifdef JUCE_WINDOWS
-            auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(rack.PluginName).replace("(VST2 64bit)", "") + "\\Banknames.txt";
+            auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\Banknames.txt";
 #else
-            auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(rack.PluginName) + "/Banknames.txt";
+            auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/Banknames.txt";
 #endif
 
             if (File(bankFile).exists())
@@ -736,10 +745,11 @@ void PluginGraph::setupPerformer()
                     {
                         if (lines[i] != "UNUSED")
                         {
+                            auto folder = String(rack.PluginName).replace("(VST2 64bit)", "");
 #ifdef JUCE_WINDOWS
-                            auto bankFile2 = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + String(rack.PluginName).replace("(VST2 64bit)", "") + "\\" + String::formatted("%03d.txt", i);
+                            auto bankFile2 = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\" + String::formatted("%03d.txt", i);
 #else
-                            auto bankFile2 = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + String(rack.PluginName) + "/" + String::formatted("%03d.txt", i);
+                            auto bankFile2 = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/" + String::formatted("%03d.txt", i);
 #endif
                             StringArray lines2;
                             File(bankFile2).readLines(lines2);

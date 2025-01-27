@@ -146,10 +146,17 @@ public:
 
         // initialise our settings file..
 
+#if JUCE_MAC
+        File(File::getSpecialLocation(File::currentExecutableFile).getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getFullPathName()).setAsCurrentWorkingDirectory();
+#endif
+#if JUCE_WIN
         system("pskill auxhost.exe");
         system("pskill P8_Core.exe");
         system("robocopy \"Performances\\OP-X PRO-3 Presets\" /MIR \"C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK\"");
-
+#endif
+#if JUCE_MAC
+        system((String("rsync -r --delete \"") + File::getCurrentWorkingDirectory().getFullPathName() + "/Performances/OP-X PRO-3 Presets/\" \"/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK\"").getCharPointer());
+#endif
         PropertiesFile::Options options;
         options.applicationName     = "Performer";
         options.filenameSuffix      = "settings";
