@@ -731,19 +731,13 @@ void PluginGraph::setupPerformer()
 
         if (auto processorPtr = processor.get())
         {
-
-            auto folder = String(rack.PluginName).replace("(VST2 64bit)", "");
-#ifdef JUCE_WINDOWS
-            auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\Banknames.txt";
-#else
-            auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/Banknames.txt";
-#endif
+            auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetNames/" + String(rack.PluginName).replace("(VST2 64bit)", "") + "/Banknames.txt";
 
             if (File(bankFile).exists())
             {
                 rack.m_usesBanks = true;
 
-#ifdef JUCE_WINDOWS
+#if JUCE_WINDOWS
                 if (rack.PluginName != "M1" && rack.PluginName != "WAVESTATION") // Get patches live on Windows since VST supports it (gets any user patches)
                 {
 #endif
@@ -754,19 +748,14 @@ void PluginGraph::setupPerformer()
                     {
                         if (lines[i] != "UNUSED")
                         {
-                            auto folder = String(rack.PluginName).replace("(VST2 64bit)", "");
-#ifdef JUCE_WINDOWS
-                            auto bankFile2 = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\" + String::formatted("%03d.txt", i);
-#else
-                            auto bankFile2 = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/" + String::formatted("%03d.txt", i);
-#endif
+                            auto bankFile2 = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetNames/" + String(rack.PluginName).replace("(VST2 64bit)", "") + "/" + String::formatted("%03d.txt", i);
                             StringArray lines2;
                             File(bankFile2).readLines(lines2);
                             for (int j = 0; j < lines2.size(); ++j)
                                 rack.m_overridePatches[i].push_back(lines2[j].toStdString());
                         }
                     }
-#ifdef JUCE_WINDOWS
+#if JUCE_WINDOWS
                 }
 #endif
             }
