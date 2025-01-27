@@ -194,20 +194,27 @@ void WavStreamerAudioProcessor::setStateInformation (const void* data, int )
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-  uint8*ptr=(uint8*)data;
-  for(int i=0;i<(int)m_patches.size();++i)
-  {
-    m_patches[i].m_mode = (*ptr++);
-    m_patches[i].m_file.resize(*ptr++);
-    for(int j=0;j<(int)m_patches[i].m_file.size();++j)
-      m_patches[i].m_file[j]=*ptr++;
-  }
+    uint8*ptr=(uint8*)data;
+    for (int i = 0; i < (int)m_patches.size(); ++i)
+    {
+        m_patches[i].m_mode = (*ptr++);
+        m_patches[i].m_file.resize(*ptr++);
+        for (int j = 0; j < (int)m_patches[i].m_file.size(); ++j)
+        {
+            m_patches[i].m_file[j] = *ptr++;
+        }
+    }
 }
 
 void WavStreamerAudioProcessor::Play()
 {
-	File audioFile(m_patches[m_currentFile].m_file);
-	AudioFormatReader* reader = m_formatManager.createReaderFor(audioFile);
+    File audioFile;
+
+    if (File::isAbsolutePath(m_patches[m_currentFile].m_file))
+	    audioFile = File(m_patches[m_currentFile].m_file);
+    else
+        audioFile = File(File::getCurrentWorkingDirectory().getFullPathName() + "/" + m_patches[m_currentFile].m_file);
+    AudioFormatReader* reader = m_formatManager.createReaderFor(audioFile);
 	if (reader != nullptr)
 	{
 		auto fileSource = new AudioFormatReaderSource(reader, true);

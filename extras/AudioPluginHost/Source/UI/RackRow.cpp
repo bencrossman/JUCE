@@ -345,7 +345,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 
                 /*static int num = 0;
                 MemoryInputStream input(mb, false);
-#ifdef JUCE_WINDOWS
+#if JUCE_WINDOWS
                 auto output3 = File(String("C:\\Users\\bencr\\Desktop\\Source\\JUCE\\extras\\AudioPluginHost\\PresetStates\\VST\\") + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("\\%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
 #else
                 auto output3 = File(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + m_current->Device->PluginName + String::formatted("/%03d_%03d.bin", m_current->Bank, num++)).createOutputStream();
@@ -541,7 +541,7 @@ void RackRow::textEditorTextChanged(TextEditor&te)
 String FormatKey(int note)
 {
     const char *notenames[] = { "C ","C#","D ","D#","E ","F ","F#","G ","G#","A ","A#","B " };
-#ifdef JUCE_WINDOWS
+#if JUCE_WINDOWS
     return String::formatted("%S%d", notenames[note % 12], note / 12 - 2);
 #else
     return String::formatted("%s%d", notenames[note % 12], note / 12 - 2);
@@ -563,7 +563,7 @@ int ParseNote(const char *str)
     for (int note = 0; note <= 127; ++note)
     {
         sprintf(notename, "%s%d", notenames[note % 12], note / 12 - 2);
-#ifdef JUCE_WINDOWS
+#if JUCE_WINDOWS
         if (_stricmp(notename, nospace) == 0)
 #else
         if (strcasecmp(notename, nospace) == 0)
@@ -803,11 +803,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     else if (imageName == "fm7")
         imageName = "Yamaha DX7";
 
-#ifdef JUCE_WINDOWS
-    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "\\Images\\" + String(imageName + ".png"));
-#else
-    auto image = ImageFileFormat::loadFrom(File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../Images/" + String(imageName + ".png"));
-#endif
+    auto image = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getFullPathName() + "/Images/" + String(imageName + ".png"));
     m_deviceSettings->setImages(false, false, false, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack, image, 1.0f, Colours::transparentBlack);
 
 	m_midiFilterNode = (AudioProcessorGraph::Node*)device.m_midiFilterNode;
@@ -817,12 +813,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     m_id = device.ID;
 
     String folder = String(device.PluginName).replace("(VST2 64bit)", "");
-#ifdef JUCE_WINDOWS
-    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetNames\\" + folder + "\\Banknames.txt";
-#else
-    auto bankFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetNames/" + folder + "/Banknames.txt";
-#endif
-
+    auto bankFile = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetNames/" + folder + "/Banknames.txt";
     if (File(bankFile).exists())
     {
         StringArray lines;
@@ -833,25 +824,20 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     }
     else
     {
-#ifdef JUCE_WINDOWS
-        auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "\\" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
-#else
-        auto programFile = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
-#endif
-
+        auto programFile = File::getCurrentWorkingDirectory().getFullPathName() + "/" + String(device.Name + ".txt"); // Name intentional since DirectWave is personalized
         if (device.PluginName == "OP-X PRO-3")
         {
             /*for (int i = 0; i < 128; ++i)
             {
                 String filename("C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK\\");
-                filename += String::formatted("%03d# Empty #.opxpreset",i + 1);
+                filename += String::formatted("#%03d Empty #.opxpreset",i + 1);
                 File f(filename);
                 f.create();
             }*/
 
 
-#ifdef JUCE_WINDOWS
-            File f("C:\\Users\\Public\\Documents\\SonicProjects\\OP-X PRO-3\\Presetbase\\1_DEFAULTBANK");
+#if JUCE_WINDOWS
+            File f("C:/Users/Public/Documents/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
 #else
             File f("/Users/Shared/SonicProjects/OP-X PRO-3/Presetbase/1_DEFAULTBANK");
 #endif
@@ -1003,12 +989,7 @@ void RackRow::SendPresetStateData()
 {
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
-        String folder = String(m_current->Device->PluginName).replace("(VST2 64bit)","");
-#ifdef JUCE_WINDOWS
-        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "\\PresetStates\\VST\\" + folder + String::formatted("\\%03d_%03d.bin", m_current->Bank, m_current->Program);
-#else
-        auto sendPresetStateDataFilename = File::getSpecialLocation(File::currentExecutableFile).getFullPathName() + "../../../../../PresetStates/AudioUnits/" + folder + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
-#endif
+        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetStates/VST/" + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
         auto input = File(sendPresetStateDataFilename).createInputStream();
         if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)
         {

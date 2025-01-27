@@ -1,7 +1,3 @@
-
-Change Mac over to working directory
-Move samples / streams to working directory
-
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email), Used 3,6,7,13,14,21,22,24,30,31,39,41,45,55,59

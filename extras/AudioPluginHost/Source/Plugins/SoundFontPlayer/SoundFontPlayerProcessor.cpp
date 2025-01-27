@@ -133,11 +133,13 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         m_patches[m_currentFile].m_reload = false;
         delete m_players[m_currentFile];
         m_players[m_currentFile] = new SoundfontAudioSource();
-        String file(m_patches[m_currentFile].m_file);
-#if JUCE_MAC
-            file = file.replace("C:\\Performance",File::getCurrentWorkingDirectory().getFullPathName());
-            file = file.replace("\\", "/");
-#endif
+
+        File file;
+        if (File::isAbsolutePath(m_patches[m_currentFile].m_file))
+            file = m_patches[m_currentFile].m_file;
+        else
+            file = File::getCurrentWorkingDirectory().getFullPathName() + "/" + m_patches[m_currentFile].m_file;
+
         m_players[m_currentFile]->loadSoundfont(file);
         m_players[m_currentFile]->SetReverb(m_reverb.get());
         m_players[m_currentFile]->prepareToPlay(buffer.getNumSamples(), m_sampleRate);
@@ -221,6 +223,8 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
         m_patches[i].m_file.resize(*ptr++);
         for(int j=0;j<(int)m_patches[i].m_file.size();++j)
             m_patches[i].m_file[j] =*ptr++;
+        m_patches[i].m_file = String(m_patches[i].m_file).replace("C:\\Performance\\", "").toStdString();
+        m_patches[i].m_file = String(m_patches[i].m_file).replace("\\", "/").toStdString();
     }
 
     if (!m_preload)
@@ -232,12 +236,13 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
         if (m_patches[i].m_file != "")
         {
             m_players[i] = new SoundfontAudioSource();
-            String file(m_patches[i].m_file);
-#if JUCE_MAC
-            file = file.replace("C:\\Performance",File::getCurrentWorkingDirectory().getFullPathName());
-            file = file.replace("\\", "/");
-#endif
-            m_players[i]->loadSoundfont(File(file));
+
+            File file;
+            if (File::isAbsolutePath(m_patches[m_currentFile].m_file))
+                file = m_patches[m_currentFile].m_file;
+            else
+                file = File::getCurrentWorkingDirectory().getFullPathName() + "/" + m_patches[i].m_file;
+            m_players[i]->loadSoundfont(file);
             m_players[i]->SetReverb(m_reverb.get());
         }
     }
