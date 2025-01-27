@@ -129,6 +129,9 @@
             <Song ID="915829015" />
             <Song ID="2007312286" />
         </SetList>
+        <SetList ID="-1226624343" Name="The Eagles">
+            <Song ID="-1431161216" />
+        </SetList>
     </SetLists>
     <Racks>
         <Rack ID="627145948" Name="Piano" PluginName="TruePianos x64">eJzFjsEKwjAMhjPw6GEHX0NQ8aqCE0H0IOgLlC66YpdK1w52mz6fHnwcbzZawTcwl/B/+fMnmaQ1hFrOsyK0ZLzcbyEZMUrg75VAF+ByFIo+up2xtqhRVMhglgZdo5be1hiXvuygjbGRtZG5wmJVRMZZzpOiI0D/8Zym7+xalMaTC4b7bfNlOUrR/ORf5dmvyCFVqsbJAKAXmK9w15Rn4Qp0Sk6GbA43rqXXTmXGspF92oh8LujE84UK5yiHNPKtcJL/68QfXw2ORMU=</Rack>
@@ -551,6 +554,9 @@
             <Performance ID="-181299492" />
             <Performance ID="-1102562470" />
             <Performance ID="-181299492" />
+        </Song>
+        <Song ID="-1431161216" Name="I can&apos;t tell you why">
+            <Performance ID="2039328788" />
         </Song>
         <Song ID="-266478303" Name="I feel good">
             <Performance ID="-335610154" />
@@ -2281,6 +2287,9 @@
             <Zone DeviceID="-789407354" Program="10" Transpose="14" HighKey="59"></Zone>
             <Zone DeviceID="-2048222835" Program="0" Volume="-3" NoteMode="1" Transpose="2" LowKey="60"></Zone>
         </Performance>
+        <Performance ID="2039328788" Name="Wurlizer">
+            <Zone DeviceID="-789407354" Program="10" Volume="-3"></Zone>
+        </Performance>
         <Performance ID="1311803371" Name="You may be right|">
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
             <Zone DeviceID="-789407354" Program="33" Volume="-4"></Zone>
@@ -2296,9 +2305,6 @@
             <Zone DeviceID="-789407354" Program="45"></Zone>
             <Zone DeviceID="-841590045" Program="7" Volume="-6.5" LowKey="60"></Zone>
             <Zone DeviceID="522416168" Program="103" Transpose="24" LowKey="23" HighKey="59"></Zone>
-        </Performance>
-        <Performance ID="2039328788" Name="Your my best friend|">
-            <Zone DeviceID="-789407354" Program="10" Volume="-3"></Zone>
         </Performance>
     </Performances>
 </Root>
