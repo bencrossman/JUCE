@@ -133,7 +133,12 @@ void SoundFontPlayerAudioProcessor::processBlock (AudioSampleBuffer& buffer, Mid
         m_patches[m_currentFile].m_reload = false;
         delete m_players[m_currentFile];
         m_players[m_currentFile] = new SoundfontAudioSource();
-        m_players[m_currentFile]->loadSoundfont(File(m_patches[m_currentFile].m_file));
+        String file(m_patches[m_currentFile].m_file);
+#if JUCE_MAC
+            file = file.replace("C:\\Performance",File::getCurrentWorkingDirectory().getFullPathName());
+            file = file.replace("\\", "/");
+#endif
+        m_players[m_currentFile]->loadSoundfont(file);
         m_players[m_currentFile]->SetReverb(m_reverb.get());
         m_players[m_currentFile]->prepareToPlay(buffer.getNumSamples(), m_sampleRate);
     }
@@ -227,7 +232,12 @@ void SoundFontPlayerAudioProcessor::setStateInformation (const void* data, int )
         if (m_patches[i].m_file != "")
         {
             m_players[i] = new SoundfontAudioSource();
-            m_players[i]->loadSoundfont(File(m_patches[i].m_file));
+            String file(m_patches[i].m_file);
+#if JUCE_MAC
+            file = file.replace("C:\\Performance",File::getCurrentWorkingDirectory().getFullPathName());
+            file = file.replace("\\", "/");
+#endif
+            m_players[i]->loadSoundfont(File(file));
             m_players[i]->SetReverb(m_reverb.get());
         }
     }

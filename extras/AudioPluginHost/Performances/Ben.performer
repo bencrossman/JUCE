@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="-40733610">
+<Root CurrentSetListID="-1293992547">
     <SetLists>
         <SetList ID="-40733610" Name="Tom Crane">
             <Song ID="800911578" />
@@ -122,6 +122,12 @@
             <Song ID="115731966" />
             <Song ID="-1461222012" />
             <Song ID="327291318" />
+        </SetList>
+        <SetList ID="-1293992547" Name="Abba Thank You For The Music">
+            <Song ID="1868386257" />
+            <Song ID="-1197047045" />
+            <Song ID="915829015" />
+            <Song ID="2007312286" />
         </SetList>
     </SetLists>
     <Racks>
@@ -374,6 +380,9 @@
             <Performance ID="-569645884" />
             <Performance ID="211262094" />
         </Song>
+        <Song ID="-1197047045" Name="Eagle">
+            <Performance ID="2039840207" />
+        </Song>
         <Song ID="668638383" Name="Eagle Rock">
             <Performance ID="325567451" />
         </Song>
@@ -452,6 +461,9 @@
         </Song>
         <Song ID="-1959455314" Name="Get Lucky">
             <Performance ID="1653998057" />
+        </Song>
+        <Song ID="915829015" Name="Gimme Gimme Gimme">
+            <Performance ID="2001749563" />
         </Song>
         <Song ID="1622943407" Name="Gimme One Reason">
             <Performance ID="985014735" />
@@ -695,6 +707,9 @@
         <Song ID="1163968056" Name="Midnight Hour">
             <Performance ID="-1862712331" />
         </Song>
+        <Song ID="2007312286" Name="Money Money Money">
+            <Performance ID="1187282638" />
+        </Song>
         <Song ID="-492085869" Name="Moondance">
             <Performance ID="265751447" />
         </Song>
@@ -930,6 +945,9 @@
         </Song>
         <Song ID="1611254500" Name="Sucker">
             <Performance ID="1699621484" />
+        </Song>
+        <Song ID="1868386257" Name="Summer Night City">
+            <Performance ID="-1102229688" />
         </Song>
         <Song ID="-1893425986" Name="Summer of 69">
             <Performance ID="-628506110" />
@@ -1350,6 +1368,9 @@
             <Zone DeviceID="-1202024641" Bank="1" Program="45" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="115" LowKey="60"></Zone>
         </Performance>
+        <Performance ID="2039840207" Name="Eagle|">
+            <Zone DeviceID="-1973686393" Program="33"></Zone>
+        </Performance>
         <Performance ID="1281826436" Name="Echo Beach|">
             <Zone DeviceID="1555279137" Program="22" Transpose="-24" LowKey="72"></Zone>
             <Zone DeviceID="-1202024641" Bank="1" Program="41" Transpose="12" LowKey="22" HighKey="71"></Zone>
@@ -1432,6 +1453,9 @@
             <Zone DeviceID="-1202024641" Program="17" Volume="-5" Transpose="12" HighKey="77"></Zone>
             <Zone DeviceID="522416168" Program="15" Volume="-5" HighKey="77"></Zone>
             <Zone DeviceID="-1973686393" Program="74" Volume="-7" Transpose="-12" LowKey="78"></Zone>
+        </Performance>
+        <Performance ID="2001749563" Name="Gimme Gimme Gimme|">
+            <Zone DeviceID="-1973686393" Program="30"></Zone>
         </Performance>
         <Performance ID="39757196" Name="Give Me The Meltdown|">
             <Zone DeviceID="-1202024641" Program="45" Volume="5" Transpose="24" LowKey="40" HighKey="71"></Zone>
@@ -1700,6 +1724,9 @@
         </Performance>
         <Performance ID="-409684420" Name="Money">
             <Zone DeviceID="-789407354" Program="20"></Zone>
+        </Performance>
+        <Performance ID="1187282638" Name="Money Money Money|">
+            <Zone DeviceID="-1973686393" Program="29"></Zone>
         </Performance>
         <Performance ID="-275725803" Name="Moves like jagger|">
             <Zone DeviceID="1555279137" Bank="26" Program="99" Volume="12" Transpose="24" LowKey="48"></Zone>
@@ -2001,6 +2028,9 @@
             <Zone DeviceID="-789407354" Program="0"></Zone>
             <Zone DeviceID="-1202024641" Bank="5" Program="36" Volume="12" Transpose="-24" LowKey="84"></Zone>
             <Zone DeviceID="522416168" Program="80" Volume="3" Transpose="12" LowKey="22" HighKey="83"></Zone>
+        </Performance>
+        <Performance ID="-1102229688" Name="Summer Night City|">
+            <Zone DeviceID="-1973686393" Program="32"></Zone>
         </Performance>
         <Performance ID="-628506110" Name="Summer of 69|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12"></Zone>

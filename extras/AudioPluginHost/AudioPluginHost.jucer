@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="NTe0XB0ij" name="Performer" projectType="guiapp" version="1.0.0"
               juceFolder="../../../juce" bundleIdentifier="com.crossproduct.performer"
-              companyName="Cross Product Software"
+              companyName="Cross Product Software" reportAppUsage="0" useAppConfig="0"
               companyCopyright="Cross Product Software Pty Ltd"
               useAppConfig="0" addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1">
   <EXPORTFORMATS>

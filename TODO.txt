@@ -1,4 +1,6 @@
-Do robocopy for Mac
+
+Change Mac over to working directory
+Move samples / streams to working directory
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
