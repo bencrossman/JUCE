@@ -32,6 +32,9 @@
   ==============================================================================
 */
 
+// BenC - Added this to compile JUCE8 in VS2019
+#define UIA_IsDialogPropertyId        30174
+
 namespace juce
 {
 
