@@ -124,8 +124,7 @@ void WavStreamerEditor::buttonClicked (juce::Button* buttonThatWasClicked)
         if(ChooseFile.browseForFileToOpen())
         {
           File fileName2=ChooseFile.getResult().withFileExtension("wav");//make sure you end with desired extension
-
-          m_table->SetSelected(fileName2.getFullPathName().toUTF8());
+           m_table->SetSelected(fileName2.getFullPathName().replace(File::getCurrentWorkingDirectory().getFullPathName() + File::getSeparatorString(), "").replace("\\", "/").toUTF8());
         }
 
         //[/UserButtonCode_m_setButton]
