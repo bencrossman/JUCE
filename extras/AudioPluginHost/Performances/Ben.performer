@@ -333,7 +333,7 @@
             <Performance ID="-832157981" />
         </Song>
         <Song ID="772857543" Name="Chiquitita">
-            <Performance ID="325567451" />
+            <Performance ID="-889122876" />
         </Song>
         <Song ID="1731793504" Name="Come Back Again">
             <Performance ID="325567451" />
@@ -444,7 +444,7 @@
             <Performance ID="1639720971" />
         </Song>
         <Song ID="1173187795" Name="Fernando">
-            <Performance ID="325567451" />
+            <Performance ID="-56712542" />
         </Song>
         <Song ID="971289612" Name="Final Countdown">
             <Performance ID="-1104081288" />
@@ -571,10 +571,10 @@
             <Performance ID="1270865452" />
         </Song>
         <Song ID="-1093750469" Name="I Do, I Do, I Do, I Do, I Do">
-            <Performance ID="325567451" />
+            <Performance ID="-562240923" />
         </Song>
         <Song ID="-1995930811" Name="I Have A Dream">
-            <Performance ID="325567451" />
+            <Performance ID="-2053869149" />
         </Song>
         <Song ID="-1491607353" Name="I Saw Her Standing There">
             <Performance ID="1270865452" />
@@ -689,7 +689,7 @@
             <Performance ID="325567451" />
         </Song>
         <Song ID="-373036845" Name="Knowing Me, Knowing You">
-            <Performance ID="325567451" />
+            <Performance ID="1865639315" />
         </Song>
         <Song ID="1262892447" Name="LA Woman">
             <Performance ID="325567451" />
@@ -938,7 +938,7 @@
             <Performance ID="-1893591430" />
         </Song>
         <Song ID="182451705" Name="SOS">
-            <Performance ID="325567451" />
+            <Performance ID="-830305607" />
         </Song>
         <Song ID="-2081850605" Name="Save Tonight">
             <Performance ID="-1893591430" />
@@ -1061,7 +1061,7 @@
             <Performance ID="-2020727274" />
         </Song>
         <Song ID="-262206833" Name="Thank You For The Music">
-            <Performance ID="325567451" />
+            <Performance ID="-1084440626" />
         </Song>
         <Song ID="-1776495401" Name="That&apos;s the way">
             <Performance ID="-895406611" />
@@ -1071,7 +1071,7 @@
             <Performance ID="-1762529841" />
         </Song>
         <Song ID="-501426780" Name="The Winner Takes It All">
-            <Performance ID="325567451" />
+            <Performance ID="710009993" />
         </Song>
         <Song ID="1929494014" Name="The pretender">
             <Performance ID="-1066488609" />
@@ -1402,6 +1402,11 @@
             <Zone DeviceID="-1202024641" Bank="1" Program="41" LowKey="60" HighKey="95"></Zone>
             <Zone DeviceID="522416168" Program="17" Volume="-2" LowKey="60" HighKey="95"></Zone>
         </Performance>
+        <Performance ID="-889122876" Name="Chiquitita|">
+            <Zone DeviceID="627145948" Program="4" LowKey="36"></Zone>
+            <Zone DeviceID="1555279137" Bank="1" Program="19" NoteMode="4" Transpose="12" HighKey="35"></Zone>
+            <Zone DeviceID="416001909" Program="0"></Zone>
+        </Performance>
         <Performance ID="-2121879230" Name="Choir" Tempo="118">
             <Zone DeviceID="-699955187" Bank="9" Program="20"></Zone>
         </Performance>
@@ -1496,6 +1501,9 @@
             <Zone DeviceID="1555279137" Bank="22" Program="1" Transpose="-12" LowKey="31"></Zone>
             <Zone DeviceID="-789407354" Program="11"></Zone>
         </Performance>
+        <Performance ID="-56712542" Name="Fernando|">
+            <Zone DeviceID="-699955187" Bank="9" Program="54" NoteMode="4"></Zone>
+        </Performance>
         <Performance ID="-1104081288" Name="Final Countdown">
             <Zone DeviceID="546031377" Program="7" Volume="-3"></Zone>
             <Zone DeviceID="-1973686393" Program="87" Transpose="-27" LowKey="78"></Zone>
@@ -1553,8 +1561,9 @@
             <Zone DeviceID="-1973686393" Program="74" Volume="-7" Transpose="-12" LowKey="78"></Zone>
         </Performance>
         <Performance ID="2001749563" Name="Gimme Gimme Gimme|">
-            <Zone DeviceID="-1973686393" Program="30" LowKey="22"></Zone>
-            <Zone DeviceID="-699955187" Bank="2" Program="8" Transpose="36" HighKey="21"></Zone>
+            <Zone DeviceID="-1973686393" Program="30" LowKey="61"></Zone>
+            <Zone DeviceID="-699955187" Bank="2" Program="8" Volume="3" Transpose="36" HighKey="27"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="39" Volume="12" Transpose="12" HighKey="60"></Zone>
         </Performance>
         <Performance ID="39757196" Name="Give Me The Meltdown|">
             <Zone DeviceID="-1202024641" Program="45" Volume="5" Transpose="24" LowKey="40" HighKey="71"></Zone>
@@ -1643,6 +1652,15 @@
         <Performance ID="569138515" Name="Hotel California">
             <Zone DeviceID="1555279137" Bank="7" Program="0" Transpose="-12" LowKey="72" HighKey="108"></Zone>
             <Zone DeviceID="-985547765" Program="112" Volume="6" Transpose="12" HighKey="72"></Zone>
+        </Performance>
+        <Performance ID="-562240923" Name="I Do, I Do, I Do, I Do, I Do|">
+            <Zone DeviceID="627145948" Program="4" Transpose="12" LowKey="32" HighKey="58"></Zone>
+            <Zone DeviceID="1555279137" Program="45" NoteMode="4" Transpose="36" HighKey="31"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="4" NoteMode="4" LowKey="59"></Zone>
+            <Zone DeviceID="-2048222836" Program="0" Volume="-6" NoteMode="4" Transpose="12" LowKey="59"></Zone>
+        </Performance>
+        <Performance ID="-2053869149" Name="I Have A Dream|">
+            <Zone DeviceID="-699955187" Bank="3" Program="115" NoteMode="4"></Zone>
         </Performance>
         <Performance ID="-2011843219" Name="I Life the Night Life|" Tempo="128">
             <Zone DeviceID="-2048222835" Program="0" Volume="-6" HighKey="95"></Zone>
@@ -1743,6 +1761,9 @@
             <Zone DeviceID="1555279137" Bank="7" Program="25" LowKey="22"></Zone>
             <Zone DeviceID="-1973686393" Program="38" Volume="-5" NoteMode="5"></Zone>
             <Zone DeviceID="-789407354" Program="7"></Zone>
+        </Performance>
+        <Performance ID="1865639315" Name="Knowing Me, Knowing You|">
+            <Zone DeviceID="-699955187" Bank="15" Program="95" NoteMode="4"></Zone>
         </Performance>
         <Performance ID="-2066548255" Name="Land downunder|">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
@@ -1893,6 +1914,9 @@
         <Performance ID="-1084440626" Name="Piano +4">
             <Zone DeviceID="627145948" Program="4" Transpose="4"></Zone>
         </Performance>
+        <Performance ID="710009993" Name="Piano +6">
+            <Zone DeviceID="627145948" Program="4" Transpose="6"></Zone>
+        </Performance>
         <Performance ID="-817870791" Name="Piano -2">
             <Zone DeviceID="627145948" Program="4" Transpose="-2"></Zone>
         </Performance>
@@ -2033,6 +2057,10 @@
         <Performance ID="-1763366266" Name="Run Away|">
             <Zone DeviceID="-1973686393" Program="97" Volume="-3"></Zone>
         </Performance>
+        <Performance ID="-830305607" Name="SOS|">
+            <Zone DeviceID="627145948" Program="4"></Zone>
+            <Zone DeviceID="-699955187" Bank="12" Program="5" Volume="6" NoteMode="4"></Zone>
+        </Performance>
         <Performance ID="1713728040" Name="Save me|">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
             <Zone DeviceID="1555279137" Bank="12" Program="46" Volume="-4" Transpose="-12" LowKey="72"></Zone>
@@ -2129,7 +2157,9 @@
             <Zone DeviceID="522416168" Program="80" Volume="3" Transpose="12" LowKey="22" HighKey="83"></Zone>
         </Performance>
         <Performance ID="-1102229688" Name="Summer Night City|">
-            <Zone DeviceID="-1973686393" Program="32"></Zone>
+            <Zone DeviceID="-1973686393" Program="32" Transpose="12" HighKey="59"></Zone>
+            <Zone DeviceID="-699955187" Bank="12" Program="40" LowKey="60"></Zone>
+            <Zone DeviceID="416001909" Program="0"></Zone>
         </Performance>
         <Performance ID="-628506110" Name="Summer of 69|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12"></Zone>
