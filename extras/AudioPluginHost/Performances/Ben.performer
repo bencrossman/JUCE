@@ -701,7 +701,7 @@
             <Performance ID="-2066548255" />
         </Song>
         <Song ID="260569205" Name="Lay All Your Love On Me">
-            <Performance ID="325567451" />
+            <Performance ID="350659922" />
         </Song>
         <Song ID="1549438206" Name="Le Freak">
             <Performance ID="-685490819" />
@@ -1772,6 +1772,9 @@
         </Performance>
         <Performance ID="1431119211" Name="Last Horizon|">
             <Zone DeviceID="1555279137" Bank="19" Program="20" Volume="3"></Zone>
+        </Performance>
+        <Performance ID="350659922" Name="Lay All Your Love On Me|">
+            <Zone DeviceID="-1973686393" Program="14" Volume="-4"></Zone>
         </Performance>
         <Performance ID="-853027829" Name="LayeredPiano|">
             <Zone DeviceID="627145948" Program="4"></Zone>
