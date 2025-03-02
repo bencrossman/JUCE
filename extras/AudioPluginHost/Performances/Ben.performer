@@ -22,7 +22,6 @@
             <Song ID="-2044191071" />
             <Song ID="2057125125" />
             <Song ID="-2044191071" />
-            <Song ID="747158023" />
             <Song ID="740917624" />
             <Song ID="-2044191071" />
             <Song ID="971289612" />
@@ -167,7 +166,7 @@
         <Rack ID="-841590045" Name="Roland JP-8000" PluginName="P8"></Rack>
         <Rack ID="1317557824" Name="Roland Jupiter-8" PluginName="JUPITER-8(VST2 64bit)"></Rack>
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
-        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkctOAzEMReETWPB+yCsWLEDiD/pQC2qrlnYo6zBjGquZuMoD1H49SaQEyppoNIt7nGvf+PBoIdqNQvvQU2Jj7+3H42VWFpK/YOKtgyHDVEd2ktlUIyzJEif5JstvpBSk35zrNWzZR3yd8bOz0IER6UbARKyojvQi01fdoIGZQWu9wYhOM5qLhhiGInxRP8v6KLQKd148YhrkNoOOZicDiXN2yaGFSiL0Q5hYVkIPlLAyKsclgTeK3A5NVK9KnXDQZee4hSEZZffmfhJtG1pVDAOhVERQ3BA6BlPvngxaeK9097y8utCuYl/LSlIid4UYsdvCmJxT0YD0CnrBHhsY8yfuLaNPzQoNNcxRPvh1SqwlvRthw4p/Kkq46BeW5iRMtqGH2QtXSZ/WsnDG1+u//v97vgGvNb4s</Rack>
+        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkctOwzAQReETWPAQL82KBQuQ+IO0VQtqo0Ibyto0Qz2qk6n8AKVfj23JhrDGirK4Z3xn7vjwaCmanUJzP1RiZ+7Mx8NFUpaSv6B0xsKEYd4GdpLYvEVYkSGO8nWS30gpiL8Fr7fQsQv4KuEna6CAKbW1gFJsaB3oeaKvbY0anjUa4zQGdJrQQtTEMBH+C/pZ0qe+lb/z4hDjIDcJFC1b6UmYc0AWDVQSYeTDhLIceqyEkUE5zgmcVmT3qIN6meuEhQFbyw1MSCvTm/tRNI1vVTGMhVIBQXZDKDTG3kPpNb+vePfgNq9di30HM7JWhTpqNzD0LljDjD+xt/MR1RvUVDNHi18nT7+idy2Mf8mfipwh+Pm3sRLKzvfQvQyVdHH7S6vdevvX/3/PNzTHtLU=</Rack>
         <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxjlAxOzC3ISS3Wd8ksTs5XCC4pysxLL9YrTjNiGFgAAB1nCVQ=</Rack>
         <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjlAhOzC3ISS3Wd8wpyVdwrSgoSi0u1itOMxKFSYSk5uUXgWRAonDlIUWluQWpJQpupTk5IAkpdIng8tScHLBJkuhSQZkFEDsYBg4AAI5CLOs=</Rack>
         <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzlj00KwkAMhVtv4EJQcOVGV3oGWxDEn4otdh3aYINOUmamirdXqzO4EQ9glu97Sd4Lu6nVCMrMNo2hYnqFSzB0UiQVKgK1r6A2Ut6eNOw7umSLWpExJNzu+VNJY7W00sBJmahYA+Nj6Y38nTVdcE6lJ52xIwtiOMfSsC3lyhEUJ+Jjwlux+O1hz0uMB/LRJt8qrUCjnD5i/XImNWponSPnzIEZIkwtaEucikJbUfu340vuznB7hM8kf5HgD+YOgLyKDA==</Rack>
@@ -528,6 +527,7 @@
         </Song>
         <Song ID="1217908240" Name="Hasta Manana">
             <Performance ID="325567451" />
+            <Performance ID="1720963904" />
         </Song>
         <Song ID="243769681" Name="Heart Of Glass">
             <Performance ID="372654456" />
@@ -686,6 +686,7 @@
             <Performance ID="-1494844207" />
         </Song>
         <Song ID="33695115" Name="Kisses Of Fire">
+            <Performance ID="952260661" />
             <Performance ID="325567451" />
         </Song>
         <Song ID="-373036845" Name="Knowing Me, Knowing You">
@@ -774,6 +775,7 @@
         </Song>
         <Song ID="2007312286" Name="Money, Money, Money">
             <Performance ID="1187282638" />
+            <Performance ID="1016986167" />
         </Song>
         <Song ID="-492085869" Name="Moondance">
             <Performance ID="265751447" />
@@ -1848,8 +1850,11 @@
         <Performance ID="-409684420" Name="Money">
             <Zone DeviceID="-789407354" Program="20"></Zone>
         </Performance>
-        <Performance ID="1187282638" Name="Money Money Money|">
+        <Performance ID="1187282638" Name="Money Money Money">
             <Zone DeviceID="-1973686393" Program="29"></Zone>
+        </Performance>
+        <Performance ID="1016986167" Name="Money Money Money +1">
+            <Zone DeviceID="-1973686393" Program="29" Transpose="1"></Zone>
         </Performance>
         <Performance ID="-275725803" Name="Moves like jagger|">
             <Zone DeviceID="1555279137" Bank="26" Program="99" Volume="12" Transpose="24" LowKey="48"></Zone>
@@ -1904,6 +1909,9 @@
             <Zone DeviceID="-1202024641" Program="17" Transpose="36" LowKey="22" HighKey="59"></Zone>
             <Zone DeviceID="522416168" Program="26" Volume="12" Transpose="-24" LowKey="60"></Zone>
             <Zone DeviceID="-789407354" Program="0"></Zone>
+        </Performance>
+        <Performance ID="952260661" Name="Piano -1">
+            <Zone DeviceID="627145948" Program="4" Transpose="-1"></Zone>
         </Performance>
         <Performance ID="-1014461567" Name="Pads">
             <Zone DeviceID="522416168" Program="21"></Zone>
