@@ -1,3 +1,7 @@
+FM8 Mac version
+
+
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email), Used 3,6,7,13,14,21,22,24,30,31,39,41,45,55,59
@@ -21,6 +25,8 @@ Integrate for Access database with edit?
 
 If released
 ~~~~~~~~~~~
+Piano showing dropdown (might be Mac only)
+Bug - program list for bank may be wrong if unmute
 Sometimes racks arnt expanded when active (Go through Queen setlist)
 Solo - Visually mutes other zones
 Notification of global/overrides (hide programs/banks)

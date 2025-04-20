@@ -1636,7 +1636,6 @@
         <Performance ID="-1409776742" Name="Gimme Gimme Gimme|Solo">
             <Zone DeviceID="-1973686393" Program="30" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="21" HighKey="59"></Zone>
-            <Zone DeviceID="-699955187" Program="35" Volume="-3" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="1555279137" Bank="12" Program="17" NoteMode="4" LowKey="60"></Zone>
         </Performance>
         <Performance ID="815988281" Name="Ginme Gimme Gimme|">
