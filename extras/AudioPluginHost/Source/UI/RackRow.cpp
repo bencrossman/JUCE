@@ -989,7 +989,12 @@ void RackRow::SendPresetStateData()
 {
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
+        
+#if JUCE_WINDOWS
         auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetStates/VST/" + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
+#else
+        auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetStates/AudioUnits/" + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
+#endif
         auto input = File(sendPresetStateDataFilename).createInputStream();
         if (input.get() && sendPresetStateDataFilename != m_lastSendPresetStateDataFilename)
         {

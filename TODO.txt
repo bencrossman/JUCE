@@ -1,4 +1,6 @@
-JUCE 8
+FM8 Mac version
+
+
 
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
@@ -23,6 +25,8 @@ Integrate for Access database with edit?
 
 If released
 ~~~~~~~~~~~
+Piano showing dropdown (might be Mac only)
+Bug - program list for bank may be wrong if unmute
 Sometimes racks arnt expanded when active (Go through Queen setlist)
 Solo - Visually mutes other zones
 Notification of global/overrides (hide programs/banks)
