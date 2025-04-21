@@ -43,17 +43,17 @@ public:
             string str = InitialStateVST;
             if (InitialStateAU.size())
             {
-                str += "|AU|" + InitialStateAU;
+                str += "|" + InitialStateAU;
             }
             AR(str);
         }
         else
         {
             AR(InitialStateVST);
-            int find = InitialStateVST.find("|AU|");
+            int find = InitialStateVST.find("|");
             if (find != -1)
             {
-                InitialStateAU = InitialStateVST.substr(find + 4);
+                InitialStateAU = InitialStateVST.substr(find + 1);
                 InitialStateVST = InitialStateVST.substr(0, find);
             }
         }

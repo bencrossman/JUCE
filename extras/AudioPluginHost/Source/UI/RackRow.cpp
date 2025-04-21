@@ -862,8 +862,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
             auto window = graph->getOrCreateWindowFor((AudioProcessorGraph::Node*)device.m_node, PluginWindow::Type::normal);
             window->closeButtonPressed();
         }
-
-        if (File(programFile).exists())
+        else if (File(programFile).exists())
         {
             m_manualPatchNames = true;
             StringArray lines;
@@ -881,7 +880,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
                 if (processor->getProgramName(i) != "")
                     anyNames = i;
 
-            if (processor->getNumPrograms() == 1 || anyNames == 0)
+            if (processor->getNumPrograms() == 1 || anyNames <= 0)
                 m_hasPrograms = false; // Used by Guitar and Disco Strings
         }
     }
