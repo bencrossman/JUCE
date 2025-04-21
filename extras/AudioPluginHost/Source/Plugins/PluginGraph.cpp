@@ -766,10 +766,16 @@ void PluginGraph::setupPerformer()
 
     for (auto i = 0U; i < m_performer.Root.Racks.Rack.size(); ++i)
     {
-        if (m_performer.Root.Racks.Rack[i].m_node && m_performer.Root.Racks.Rack[i].InitialState.size())
+        if (m_performer.Root.Racks.Rack[i].m_node)
         {
             auto processor = (AudioPluginInstance*)((AudioProcessorGraph::Node*)m_performer.Root.Racks.Rack[i].m_node)->getProcessor();
-            SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialState);
+#if JUCE_WINDOWS
+            if (m_performer.Root.Racks.Rack[i].InitialStateVST.size())
+                SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialStateVST);
+#else
+            if (m_performer.Root.Racks.Rack[i].InitialStateAU.size())
+                SendChunkString(processor, m_performer.Root.Racks.Rack[i].InitialStateAU);
+#endif
         }
     }
 

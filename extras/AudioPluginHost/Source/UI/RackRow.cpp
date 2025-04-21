@@ -362,7 +362,11 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                 MemoryOutputStream output2;
                 Base64::convertToBase64(output2, output.getData(),output.getDataSize());
                 if (res == 1)
-                    m_current->Device->InitialState = (const char*)output2.getData();
+#if JUCE_WINDOWS
+                    m_current->Device->InitialStateVST = (const char*)output2.getData();
+#else
+                    m_current->Device->InitialStateAU = (const char*)output2.getData();
+#endif
                 else
                     m_current->OverrideState = (const char*)output2.getData();
             }
@@ -903,7 +907,11 @@ void RackRow::Assign(Zone *zone)
 		{
 			if (m_lastZoneHadOverrideState)
 			{
-				graph->SendChunkString(processor, zone->Device->InitialState);
+#if JUCE_WINDOWS
+				graph->SendChunkString(processor, zone->Device->InitialStateVST);
+#else
+                graph->SendChunkString(processor, zone->Device->InitialStateAU);
+#endif
 				m_lastZoneHadOverrideState = false;
 			}
 
