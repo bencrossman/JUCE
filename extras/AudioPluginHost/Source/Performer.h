@@ -17,8 +17,9 @@ public:
     int ID;
     string Name;
     string PluginName;
-    string InitialState;
-	vector<vector<string>> m_overridePatches;
+    string InitialStateVST;
+    string InitialStateAU;
+    vector<vector<string>> m_overridePatches;
     void *m_node = NULL;
     void *m_gainNode = NULL;
     void *m_midiFilterNode = NULL;
@@ -37,7 +38,26 @@ public:
 		AR(ID, XmlAttribute);
         AR(Name, XmlAttribute);
         AR(PluginName, XmlAttribute);
-        AR(InitialState);
+        if (ar.IsSaving())
+        {
+            string str = InitialStateVST;
+            if (InitialStateAU.size())
+            {
+                str += "|AU|" + InitialStateAU;
+            }
+            AR(str);
+        }
+        else
+        {
+            AR(InitialStateVST);
+            int find = InitialStateVST.find("|AU|");
+            if (find != -1)
+            {
+                InitialStateAU = InitialStateVST.substr(find + 4);
+                InitialStateVST = InitialStateVST.substr(0, find);
+            }
+        }
+
     }
 };
 

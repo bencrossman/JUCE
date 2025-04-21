@@ -97,7 +97,7 @@ void Performer::Import(const char *fileToLoad)
                             {
                                 if (blobs[bi].Key == blobref.Key)
                                 {
-                                    Root.Racks.Rack[r].InitialState = blobs[bi].contents;
+                                    Root.Racks.Rack[r].InitialStateVST = blobs[bi].contents;
                                 }
                             }
                         }
