@@ -65,7 +65,7 @@ enum NoteMode
 {
 	Normal,
 	Limit117,
-	Fall,
+	DownUpArpeggro,
 	Sixteenth,
 	DoubleOctave,
 	ThreeOctaveArpeggio,
