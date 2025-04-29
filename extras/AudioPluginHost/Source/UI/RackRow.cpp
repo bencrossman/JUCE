@@ -170,7 +170,7 @@ RackRow::RackRow ()
     m_noteMode->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
     m_noteMode->addItem (TRANS ("Normal note mode"), 1);
     m_noteMode->addItem (TRANS ("Limit 117"), 2);
-    m_noteMode->addItem (TRANS ("Fall"), 3);
+    m_noteMode->addItem (TRANS ("Down up arpeggio"), 3);
     m_noteMode->addItem (TRANS ("Sixteenth"), 4);
     m_noteMode->addItem (TRANS ("Double octave"), 5);
     m_noteMode->addItem (TRANS ("Three octave arpeggio"), 6);
@@ -614,7 +614,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
                     if (note >= 0 && note <= 127)
                     {
-                        if (m_current->NoteMode == NoteMode::Sixteenth || m_current->NoteMode == NoteMode::ThreeOctaveArpeggio)
+                        if (m_current->NoteMode == NoteMode::Sixteenth || m_current->NoteMode == NoteMode::ThreeOctaveArpeggio || m_current->NoteMode == NoteMode::DownUpArpeggio)
                         {
                             // See if new sequence
                             if (m_notesDown.empty() && midi_message.isNoteOn())
@@ -678,7 +678,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                             midi_message.setNoteNumber(note); // transposed note
 
                             if (m_current->NoteMode == NoteMode::Limit117 && midi_message.getVelocity() > 117)
-                                midi_message.setVelocity(117.f / 127);                                
+                                midi_message.setVelocity(117.f / 127);
 
                             if (!m_current->Device->m_ignoreMidi)
                                 output.addEvent(midi_message, sample_number);
@@ -774,7 +774,20 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 
                 // need new note
 
-                m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio ? 3 : 1));
+                if (m_current->NoteMode == NoteMode::ThreeOctaveArpeggio)
+                    m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()] + 12 * ((m_arpeggiatorBeat / m_notesDown.size()) % 3);
+                else if (m_current->NoteMode == NoteMode::Sixteenth || (m_current->NoteMode == NoteMode::DownUpArpeggio && m_notesDown.size() == 1))
+                    m_lastNote = m_notesDown[m_arpeggiatorBeat % m_notesDown.size()];
+                else if (m_current->NoteMode == NoteMode::DownUpArpeggio && m_notesDown.size() > 1)
+                {
+                    bool isGoingUp = (m_arpeggiatorBeat / (m_notesDown.size() - 1)) % 2;
+                    int index = m_arpeggiatorBeat % (m_notesDown.size() - 1);
+                    if (!isGoingUp)
+                        index = m_notesDown.size() - 1 - index;
+                    m_lastNote = m_notesDown[index];
+                }
+
+
                 if (m_lastNote < 128)
                     midiBuffer.addEvent(MidiMessage::noteOn(1, m_lastNote, 1.0f), nextarpeggiatorSample);
                 m_arpeggiatorBeat++;
@@ -996,7 +1009,7 @@ void RackRow::SendPresetStateData()
 {
     if (String(m_current->Device->PluginName).startsWith("JV-1080") || String(m_current->Device->PluginName).startsWith("JUPITER-8"))
     {
-        
+
 #if JUCE_WINDOWS
         auto sendPresetStateDataFilename = File::getCurrentWorkingDirectory().getFullPathName() + "/PresetStates/VST/" + String(m_current->Device->PluginName).replace("(VST2 64bit)", "") + String::formatted("/%03d_%03d.bin", m_current->Bank, m_current->Program);
 #else
@@ -1080,7 +1093,7 @@ BEGIN_JUCER_METADATA
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
   <COMBOBOX name="" id="321cb138fb836f9e" memberName="m_noteMode" virtualName=""
             explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
-            items="Normal note mode&#10;Limit 117&#10;Fall&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
+            items="Normal note mode&#10;Limit 117&#10;Down up arpeggio&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="" id="12f9414bd02d87a4" memberName="m_missing" virtualName=""
          explicitFocusOrder="0" pos="8 14 76 57" edTextCol="ff000000"

@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 7.0.10
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -33,58 +33,58 @@ SetlistManager::SetlistManager ()
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    m_selectedSongGroup.reset (new GroupComponent (String(),
-                                                   TRANS("Performances in selected song")));
+    m_selectedSongGroup.reset (new juce::GroupComponent (juce::String(),
+                                                         TRANS ("Performances in selected song")));
     addAndMakeVisible (m_selectedSongGroup.get());
 
     m_selectedSongGroup->setBounds (496, 72, 216, 568);
 
-    m_allsongsGroup.reset (new GroupComponent (String(),
-                                               TRANS("Songs")));
+    m_allsongsGroup.reset (new juce::GroupComponent (juce::String(),
+                                                     TRANS ("Songs")));
     addAndMakeVisible (m_allsongsGroup.get());
 
     m_allsongsGroup->setBounds (216, 72, 280, 568);
 
-    m_setlistGroup.reset (new GroupComponent (String(),
-                                              TRANS("Setlist")));
+    m_setlistGroup.reset (new juce::GroupComponent (juce::String(),
+                                                    TRANS ("Setlist")));
     addAndMakeVisible (m_setlistGroup.get());
 
     m_setlistGroup->setBounds (0, 0, 216, 640);
 
-    m_newSetlist.reset (new TextButton (String()));
+    m_newSetlist.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_newSetlist.get());
-    m_newSetlist->setButtonText (TRANS("New"));
+    m_newSetlist->setButtonText (TRANS ("New"));
     m_newSetlist->addListener (this);
 
     m_newSetlist->setBounds (8, 24, 39, 24);
 
-    m_deleteSetlist.reset (new TextButton (String()));
+    m_deleteSetlist.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_deleteSetlist.get());
-    m_deleteSetlist->setButtonText (TRANS("Delete"));
+    m_deleteSetlist->setButtonText (TRANS ("Delete"));
     m_deleteSetlist->addListener (this);
 
     m_deleteSetlist->setBounds (48, 24, 47, 24);
 
-    m_cloneSetlist.reset (new TextButton (String()));
+    m_cloneSetlist.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_cloneSetlist.get());
-    m_cloneSetlist->setButtonText (TRANS("Clone"));
+    m_cloneSetlist->setButtonText (TRANS ("Clone"));
     m_cloneSetlist->addListener (this);
 
     m_cloneSetlist->setBounds (96, 24, 47, 24);
 
-    m_renameSetlist.reset (new TextButton (String()));
+    m_renameSetlist.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_renameSetlist.get());
-    m_renameSetlist->setButtonText (TRANS("Rename"));
+    m_renameSetlist->setButtonText (TRANS ("Rename"));
     m_renameSetlist->addListener (this);
 
     m_renameSetlist->setBounds (144, 24, 63, 24);
 
-    m_currentSetlist.reset (new ComboBox (String()));
+    m_currentSetlist.reset (new juce::ComboBox (juce::String()));
     addAndMakeVisible (m_currentSetlist.get());
     m_currentSetlist->setEditableText (false);
-    m_currentSetlist->setJustificationType (Justification::centredLeft);
-    m_currentSetlist->setTextWhenNothingSelected (String());
-    m_currentSetlist->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    m_currentSetlist->setJustificationType (juce::Justification::centredLeft);
+    m_currentSetlist->setTextWhenNothingSelected (juce::String());
+    m_currentSetlist->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
     m_currentSetlist->addListener (this);
 
     m_currentSetlist->setBounds (8, 56, 200, 24);
@@ -94,72 +94,72 @@ SetlistManager::SetlistManager ()
 
     m_setlist->setBounds (8, 120, 200, 512);
 
-    m_useSetlistSong.reset (new TextButton (String()));
+    m_useSetlistSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_useSetlistSong.get());
-    m_useSetlistSong->setButtonText (TRANS("Use"));
+    m_useSetlistSong->setButtonText (TRANS ("Use"));
     m_useSetlistSong->addListener (this);
 
     m_useSetlistSong->setBounds (16, 88, 31, 24);
 
-    m_removeSetlistSong.reset (new TextButton (String()));
+    m_removeSetlistSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_removeSetlistSong.get());
-    m_removeSetlistSong->setButtonText (TRANS("Remove"));
+    m_removeSetlistSong->setButtonText (TRANS ("Remove"));
     m_removeSetlistSong->addListener (this);
 
     m_removeSetlistSong->setBounds (128, 88, 63, 24);
 
-    m_upSetlistSong.reset (new TextButton (String()));
+    m_upSetlistSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_upSetlistSong.get());
-    m_upSetlistSong->setButtonText (TRANS("Up"));
+    m_upSetlistSong->setButtonText (TRANS ("Up"));
     m_upSetlistSong->addListener (this);
 
     m_upSetlistSong->setBounds (48, 88, 31, 24);
 
-    m_downSetlistSong.reset (new TextButton (String()));
+    m_downSetlistSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_downSetlistSong.get());
-    m_downSetlistSong->setButtonText (TRANS("Down"));
+    m_downSetlistSong->setButtonText (TRANS ("Down"));
     m_downSetlistSong->addListener (this);
 
     m_downSetlistSong->setBounds (80, 88, 47, 24);
 
-    m_useSong.reset (new TextButton (String()));
+    m_useSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_useSong.get());
-    m_useSong->setButtonText (TRANS("Use"));
+    m_useSong->setButtonText (TRANS ("Use"));
     m_useSong->addListener (this);
 
     m_useSong->setBounds (264, 88, 31, 24);
 
-    m_newSong.reset (new TextButton (String()));
+    m_newSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_newSong.get());
-    m_newSong->setButtonText (TRANS("New"));
+    m_newSong->setButtonText (TRANS ("New"));
     m_newSong->addListener (this);
 
     m_newSong->setBounds (224, 88, 39, 24);
 
-    m_deleteSong.reset (new TextButton (String()));
+    m_deleteSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_deleteSong.get());
-    m_deleteSong->setButtonText (TRANS("Delete"));
+    m_deleteSong->setButtonText (TRANS ("Delete"));
     m_deleteSong->addListener (this);
 
     m_deleteSong->setBounds (296, 88, 47, 24);
 
-    m_cloneSong.reset (new TextButton (String()));
+    m_cloneSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_cloneSong.get());
-    m_cloneSong->setButtonText (TRANS("Clone"));
+    m_cloneSong->setButtonText (TRANS ("Clone"));
     m_cloneSong->addListener (this);
 
     m_cloneSong->setBounds (344, 88, 47, 24);
 
-    m_renameSong.reset (new TextButton (String()));
+    m_renameSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_renameSong.get());
-    m_renameSong->setButtonText (TRANS("Rename"));
+    m_renameSong->setButtonText (TRANS ("Rename"));
     m_renameSong->addListener (this);
 
     m_renameSong->setBounds (392, 88, 63, 24);
 
-    m_addSong.reset (new TextButton (String()));
+    m_addSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_addSong.get());
-    m_addSong->setButtonText (TRANS("<<"));
+    m_addSong->setButtonText (TRANS ("<<"));
     m_addSong->addListener (this);
 
     m_addSong->setBounds (456, 88, 31, 24);
@@ -174,71 +174,71 @@ SetlistManager::SetlistManager ()
 
     m_performancesInSongList->setBounds (504, 120, 200, 512);
 
-    m_usePerformanceInsSong.reset (new TextButton (String()));
+    m_usePerformanceInsSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_usePerformanceInsSong.get());
-    m_usePerformanceInsSong->setButtonText (TRANS("Use"));
+    m_usePerformanceInsSong->setButtonText (TRANS ("Use"));
     m_usePerformanceInsSong->addListener (this);
 
     m_usePerformanceInsSong->setBounds (512, 88, 31, 24);
 
-    m_removePerformanceFromSong.reset (new TextButton (String()));
+    m_removePerformanceFromSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_removePerformanceFromSong.get());
-    m_removePerformanceFromSong->setButtonText (TRANS("Remove"));
+    m_removePerformanceFromSong->setButtonText (TRANS ("Remove"));
     m_removePerformanceFromSong->addListener (this);
 
     m_removePerformanceFromSong->setBounds (624, 88, 63, 24);
 
-    m_upPerformanceInSong.reset (new TextButton (String()));
+    m_upPerformanceInSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_upPerformanceInSong.get());
-    m_upPerformanceInSong->setButtonText (TRANS("Up"));
+    m_upPerformanceInSong->setButtonText (TRANS ("Up"));
     m_upPerformanceInSong->addListener (this);
 
     m_upPerformanceInSong->setBounds (544, 88, 31, 24);
 
-    m_downPerformanceInSong.reset (new TextButton (String()));
+    m_downPerformanceInSong.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_downPerformanceInSong.get());
-    m_downPerformanceInSong->setButtonText (TRANS("Down"));
+    m_downPerformanceInSong->setButtonText (TRANS ("Down"));
     m_downPerformanceInSong->addListener (this);
 
     m_downPerformanceInSong->setBounds (576, 88, 47, 24);
 
-    m_performancesGroup.reset (new GroupComponent (String(),
-                                                   TRANS("Performances")));
+    m_performancesGroup.reset (new juce::GroupComponent (juce::String(),
+                                                         TRANS ("Performances")));
     addAndMakeVisible (m_performancesGroup.get());
 
     m_performancesGroup->setBounds (712, 72, 232, 568);
 
-    m_usePerformance.reset (new TextButton (String()));
+    m_usePerformance.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_usePerformance.get());
-    m_usePerformance->setButtonText (TRANS("Use"));
+    m_usePerformance->setButtonText (TRANS ("Use"));
     m_usePerformance->addListener (this);
 
     m_usePerformance->setBounds (760, 88, 31, 24);
 
-    m_newPerformance.reset (new TextButton (String()));
+    m_newPerformance.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_newPerformance.get());
-    m_newPerformance->setButtonText (TRANS("New"));
+    m_newPerformance->setButtonText (TRANS ("New"));
     m_newPerformance->addListener (this);
 
     m_newPerformance->setBounds (720, 88, 39, 24);
 
-    m_deletePerformance.reset (new TextButton (String()));
+    m_deletePerformance.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_deletePerformance.get());
-    m_deletePerformance->setButtonText (TRANS("Delete"));
+    m_deletePerformance->setButtonText (TRANS ("Delete"));
     m_deletePerformance->addListener (this);
 
     m_deletePerformance->setBounds (792, 88, 47, 24);
 
-    m_renamePerformance.reset (new TextButton (String()));
+    m_renamePerformance.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_renamePerformance.get());
-    m_renamePerformance->setButtonText (TRANS("Rename"));
+    m_renamePerformance->setButtonText (TRANS ("Rename"));
     m_renamePerformance->addListener (this);
 
     m_renamePerformance->setBounds (840, 88, 63, 24);
 
-    m_addPerformance.reset (new TextButton (String()));
+    m_addPerformance.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_addPerformance.get());
-    m_addPerformance->setButtonText (TRANS("<<"));
+    m_addPerformance->setButtonText (TRANS ("<<"));
     m_addPerformance->addListener (this);
 
     m_addPerformance->setBounds (904, 88, 31, 24);
@@ -285,7 +285,7 @@ SetlistManager::SetlistManager ()
 	};
 	m_songList->setModel(m_songListModel);
 
-	
+
 	m_selectedSongListModel = new SelectedSongListModel();
 	m_selectedSongListModel->m_onSelectedChanged = [this]()
 	{
@@ -298,13 +298,13 @@ SetlistManager::SetlistManager ()
 		}
 	};
 	m_performancesInSongList->setModel(m_selectedSongListModel);
-    
+
 
 	m_performanceListModel = new PerformanceListModel();
 	m_performanceList->setModel(m_performanceListModel);
 
-	
-	//[/Constructor]
+
+    //[/Constructor]
 }
 
 SetlistManager::~SetlistManager()
@@ -351,12 +351,12 @@ SetlistManager::~SetlistManager()
 }
 
 //==============================================================================
-void SetlistManager::paint (Graphics& g)
+void SetlistManager::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colour (0xff323e44));
+    g.fillAll (juce::Colour (0xff323e44));
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -371,7 +371,7 @@ void SetlistManager::resized()
     //[/UserResized]
 }
 
-void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
+void SetlistManager::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
@@ -432,7 +432,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 
 		m_performer->Root.SetLists.SetList.push_back(newSetlist);
 		auto &newSetlist2 = m_performer->Root.SetLists.SetList[m_performer->Root.SetLists.SetList.size() - 1];
-		
+
 		m_performer->m_currentSetlistIndex = (int)m_performer->Root.SetLists.SetList.size() - 1;
 		m_performer->Root.CurrentSetListID = newSetlist2.ID;
 		m_setlistListModel->m_selectedSetlist = &newSetlist2;
@@ -458,7 +458,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 			auto &song = m_setlistListModel->m_selectedSetlist->SongPtr[index];
 			if (song->PerformancePtr.size()) // song may have no performances
 				m_onUsePerformance(m_performer->GetIndexByPerformance(song->ID, song->PerformancePtr[0]->ID), nullptr);
-		}		
+		}
         //[/UserButtonCode_m_useSetlistSong]
     }
     else if (buttonThatWasClicked == m_removeSetlistSong.get())
@@ -655,12 +655,12 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
 		auto index = m_performancesInSongList->getSelectedRow();
 		if (index != -1)
 		{
-			auto setlistIndex = m_performer->GetIndexByPerformance(m_selectedSongListModel->m_selectedSong->ID, m_selectedSongListModel->m_selectedSong->Performance[0].ID);	
+			auto setlistIndex = m_performer->GetIndexByPerformance(m_selectedSongListModel->m_selectedSong->ID, m_selectedSongListModel->m_selectedSong->Performance[0].ID);
 			if (setlistIndex != -1)
 				setlistIndex += index;
 			m_onUsePerformance(setlistIndex, m_selectedSongListModel->m_selectedSong->PerformancePtr[index]);
 		}
-		//[/UserButtonCode_m_usePerformanceInsSong]
+        //[/UserButtonCode_m_usePerformanceInsSong]
     }
     else if (buttonThatWasClicked == m_removePerformanceFromSong.get())
     {
@@ -832,7 +832,7 @@ void SetlistManager::buttonClicked (Button* buttonThatWasClicked)
     //[/UserbuttonClicked_Post]
 }
 
-void SetlistManager::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
+void SetlistManager::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
