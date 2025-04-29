@@ -1,7 +1,5 @@
 yabridge is a great Linux bridge
 
-Upgrade to 7.0.12 - Put in fix for https://forum.juce.com/t/removal-of-gui-editor/62379/13
-
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email), Used 3,6,7,13,14,21,22,24,30,31,39,41,45,55,59
