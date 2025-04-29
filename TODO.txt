@@ -1,5 +1,7 @@
 yabridge is a great Linux bridge
 
+Upgrade to 7.0.12 - Put in fix for https://forum.juce.com/t/removal-of-gui-editor/62379/13
+
 Mac support missing
 ~~~~~~~~~~~~~~~~~~~
 -P8 - No Windows (Have fired off email), Used 3,6,7,13,14,21,22,24,30,31,39,41,45,55,59
@@ -24,6 +26,7 @@ Integrate for Access database with edit?
 If released
 ~~~~~~~~~~~
 Bug where Voulez-Vous expands muted piano
+Bug where jump straight to SOS and Triton patch not set (debug only?)
 Bug - program list for bank may be wrong if unmute
 Sometimes racks arnt expanded when active (Go through Queen setlist)
 Solo - Visually mutes other zones

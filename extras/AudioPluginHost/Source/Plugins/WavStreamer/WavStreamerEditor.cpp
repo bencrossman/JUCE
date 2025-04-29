@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 7.0.2
+  Created with Projucer version: 7.0.10
 
   ------------------------------------------------------------------------------
 
@@ -36,14 +36,14 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
 
     m_setButton.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_setButton.get());
-    m_setButton->setButtonText (TRANS("Set"));
+    m_setButton->setButtonText (TRANS ("Set"));
     m_setButton->addListener (this);
 
     m_setButton->setBounds (8, 8, 80, 24);
 
     m_clearButton.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_clearButton.get());
-    m_clearButton->setButtonText (TRANS("Clear"));
+    m_clearButton->setButtonText (TRANS ("Clear"));
     m_clearButton->addListener (this);
 
     m_clearButton->setBounds (96, 8, 80, 24);
@@ -55,7 +55,7 @@ WavStreamerEditor::WavStreamerEditor (AudioProcessor& processor)
 
     m_cycleButton.reset (new juce::TextButton (juce::String()));
     addAndMakeVisible (m_cycleButton.get());
-    m_cycleButton->setButtonText (TRANS("Cycle Mode"));
+    m_cycleButton->setButtonText (TRANS ("Cycle Mode"));
     m_cycleButton->addListener (this);
 
     m_cycleButton->setBounds (336, 8, 104, 24);

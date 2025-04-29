@@ -2192,7 +2192,8 @@
         </Performance>
         <Performance ID="-830305607" Name="SOS|" Tempo="125">
             <Zone DeviceID="627145948" Program="4" HighKey="80"></Zone>
-            <Zone DeviceID="-699955187" Bank="12" Program="5" Volume="6" NoteMode="5" Transpose="-12" LowKey="81"></Zone>
+            <Zone DeviceID="-699955187" Bank="12" Program="5" Volume="9" NoteMode="2" LowKey="81"></Zone>
+            <Zone DeviceID="-985547765" Program="0" Volume="3" NoteMode="2" Transpose="-24" LowKey="81"></Zone>
         </Performance>
         <Performance ID="1713728040" Name="Save me|">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>

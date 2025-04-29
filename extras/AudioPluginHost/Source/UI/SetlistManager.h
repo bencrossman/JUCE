@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 7.0.10
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -166,13 +166,13 @@ public:
                                                                     //[/Comments]
 */
 class SetlistManager  : public Component,
-                        public Button::Listener,
-                        public ComboBox::Listener
+                        public juce::Button::Listener,
+                        public juce::ComboBox::Listener
 {
 public:
     //==============================================================================
     SetlistManager ();
-    ~SetlistManager();
+    ~SetlistManager() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
@@ -180,12 +180,12 @@ public:
 	Performer *m_performer = nullptr;
 	std::function<void(int,PerformanceType *)> m_onUsePerformance;
 	virtual void visibilityChanged();
-	//[/UserMethods]
+    //[/UserMethods]
 
-    void paint (Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
+    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
 
 
 
@@ -203,37 +203,37 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<GroupComponent> m_selectedSongGroup;
-    std::unique_ptr<GroupComponent> m_allsongsGroup;
-    std::unique_ptr<GroupComponent> m_setlistGroup;
-    std::unique_ptr<TextButton> m_newSetlist;
-    std::unique_ptr<TextButton> m_deleteSetlist;
-    std::unique_ptr<TextButton> m_cloneSetlist;
-    std::unique_ptr<TextButton> m_renameSetlist;
-    std::unique_ptr<ComboBox> m_currentSetlist;
+    std::unique_ptr<juce::GroupComponent> m_selectedSongGroup;
+    std::unique_ptr<juce::GroupComponent> m_allsongsGroup;
+    std::unique_ptr<juce::GroupComponent> m_setlistGroup;
+    std::unique_ptr<juce::TextButton> m_newSetlist;
+    std::unique_ptr<juce::TextButton> m_deleteSetlist;
+    std::unique_ptr<juce::TextButton> m_cloneSetlist;
+    std::unique_ptr<juce::TextButton> m_renameSetlist;
+    std::unique_ptr<juce::ComboBox> m_currentSetlist;
     std::unique_ptr<ListBox> m_setlist;
-    std::unique_ptr<TextButton> m_useSetlistSong;
-    std::unique_ptr<TextButton> m_removeSetlistSong;
-    std::unique_ptr<TextButton> m_upSetlistSong;
-    std::unique_ptr<TextButton> m_downSetlistSong;
-    std::unique_ptr<TextButton> m_useSong;
-    std::unique_ptr<TextButton> m_newSong;
-    std::unique_ptr<TextButton> m_deleteSong;
-    std::unique_ptr<TextButton> m_cloneSong;
-    std::unique_ptr<TextButton> m_renameSong;
-    std::unique_ptr<TextButton> m_addSong;
+    std::unique_ptr<juce::TextButton> m_useSetlistSong;
+    std::unique_ptr<juce::TextButton> m_removeSetlistSong;
+    std::unique_ptr<juce::TextButton> m_upSetlistSong;
+    std::unique_ptr<juce::TextButton> m_downSetlistSong;
+    std::unique_ptr<juce::TextButton> m_useSong;
+    std::unique_ptr<juce::TextButton> m_newSong;
+    std::unique_ptr<juce::TextButton> m_deleteSong;
+    std::unique_ptr<juce::TextButton> m_cloneSong;
+    std::unique_ptr<juce::TextButton> m_renameSong;
+    std::unique_ptr<juce::TextButton> m_addSong;
     std::unique_ptr<ListBox> m_songList;
     std::unique_ptr<ListBox> m_performancesInSongList;
-    std::unique_ptr<TextButton> m_usePerformanceInsSong;
-    std::unique_ptr<TextButton> m_removePerformanceFromSong;
-    std::unique_ptr<TextButton> m_upPerformanceInSong;
-    std::unique_ptr<TextButton> m_downPerformanceInSong;
-    std::unique_ptr<GroupComponent> m_performancesGroup;
-    std::unique_ptr<TextButton> m_usePerformance;
-    std::unique_ptr<TextButton> m_newPerformance;
-    std::unique_ptr<TextButton> m_deletePerformance;
-    std::unique_ptr<TextButton> m_renamePerformance;
-    std::unique_ptr<TextButton> m_addPerformance;
+    std::unique_ptr<juce::TextButton> m_usePerformanceInsSong;
+    std::unique_ptr<juce::TextButton> m_removePerformanceFromSong;
+    std::unique_ptr<juce::TextButton> m_upPerformanceInSong;
+    std::unique_ptr<juce::TextButton> m_downPerformanceInSong;
+    std::unique_ptr<juce::GroupComponent> m_performancesGroup;
+    std::unique_ptr<juce::TextButton> m_usePerformance;
+    std::unique_ptr<juce::TextButton> m_newPerformance;
+    std::unique_ptr<juce::TextButton> m_deletePerformance;
+    std::unique_ptr<juce::TextButton> m_renamePerformance;
+    std::unique_ptr<juce::TextButton> m_addPerformance;
     std::unique_ptr<ListBox> m_performanceList;
 
 
