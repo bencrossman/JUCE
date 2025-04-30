@@ -336,6 +336,9 @@
             <Performance ID="-889122876" />
             <Performance ID="1081313491" />
             <Performance ID="-209958434" />
+            <Performance ID="1081313491" />
+            <Performance ID="-209958434" />
+            <Performance ID="-889122876" />
         </Song>
         <Song ID="1731793504" Name="Come Back Again">
             <Performance ID="325567451" />
@@ -1437,15 +1440,13 @@
             <Zone DeviceID="522416168" Program="17" Volume="-2" LowKey="60" HighKey="95"></Zone>
         </Performance>
         <Performance ID="-889122876" Name="Chiquitita|">
-            <Zone DeviceID="627145948" Program="4" LowKey="36" HighKey="92"></Zone>
+            <Zone DeviceID="627145948" Program="4" LowKey="36"></Zone>
             <Zone DeviceID="1555279137" Bank="1" Program="19" NoteMode="4" Transpose="12" HighKey="35"></Zone>
-            <Zone DeviceID="-699955187" Bank="12" Program="79" Transpose="-12" LowKey="92"></Zone>
         </Performance>
         <Performance ID="1081313491" Name="Chiquitita|+Strings">
-            <Zone DeviceID="627145948" Program="4" LowKey="36" HighKey="92"></Zone>
+            <Zone DeviceID="627145948" Program="4" LowKey="36"></Zone>
             <Zone DeviceID="1555279137" Bank="1" Program="19" NoteMode="4" Transpose="12" HighKey="35"></Zone>
-            <Zone DeviceID="-699955187" Bank="12" Program="79" Transpose="-12" LowKey="92"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="12" LowKey="36" HighKey="92"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="12" LowKey="36"></Zone>
         </Performance>
         <Performance ID="-209958434" Name="Chiquitita|Harpichord">
             <Zone DeviceID="-699955187" Bank="8" Program="8" Volume="3" NoteMode="4" LowKey="21"></Zone>
@@ -2193,7 +2194,8 @@
         <Performance ID="-830305607" Name="SOS|" Tempo="125">
             <Zone DeviceID="627145948" Program="4" HighKey="80"></Zone>
             <Zone DeviceID="-699955187" Bank="12" Program="5" Volume="9" NoteMode="2" LowKey="81"></Zone>
-            <Zone DeviceID="-985547765" Program="0" Volume="3" NoteMode="2" Transpose="-24" LowKey="81"></Zone>
+            <Zone DeviceID="-985547765" Program="0" Volume="-3" NoteMode="2" Transpose="-24" LowKey="81"></Zone>
+            <Zone DeviceID="522416168" Program="8" Volume="-3" NoteMode="2" Transpose="-24" LowKey="81"></Zone>
         </Performance>
         <Performance ID="1713728040" Name="Save me|">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
