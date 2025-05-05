@@ -1052,6 +1052,8 @@
             <Performance ID="-1269674436" />
             <Performance ID="1957098501" />
             <Performance ID="-1102229688" />
+            <Performance ID="1957098501" />
+            <Performance ID="-1102229688" />
         </Song>
         <Song ID="-1893425986" Name="Summer of 69">
             <Performance ID="-628506110" />
@@ -1108,6 +1110,7 @@
             <Performance ID="-575612397" />
             <Performance ID="710009993" />
             <Performance ID="-575612397" />
+            <Performance ID="710009993" />
         </Song>
         <Song ID="1929494014" Name="The pretender">
             <Performance ID="-1066488609" />
@@ -1566,14 +1569,12 @@
         <Performance ID="475411215" Name="Fernando|Piano">
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
-            <Zone DeviceID="627145948" Program="0" Transpose="24" LowKey="40" HighKey="58"></Zone>
-            <Zone DeviceID="1555279137" Bank="5" Program="13" Transpose="24" HighKey="39"></Zone>
+            <Zone DeviceID="627145948" Program="0" Transpose="24" LowKey="21" HighKey="58"></Zone>
         </Performance>
         <Performance ID="-56712542" Name="Fernando|Strings">
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" NoteMode="4" Transpose="24" LowKey="42" HighKey="58"></Zone>
-            <Zone DeviceID="1555279137" Bank="5" Program="13" Transpose="24" HighKey="41"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" NoteMode="4" Transpose="24" LowKey="21" HighKey="58"></Zone>
         </Performance>
         <Performance ID="-1104081288" Name="Final Countdown">
             <Zone DeviceID="546031377" Program="7" Volume="-3"></Zone>
@@ -1885,7 +1886,7 @@
         </Performance>
         <Performance ID="350659922" Name="Lay All Your Love On Me|">
             <Zone DeviceID="-1973686393" Program="14" Volume="-10" HighKey="83"></Zone>
-            <Zone DeviceID="-699955187" Program="67" Volume="6" NoteMode="4" Transpose="-24" LowKey="84"></Zone>
+            <Zone DeviceID="-699955187" Program="67" Volume="3" NoteMode="4" Transpose="-24" LowKey="84"></Zone>
             <Zone DeviceID="522416168" Program="17" Volume="-3" Transpose="12" HighKey="83"></Zone>
         </Performance>
         <Performance ID="-853027829" Name="LayeredPiano|">
@@ -2349,7 +2350,7 @@
             <Zone DeviceID="522416168" Program="41" Volume="-6" Transpose="-12" LowKey="56"></Zone>
             <Zone DeviceID="-789407354" Program="31" Volume="-11"></Zone>
         </Performance>
-        <Performance ID="-1909776476" Name="Take A Chance On Me|" Tempo="107">
+        <Performance ID="-1909776476" Name="Take A Chance On Me|" Tempo="108">
             <Zone DeviceID="-1202024641" Program="17" LowKey="60" HighKey="91"></Zone>
             <Zone DeviceID="522416168" Program="103" Transpose="-12" LowKey="60" HighKey="91"></Zone>
             <Zone DeviceID="1317557824" Program="32" Volume="-9" Transpose="24" HighKey="59"></Zone>

@@ -677,8 +677,8 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                         {
                             midi_message.setNoteNumber(note); // transposed note
 
-                            if (m_current->NoteMode == NoteMode::Limit117 && midi_message.getVelocity() > 117)
-                                midi_message.setVelocity(117.f / 127);
+                            if (m_current->NoteMode == NoteMode::Limit117)
+                                midi_message.setVelocity(midi_message.getVelocity() / 127.f * (117.f / 127.f));
 
                             if (!m_current->Device->m_ignoreMidi)
                                 output.addEvent(midi_message, sample_number);
@@ -937,6 +937,11 @@ void RackRow::Assign(Zone *zone)
 		m_missing->setVisible(false);
 	}
 
+    /*if (zone->Device->PluginName == "mp3play2")
+    {
+        zone->Mute = false;
+        zone->Volume = 3;
+    }*/
     m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
     m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification);
     m_volume->setValue(zone->Volume);

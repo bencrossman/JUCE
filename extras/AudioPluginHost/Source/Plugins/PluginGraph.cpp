@@ -985,6 +985,13 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             //  //ignore modulation
             //}
 
+            // Handle M-Wave foot switch
+            /*if (midi_message.isProgramChange() && midi_message.getProgramChangeNumber() == 0)
+                midi_message = MidiMessage::controllerEvent(0, 28, 127);
+
+            if (midi_message.isProgramChange() && midi_message.getProgramChangeNumber() == 1)
+                midi_message = MidiMessage::controllerEvent(0, 29, 127);*/
+
             if (midi_message.isControllerOfType(85))
             {
 				((AudioProcessorGraph::Node *)(m_masterGainNode))->getProcessor()->getParameters()[0]->setValue((((float)midi_message.getControllerValue()) / 127.f) * 0.25f);
