@@ -423,12 +423,10 @@
         <Song ID="-1197047045" Name="Eagle">
             <Performance ID="2039840207" />
             <Performance ID="196282959" />
-            <Performance ID="543670484" />
             <Performance ID="2039840207" />
             <Performance ID="196282959" />
-            <Performance ID="543670484" />
+            <Performance ID="2039840207" />
             <Performance ID="196282959" />
-            <Performance ID="543670484" />
             <Performance ID="2039840207" />
         </Song>
         <Song ID="668638383" Name="Eagle Rock">
@@ -519,15 +517,9 @@
         </Song>
         <Song ID="915829015" Name="Gimme Gimme Gimme">
             <Performance ID="-1409776742" />
-            <Performance ID="815988281" />
             <Performance ID="-229827479" />
-            <Performance ID="815988281" />
             <Performance ID="-1409776742" />
-            <Performance ID="815988281" />
             <Performance ID="-229827479" />
-            <Performance ID="815988281" />
-            <Performance ID="-229827479" />
-            <Performance ID="815988281" />
             <Performance ID="-1409776742" />
         </Song>
         <Song ID="1622943407" Name="Gimme One Reason">
@@ -1126,7 +1118,7 @@
             <Performance ID="-575612397" />
             <Performance ID="710009993" />
             <Performance ID="-575612397" />
-            <Performance ID="710009993" />
+            <Performance ID="441622061" />
         </Song>
         <Song ID="1929494014" Name="The pretender">
             <Performance ID="-1066488609" />
@@ -1561,16 +1553,13 @@
             <Zone DeviceID="-985547765" Bank="1" Program="115" LowKey="60"></Zone>
         </Performance>
         <Performance ID="196282959" Name="Eagle|Bridge">
-            <Zone DeviceID="-1973686393" Program="33" Volume="-4" LowKey="21" HighKey="108"></Zone>
+            <Zone DeviceID="-1973686393" Program="33" Volume="-5" LowKey="21" HighKey="108"></Zone>
         </Performance>
-        <Performance ID="543670484" Name="Eagle|Chorus">
-            <Zone DeviceID="-1973686393" Program="33" LowKey="60" HighKey="108"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Transpose="24" HighKey="59"></Zone>
-        </Performance>
-        <Performance ID="2039840207" Name="Eagle|Verse">
-            <Zone DeviceID="-1973686393" Program="33" LowKey="46" HighKey="101"></Zone>
+        <Performance ID="2039840207" Name="Eagle|Verse/Chorus">
+            <Zone DeviceID="-1973686393" Program="33" LowKey="66" HighKey="101"></Zone>
             <Zone DeviceID="-699955187" Bank="14" Program="61" Volume="6" Transpose="-24" LowKey="102"></Zone>
-            <Zone DeviceID="1555279137" Bank="5" Program="20" Transpose="36" HighKey="45"></Zone>
+            <Zone DeviceID="1555279137" Bank="5" Program="20" Transpose="24" HighKey="65"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-13" Transpose="36"></Zone>
         </Performance>
         <Performance ID="1281826436" Name="Echo Beach|">
             <Zone DeviceID="1555279137" Program="22" Transpose="-24" LowKey="72"></Zone>
@@ -1603,11 +1592,13 @@
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
             <Zone DeviceID="627145948" Program="0" Transpose="24" LowKey="21" HighKey="58"></Zone>
+
         </Performance>
         <Performance ID="-56712542" Name="Fernando|Strings">
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" NoteMode="4" Transpose="24" LowKey="21" HighKey="58"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-3" NoteMode="4" Transpose="24" LowKey="21" HighKey="58"></Zone>
+
         </Performance>
         <Performance ID="-1104081288" Name="Final Countdown">
             <Zone DeviceID="546031377" Program="7" Volume="-3"></Zone>
@@ -1670,18 +1661,15 @@
             <Zone DeviceID="-985547765" Bank="2" Program="39" Volume="12" Transpose="-12" LowKey="51" HighKey="108"></Zone>
             <Zone DeviceID="1555279137" Bank="6" Program="1" Transpose="12" HighKey="50"></Zone>
         </Performance>
-        <Performance ID="-229827479" Name="Gimme Gimme Gimme|Piano">
-            <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="21" HighKey="59"></Zone>
-            <Zone DeviceID="627145948" Program="0" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
-        </Performance>
         <Performance ID="-1409776742" Name="Gimme Gimme Gimme|Solo">
             <Zone DeviceID="-1973686393" Program="30" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="21" HighKey="59"></Zone>
             <Zone DeviceID="1555279137" Bank="12" Program="17" NoteMode="4" LowKey="60"></Zone>
         </Performance>
-        <Performance ID="815988281" Name="Ginme Gimme Gimme|">
-            <Zone DeviceID="-985547765" Bank="2" Program="39" Volume="12" Transpose="-12" LowKey="60" HighKey="108"></Zone>
+        <Performance ID="-229827479" Name="Gimme Gimme Gimme|Verse/Chorus">
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="21" HighKey="59"></Zone>
+            <Zone DeviceID="627145948" Program="0" NoteMode="4" Transpose="-24" LowKey="89"></Zone>
+            <Zone DeviceID="-985547765" Bank="2" Program="39" Volume="12" NoteMode="6" Transpose="-12" LowKey="60" HighKey="88"></Zone>
         </Performance>
         <Performance ID="39757196" Name="Give Me The Meltdown|">
             <Zone DeviceID="-1202024641" Program="45" Volume="5" Transpose="24" LowKey="40" HighKey="71"></Zone>
@@ -1903,7 +1891,6 @@
         <Performance ID="879498299" Name="Kisses Of Fire|Intro">
             <Zone DeviceID="627145948" Program="4" Transpose="-1"></Zone>
             <Zone DeviceID="-699955187" Bank="9" Program="19" Volume="-3" Transpose="-1"></Zone>
-            <Zone DeviceID="416001909" Program="0"></Zone>
         </Performance>
         <Performance ID="1865639315" Name="Knowing Me, Knowing You|">
             <Zone DeviceID="-699955187" Bank="15" Program="95" NoteMode="4" LowKey="60"></Zone>
@@ -1984,7 +1971,7 @@
         <Performance ID="-1395140394" Name="Mamma Mia|">
             <Zone DeviceID="627145948" Program="4" HighKey="95"></Zone>
             <Zone DeviceID="-2048222835" Program="0" Volume="-3" NoteMode="1" Transpose="-24" LowKey="96"></Zone>
-            <Zone DeviceID="-985547765" Program="0" Transpose="12" LowKey="69" HighKey="95"></Zone>
+            <Zone DeviceID="-985547765" Program="0" Volume="4" Transpose="12" LowKey="69" HighKey="95"></Zone>
         </Performance>
         <Performance ID="-1963650825" Name="Man I Feel Like A Woman|">
             <Zone DeviceID="1555279137" Bank="2" Program="60" Transpose="35" HighKey="42"></Zone>
@@ -2146,7 +2133,7 @@
         </Performance>
         <Performance ID="265751447" Name="Piano/Tenorsax">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
-            <Zone DeviceID="-2048222836" Program="1" NoteMode="6" Transpose="-12" LowKey="72"></Zone>
+            <Zone DeviceID="-2048222836" Program="1" Volume="-4" NoteMode="6" Transpose="-12" LowKey="72"></Zone>
         </Performance>
         <Performance ID="53664735" Name="Piano/Tuba">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="61"></Zone>
@@ -2418,7 +2405,11 @@
         <Performance ID="1465038175" Name="The Name Of The Game|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" LowKey="31" HighKey="59"></Zone>
             <Zone DeviceID="-699955187" Bank="11" Program="40" Transpose="48" HighKey="30"></Zone>
-            <Zone DeviceID="-985547765" Bank="1" Program="125" Volume="3" LowKey="60"></Zone>
+            <Zone DeviceID="-2048222836" Program="2" Volume="-3" Transpose="12" LowKey="60"></Zone>
+        </Performance>
+        <Performance ID="441622061" Name="The Winner Takes It All|Ending">
+            <Zone DeviceID="627145948" Program="4" Transpose="6" HighKey="75"></Zone>
+            <Zone DeviceID="-985547765" Program="0" Volume="3" NoteMode="4" Transpose="-18" LowKey="76"></Zone>
         </Performance>
         <Performance ID="1454644447" Name="These are the days of our lives|">
             <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
