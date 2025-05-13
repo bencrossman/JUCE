@@ -1029,7 +1029,7 @@
             <Performance ID="1835026396" />
         </Song>
         <Song ID="-2125525395" Name="So Long">
-            <Performance ID="325567451" />
+            <Performance ID="530482424" />
         </Song>
         <Song ID="500852117" Name="So What">
             <Performance ID="-1933864056" />
@@ -1592,13 +1592,11 @@
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
             <Zone DeviceID="627145948" Program="0" Transpose="24" LowKey="21" HighKey="58"></Zone>
-
         </Performance>
         <Performance ID="-56712542" Name="Fernando|Strings">
             <Zone DeviceID="-699955187" Bank="9" Program="54" Volume="3" NoteMode="4" LowKey="59" HighKey="94"></Zone>
             <Zone DeviceID="-985547765" Bank="1" Program="103" Volume="3" Transpose="-24" LowKey="95"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-3" NoteMode="4" Transpose="24" LowKey="21" HighKey="58"></Zone>
-
         </Performance>
         <Performance ID="-1104081288" Name="Final Countdown">
             <Zone DeviceID="546031377" Program="7" Volume="-3"></Zone>
@@ -2286,6 +2284,10 @@
             <Zone DeviceID="627145948" Program="4" Volume="-3" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="1555279137" Bank="2" Program="41" Volume="2" Transpose="-12" LowKey="60" HighKey="86"></Zone>
             <Zone DeviceID="-2048222836" Program="2" LowKey="60"></Zone>
+        </Performance>
+        <Performance ID="530482424" Name="So Long|">
+            <Zone DeviceID="627145948" Program="4" HighKey="85"></Zone>
+            <Zone DeviceID="-2048222836" Program="2" NoteMode="4" Transpose="-12" LowKey="86"></Zone>
         </Performance>
         <Performance ID="-1933864056" Name="So what|">
             <Zone DeviceID="1024611825" Program="0" Volume="-16" Transpose="24" HighKey="72"></Zone>
