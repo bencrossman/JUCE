@@ -1056,10 +1056,8 @@
         <Song ID="1868386257" Name="Summer Night City">
             <Performance ID="-1269674436" />
             <Performance ID="-1107446628" />
-            <Performance ID="-1102229688" />
             <Performance ID="-179497071" />
             <Performance ID="-1107446628" />
-            <Performance ID="-1102229688" />
             <Performance ID="-179497071" />
             <Performance ID="-1107446628" />
         </Song>
@@ -1294,16 +1292,6 @@
         </Song>
     </Songs>
     <Performances>
-        <Performance ID="1187282638" Name="(Am) Money Money Money">
-            <Zone DeviceID="-1973686393" Program="29" Volume="-6"></Zone>
-            <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-9"></Zone>
-            <Zone DeviceID="627145948" Program="0" Volume="-3"></Zone>
-        </Performance>
-        <Performance ID="1016986167" Name="(Bbm) Money Money Money">
-            <Zone DeviceID="-1973686393" Program="29" Volume="-6" Transpose="1"></Zone>
-            <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-9" Transpose="1"></Zone>
-            <Zone DeviceID="627145948" Program="0" Volume="-3" Transpose="1"></Zone>
-        </Performance>
         <Performance ID="-1542660704" Name="70s Electric Piano">
             <Zone DeviceID="1555279137" Program="11"></Zone>
         </Performance>
@@ -1771,12 +1759,12 @@
             <Zone DeviceID="1555279137" Bank="7" Program="0" Transpose="-12" LowKey="72" HighKey="108"></Zone>
             <Zone DeviceID="-985547765" Program="112" Volume="6" Transpose="12" HighKey="72"></Zone>
         </Performance>
-        <Performance ID="-562240923" Name="I Do, I Do, I Do, I Do, I Do|">
+        <Performance ID="-562240923" Name="I Do, I Do, I Do, I Do, I Do|In C">
             <Zone DeviceID="627145948" Program="4" Transpose="12" LowKey="43" HighKey="58"></Zone>
             <Zone DeviceID="1555279137" Program="45" Volume="6" NoteMode="4" Transpose="36" HighKey="42"></Zone>
             <Zone DeviceID="-2048222836" Program="1" LowKey="59"></Zone>
         </Performance>
-        <Performance ID="-1049772788" Name="I Do, I Do, I Do, I Do, I Do|Key Change">
+        <Performance ID="-1049772788" Name="I Do, I Do, I Do, I Do, I Do|In D!!!">
             <Zone DeviceID="627145948" Program="4" Transpose="13" LowKey="43" HighKey="58"></Zone>
             <Zone DeviceID="1555279137" Program="45" Volume="6" NoteMode="4" Transpose="37" HighKey="42"></Zone>
             <Zone DeviceID="-2048222836" Program="1" Transpose="1" LowKey="59"></Zone>
@@ -1987,6 +1975,16 @@
         </Performance>
         <Performance ID="-409684420" Name="Money">
             <Zone DeviceID="-789407354" Program="20"></Zone>
+        </Performance>
+        <Performance ID="1187282638" Name="Money Money Money|In A">
+            <Zone DeviceID="-1973686393" Program="29" Volume="-6"></Zone>
+            <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-9"></Zone>
+            <Zone DeviceID="627145948" Program="0" Volume="-3"></Zone>
+        </Performance>
+        <Performance ID="1016986167" Name="Money Money Money|In Bbm!!!">
+            <Zone DeviceID="-1973686393" Program="29" Volume="-6" Transpose="1"></Zone>
+            <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-9" Transpose="1"></Zone>
+            <Zone DeviceID="627145948" Program="0" Volume="-3" Transpose="1"></Zone>
         </Performance>
         <Performance ID="-275725803" Name="Moves like jagger|">
             <Zone DeviceID="1555279137" Bank="26" Program="99" Volume="12" Transpose="24" LowKey="48"></Zone>
@@ -2326,12 +2324,12 @@
             <Zone DeviceID="-1973686393" Program="32" Volume="-3" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-699955187" Bank="12" Program="40" Volume="-2" LowKey="60"></Zone>
         </Performance>
-        <Performance ID="-179497071" Name="Summer Night City|Chorus">
+        <Performance ID="-179497071" Name="Summer Night City|Bridge/Chorus">
             <Zone DeviceID="-1973686393" Program="32" Volume="-3" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-1202024641" Program="17" NoteMode="4" LowKey="60"></Zone>
         </Performance>
         <Performance ID="-1269674436" Name="Summer Night City|Intro">
-            <Zone DeviceID="-1973686393" Program="32" HighKey="108"></Zone>
+            <Zone DeviceID="-1973686393" Program="32" Volume="-1" HighKey="108"></Zone>
         </Performance>
         <Performance ID="-1107446628" Name="Summer Night City|Piano">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
