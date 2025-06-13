@@ -30,12 +30,8 @@
             <Song ID="-2044191071" />
             <Song ID="749494757" />
             <Song ID="1908421785" />
-            <Song ID="-240073372" />
-            <Song ID="-208230145" />
             <Song ID="1513500925" />
-            <Song ID="-1029964192" />
             <Song ID="-740596650" />
-            <Song ID="1423344023" />
         </SetList>
         <SetList ID="230290255" Name="Billy and Blondie">
             <Song ID="800911578" />
@@ -165,7 +161,7 @@
         <Rack ID="-841590045" Name="Roland JP-8000" PluginName="P8"></Rack>
         <Rack ID="1317557824" Name="Roland Jupiter-8" PluginName="JUPITER-8(VST2 64bit)"></Rack>
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
-        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkctOwzAQReETWPAQL82KBQuQ+IO0VQtqo0Ibyto0Qz2qk6n8AKVfj23JhrDGirK4Z3xn7vjwaCmanUJzP1RiZ+7Mx8NFUpaSv6B0xsKEYd4GdpLYvEVYkSGO8nWS30gpiL8Fr7fQsQv4KuEna6CAKbW1gFJsaB3oeaKvbY0anjUa4zQGdJrQQtTEMBH+C/pZ0qe+lb/z4hDjIDcJFC1b6UmYc0AWDVQSYeTDhLIceqyEkUE5zgmcVmT3qIN6meuEhQFbyw1MSCvTm/tRNI1vVTGMhVIBQXZDKDTG3kPpNb+vePfgNq9di30HM7JWhTpqNzD0LljDjD+xt/MR1RvUVDNHi18nT7+idy2Mf8mfipwh+Pm3sRLKzvfQvQyVdHH7S6vdevvX/3/PNzTHtLU=</Rack>
+        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkctOwzAQReETWPAQL82KBQuQ+IM0FRFqo0JTytrEQzyqG1d+gNKvx3ZlQ1ljRVncM565c3141LD1RqK5LyXbmDvz8XCRlEaoL6idsVApmPWBnSQ26xGWZEhF+TrJbyQlxN9ctSsYlAv4KuEna6CACfWcQc06agM9T/S156jhWaMxTmNApwnNGScFFfNf0M+SPvGj/J0XhxiN3CRQ9MoKT4LPEVk0sBAIY79MKMtLP0pmRFCO8wZOS7Jb1EG9zHXMwkhZq9ZQkZYxpwPIdxAKjXFCKbzmU9lV3OZwNdsOMCVrZaijvoOSeescpuoT95IdE+9QE1cqtvh1ssclvWtm/Hv9VGSnoZ9/ASugHvwMvZfwQriYcWO1a1d/+//v+QZUxKuC</Rack>
         <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxjlAxOzC3ISS3Wd8ksTs5XCC4pysxLL9YrTjNiGFgAAB1nCVQ=</Rack>
         <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjlAhOzC3ISS3Wd8wpyVdwrSgoSi0u1itOMxKFSYSk5uUXgWRAonDlIUWluQWpJQpupTk5IAkpdIng8tScHLBJkuhSQZkFEDsYBg4AAI5CLOs=</Rack>
         <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzlj00KwkAMhVtv4EJQcOVGV3oGWxDEn4otdh3aYINOUmamirdXqzO4EQ9glu97Sd4Lu6nVCMrMNo2hYnqFSzB0UiQVKgK1r6A2Ut6eNOw7umSLWpExJNzu+VNJY7W00sBJmahYA+Nj6Y38nTVdcE6lJ52xIwtiOMfSsC3lyhEUJ+Jjwlux+O1hz0uMB/LRJt8qrUCjnD5i/XImNWponSPnzIEZIkwtaEucikJbUfu340vuznB7hM8kf5HgD+YOgLyKDA==</Rack>
@@ -248,7 +244,7 @@
             <Performance ID="1102019116" />
         </Song>
         <Song ID="-1320569983" Name="Big Spender">
-            <Performance ID="-1990874256" />
+            <Performance ID="-335610154" />
         </Song>
         <Song ID="-1496032638" Name="Billy Jean">
             <Performance ID="-1996754324" />
@@ -1105,6 +1101,8 @@
         <Song ID="-262206833" Name="Thank You For The Music">
             <Performance ID="-1084440626" />
             <Performance ID="1737335827" />
+            <Performance ID="1776262484" />
+            <Performance ID="1737335827" />
         </Song>
         <Song ID="-1776495401" Name="That&apos;s the way">
             <Performance ID="-895406611" />
@@ -1196,6 +1194,9 @@
             <Performance ID="-720062002" />
             <Performance ID="-1211865371" />
             <Performance ID="-720062002" />
+            <Performance ID="-1211865371" />
+            <Performance ID="-720062002" />
+            <Performance ID="-1211865371" />
         </Song>
         <Song ID="-1492256628" Name="Walk Like An Egyptian">
             <Performance ID="-230307805" />
@@ -1692,11 +1693,10 @@
             <Zone DeviceID="-1783610977" Program="0"></Zone>
         </Performance>
         <Performance ID="-1747834684" Name="Hammer to fall|">
-            <Zone DeviceID="627145948" Program="4" Transpose="12" LowKey="22" HighKey="55"></Zone>
+            <Zone DeviceID="627145948" Program="4" Transpose="12" LowKey="21" HighKey="55"></Zone>
             <Zone DeviceID="1555279137" Program="43" Volume="-2" LowKey="71"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Volume="-10" Transpose="12" LowKey="71"></Zone>
-            <Zone DeviceID="-985547765" Program="14" Volume="5" Transpose="24" LowKey="56" HighKey="70"></Zone>
-            <Zone DeviceID="-789407354" Program="12" HighKey="21"></Zone>
+            <Zone DeviceID="-985547765" Program="14" Volume="3" Transpose="24" LowKey="56" HighKey="70"></Zone>
         </Performance>
         <Performance ID="-1962429869" Name="Hangin Around|">
             <Zone DeviceID="627145948" Program="4" LowKey="23"></Zone>
@@ -2248,7 +2248,7 @@
             <Zone DeviceID="522416168" Program="51" Volume="-3" Transpose="-12" LowKey="72"></Zone>
         </Performance>
         <Performance ID="-335610154" Name="Sax">
-            <Zone DeviceID="-2048222836" Program="1" Volume="6" Transpose="12"></Zone>
+            <Zone DeviceID="-2048222836" Program="0" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-1990874256" Name="Sax (fake)">
             <Zone DeviceID="1555279137" Program="22"></Zone>
@@ -2411,10 +2411,14 @@
         <Performance ID="-2020727274" Name="Take On Me Lead|">
             <Zone DeviceID="-1973686393" Program="99" Volume="-6"></Zone>
         </Performance>
+        <Performance ID="1776262484" Name="Thank You For The Music|Bridge">
+            <Zone DeviceID="627145948" Program="4" Transpose="4" HighKey="108"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="16" HighKey="108"></Zone>
+            <Zone DeviceID="1555279137" Program="34" Volume="-3" Transpose="-8" LowKey="21"></Zone>
+        </Performance>
         <Performance ID="1737335827" Name="Thank You For The Music|Strings">
-            <Zone DeviceID="627145948" Program="4" Transpose="4" HighKey="83"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="16" HighKey="83"></Zone>
-            <Zone DeviceID="1555279137" Program="34" Transpose="-32" LowKey="84"></Zone>
+            <Zone DeviceID="627145948" Program="4" Transpose="4" HighKey="108"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="16" HighKey="108"></Zone>
         </Performance>
         <Performance ID="942179974" Name="The Great Pretender|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="22"></Zone>
