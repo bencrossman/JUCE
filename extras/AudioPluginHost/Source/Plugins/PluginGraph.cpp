@@ -925,23 +925,27 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
     {
         MidiBuffer output;
 
-		for (const auto meta : midiBuffer)
-		{
-			auto midi_message = meta.getMessage();
-			int sample_number = meta.samplePosition;
+        for (const auto meta : midiBuffer)
+        {
+            auto midi_message = meta.getMessage();
+            int sample_number = meta.samplePosition;
+
+            // Remap for Keylab MKII because want it in "Analog Lab" mode to change patches and can't override controllers
+            if (m_isKeylab88MkII && midi_message.getChannel() == 10 && midi_message.isNoteOnOrOff())
+            {
+                midi_message.setNoteNumber(midi_message.getNoteNumber() - 15);
+                midi_message.setChannel(1);
+            }
 
             if (m_isKeylab88MkII && midi_message.isController())
             {
-                // Remap for Keylab MKII because want it in "Analog Lab" mode to change patches and can't override controllers
                 if (midi_message.getControllerNumber() == 74) // 74 = Frequency Cutoff (standard MIDI)
                     midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 16, midi_message.getControllerValue()); // Filter
 
                 else if (midi_message.getControllerNumber() == 30)
                 {
-                    if (midi_message.getControllerValue() == 17)
+                    if (midi_message.getControllerValue() == 17) // Right most button
                         midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 30, 127); // power off
-                    else if (midi_message.getControllerValue() == 15)
-                        midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 31, 127); // reset device
                     else
                         continue;
                 }
