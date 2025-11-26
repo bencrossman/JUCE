@@ -139,8 +139,8 @@
             <Song ID="772857543" />
             <Song ID="-501426780" />
             <Song ID="260569205" />
-            <Song ID="-1735800850" />
             <Song ID="1409242174" />
+            <Song ID="-1735800850" />
             <Song ID="-262206833" />
             <Song ID="2024492657" />
             <Song ID="762554151" />
@@ -1056,7 +1056,6 @@
             <Performance ID="1699621484" />
         </Song>
         <Song ID="1868386257" Name="Summer Night City">
-            <Performance ID="-1269674436" />
             <Performance ID="-1107446628" />
             <Performance ID="-179497071" />
             <Performance ID="-1107446628" />
@@ -1537,9 +1536,9 @@
             <Zone DeviceID="-789407354" Program="25"></Zone>
         </Performance>
         <Performance ID="-769977131" Name="Does Your Mother Know|">
-            <Zone DeviceID="627145948" Program="4" LowKey="32" HighKey="71"></Zone>
-            <Zone DeviceID="-699955187" Bank="16" Program="6" Volume="-9" Transpose="12" HighKey="31"></Zone>
-            <Zone DeviceID="-2048222836" Program="1" Transpose="-12" LowKey="72"></Zone>
+            <Zone DeviceID="627145948" Program="4" LowKey="32" HighKey="85"></Zone>
+            <Zone DeviceID="-699955187" Bank="16" Program="7" Transpose="12" HighKey="31"></Zone>
+            <Zone DeviceID="-2048222836" Program="1" Transpose="-12" LowKey="86"></Zone>
         </Performance>
         <Performance ID="2055148480" Name="Don&apos;t change|">
             <Zone DeviceID="1555279137" Bank="9" Program="28" Volume="2" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
@@ -1915,9 +1914,9 @@
         </Performance>
         <Performance ID="-885163975" Name="Lay All Your Love On Me|Verse">
             <Zone DeviceID="-1973686393" Program="14" Volume="-16" Transpose="12" HighKey="59"></Zone>
-            <Zone DeviceID="-699955187" Program="67" Volume="5" NoteMode="4" LowKey="60" HighKey="77"></Zone>
+            <Zone DeviceID="-699955187" Program="67" Volume="3" NoteMode="4" LowKey="60" HighKey="77"></Zone>
             <Zone DeviceID="522416168" Program="17" Volume="-8" Transpose="24" HighKey="59"></Zone>
-            <Zone DeviceID="1555279137" Bank="9" Program="34" Volume="-3" Transpose="-24" LowKey="78"></Zone>
+            <Zone DeviceID="1555279137" Bank="9" Program="34" Volume="-4" Transpose="-24" LowKey="78"></Zone>
         </Performance>
         <Performance ID="-853027829" Name="LayeredPiano|">
             <Zone DeviceID="627145948" Program="4"></Zone>
@@ -2149,7 +2148,7 @@
         </Performance>
         <Performance ID="265751447" Name="Piano/Tenorsax">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="71"></Zone>
-            <Zone DeviceID="-2048222836" Program="1" Volume="-1" NoteMode="6" Transpose="-12" LowKey="72"></Zone>
+            <Zone DeviceID="-2048222836" Program="1" Volume="-2" NoteMode="6" Transpose="-12" LowKey="72"></Zone>
         </Performance>
         <Performance ID="53664735" Name="Piano/Tuba">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="61"></Zone>
@@ -2396,8 +2395,9 @@
         <Performance ID="-1909776476" Name="Take A Chance On Me|" Tempo="108">
             <Zone DeviceID="-1202024641" Program="17" LowKey="60" HighKey="91"></Zone>
             <Zone DeviceID="522416168" Program="103" Volume="-2" Transpose="-12" LowKey="60" HighKey="91"></Zone>
-            <Zone DeviceID="1317557824" Program="32" Volume="-9" Transpose="24" HighKey="59"></Zone>
+            <Zone DeviceID="1317557824" Program="32" Volume="-9" Transpose="24" LowKey="35" HighKey="59"></Zone>
             <Zone DeviceID="-699955187" Bank="16" Program="1" NoteMode="4" Transpose="-12" LowKey="92"></Zone>
+            <Zone DeviceID="-985547765" Program="15" NoteMode="4" Transpose="24" HighKey="34"></Zone>
         </Performance>
         <Performance ID="1688367010" Name="Take Me Back|">
             <Zone DeviceID="-841590045" Program="24" Volume="-6" HighKey="108"></Zone>
@@ -2543,7 +2543,8 @@
             <Zone DeviceID="-1202024641" Program="17" Volume="-3" Transpose="36" HighKey="59"></Zone>
             <Zone DeviceID="-699955187" Bank="2" Program="67" LowKey="60" HighKey="87"></Zone>
             <Zone DeviceID="-985547765" Bank="2" Program="9" Transpose="-24" LowKey="88"></Zone>
-            <Zone DeviceID="-2048222836" Program="2" Volume="-1" NoteMode="4" Transpose="-12" LowKey="88"></Zone>
+            <Zone DeviceID="-2048222836" Program="0" Volume="-3" NoteMode="4" Transpose="-12" LowKey="88"></Zone>
+            <Zone DeviceID="416001909" Program="0"></Zone>
         </Performance>
         <Performance ID="-1211865371" Name="Voulez-Vous|Intro">
             <Zone DeviceID="1555279137" Program="21" Transpose="12" LowKey="47" HighKey="59"></Zone>
