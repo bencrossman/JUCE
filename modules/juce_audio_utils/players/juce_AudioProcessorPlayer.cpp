@@ -343,7 +343,7 @@ void AudioProcessorPlayer::audioDeviceIOCallbackWithContext (const float* const*
                 if (midiOutput->isBackgroundThreadRunning())
                 {
                     midiOutput->sendBlockOfMessages (incomingMidi,
-                                                     Time::getMillisecondCounterHiRes(),
+                                                     Time::getMillisecondCounter(),
                                                      sampleRate);
                 }
                 else
