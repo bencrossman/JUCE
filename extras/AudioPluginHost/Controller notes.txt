@@ -1,0 +1,50 @@
+Sono 88
+EditMode F#3 (Transpose buttons are program change)
+Editmode A#4 (local mode off)
+Editmode A#5 C6 C7 (knob to CC#3)
+(Just for vol testing) Editmode A#6? B6 C7 (knob to CC#9)
+Use MAudio Sono driver
+
+Keystation 88
+Advanced FADER 9 ENTER (notes are written on keys) (slider to CC#9)
+Advanced PGM CHANGE (Octave keys are program change)
+
+Unknown keyboard
+Channel 1 - Notes , Pedal1=Sustain, Pedal2=Volume(85)
+Patch as a bonus
+Knob for 16 (radio) or look at changing to modulation slider
+
+Yamaha S90es 
+Utility / Assign / Ctl Asn / ASA=85 ASB=16
+Press 'PAN/SEND' and 'TONE' to setup assign slider mode
+Master / Edit (Make sure its using Multi/Seq memory)
+Track Select button / 1
+TXSW - 1Zone / PC(MIDI) and ChAT off
+Preset - PgmChange at live time, enable send
+
+Roland RD700
+Only one knob to assign to volume (no CC#016)
+Could use modulation slider?
+MIDI TX
+
+Roland RD700SX
+One touch piano
+Press External button and Control button (not zone level)
+Edit / Control
+Setup Lower2/Lower1 as 85 and 16 (CAREFUL, order isnt intuitive)
+Have top right button on (rest can be off and all sliders will still work)
+Press Midi TX (or just press external)
+Change PC at live
+
+Roland RD800
+Assign knobs (not sliders)
+
+KeyLab 88
+Volume to 85
+E1 to 16
+Pads to ch1, note 21 up
+left/right to control 114/115 
+keyATMax to 0 padATMax to 0
+Disable all others
+
+VStand - use 6 gaps
