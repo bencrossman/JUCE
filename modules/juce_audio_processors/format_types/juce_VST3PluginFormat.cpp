@@ -2659,26 +2659,14 @@ public:
     }
 
     //==============================================================================
-    void processBlock(AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override
+    void processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override
     {
-        jassert(!isUsingDoublePrecision());
+        jassert (! isUsingDoublePrecision());
 
-        const SpinLock::ScopedLockType processLock(processMutex);
+        const SpinLock::ScopedLockType processLock (processMutex);
 
         if (isActive && processor != nullptr)
-        {
-            int extraConsume = buffer.getNumSamples();
-
-            for (const auto meta : midiMessages)
-                if (meta.getMessage().isControllerOfType(9))
-                    extraConsume = 96000;
-                   
-            while (extraConsume > 0)
-            {
-                processAudio(buffer, midiMessages, Vst::kSample32, false);
-                extraConsume -= buffer.getNumSamples();
-            }
-        }
+            processAudio (buffer, midiMessages, Vst::kSample32, false);
     }
 
     void processBlock (AudioBuffer<double>& buffer, MidiBuffer& midiMessages) override
