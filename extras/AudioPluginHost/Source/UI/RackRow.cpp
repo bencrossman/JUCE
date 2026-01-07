@@ -909,6 +909,23 @@ void RackRow::Assign(Zone *zone)
 
 	if (zone->Device->m_node)
 	{
+        /*if (zone->Device->PluginName == "mp3play2")
+        {
+            zone->Mute = false;
+            zone->Volume = 3;
+        }*/
+        m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
+        m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification); // Do this first so plugin can process m_pendingProgram
+        m_volume->setValue(zone->Volume);
+        m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
+        m_lowKey->setText(FormatKey(zone->LowKey));
+        m_highKey->setText(FormatKey(zone->HighKey));
+        m_transpose->setText(String(zone->Transpose));
+        m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
+
+        m_program->setSelectedId(zone->Program + 1, dontSendNotification);
+        m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
+
 		auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
 		if (!zone->OverrideState.empty())
 		{
@@ -936,23 +953,6 @@ void RackRow::Assign(Zone *zone)
 		}
 		m_missing->setVisible(false);
 	}
-
-    /*if (zone->Device->PluginName == "mp3play2")
-    {
-        zone->Mute = false;
-        zone->Volume = 3;
-    }*/
-    m_solo->setToggleState(zone->Solo, sendNotification); // some logic in these two so better do it
-    m_mute->setToggleState(zone->Mute || !zone->Device || zone->Device->m_deleted, sendNotification);
-    m_volume->setValue(zone->Volume);
-    m_noteMode->setSelectedItemIndex(zone->NoteMode, dontSendNotification);
-    m_lowKey->setText(FormatKey(zone->LowKey));
-    m_highKey->setText(FormatKey(zone->HighKey));
-    m_transpose->setText(String(zone->Transpose));
-    m_bank->setSelectedId(zone->Bank + 1, dontSendNotification);
-
-    m_program->setSelectedId(zone->Program + 1, dontSendNotification);
-    m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
 
     UpdateKeyboard();
 }

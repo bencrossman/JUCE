@@ -89,7 +89,8 @@ void SoundFontPlayerAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     m_sampleRate = sampleRate;
 
-    m_reverb.reset(new ReverbAudioProcessor());
+    if (!m_reverb)
+        m_reverb.reset(new ReverbAudioProcessor());
 }
 
 void SoundFontPlayerAudioProcessor::releaseResources()

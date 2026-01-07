@@ -111,6 +111,7 @@ private:
 	std::vector<std::unique_ptr<Component>> m_rackDevice;
 
     void SetPerformance(PerformanceType *performance = nullptr);
+    void handleCommandMessage(int commandId) override;
     int m_titleHeight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphEditorPanel)

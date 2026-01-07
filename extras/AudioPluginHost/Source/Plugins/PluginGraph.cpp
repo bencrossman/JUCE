@@ -884,7 +884,7 @@ void PluginGraph::UpdateLCDScreen(MidiBuffer &output, int sample_number, int ind
 
 void PluginGraph::UpdateCurrentRouting()
 {
-    MessageManagerLock ms;
+    // Can't believe before I was doing all this UI in the ASIO thread!
     m_onProgramChange();
 }
 

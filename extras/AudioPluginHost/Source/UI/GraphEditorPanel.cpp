@@ -898,6 +898,14 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
     changeListenerCallbackDone = true;
 
     updateComponents();
+
+    // I think this is the last intensive thing but looks like I'm wrong because have to wait a good chunk of time
+    Thread::launch([this]() 
+    {
+        Thread::sleep(1000);
+        auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
+        mainWindow->postCommandMessage(CommandIDs::resetDevice);
+    });
 }
 
 /*
@@ -1478,13 +1486,18 @@ void GraphDocumentComponent::updateMidiOutput()
     }
 }
 
+void GraphEditorPanel::handleCommandMessage(int commandId)
+{
+    SetPerformance();
+}
+
 void GraphEditorPanel::init(String name)
 {
     graph.SetMidiOutputDeviceName(name);
 
     graph.m_onProgramChange = [this]()
     {
-        SetPerformance();
+        postCommandMessage(0);
     };
 
     graph.m_onMasterVolume = [this](int volume)
@@ -1571,10 +1584,6 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
     RackRow::SetTempo(performer->TempPerformance.Tempo);
 	graph.SetTempo(performer->TempPerformance.Tempo);
 
-
-
-    bool tempBufferIncrease = false;
-
     for (auto i = 0U; i < zones.size(); ++i)
     {
         for (auto d = 0U; d < m_rackDevice.size(); d++)
@@ -1582,19 +1591,11 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             auto rackDevice = ((RackRow*)m_rackDevice[d].get());
             if (rackDevice->ID() == zones[i].DeviceID)
             {
-                //if (zones[i].Device->m_audioInputNode && !zones[i].Mute)
-                //    tempBufferIncrease = true;
-
                 rackDevice->Assign(&(zones[i]));
                 break;
             }
         }
     }
-
-    auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
-    mainWindow->postCommandMessage(tempBufferIncrease ? CommandIDs::temporarilyIncreaseSampleBuffer : CommandIDs::restoreSampleBuffer);
-
-
 }
 
 void GraphEditorPanel::SoloChange()
@@ -1617,6 +1618,7 @@ bool GraphEditorPanel::keyPressed(const KeyPress &key, Component *)
 }
 
 
+// Called all over the place, on setup, on each mute/unmute from performance setup
 void GraphEditorPanel::RefreshRacks()
 {
     m_rackUI->removeAllChildren();
@@ -1683,7 +1685,7 @@ void GraphEditorPanel::updateComponents()
 	// Originally updateComponents would be smart and only create / destroy what it needs (hence resized commented out). Perhaps need to move this?
     // both of these are about to be added to in for loop below
 
-    if (!m_updateComponents)
+    if (!m_updateComponents) // This is to help when saving performer files
     {
         m_updateComponents = true;
         return;
