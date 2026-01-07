@@ -1,7 +1,3 @@
-mp3play/guitar now showing boxes
-
-Check performance
-- OP-X problem?
 
 yabridge is a great Linux bridge
 

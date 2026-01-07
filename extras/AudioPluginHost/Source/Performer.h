@@ -25,7 +25,6 @@ public:
     void *m_midiFilterNode = NULL;
     void* m_audioInputNode = NULL;
     bool m_usesBanks = false;
-    bool m_hasStupidCrossfade = false;
     bool m_stereoToMonoWillPhase = false;
     bool m_doesntRespectSoundOff = false;
     bool m_ignoreMidi = false;

@@ -35,7 +35,6 @@ class NonSysexFilter : public MidiFilterCallback
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
 };
 
-extern int g_engineDuck;
 
 //==============================================================================
 /** A type that encapsulates a PluginDescription and some preferences regarding
@@ -142,72 +141,8 @@ public:
     void SetTempo(double tempo);
 	void SetMono(bool mono);
 	bool IsMono() { return m_mono; }
-
-    bool DoesPendingingPerformanceDoConsume(int offset)
-    {
-        auto performer = GetPerformer();
-        PerformanceType* performance;
-        Song* song = NULL;
-        performer->GetPerformanceByIndex(performance, song, performer->m_currentPerformanceIndex + offset);
-        for (int i = 0; i < performance->Zone.size(); ++i)
-        {
-            if (performance->Zone[i].Device->m_hasStupidCrossfade && !performance->Zone[i].Mute)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    void PrevPerformance()
-    {
-        if (!DoesPendingingPerformanceDoConsume(-1))
-        {
-            m_manualMidi = 28;
-            return;
-        }
-
-        if (m_performanceChangePending)
-            return;
-
-        m_performanceChangePending = true;
-
-        g_engineDuck = 3;
-        Thread::launch([this]()
-        {
-            Thread::sleep(50);
-            m_manualMidi = 28;
-            Thread::sleep(50);
-            g_engineDuck = 1;
-            m_performanceChangePending = false;
-
-        });
-    }
-    void NextPerformance() 
-    { 
-        if (!DoesPendingingPerformanceDoConsume(1))
-        {
-            m_manualMidi = 29;
-            return;
-        }
-
-        if (m_performanceChangePending)
-            return;
-
-        m_performanceChangePending = true;
-
-        g_engineDuck = 3;
-        Thread::launch([this]() 
-        {
-            Thread::sleep(50); 
-            m_manualMidi = 29;  
-            Thread::sleep(50);
-            g_engineDuck = 1;
-            m_performanceChangePending = false;
-
-        });
-        
-    }
+    void PrevPerformance() { m_manualMidi = 28; }
+    void NextPerformance() { m_manualMidi = 29; }
     void SetMidiOutputDeviceName(String name);
 
 private:
@@ -216,8 +151,6 @@ private:
     KnownPluginList& knownPlugins;
     OwnedArray<PluginWindow> activePluginWindows;
     ScopedMessageBox messageBox;
-
-    bool m_performanceChangePending = false;
 
     Performer m_performer;
     string m_performerFilename;
