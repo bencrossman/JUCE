@@ -215,6 +215,9 @@ RackRow::~RackRow()
     //[Destructor_pre]. You can add your own custom destruction code here..
     if (m_midiFilterNode)
         InternalPluginFormat::SetFilterCallback(m_midiFilterNode, NULL); // if we're still getting crashing related to this then probably because the node is already dead
+    memset(&m_lowKey, 0, sizeof(m_lowKey));
+    memset(&m_highKey, 0, sizeof(m_highKey));
+    memset(&m_transpose, 0, sizeof(m_transpose));
     //[/Destructor_pre]
 
     m_deviceName = nullptr;
@@ -944,7 +947,8 @@ void RackRow::Assign(Zone *zone)
 				m_lastZoneHadOverrideState = false;
 			}
 
-			m_pendingBank = true;
+			if (zone->Device->m_usesBanks)
+                m_pendingBank = true;
 			m_pendingProgram = true;
 			m_pendingSoundOff = true;
 			m_pendingProgramNames = true;

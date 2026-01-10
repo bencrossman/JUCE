@@ -2426,7 +2426,8 @@ public:
         programListData = nullptr;
         componentHandler2 = nullptr;
         componentHandler = nullptr;
-        processor = nullptr;
+        memset(&processor, 0, sizeof(processor));
+        //processor = nullptr;
         midiMapping = nullptr;
         editController2 = nullptr;
         editController = nullptr;

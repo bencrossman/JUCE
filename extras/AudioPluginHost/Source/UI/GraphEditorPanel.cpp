@@ -899,12 +899,14 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
 
     updateComponents();
 
-    // I think this is the last intensive thing but looks like I'm wrong because have to wait a good chunk of time
-    Thread::launch([this]() 
+    Thread::launch([this]()
     {
-        Thread::sleep(1000);
-        auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
-        mainWindow->postCommandMessage(CommandIDs::resetDevice);
+        // Tried to do an initial reset here but just didn't seem to behave like doing with the UI
+
+        Thread::sleep(5000);
+        graph.NextPerformance();
+        Thread::sleep(5000);
+        graph.PrevPerformance();
     });
 }
 
@@ -1489,6 +1491,10 @@ void GraphDocumentComponent::updateMidiOutput()
 void GraphEditorPanel::handleCommandMessage(int commandId)
 {
     SetPerformance();
+
+    // Reset to handle OP-X seems to be quite blocking
+    auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
+    mainWindow->postCommandMessage(CommandIDs::resetDevice);
 }
 
 void GraphEditorPanel::init(String name)

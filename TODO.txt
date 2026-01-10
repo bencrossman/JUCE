@@ -1,4 +1,3 @@
-
 yabridge is a great Linux bridge
 
 Mac support missing
@@ -24,6 +23,7 @@ Integrate for Access database with edit?
 
 If released
 ~~~~~~~~~~~
+Need to not activate sound engine until everything is loaded (so don't need the reset device after 2 seconds and OP-X sometimes doesn't set patch)
 Archecture is a mess, look at how often RefreshRacks is called and updateComponents()
 JUCE 8 has licensing changes
 JUCE 8.0.1 has removed GUI editor
