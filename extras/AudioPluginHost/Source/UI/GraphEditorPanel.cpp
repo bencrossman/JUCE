@@ -898,16 +898,6 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
     changeListenerCallbackDone = true;
 
     updateComponents();
-
-    Thread::launch([this]()
-    {
-        // Tried to do an initial reset here but just didn't seem to behave like doing with the UI
-
-        Thread::sleep(5000);
-        graph.NextPerformance();
-        Thread::sleep(5000);
-        graph.PrevPerformance();
-    });
 }
 
 /*
