@@ -447,16 +447,18 @@ void MainHostWindow::tryToQuitApplication()
         if (graphHolder->graph->saveDocument (PluginGraph::getDefaultGraphDocumentOnMobile()))
             releaseAndQuit();
        #else
-        SafePointer<MainHostWindow> parent { this };
-        graphHolder->graph->saveIfNeededAndUserAgreesAsync ([parent, releaseAndQuit] (FileBasedDocument::SaveResult r)
-        {
-            if (parent == nullptr)
-                return;
+        //SafePointer<MainHostWindow> parent { this };
+        //graphHolder->graph->saveIfNeededAndUserAgreesAsync ([parent, releaseAndQuit] (FileBasedDocument::SaveResult r)
+        //{
+        //    if (parent == nullptr)
+        //        return;
 
-            if (r == FileBasedDocument::savedOk)
-                releaseAndQuit();
-        });
+        //    if (r == FileBasedDocument::savedOk)
+        //        releaseAndQuit();
+        //});
        #endif
+
+        releaseAndQuit();
 
         return;
     }
