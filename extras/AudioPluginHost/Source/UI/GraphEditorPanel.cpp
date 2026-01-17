@@ -898,6 +898,14 @@ void GraphEditorPanel::changeListenerCallback (ChangeBroadcaster*)
     changeListenerCallbackDone = true;
 
     updateComponents();
+
+    Thread::launch([this]()
+    {
+        Thread::sleep(5000); // Dont know why this has to be so long but anything less doesn't
+        // Reset to cater for all the blocks on start up
+        auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
+        mainWindow->postCommandMessage(CommandIDs::resetDevice);
+    });
 }
 
 /*
@@ -1481,10 +1489,6 @@ void GraphDocumentComponent::updateMidiOutput()
 void GraphEditorPanel::handleCommandMessage(int commandId)
 {
     SetPerformance();
-
-    // Reset to handle OP-X seems to be quite blocking
-    auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
-    mainWindow->postCommandMessage(CommandIDs::resetDevice);
 }
 
 void GraphEditorPanel::init(String name)

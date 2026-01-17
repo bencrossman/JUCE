@@ -29,6 +29,7 @@ public:
     bool m_doesntRespectSoundOff = false;
     bool m_ignoreMidi = false;
     bool m_deleted = false;
+    bool m_bypassProblems = false;
     float m_order = 0;
 
 	template<class A>

@@ -1004,11 +1004,14 @@ void RackRow::handleCommandMessage(int id)
         {
             m_pendingBypass = false;
 
-            ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
-            //((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
-            ((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
-            if (m_current->Device->m_audioInputNode)
-                ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
+            if (!m_current->Device->m_bypassProblems)
+            {
+                ((AudioProcessorGraph::Node*)m_current->Device->m_node)->setBypassed(true);
+                //((AudioProcessorGraph::Node*)m_current->Device->m_midiFilterNode)->setBypassed(true);
+                ((AudioProcessorGraph::Node*)m_current->Device->m_gainNode)->setBypassed(true);
+                if (m_current->Device->m_audioInputNode)
+                    ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(true);
+            }
         }
 	}
  }

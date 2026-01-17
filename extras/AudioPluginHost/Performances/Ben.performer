@@ -1899,7 +1899,6 @@
             <Zone DeviceID="-699955187" Bank="15" Program="95" NoteMode="4" LowKey="60"></Zone>
             <Zone DeviceID="522416168" Program="15" Volume="-1" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="36" HighKey="59"></Zone>
-            <Zone DeviceID="-1973686393" Program="33" LowKey="108"></Zone>
         </Performance>
         <Performance ID="-2066548255" Name="Land downunder|">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
@@ -2354,7 +2353,6 @@
         <Performance ID="-1107446628" Name="Summer Night City|Piano">
             <Zone DeviceID="627145948" Program="4" Transpose="12" HighKey="59"></Zone>
             <Zone DeviceID="-1202024641" Program="17" NoteMode="4" LowKey="60"></Zone>
-            <Zone DeviceID="-1973686393" Program="32" LowKey="108"></Zone>
         </Performance>
         <Performance ID="-628506110" Name="Summer of 69|">
             <Zone DeviceID="-1202024641" Program="17" Transpose="12"></Zone>
@@ -2436,7 +2434,6 @@
         <Performance ID="441622061" Name="The Winner Takes It All|Ending">
             <Zone DeviceID="627145948" Program="4" Transpose="6" HighKey="75"></Zone>
             <Zone DeviceID="-985547765" Program="0" Volume="3" NoteMode="4" Transpose="-18" LowKey="76"></Zone>
-            <Zone DeviceID="-1973686393" Program="14" LowKey="108"></Zone>
         </Performance>
         <Performance ID="1454644447" Name="These are the days of our lives|">
             <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
