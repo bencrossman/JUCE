@@ -122,9 +122,9 @@
             <Song ID="915829015" />
             <Song ID="-1093750469" />
             <Song ID="-297870552" />
-            <Song ID="1217908240" />
             <Song ID="1173187795" />
             <Song ID="-2134847428" />
+            <Song ID="399143875" />
             <Song ID="-373036845" />
             <Song ID="-1197047045" />
             <Song ID="1868386257" />
@@ -593,6 +593,9 @@
         </Song>
         <Song ID="-1995930811" Name="I Have A Dream">
             <Performance ID="-2053869149" />
+        </Song>
+        <Song ID="399143875" Name="I Know Him So Well">
+            <Performance ID="857594652" />
         </Song>
         <Song ID="-1491607353" Name="I Saw Her Standing There">
             <Performance ID="1270865452" />
@@ -1371,7 +1374,7 @@
             <Zone DeviceID="-1202024641" Program="17" Transpose="12" LowKey="48" HighKey="83"></Zone>
             <Zone DeviceID="522416168" Program="38" Transpose="24" HighKey="47"></Zone>
         </Performance>
-        <Performance ID="857594651" Name="Bell PIano">
+        <Performance ID="857594651" Name="Bell Piano">
             <Zone DeviceID="1555279137" Program="21" Volume="6"></Zone>
         </Performance>
         <Performance ID="327650012" Name="Bells">
@@ -1786,6 +1789,10 @@
             <Zone DeviceID="-699955187" Bank="3" Program="115" NoteMode="4" LowKey="101"></Zone>
             <Zone DeviceID="-1202024641" Program="17" Transpose="24" HighKey="59"></Zone>
             <Zone DeviceID="1317557824" Program="4" LowKey="60"></Zone>
+        </Performance>
+        <Performance ID="857594652" Name="I Know Him So Well|">
+            <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-2011843219" Name="I Life the Night Life|" Tempo="128">
             <Zone DeviceID="-2048222835" Program="0" Volume="-6" HighKey="95"></Zone>

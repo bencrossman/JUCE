@@ -1103,6 +1103,7 @@ void MainHostWindow::handleCommandMessage(int commandId)
         {
             deviceManager.closeAudioDevice();
             deviceManager.restartLastAudioDevice();
+            Logger::outputDebugString("resetDevice\n");
             break;
         }
     }

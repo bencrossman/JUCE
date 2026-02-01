@@ -1505,6 +1505,12 @@ void GraphEditorPanel::init(String name)
         ((RackTitleBar*)m_rackTopUI.get())->postCommandMessage(volume);
     };
 
+    graph.m_onResetDevice = [this]()
+    {
+        auto* mainWindow = findParentComponentOfClass<MainHostWindow>();
+        mainWindow->postCommandMessage(CommandIDs::resetDevice);
+    };
+
 	((RackTitleBar*)m_rackTopUI.get())->m_onMonoChanged = [this](bool mono)
 	{
 		graph.SetMono(mono);

@@ -946,6 +946,8 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                 {
                     if (midi_message.getControllerValue() == 17) // Right most button
                         midi_message = MidiMessage::controllerEvent(midi_message.getChannel(), 30, 127); // power off
+                    else if (midi_message.getControllerValue() == 15) // 2nd right most button
+                        m_onResetDevice();
                     else
                         continue;
                 }

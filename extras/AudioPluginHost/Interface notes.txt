@@ -1,2 +1,3 @@
 AudioBox 64 samples
 ASIO4ALL 64 samples (monitor in case have to increase)
+Octave Neva Uno ASIO 64 samples

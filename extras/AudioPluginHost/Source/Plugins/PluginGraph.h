@@ -136,6 +136,7 @@ public:
 
     std::function<void()> m_onProgramChange = NULL;
     std::function<void(int)> m_onMasterVolume = NULL;
+    std::function<void()> m_onResetDevice = NULL;
     bool m_initializing = true;
 
     void SetTempo(double tempo);
