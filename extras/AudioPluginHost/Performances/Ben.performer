@@ -130,6 +130,7 @@
             <Song ID="1868386257" />
             <Song ID="2007312286" />
             <Song ID="26813361" />
+            <Song ID="-2125525395" />
             <Song ID="-139239702" />
             <Song ID="-1653456889" />
             <Song ID="361518934" />
@@ -143,6 +144,7 @@
             <Song ID="-1735800850" />
             <Song ID="-262206833" />
             <Song ID="2024492657" />
+            <Song ID="-460325462" />
             <Song ID="762554151" />
         </SetList>
         <SetList ID="-1226624343" Name="The Eagles">
@@ -176,6 +178,10 @@
             <Performance ID="-1194260117" />
             <Performance ID="325567451" />
             <Performance ID="-1194260117" />
+        </Song>
+        <Song ID="-460325462" Name="ABBA jamming">
+            <Performance ID="-1893591431" />
+            <Performance ID="-2016210536" />
         </Song>
         <Song ID="-1489615974" Name="Aint Nobody">
             <Performance ID="1526301003" />
@@ -354,10 +360,6 @@
         </Song>
         <Song ID="-2044191071" Name="Crazy Little Thing Called Love">
             <Performance ID="-812800143" />
-        </Song>
-        <Song ID="1539962914" Name="Cry me">
-            <Performance ID="-1593823047" />
-            <Performance ID="2029604362" />
         </Song>
         <Song ID="-272316000" Name="Crying Shame">
             <Performance ID="-1893591430" />
@@ -1791,8 +1793,8 @@
             <Zone DeviceID="1317557824" Program="4" LowKey="60"></Zone>
         </Performance>
         <Performance ID="857594652" Name="I Know Him So Well|">
-            <Zone DeviceID="1555279137" Program="51" Transpose="12"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Volume="-6" Transpose="12"></Zone>
+            <Zone DeviceID="1555279137" Program="51" Volume="2" Transpose="12"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Volume="-9" Transpose="12"></Zone>
         </Performance>
         <Performance ID="-2011843219" Name="I Life the Night Life|" Tempo="128">
             <Zone DeviceID="-2048222835" Program="0" Volume="-6" HighKey="95"></Zone>
@@ -2090,9 +2092,6 @@
         </Performance>
         <Performance ID="-817870791" Name="Piano -2">
             <Zone DeviceID="627145948" Program="4" Transpose="-2"></Zone>
-        </Performance>
-        <Performance ID="-1593823047" Name="Piano octaves">
-            <Zone DeviceID="627145948" Program="4"></Zone>
         </Performance>
         <Performance ID="-2016210536" Name="Piano solo">
             <Zone DeviceID="627145948" Program="4" NoteMode="4"></Zone>
