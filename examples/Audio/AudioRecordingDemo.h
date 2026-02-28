@@ -50,6 +50,7 @@
 
 #include "../Assets/DemoUtilities.h"
 #include "../Assets/AudioLiveScrollingDisplay.h"
+//#include "juce_audio_basics/utilities/juce_Decibels.h"
 
 //==============================================================================
 /** A simple class that acts as an AudioIODeviceCallback and writes the
@@ -243,14 +244,13 @@ public:
         setOpaque (true);
         addAndMakeVisible (liveAudioScroller);
 
-        /*
         addAndMakeVisible (explanationLabel);
         explanationLabel.setFont (Font (15.0f, Font::plain));
         explanationLabel.setJustificationType (Justification::topLeft);
         explanationLabel.setEditable (false, false, false);
         explanationLabel.setColour (TextEditor::textColourId, Colours::black);
-        explanationLabel.setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-        */
+        explanationLabel.setColour(TextEditor::backgroundColourId, Colour(0x00000000));
+        explanationLabel.setText("0db", NotificationType::dontSendNotification);
 
         addAndMakeVisible (recordButton);
         recordButton.setColour (TextButton::buttonColourId, Colour (0xffff5c5c));
@@ -291,6 +291,9 @@ public:
 
     void paint (Graphics& g) override
     {
+        auto str = juce::Decibels::toString(juce::Decibels::gainToDecibels(lastRMS));
+        explanationLabel.setText(str, NotificationType::dontSendNotification);
+
         g.fillAll (getUIColourIfAvailable (LookAndFeel_V4::ColourScheme::UIColour::windowBackground));
     }
 
@@ -304,9 +307,12 @@ public:
         explanationLabel  .setBounds (area.reduced (8));
     }
 
-    void setSampleRate(int sampleRate)
+    void setSampleRate(int a_sampleRate)
     {
-        recorder.setSampleRate(sampleRate);
+        recorder.setSampleRate(a_sampleRate);
+        if (sampleRate == -1)
+            samplesTillRMS = a_sampleRate;
+        sampleRate = a_sampleRate;
     }
 
     void process(const float* const* outputChannelData, int numOutputChannels, int numSamples)
@@ -314,9 +320,33 @@ public:
         AudioIODeviceCallbackContext context;
         liveAudioScroller.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
         recorder.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
+
+        samplesTillRMS -= numSamples;
+        
+        for (int i = 0; i < numSamples; ++i)
+        {
+            for (int ch = 0; ch < numOutputChannels; ++ch)
+            {
+                float sample = outputChannelData[ch][i];
+                accumulator += sample * sample;
+            }
+        }
+        
+        if (samplesTillRMS <= 0)
+        {
+            lastRMS = std::sqrt(accumulator / (sampleRate + -samplesTillRMS));
+            samplesTillRMS = sampleRate;
+            accumulator = 0;            
+        }
+
     }
 
 private:
+    double accumulator = 0;
+    int samplesTillRMS = -1;
+    int sampleRate = -1;
+    double lastRMS = 0;
+
     // if this PIP is running inside the demo runner, we'll use the shared device manager instead
    #ifndef JUCE_DEMO_RUNNER
     AudioDeviceManager audioDeviceManager;

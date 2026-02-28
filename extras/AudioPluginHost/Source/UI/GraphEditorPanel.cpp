@@ -1371,7 +1371,7 @@ void GraphDocumentComponent::resized()
 
     keyboardComp->setBounds (r.removeFromBottom (statusHeight + keysHeight).withTrimmedBottom(statusHeight));
     statusBar->setBounds (r.removeFromBottom (statusHeight));
-    recordComp->setBounds(r.removeFromRight(150).removeFromTop(200));
+    recordComp->setBounds(r.removeFromRight(150).removeFromTop(225));
     graphPanel->setBounds (r);
 
     checkAvailableWidth();
