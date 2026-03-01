@@ -2,3 +2,6 @@
 [submodule "extras/AudioPluginHost/Source/ForteEmulator"]
 	path = extras/AudioPluginHost/Source/ForteEmulator
 	url = https://gitlab.com/bencrossman/ForteEmulator.git
+[submodule "extras/AudioPluginHost/Source/LUFSMeter"]
+	path = extras/AudioPluginHost/Source/LUFSMeter
+	url = https://github.com/klangfreund/LUFSMeter.git

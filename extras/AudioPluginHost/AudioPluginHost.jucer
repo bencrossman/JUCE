@@ -202,6 +202,20 @@
           <FILE id="MF1U3E" name="XmlArchive.h" compile="0" resource="0" file="Source/ForteEmulator/ForteSDK/XmlArchive.h"/>
         </GROUP>
       </GROUP>
+      <GROUP id="{92FDB6BE-B816-ADD2-3800-D2A4CC5DF83C}" name="LUFSMeter">
+        <GROUP id="{15F5C77E-6551-4DC8-A2D4-8B4EAA943437}" name="filters">
+          <FILE id="QPJ2JK" name="SecondOrderIIRFilter.cpp" compile="1" resource="0"
+                file="Source/LUFSMeter/filters/SecondOrderIIRFilter.cpp"/>
+          <FILE id="B6e7rc" name="SecondOrderIIRFilter.h" compile="0" resource="0"
+                file="Source/LUFSMeter/filters/SecondOrderIIRFilter.h"/>
+        </GROUP>
+        <FILE id="X8Yya4" name="Ebu128LoudnessMeter.cpp" compile="1" resource="0"
+              file="Source/LUFSMeter/Ebu128LoudnessMeter.cpp"/>
+        <FILE id="R4jcn6" name="Ebu128LoudnessMeter.h" compile="0" resource="0"
+              file="Source/LUFSMeter/Ebu128LoudnessMeter.h"/>
+        <FILE id="se2Oxu" name="MacrosAndJuceHeaders.h" compile="0" resource="0"
+              file="Source/LUFSMeter/MacrosAndJuceHeaders.h"/>
+      </GROUP>
       <GROUP id="{6F257CD6-CE86-9BBC-54C1-45E43249E414}" name="Plugins">
         <GROUP id="{23CCF3A0-6597-A1EC-63EE-6E4F38051706}" name="GuitarStrummer">
           <FILE id="tCA6zX" name="GuitarStrummerProcessor.cpp" compile="1" resource="0"

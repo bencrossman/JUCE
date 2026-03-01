@@ -50,7 +50,7 @@
 
 #include "../Assets/DemoUtilities.h"
 #include "../Assets/AudioLiveScrollingDisplay.h"
-//#include "juce_audio_basics/utilities/juce_Decibels.h"
+#include "../Source/LUFSMeter/Ebu128LoudnessMeter.h"
 
 //==============================================================================
 /** A simple class that acts as an AudioIODeviceCallback and writes the
@@ -236,7 +236,7 @@ private:
 };
 
 //==============================================================================
-class AudioRecordingDemo final : public Component,private Timer
+class AudioRecordingDemo final : public Component
 {
 public:
     AudioRecordingDemo()
@@ -281,21 +281,17 @@ public:
         liveAudioScroller.setNumChannels(2);
 
         setSize (500, 500);
-
-        startTimer(1000);
     }
 
     ~AudioRecordingDemo() override
     {
         //audioDeviceManager.removeAudioCallback (&recorder);
         //audioDeviceManager.removeAudioCallback (&liveAudioScroller);
-
-        stopTimer();
     }
 
     void paint (Graphics& g) override
     {
-        auto str = juce::Decibels::toString(juce::Decibels::gainToDecibels(lastRMS));
+        auto str = juce::Decibels::toString(m_loudnessMeter.getShortTermLoudness());
         explanationLabel.setText(str, NotificationType::dontSendNotification);
 
         g.fillAll (getUIColourIfAvailable (LookAndFeel_V4::ColourScheme::UIColour::windowBackground));
@@ -314,8 +310,6 @@ public:
     void setSampleRate(int a_sampleRate)
     {
         recorder.setSampleRate(a_sampleRate);
-        if (sampleRate == -1)
-            samplesTillRMS = a_sampleRate;
         sampleRate = a_sampleRate;
     }
 
@@ -325,37 +319,22 @@ public:
         liveAudioScroller.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
         recorder.audioDeviceIOCallbackWithContext(outputChannelData, numOutputChannels, nullptr, 0, numSamples, context);
 
-        samplesTillRMS -= numSamples;
-        
-        for (int i = 0; i < numSamples; ++i)
+        if (m_loudnessMeterInit)
         {
-            for (int ch = 0; ch < numOutputChannels; ++ch)
-            {
-                float sample = outputChannelData[ch][i];
-                accumulator += sample * sample;
-            }
-        }
-        
-        if (samplesTillRMS <= 0)
-        {
-            lastRMS = std::sqrt(accumulator / (sampleRate + -samplesTillRMS));
-            samplesTillRMS = sampleRate;
-            accumulator = 0;            
+            m_loudnessMeterInit = false;
+            m_loudnessMeter.prepareToPlay(sampleRate, numOutputChannels, numSamples, 1);
         }
 
+        AudioSampleBuffer buffer(const_cast<float**>(outputChannelData), numOutputChannels, numSamples);
+        m_loudnessMeter.processBlock(buffer);
     }
 
 private:
-    void timerCallback() override
-    {
-        repaint();
-    }
 
-
-    double accumulator = 0;
-    int samplesTillRMS = -1;
     int sampleRate = -1;
-    double lastRMS = 0;
+    bool m_loudnessMeterInit = true;
+
+    Ebu128LoudnessMeter m_loudnessMeter;
 
     // if this PIP is running inside the demo runner, we'll use the shared device manager instead
    #ifndef JUCE_DEMO_RUNNER

@@ -11,6 +11,12 @@
     <Filter Include="Performer\Source\ForteEmulator">
       <UniqueIdentifier>{5D07E90C-5C8A-BD15-E4F3-9CC311FF063A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Performer\Source\LUFSMeter\filters">
+      <UniqueIdentifier>{875F96F1-2E05-36A5-4209-8D64C662866F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Performer\Source\LUFSMeter">
+      <UniqueIdentifier>{B7152187-DC77-255C-C039-4CAD29BC14AC}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Performer\Source\Plugins\GuitarStrummer">
       <UniqueIdentifier>{BD427BA4-4C82-934B-3CD0-B74977534753}</UniqueIdentifier>
     </Filter>
@@ -699,6 +705,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\ForteEmulator\ForteSDK\tinyxml\tinyxmlparser.cpp">
       <Filter>Performer\Source\ForteEmulator\ForteSDK\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\LUFSMeter\filters\SecondOrderIIRFilter.cpp">
+      <Filter>Performer\Source\LUFSMeter\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\LUFSMeter\Ebu128LoudnessMeter.cpp">
+      <Filter>Performer\Source\LUFSMeter</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.cpp">
       <Filter>Performer\Source\Plugins\GuitarStrummer</Filter>
@@ -3497,6 +3509,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\ForteEmulator\ForteSDK\XmlArchive.h">
       <Filter>Performer\Source\ForteEmulator\ForteSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\LUFSMeter\filters\SecondOrderIIRFilter.h">
+      <Filter>Performer\Source\LUFSMeter\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\LUFSMeter\Ebu128LoudnessMeter.h">
+      <Filter>Performer\Source\LUFSMeter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\LUFSMeter\MacrosAndJuceHeaders.h">
+      <Filter>Performer\Source\LUFSMeter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Plugins\GuitarStrummer\GuitarStrummerProcessor.h">
       <Filter>Performer\Source\Plugins\GuitarStrummer</Filter>
