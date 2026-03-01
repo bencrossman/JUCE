@@ -236,7 +236,7 @@ private:
 };
 
 //==============================================================================
-class AudioRecordingDemo final : public Component
+class AudioRecordingDemo final : public Component, private Timer
 {
 public:
     AudioRecordingDemo()
@@ -281,12 +281,16 @@ public:
         liveAudioScroller.setNumChannels(2);
 
         setSize (500, 500);
+
+        startTimer(200);
     }
 
     ~AudioRecordingDemo() override
     {
         //audioDeviceManager.removeAudioCallback (&recorder);
         //audioDeviceManager.removeAudioCallback (&liveAudioScroller);
+
+        stopTimer();
     }
 
     void paint (Graphics& g) override
@@ -330,7 +334,10 @@ public:
     }
 
 private:
-
+    void timerCallback() override
+    {
+        repaint();
+    }
     int sampleRate = -1;
     bool m_loudnessMeterInit = true;
 
