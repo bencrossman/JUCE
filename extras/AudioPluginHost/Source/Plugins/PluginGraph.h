@@ -130,7 +130,6 @@ public:
     void PrintLCDScreen(MidiBuffer &output, int sample_number, const char *text1, const char *text2);
     void UpdateLCDScreen(MidiBuffer &output, int sample_number, int index);
     void UpdateCurrentRouting();
-    void LoadSet(int setIndex);
     void CreateDefaultNodes();
     void SendChunkString(AudioPluginInstance *processorPtr, StringRef str);
 

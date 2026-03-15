@@ -888,13 +888,6 @@ void PluginGraph::UpdateCurrentRouting()
     m_onProgramChange();
 }
 
-void PluginGraph::LoadSet(int setIndex)
-{
-    // TODO
-    setIndex; 
-    m_performer.m_currentPerformanceIndex = 0;
-}
-
 
 void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
 {
@@ -1064,8 +1057,9 @@ void PluginGraph::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             {
                 if (midi_message.getControllerValue() > 0)
                 {
-                    LoadSet(m_pendingSet);
-                    UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex);
+                    m_performer.m_currentSetlistIndex = m_pendingSet;
+                    m_performer.m_currentPerformanceIndex = 0;
+                    UpdateCurrentRouting();
                 }
                 else
                     UpdateLCDScreen(output, sample_number, m_performer.m_currentPerformanceIndex); // just redraw
