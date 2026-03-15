@@ -1983,9 +1983,9 @@
             <Zone DeviceID="-789407354" Program="36"></Zone>
         </Performance>
         <Performance ID="-1395140394" Name="Mamma Mia|">
-            <Zone DeviceID="627145948" Program="4" Volume="2" HighKey="95"></Zone>
-            <Zone DeviceID="-2048222835" Program="0" Volume="-4" NoteMode="1" Transpose="-24" LowKey="96"></Zone>
-            <Zone DeviceID="-985547765" Program="0" Volume="5" Transpose="12" LowKey="69" HighKey="95"></Zone>
+            <Zone DeviceID="627145948" Program="4" Volume="4" HighKey="95"></Zone>
+            <Zone DeviceID="-2048222835" Program="0" Volume="-1.5" NoteMode="1" Transpose="-24" LowKey="96"></Zone>
+            <Zone DeviceID="-985547765" Program="0" Volume="6.5" Transpose="12" LowKey="69" HighKey="95"></Zone>
         </Performance>
         <Performance ID="-1963650825" Name="Man I Feel Like A Woman|">
             <Zone DeviceID="1555279137" Bank="2" Program="60" Transpose="35" HighKey="42"></Zone>
