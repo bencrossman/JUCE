@@ -175,6 +175,7 @@ RackRow::RackRow ()
     m_noteMode->addItem (TRANS ("Double octave"), 5);
     m_noteMode->addItem (TRANS ("Three octave arpeggio"), 6);
     m_noteMode->addItem (TRANS ("No sustain"), 7);
+    m_noteMode->addItem (TRANS ("Major 3rd"), 8);
     m_noteMode->addListener (this);
 
     m_noteMode->setBounds (400, 14, 232, 24);
@@ -691,6 +692,11 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
                                 midi_message.setNoteNumber(note + 12);
                                 output.addEvent(midi_message, sample_number);
                             }
+                            if (m_current->NoteMode == NoteMode::Major3rd && note < 128 - 4) // major 3rd
+                            {
+                                midi_message.setNoteNumber(note + 4);
+                                output.addEvent(midi_message, sample_number);
+                            }
                         }
                     }
                 }
@@ -926,7 +932,7 @@ void RackRow::Assign(Zone *zone)
 
     m_program->setSelectedId(zone->Program + 1, dontSendNotification);
     m_allowCC16 = m_program->getItemText(m_program->getSelectedId() - 1).contains("with CC16");
-    
+
     if (zone->Device->m_node)
 	{
 		auto processor = (AudioPluginInstance *)((AudioProcessorGraph::Node*)zone->Device->m_node)->getProcessor();
@@ -1105,7 +1111,7 @@ BEGIN_JUCER_METADATA
                     explicitFocusOrder="0" pos="392 43 416 24" class="unknown" params="*m_keyboardState, MidiKeyboardComponent::Orientation::horizontalKeyboard"/>
   <COMBOBOX name="" id="321cb138fb836f9e" memberName="m_noteMode" virtualName=""
             explicitFocusOrder="0" pos="400 14 232 24" editable="0" layout="33"
-            items="Normal note mode&#10;Limit 117&#10;Down up arpeggio&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain"
+            items="Normal note mode&#10;Limit 117&#10;Down up arpeggio&#10;Sixteenth&#10;Double octave&#10;Three octave arpeggio&#10;No sustain&#10;Major 3rd"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="" id="12f9414bd02d87a4" memberName="m_missing" virtualName=""
          explicitFocusOrder="0" pos="8 14 76 57" edTextCol="ff000000"

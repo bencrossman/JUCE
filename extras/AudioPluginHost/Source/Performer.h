@@ -69,7 +69,8 @@ enum NoteMode
 	Sixteenth,
 	DoubleOctave,
 	ThreeOctaveArpeggio,
-    NoSustain
+    NoSustain,
+    Major3rd
 };
 
 class Zone

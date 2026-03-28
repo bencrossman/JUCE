@@ -532,6 +532,8 @@
         </Song>
         <Song ID="872585702" Name="Funky Town">
             <Performance ID="695577816" />
+            <Performance ID="1569589684" />
+            <Performance ID="695577816" />
         </Song>
         <Song ID="-591035547" Name="Funky Town Original">
             <Performance ID="1350590003" />
@@ -1756,6 +1758,12 @@
         <Performance ID="-2015719346" Name="Friends will be friends|">
             <Zone DeviceID="627145948" Program="4" Transpose="-14" LowKey="60"></Zone>
             <Zone DeviceID="522416168" Program="21" Transpose="22" HighKey="59"></Zone>
+        </Performance>
+        <Performance ID="1569589684" Name="Funky Town 3rds" Tempo="128">
+            <Zone DeviceID="1555279137" Bank="2" Program="69" Volume="5" NoteMode="3" Transpose="24" HighKey="40"></Zone>
+            <Zone DeviceID="-1202024641" Bank="2" Program="41" Volume="3" Transpose="12" LowKey="41" HighKey="77"></Zone>
+            <Zone DeviceID="522416168" Program="11" Volume="8" NoteMode="7" Transpose="-12" LowKey="78"></Zone>
+            <Zone DeviceID="-1973686393" Program="70" Volume="-4" NoteMode="7" LowKey="78"></Zone>
         </Performance>
         <Performance ID="1350590003" Name="Funky Town Original" Tempo="128">
             <Zone DeviceID="522416168" Program="96" Transpose="21" LowKey="21"></Zone>
