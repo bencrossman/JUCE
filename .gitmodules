@@ -4,4 +4,4 @@
 	url = https://gitlab.com/bencrossman/ForteEmulator.git
 [submodule "extras/AudioPluginHost/Source/LUFSMeter"]
 	path = extras/AudioPluginHost/Source/LUFSMeter
-	url = https://github.com/klangfreund/LUFSMeter.git
+	url = https://github.com/bencrossman/LUFSMeter.git
