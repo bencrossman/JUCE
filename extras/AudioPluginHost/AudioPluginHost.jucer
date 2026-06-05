@@ -407,6 +407,8 @@
       <FILE id="c97aUr" name="JUCEAppIcon.png" compile="0" resource="0" file="Source/JUCEAppIcon.png"/>
       <FILE id="TuhBFg" name="Performer.cpp" compile="1" resource="0" file="Source/Performer.cpp"/>
       <FILE id="HPKay8" name="Performer.h" compile="0" resource="0" file="Source/Performer.h"/>
+      <FILE id="a1b2c3" name="MidiFilePlayer.cpp" compile="1" resource="0" file="Source/MidiFilePlayer.cpp"/>
+      <FILE id="d4e5f6" name="MidiFilePlayer.h" compile="0" resource="0" file="Source/MidiFilePlayer.h"/>
     </GROUP>
     <GROUP id="{63C773C8-4305-87DD-DB3F-6D1143EFEC61}" name="BinaryData"/>
   </MAINGROUP>

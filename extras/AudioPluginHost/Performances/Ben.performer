@@ -187,7 +187,7 @@
         <Rack ID="-841590045" Name="Roland JP-8000" PluginName="P8"></Rack>
         <Rack ID="1317557824" Name="Roland Jupiter-8" PluginName="JUPITER-8(VST2 64bit)"></Rack>
         <Rack ID="-1973686393" Name="Oberheim OP-X" PluginName="OP-X PRO-3"></Rack>
-        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJy1kk1OwzAQheEICPH/o1mxYAESN0gKrRCtCjTAekiGZFTXg2wHVE6PbWRDDoAVZfE++43neTa3Frh6V2QvRwrf7YV9uzpKyqKTT5j11sFEYK4D201srgme2bJE+TTJL6wUxN+j1EtYSx/wScK3zkIBd6wbhBm2XAd6mOiTbsjAvSFre0MB7SX0iA0LTNB/Qd9P+p0v5c889ETxImcJFFpc50m4Z8mOLFQdwbVvJmzLTY8V2i4oO7mD3ih2X2SCepz3oYNSnJMVTNiomNN2giW2Les2aJBtCApDseio85oPyg4CvKk7gZKwjuXP8ysY/FrDlJ1T4bS3hRH6HhuYygcNHK65aclwIzKIpELW7s/+/DYz1LdjIjXlJRUvssKY2MFvlI2dvxUrb1njgJRidCUlFYp/LHNY414v15V8RqeNn5XhM78atH6qfmHOM1zOz4nrYLb2DZrBHFRdHydh4UxfL/9Y/8P6BqeU6K8=</Rack>
+        <Rack ID="-789407354" Name="Sampler" PluginName="Sound Font Player">eJytkstOwzAQReETEOL90KxYsACJP0haWlVtVGhLux6SaTyqa1e2Aypfj23JKdljWVncM57HnRyfzHG7k2SfexJ39smuX26SMhf6G4rGOhhqmKrAzhObKoIlW9ZRvk/yiqWE+JnpcgN73QR8l/DIWchgzKpCKLDmMtDrRD9URQbeDFnbGAroIqEZVqxhiP4G/TLpY1/Kv3lviGIjDwlkSjvhSegzZ0cWFoKg74cJYe3QA4lWBOWsnaAxkt0PmaDetnHoINfO6S0M2cjo02mCOdY1qzpo0KYhyAzFoj3hNW+U7Rj4WgoNOWEZyz+2WzD4s4cJOyfDa58WeuhnrGCiv6iToc9VTYYrrTuWLJCV+xPf7qZANRoQyQlvKFvpLUbHrg5WVna6zrY+ZRlNPkqn9WbJnwat/08OuHUolPObdwKKvW/ZdDa7EE3c7dyZptx0kv/7+QUH3ddm</Rack>
         <Rack ID="-2048222835" Name="Disco Strings" PluginName="Sound Font Player">eJxjlAxOzC3ISS3Wd8ksTs5XCC4pysxLL9YrTjNiGFgAAB1nCVQ=</Rack>
         <Rack ID="-2048222836" Name="Brass" PluginName="Sound Font Player">eJxjlAhOzC3ISS3Wd8wpyVdwrSgoSi0u1itOMxKFSYSk5uUXgWRAonDlIUWluQWpJQpupTk5IAkpdIng8tScHLBJkuhSQZkFEDsYBg4AAI5CLOs=</Rack>
         <Rack ID="546031377" Name="Wav Streamer" PluginName="Wav Streamer">eJzlj00KwkAMhVtv4EJQcOVGV3oGWxDEn4otdh3aYINOUmamirdXqzO4EQ9glu97Sd4Lu6nVCMrMNo2hYnqFSzB0UiQVKgK1r6A2Ut6eNOw7umSLWpExJNzu+VNJY7W00sBJmahYA+Nj6Y38nTVdcE6lJ52xIwtiOMfSsC3lyhEUJ+Jjwlux+O1hz0uMB/LRJt8qrUCjnD5i/XImNWponSPnzIEZIkwtaEucikJbUfu340vuznB7hM8kf5HgD+YOgLyKDA==</Rack>
@@ -1770,9 +1770,12 @@
         <Performance ID="695577816" Name="Funky town|" Tempo="128">
             <Zone DeviceID="1555279137" Bank="2" Program="69" Volume="5" NoteMode="3" Transpose="24" LowKey="22" HighKey="40"></Zone>
             <Zone DeviceID="-1202024641" Bank="2" Program="41" Volume="3" Transpose="12" LowKey="41" HighKey="77"></Zone>
-            <Zone DeviceID="522416168" Program="11" Volume="10" Transpose="-12" LowKey="78"></Zone>
-            <Zone DeviceID="-1973686393" Program="70" LowKey="78"></Zone>
-            <Zone DeviceID="-789407354" Program="21"></Zone>
+            <Zone DeviceID="522416168" Program="11" Volume="10" Transpose="-12" LowKey="78">
+                <KeyMidiFiles Note="21">Midis/FunkyTown.mid</KeyMidiFiles>
+            </Zone>
+            <Zone DeviceID="-1973686393" Program="70" LowKey="78">
+                <KeyMidiFiles Note="21">Midis/FunkyTown.mid</KeyMidiFiles>
+            </Zone>
         </Performance>
         <Performance ID="1653998057" Name="Get lucky|">
             <Zone DeviceID="1555279137" Bank="2" Program="12" HighKey="77"></Zone>

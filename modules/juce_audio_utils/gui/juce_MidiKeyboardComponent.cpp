@@ -208,6 +208,9 @@ void MidiKeyboardComponent::mouseDrag (const MouseEvent& e)
 
 void MidiKeyboardComponent::mouseDown (const MouseEvent& e)
 {
+    if (e.mods.isRightButtonDown())
+        return;
+
     auto newNote = getNoteAndVelocityAtPosition (e.position).note;
 
     if (newNote >= 0 && mouseDownOnKey (newNote, e))
@@ -216,6 +219,9 @@ void MidiKeyboardComponent::mouseDown (const MouseEvent& e)
 
 void MidiKeyboardComponent::mouseUp (const MouseEvent& e)
 {
+    if (e.mods.isRightButtonDown())
+        return;
+
     updateNoteUnderMouse (e, false);
 
     auto note = getNoteAndVelocityAtPosition (e.position).note;

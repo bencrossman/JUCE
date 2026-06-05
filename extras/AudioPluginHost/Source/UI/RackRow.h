@@ -22,6 +22,8 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include "../Plugins/InternalPlugins.h"
+#include "../MidiFilePlayer.h"
+#include <map>
 class Device;
 class Zone;
 class FilterGraph;
@@ -68,6 +70,10 @@ public:
     void SendPresetStateData();
     bool IsDeleted() { return m_current ? m_current->Device->m_deleted : false; }
     bool IsMuted() { return m_current ? m_current->Mute : false; }
+    void AssignMidiFileToKey (int note);
+    void ClearMidiFileFromKey (int note);
+    String GetKeyMidiFilePath (int note) const;
+    void StopMidiFilePlaybacks();
 
     //[/UserMethods]
 
@@ -107,6 +113,12 @@ private:
     bool m_lastZoneHadOverrideState = false;
     String m_lastSendPresetStateDataFilename;
     AudioProcessorGraph::Node* m_midiFilterNode = nullptr; // didnt want to hold this but had to
+    std::vector<MidiFilePlayer> m_midiFilePlaybacks;
+    std::map<String, MidiFilePlayer> m_loadedMidiFiles;
+    void PreloadMidiFile (const String& path);
+    void PreloadZoneMidiFiles();
+    void StartMidiFilePlayback (const String& path);
+    void ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer& midiBuffer);
     //[/UserVariables]
 
     //==============================================================================

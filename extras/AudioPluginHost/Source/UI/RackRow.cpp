@@ -257,6 +257,20 @@ void RackRow::paint (juce::Graphics& g)
     {
         g.fillAll(Colour(0x30000000));
     }
+
+    if (m_current && m_keyboard->isVisible())
+    {
+        g.setColour (Colour (0xffe67e22));
+        for (auto& keyMidiFile : m_current->KeyMidiFiles)
+        {
+            auto keyRect = m_keyboard->getRectangleForKey (keyMidiFile.Note);
+            if (! keyRect.isEmpty())
+            {
+                auto dot = keyRect.withSizeKeepingCentre (4, 4).withY (keyRect.getBottom() - 6);
+                g.fillEllipse (dot.toFloat());
+            }
+        }
+    }
     //[/UserPaint]
 }
 
@@ -487,12 +501,37 @@ void RackRow::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 void RackRow::mouseDown (const juce::MouseEvent& e)
 {
     //[UserCode_mouseDown] -- Add your code here...
+    if (e.mods.isPopupMenu() && e.eventComponent == m_keyboard.get() && m_current)
+    {
+        auto key = m_keyboard->getNoteAndVelocityAtPosition (e.position);
+        if (key.note != -1)
+        {
+            PopupMenu menu;
+            menu.addItem (1, "Assign MIDI file...");
+            if (GetKeyMidiFilePath (key.note).isNotEmpty())
+                menu.addItem (2, "Clear MIDI file");
+
+            auto note = key.note;
+            menu.showMenuAsync ({}, [this, note] (int result)
+            {
+                if (result == 1)
+                    AssignMidiFileToKey (note);
+                else if (result == 2)
+                    ClearMidiFileFromKey (note);
+            });
+            return;
+        }
+    }
+
     mouseDrag(e);
     //[/UserCode_mouseDown]
 }
 
 void RackRow::mouseDrag (const juce::MouseEvent& e)
 {
+    if (e.mods.isRightButtonDown())
+        return;
+
     //[UserCode_mouseDrag] -- Add your code here...
     if (e.eventComponent == m_keyboard.get())
     {
@@ -613,6 +652,16 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
             midi_message.setChannel(1);
             if (midi_message.isNoteOnOrOff())
             {
+                if (midi_message.isNoteOn())
+                {
+                    auto midiFilePath = GetKeyMidiFilePath(midi_message.getNoteNumber());
+                    if (midiFilePath.isNotEmpty())
+                    {
+                        StartMidiFilePlayback(midiFilePath);
+                        continue;
+                    }
+                }
+
                 if (midi_message.getNoteNumber() >= m_current->LowKey && midi_message.getNoteNumber() <= m_current->HighKey)
                 {
                     int note = midi_message.getNoteNumber() + m_current->Transpose;
@@ -730,6 +779,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         if (m_notesDown.size() > 0)
             m_notesDown.clear();
 
+        StopMidiFilePlaybacks();
         m_pendingSoundOff = false;
     }
     else if (m_pendingBank)
@@ -808,6 +858,11 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         // reduce timer
         m_arpeggiatorTimer -= (samples - arpeggiatorSample) / (float)sampleRate;
     }
+
+    if (m_current && ! m_current->Mute)
+        ProcessMidiFilePlaybacks (samples, sampleRate, midiBuffer);
+    else
+        StopMidiFilePlaybacks();
 }
 
 void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &GraphEditorPanel)
@@ -912,8 +967,131 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
     m_volume->setValue(-100); // So in Assign we do something
 }
 
+String RackRow::GetKeyMidiFilePath (int note) const
+{
+    if (! m_current)
+        return {};
+
+    for (auto& keyMidiFile : m_current->KeyMidiFiles)
+        if (keyMidiFile.Note == note)
+            return keyMidiFile.Path;
+
+    return {};
+}
+
+void RackRow::AssignMidiFileToKey (int note)
+{
+    if (! m_current)
+        return;
+
+    FileChooser chooser ("Select MIDI file:", File(), "*.mid;*.midi");
+    if (! chooser.browseForFileToOpen())
+        return;
+
+    auto file = chooser.getResult();
+    auto cwd = File::getCurrentWorkingDirectory().getFullPathName();
+    auto path = file.getFullPathName();
+
+    if (path.startsWith (cwd))
+        path = path.substring (cwd.length() + 1);
+
+    path = path.replace ("\\", "/");
+
+    for (auto& keyMidiFile : m_current->KeyMidiFiles)
+    {
+        if (keyMidiFile.Note == note)
+        {
+            keyMidiFile.Path = path.toStdString();
+            PreloadMidiFile (path);
+            repaint();
+            return;
+        }
+    }
+
+    KeyMidiFile keyMidiFile;
+    keyMidiFile.Note = note;
+    keyMidiFile.Path = path.toStdString();
+    m_current->KeyMidiFiles.push_back (keyMidiFile);
+    PreloadMidiFile (path);
+    repaint();
+}
+
+void RackRow::ClearMidiFileFromKey (int note)
+{
+    if (! m_current)
+        return;
+
+    for (auto it = m_current->KeyMidiFiles.begin(); it != m_current->KeyMidiFiles.end(); ++it)
+    {
+        if (it->Note == note)
+        {
+            m_loadedMidiFiles.erase (String (it->Path));
+            m_current->KeyMidiFiles.erase (it);
+            repaint();
+            return;
+        }
+    }
+}
+
+void RackRow::PreloadMidiFile (const String& path)
+{
+    if (path.isEmpty() || m_loadedMidiFiles.find (path) != m_loadedMidiFiles.end())
+        return;
+
+    MidiFilePlayer player;
+    if (player.load (resolveMidiFilePath (path)))
+        m_loadedMidiFiles[path] = std::move (player);
+}
+
+void RackRow::PreloadZoneMidiFiles()
+{
+    if (! m_current)
+        return;
+
+    for (auto& keyMidiFile : m_current->KeyMidiFiles)
+        PreloadMidiFile (keyMidiFile.Path);
+}
+
+void RackRow::StopMidiFilePlaybacks()
+{
+    for (auto& player : m_midiFilePlaybacks)
+        player.stop();
+
+    m_midiFilePlaybacks.clear();
+}
+
+void RackRow::StartMidiFilePlayback (const String& path)
+{
+    if (path.isEmpty())
+        return;
+
+    auto loaded = m_loadedMidiFiles.find (path);
+    if (loaded == m_loadedMidiFiles.end())
+        return;
+
+    auto player = loaded->second;
+    // TODO Do we need to set tempo
+    player.start();
+    m_midiFilePlaybacks.push_back (std::move (player));
+}
+
+void RackRow::ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer& midiBuffer)
+{
+    if (m_midiFilePlaybacks.empty())
+        return;
+
+    for (auto& player : m_midiFilePlaybacks)
+        if (player.isActive())
+            player.fillBuffer (samples, sampleRate, midiBuffer);
+
+    m_midiFilePlaybacks.erase (std::remove_if (m_midiFilePlaybacks.begin(), m_midiFilePlaybacks.end(),
+                                               [] (const MidiFilePlayer& player) { return ! player.isActive(); }),
+                               m_midiFilePlaybacks.end());
+}
+
 void RackRow::Assign(Zone *zone)
 {
+    StopMidiFilePlaybacks();
     m_current = zone;
 
     /*if (zone->Device->PluginName == "mp3play2")
@@ -964,7 +1142,10 @@ void RackRow::Assign(Zone *zone)
 		m_missing->setVisible(false);
 	}
 
+    m_loadedMidiFiles.clear();
+    PreloadZoneMidiFiles();
     UpdateKeyboard();
+    repaint();
 }
 
 void RackRow::SetSoloMode(bool mode)

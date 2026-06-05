@@ -73,6 +73,20 @@ enum NoteMode
     Major3rd
 };
 
+class KeyMidiFile
+{
+public:
+    int Note = 0;
+    string Path;
+
+    template<class A>
+    void Serialize (A& ar)
+    {
+        AR (Note, XmlAttribute);
+        AR (Path);
+    }
+};
+
 class Zone
 {
 public:
@@ -88,6 +102,7 @@ public:
     int LowKey;
     int HighKey;
     string OverrideState;
+    vector<KeyMidiFile> KeyMidiFiles;
 
 	template<class A>
 	void Serialize(A& ar)
@@ -108,6 +123,7 @@ public:
 		AR(LowKey, XmlAttribute | XmlOptional);
         AR(HighKey, XmlAttribute | XmlOptional, 127);
         AR(OverrideState);
+        AR(KeyMidiFiles);
     }
 };
 
