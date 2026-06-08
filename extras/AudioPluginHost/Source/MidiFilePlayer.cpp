@@ -25,6 +25,18 @@ bool MidiFilePlayer::load (const File& file)
     if (! midiFile.readFrom (stream, true))
         return false;
 
+    fileTempoBpm = 120.0;
+    MidiMessageSequence tempoEvents;
+    midiFile.findAllTempoEvents (tempoEvents);
+
+    if (tempoEvents.getNumEvents() > 0)
+    {
+        const auto& msg = tempoEvents.getEventPointer (0)->message;
+
+        if (msg.isTempoMetaEvent())
+            fileTempoBpm = 60.0 / msg.getTempoSecondsPerQuarterNote();
+    }
+
     midiFile.convertTimestampTicksToSeconds();
 
     for (int t = 0; t < midiFile.getNumTracks(); ++t)
@@ -50,13 +62,19 @@ void MidiFilePlayer::stop()
     positionSeconds = 0;
 }
 
-void MidiFilePlayer::fillBuffer (int numSamples, int sampleRate, MidiBuffer& output, int midiChannel)
+void MidiFilePlayer::fillBuffer (int numSamples, int sampleRate, MidiBuffer& output, float performanceTempoBpm, int midiChannel)
 {
     if (! active || sampleRate <= 0)
         return;
 
+    if (performanceTempoBpm <= 0.0f)
+        performanceTempoBpm = 120.0f;
+
+    const double tempoScale = performanceTempoBpm / fileTempoBpm;
+    const double wallDelta = numSamples / (double) sampleRate;
+    const double fileDelta = wallDelta * tempoScale;
     const double blockStart = positionSeconds;
-    const double blockEnd = blockStart + numSamples / (double) sampleRate;
+    const double blockEnd = blockStart + fileDelta;
 
     while (nextEventIndex < sequence.getNumEvents())
     {
@@ -72,7 +90,7 @@ void MidiFilePlayer::fillBuffer (int numSamples, int sampleRate, MidiBuffer& out
             message.setTimeStamp (0);
 
             const int samplePos = jlimit (0, numSamples - 1,
-                                            (int) std::round ((eventTime - blockStart) * sampleRate));
+                                            (int) std::round ((eventTime - blockStart) / fileDelta * numSamples));
             output.addEvent (message, samplePos);
         }
 

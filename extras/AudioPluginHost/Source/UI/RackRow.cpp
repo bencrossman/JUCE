@@ -257,21 +257,26 @@ void RackRow::paint (juce::Graphics& g)
     {
         g.fillAll(Colour(0x30000000));
     }
+    //[/UserPaint]
+}
 
+void RackRow::paintOverChildren (juce::Graphics& g)
+{
     if (m_current && m_keyboard->isVisible())
     {
         g.setColour (Colour (0xffe67e22));
         for (auto& keyMidiFile : m_current->KeyMidiFiles)
         {
             auto keyRect = m_keyboard->getRectangleForKey (keyMidiFile.Note);
+            keyRect.translate ((float) m_keyboard->getX(), (float) m_keyboard->getY());
+
             if (! keyRect.isEmpty())
             {
-                auto dot = keyRect.withSizeKeepingCentre (4, 4).withY (keyRect.getBottom() - 6);
-                g.fillEllipse (dot.toFloat());
+                auto dot = keyRect.withSizeKeepingCentre (4.0f, 4.0f).withY (keyRect.getBottom() - 6.0f);
+                g.fillEllipse (dot);
             }
         }
     }
-    //[/UserPaint]
 }
 
 void RackRow::resized()
@@ -1070,7 +1075,6 @@ void RackRow::StartMidiFilePlayback (const String& path)
         return;
 
     auto player = loaded->second;
-    // TODO Do we need to set tempo
     player.start();
     m_midiFilePlaybacks.push_back (std::move (player));
 }
@@ -1082,7 +1086,7 @@ void RackRow::ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer&
 
     for (auto& player : m_midiFilePlaybacks)
         if (player.isActive())
-            player.fillBuffer (samples, sampleRate, midiBuffer);
+            player.fillBuffer (samples, sampleRate, midiBuffer, m_tempo);
 
     m_midiFilePlaybacks.erase (std::remove_if (m_midiFilePlaybacks.begin(), m_midiFilePlaybacks.end(),
                                                [] (const MidiFilePlayer& player) { return ! player.isActive(); }),

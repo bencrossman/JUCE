@@ -1508,8 +1508,14 @@
             <Zone DeviceID="546031377" Program="2"></Zone>
         </Performance>
         <Performance ID="1703905528" Name="Born To Be Alive|">
-            <Zone DeviceID="-2048222836" Program="2" Volume="3" NoteMode="4" Transpose="12" LowKey="55" HighKey="108"></Zone>
-            <Zone DeviceID="-789407354" Program="20" Volume="9"></Zone>
+            <Zone DeviceID="-2048222836" Program="2" Volume="3" NoteMode="4" Transpose="12" LowKey="55" HighKey="108">
+                <KeyMidiFiles Note="21">Midis/BornToBeAlive1.mid</KeyMidiFiles>
+                <KeyMidiFiles Note="22">Midis/BornToBeAlive2.mid</KeyMidiFiles>
+                <KeyMidiFiles Note="23">Midis/BornToBeAlive3.mid</KeyMidiFiles>
+                <KeyMidiFiles Note="24">Midis/BornToBeAlive4.mid</KeyMidiFiles>
+                <KeyMidiFiles Note="25">Midis/BornToBeAlive5.mid</KeyMidiFiles>
+                <KeyMidiFiles Note="26">Midis/BornToBeAlive6.mid</KeyMidiFiles>
+            </Zone>
             <Zone DeviceID="627145948" Program="0" Volume="4" Transpose="12" LowKey="27" HighKey="54"></Zone>
         </Performance>
         <Performance ID="-1723119480" Name="Boys in town|Chorus">
