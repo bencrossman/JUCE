@@ -120,6 +120,12 @@ private:
     void PreloadZoneMidiFiles();
     void StartMidiFilePlayback (const String& path);
     void ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer& midiBuffer);
+    bool HasGlobalRackState() const;
+    bool HasPerformanceOverrideState() const;
+    void ClearGlobalRackState();
+    void ClearPerformanceOverrideState();
+    void DrawStateIndicators (juce::Graphics& g);
+    void UpdateProgramBankVisibility();
     //[/UserVariables]
 
     //==============================================================================

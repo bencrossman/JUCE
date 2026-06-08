@@ -262,6 +262,8 @@ void RackRow::paint (juce::Graphics& g)
 
 void RackRow::paintOverChildren (juce::Graphics& g)
 {
+    DrawStateIndicators (g);
+
     if (m_current && m_keyboard->isVisible())
     {
         g.setColour (Colour (0xffe67e22));
@@ -326,8 +328,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
         }
 
         bool nonKeyboardPlugin = m_current->Device->PluginName == "Wav Streamer" || m_current->Device->m_audioInputNode;
-        m_program->setVisible(!m_current->Mute && m_hasPrograms);
-        m_bank->setVisible(!m_current->Mute && m_bank->getNumItems() > 0);
+        UpdateProgramBankVisibility();
         m_keyboard->setVisible(!nonKeyboardPlugin && !m_current->Mute);
         m_volume->setVisible(!m_current->Mute);
         m_transpose->setVisible(!nonKeyboardPlugin && !m_current->Mute);
@@ -355,13 +356,15 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
         {
             PopupMenu menu;
             menu.addItem(1, "Save global rack state");
-            menu.addItem(2, "Save performance override state");
-            menu.addItem(3, "Move rack up");
-            menu.addItem(4, "Move rack down");
-            menu.addItem(5, "Rename rack");
-            menu.addItem(6, "Delete rack");
+            menu.addItem(2, "Clear global rack state", HasGlobalRackState());
+            menu.addItem(3, "Save performance override state");
+            menu.addItem(4, "Clear performance override state", HasPerformanceOverrideState());
+            menu.addItem(5, "Move rack up");
+            menu.addItem(6, "Move rack down");
+            menu.addItem(7, "Rename rack");
+            menu.addItem(8, "Delete rack");
             auto res = menu.show();
-            if (res == 1 || res == 2)
+            if (res == 1 || res == 3)
             {
                 MemoryBlock mb;
                 ((AudioProcessorGraph::Node*)m_current->Device->m_node)->getProcessor()->getStateInformation(mb);
@@ -391,19 +394,30 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                     m_current->Device->InitialStateAU = (const char*)output2.getData();
 #endif
                 else
+                {
                     m_current->OverrideState = (const char*)output2.getData();
+                    UpdateProgramBankVisibility();
+                    repaint();
+                }
             }
-            if (res == 3)
+            if (res == 2)
+                ClearGlobalRackState();
+            if (res == 4)
+            {
+                ClearPerformanceOverrideState();
+                UpdateProgramBankVisibility();
+            }
+            if (res == 5)
             {
                 m_current->Device->m_order -= 1.5f;
                 panel->RefreshRacks();
             }
-            if (res == 4)
+            if (res == 6)
             {
                 m_current->Device->m_order += 1.5f;
                 panel->RefreshRacks();
             }
-            if (res == 5)
+            if (res == 7)
             {
                 AlertWindow alert("", "", AlertWindow::NoIcon);
                 alert.addTextEditor("Name", m_current->Device->Name);
@@ -418,7 +432,7 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
 
                 }
             }
-            if (res == 6)
+            if (res == 8)
             {
                 m_current->Device->m_deleted = true;
                 m_mute->setToggleState(true, sendNotification); // Good, will only bypass if not currently muted
@@ -1114,6 +1128,82 @@ void RackRow::ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer&
                                m_midiFilePlaybacks.end());
 }
 
+bool RackRow::HasGlobalRackState() const
+{
+    if (!m_current || !m_current->Device)
+        return false;
+
+    return !m_current->Device->InitialStateVST.empty()
+        || !m_current->Device->InitialStateAU.empty();
+}
+
+bool RackRow::HasPerformanceOverrideState() const
+{
+    return m_current && !m_current->OverrideState.empty();
+}
+
+void RackRow::ClearGlobalRackState()
+{
+    if (!m_current || !m_current->Device)
+        return;
+
+    m_current->Device->InitialStateVST.clear();
+    m_current->Device->InitialStateAU.clear();
+    repaint();
+}
+
+void RackRow::ClearPerformanceOverrideState()
+{
+    if (!m_current || m_current->OverrideState.empty())
+        return;
+
+    m_current->OverrideState.clear();
+
+    if (m_current->Device->m_node)
+    {
+        auto processor = (AudioPluginInstance*) ((AudioProcessorGraph::Node*) m_current->Device->m_node)->getProcessor();
+
+#if JUCE_WINDOWS
+        graph->SendChunkString (processor, m_current->Device->InitialStateVST);
+#else
+        graph->SendChunkString (processor, m_current->Device->InitialStateAU);
+#endif
+        m_lastZoneHadOverrideState = false;
+    }
+
+    repaint();
+}
+
+void RackRow::DrawStateIndicators (juce::Graphics& g)
+{
+    if (! m_current || ! m_current->Device || ! m_deviceSettings->isVisible())
+        return;
+
+    auto deviceRect = m_deviceSettings->getBounds().toFloat();
+
+    if (HasGlobalRackState())
+    {
+        g.setColour (Colour (0xff3498db));
+        g.fillEllipse (deviceRect.getX() + 4.0f, deviceRect.getY() + 4.0f, 6.0f, 6.0f);
+    }
+
+    if (HasPerformanceOverrideState())
+    {
+        g.setColour (Colour (0xff9b59b6));
+        g.fillEllipse (deviceRect.getRight() - 10.0f, deviceRect.getY() + 4.0f, 6.0f, 6.0f);
+    }
+}
+
+void RackRow::UpdateProgramBankVisibility()
+{
+    const bool muted = m_current && m_current->Mute;
+    const bool hideForOverride = HasPerformanceOverrideState();
+    const bool show = ! muted && ! hideForOverride;
+
+    m_program->setVisible (show && m_hasPrograms);
+    m_bank->setVisible (show && m_bank->getNumItems() > 0);
+}
+
 void RackRow::Assign(Zone *zone)
 {
     StopMidiFilePlaybacks();
@@ -1170,6 +1260,7 @@ void RackRow::Assign(Zone *zone)
     m_loadedMidiFiles.clear();
     PreloadZoneMidiFiles();
     UpdateKeyboard();
+    UpdateProgramBankVisibility();
     repaint();
 }
 

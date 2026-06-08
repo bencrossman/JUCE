@@ -29,8 +29,6 @@ JUCE 8.0.1 has removed GUI editor
 Bug where jump straight to SOS and Triton patch not set (debug only?)
 Bug - program list for bank may be wrong if unmute
 Solo - Visually mutes other zones
-Notification of global/overrides (hide programs/banks)
-Clear override (easy)
 Load doesn't work, also doesn't clear previous causing crash
 Need UI to enable/disable #CC16
 Disconnect guitar on device change (stop ASIO4ALL crash), also if loading a guitar before others, will be active while loading.
