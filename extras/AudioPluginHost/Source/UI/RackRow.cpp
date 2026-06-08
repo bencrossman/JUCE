@@ -1084,9 +1084,30 @@ void RackRow::ProcessMidiFilePlaybacks (int samples, int sampleRate, MidiBuffer&
     if (m_midiFilePlaybacks.empty())
         return;
 
+    MidiBuffer fileEvents;
+
     for (auto& player : m_midiFilePlaybacks)
         if (player.isActive())
-            player.fillBuffer (samples, sampleRate, midiBuffer, m_tempo);
+            player.fillBuffer (samples, sampleRate, fileEvents, m_tempo);
+
+    for (const auto meta : fileEvents)
+    {
+        auto message = meta.getMessage();
+        const int samplePos = meta.samplePosition;
+
+        if (! m_current->Device->m_ignoreMidi)
+            midiBuffer.addEvent (message, samplePos);
+
+        if (m_current->NoteMode == NoteMode::DoubleOctave && message.isNoteOnOrOff())
+        {
+            const int note = message.getNoteNumber();
+            if (note < 128 - 12)
+            {
+                message.setNoteNumber (note + 12);
+                midiBuffer.addEvent (message, samplePos);
+            }
+        }
+    }
 
     m_midiFilePlaybacks.erase (std::remove_if (m_midiFilePlaybacks.begin(), m_midiFilePlaybacks.end(),
                                                [] (const MidiFilePlayer& player) { return ! player.isActive(); }),

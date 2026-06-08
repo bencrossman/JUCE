@@ -1373,7 +1373,7 @@
             <Performance ID="1988043787" />
         </Song>
         <Song ID="-597183157" Name="YMCA">
-            <Performance ID="-55223580" />
+            <Performance ID="1211815352" />
         </Song>
         <Song ID="325964708" Name="You can leave your hat on">
             <Performance ID="265751447" />
@@ -1507,7 +1507,7 @@
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
             <Zone DeviceID="546031377" Program="2"></Zone>
         </Performance>
-        <Performance ID="1703905528" Name="Born To Be Alive|">
+        <Performance ID="1703905528" Name="Born To Be Alive|" Tempo="130">
             <Zone DeviceID="-2048222836" Program="2" Volume="3" NoteMode="4" Transpose="12" LowKey="55" HighKey="108">
                 <KeyMidiFiles Note="21">Midis/BornToBeAlive1.mid</KeyMidiFiles>
                 <KeyMidiFiles Note="22">Midis/BornToBeAlive2.mid</KeyMidiFiles>
@@ -2879,6 +2879,13 @@
         <Performance ID="1988043787" Name="Xanadu|">
             <Zone DeviceID="627145948" Program="4" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
             <Zone DeviceID="-2048222835" Program="0" Volume="-9" NoteMode="1" Transpose="24" HighKey="59"></Zone>
+        </Performance>
+        <Performance ID="1211815352" Name="YMCA|">
+            <Zone DeviceID="-2048222836" Program="2" NoteMode="4" Transpose="11" LowKey="60"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Transpose="23" HighKey="59"></Zone>
+            <Zone DeviceID="-2048222835" Program="0" Volume="-3" NoteMode="4" HighKey="21">
+                <KeyMidiFiles Note="21">Midis/YMCA.mid</KeyMidiFiles>
+            </Zone>
         </Performance>
         <Performance ID="1311803371" Name="You may be right|">
             <Zone DeviceID="627145948" Program="4" LowKey="22"></Zone>
