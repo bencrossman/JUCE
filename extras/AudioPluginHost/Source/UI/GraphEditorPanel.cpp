@@ -1602,6 +1602,8 @@ void GraphEditorPanel::SetPerformance(PerformanceType *performance)
             }
         }
     }
+
+    RefreshRacks(); // This fixed the case where rack heights would be wrong in some situations
 }
 
 void GraphEditorPanel::SoloChange()
