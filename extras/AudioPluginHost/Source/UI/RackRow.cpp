@@ -355,10 +355,15 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
         if (modifiers.isRightButtonDown())
         {
             PopupMenu menu;
+            const auto& pluginName = m_current->Device->PluginName;
+            const bool supportsOverride = pluginName != "Wav Streamer" && pluginName != "Sound Font Player";
             menu.addItem(1, "Save global rack state");
             menu.addItem(2, "Clear global rack state", HasGlobalRackState());
-            menu.addItem(3, "Save performance override state");
-            menu.addItem(4, "Clear performance override state", HasPerformanceOverrideState());
+            if (supportsOverride)
+            {
+                menu.addItem(3, "Save performance override state");
+                menu.addItem(4, "Clear performance override state", !m_current->OverrideState.empty());
+            }
             menu.addItem(5, "Move rack up");
             menu.addItem(6, "Move rack down");
             menu.addItem(7, "Rename rack");
@@ -388,11 +393,15 @@ void RackRow::buttonClicked (juce::Button* buttonThatWasClicked)
                 MemoryOutputStream output2;
                 Base64::convertToBase64(output2, output.getData(),output.getDataSize());
                 if (res == 1)
+                {
 #if JUCE_WINDOWS
                     m_current->Device->InitialStateVST = (const char*)output2.getData();
 #else
                     m_current->Device->InitialStateAU = (const char*)output2.getData();
 #endif
+                    UpdatePatchProgramList();
+                    repaint();
+                }
                 else
                 {
                     m_current->OverrideState = (const char*)output2.getData();
@@ -1137,15 +1146,14 @@ bool RackRow::HasGlobalRackState() const
         || !m_current->Device->InitialStateAU.empty();
 }
 
-bool RackRow::HasPerformanceOverrideState() const
-{
-    return m_current && !m_current->OverrideState.empty();
-}
-
 void RackRow::ClearGlobalRackState()
 {
     if (!m_current || !m_current->Device)
         return;
+
+    const auto& pluginName = m_current->Device->PluginName;
+    if (pluginName == "Wav Streamer" || pluginName == "Sound Font Player")
+        m_program->clear(dontSendNotification);
 
     m_current->Device->InitialStateVST.clear();
     m_current->Device->InitialStateAU.clear();
@@ -1187,7 +1195,7 @@ void RackRow::DrawStateIndicators (juce::Graphics& g)
         g.fillEllipse (deviceRect.getX() + 4.0f, deviceRect.getY() + 4.0f, 6.0f, 6.0f);
     }
 
-    if (HasPerformanceOverrideState())
+    if (!m_current->OverrideState.empty())
     {
         g.setColour (Colour (0xff9b59b6));
         g.fillEllipse (deviceRect.getRight() - 10.0f, deviceRect.getY() + 4.0f, 6.0f, 6.0f);
@@ -1197,11 +1205,35 @@ void RackRow::DrawStateIndicators (juce::Graphics& g)
 void RackRow::UpdateProgramBankVisibility()
 {
     const bool muted = m_current && m_current->Mute;
-    const bool hideForOverride = HasPerformanceOverrideState();
+    const bool hideForOverride = !m_current->OverrideState.empty();
     const bool show = ! muted && ! hideForOverride;
 
     m_program->setVisible (show && m_hasPrograms);
     m_bank->setVisible (show && m_bank->getNumItems() > 0);
+}
+
+void RackRow::UpdatePatchProgramList()
+{
+    if (! m_current || ! m_current->Device->m_node)
+        return;
+
+    const auto& pluginName = m_current->Device->PluginName;
+    if (pluginName != "Wav Streamer" && pluginName != "Sound Font Player")
+        return;
+
+    auto processor = ((AudioProcessorGraph::Node*) m_current->Device->m_node)->getProcessor();
+    m_program->clear (dontSendNotification);
+    m_hasPrograms = true;
+
+    for (int i = 0; i < processor->getNumPrograms(); ++i)
+    {
+        const auto name = processor->getProgramName (i);
+        if (name.isNotEmpty())
+            m_program->addItem (name, i + 1);
+    }
+
+    m_program->setSelectedId (m_current->Program + 1, dontSendNotification);
+    UpdateProgramBankVisibility();
 }
 
 void RackRow::Assign(Zone *zone)

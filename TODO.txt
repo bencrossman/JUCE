@@ -22,7 +22,6 @@ Integrate for Access database with edit?
 
 If released
 ~~~~~~~~~~~
-WavStreamer/SoundFontPlayer needs to refresh on dropdown
 Bug - program list for bank may be wrong if unmute
 
 Need to not activate sound engine until everything is loaded (so don't need the reset device after 2 seconds and OP-X sometimes doesn't set patch)
