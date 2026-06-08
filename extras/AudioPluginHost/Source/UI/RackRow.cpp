@@ -864,7 +864,7 @@ void RackRow::Filter(int samples, int sampleRate, MidiBuffer &midiBuffer)
         m_arpeggiatorTimer -= (samples - arpeggiatorSample) / (float)sampleRate;
     }
 
-    if (m_current && ! m_current->Mute)
+    if (m_current && !m_current->Mute)
         ProcessMidiFilePlaybacks (samples, sampleRate, midiBuffer);
     else
         StopMidiFilePlaybacks();
@@ -974,7 +974,7 @@ void RackRow::Setup(Device &device, PluginGraph &pluginGraph, GraphEditorPanel &
 
 String RackRow::GetKeyMidiFilePath (int note) const
 {
-    if (! m_current)
+    if (!m_current)
         return {};
 
     for (auto& keyMidiFile : m_current->KeyMidiFiles)
@@ -986,7 +986,7 @@ String RackRow::GetKeyMidiFilePath (int note) const
 
 void RackRow::AssignMidiFileToKey (int note)
 {
-    if (! m_current)
+    if (!m_current)
         return;
 
     FileChooser chooser ("Select MIDI file:", File(), "*.mid;*.midi");
@@ -1023,7 +1023,7 @@ void RackRow::AssignMidiFileToKey (int note)
 
 void RackRow::ClearMidiFileFromKey (int note)
 {
-    if (! m_current)
+    if (!m_current)
         return;
 
     for (auto it = m_current->KeyMidiFiles.begin(); it != m_current->KeyMidiFiles.end(); ++it)
@@ -1050,7 +1050,7 @@ void RackRow::PreloadMidiFile (const String& path)
 
 void RackRow::PreloadZoneMidiFiles()
 {
-    if (! m_current)
+    if (!m_current)
         return;
 
     for (auto& keyMidiFile : m_current->KeyMidiFiles)
