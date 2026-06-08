@@ -253,7 +253,7 @@ void RackRow::paint (juce::Graphics& g)
     auto rect = m_deviceSettings->getBounds();
     rect.expand(1, 1);
     g.drawRect(rect);
-    if (m_mute->getToggleState())
+    if (m_mute->getToggleState() || IsSoloedOut())
     {
         g.fillAll(Colour(0x30000000));
     }
@@ -1277,6 +1277,13 @@ void RackRow::SetSoloMode(bool mode)
 
     if (m_current->Device->m_audioInputNode)
         ((AudioProcessorGraph::Node*)m_current->Device->m_audioInputNode)->setBypassed(m_current->Mute || (m_soloMode && !m_current->Solo));
+
+    repaint();
+}
+
+bool RackRow::IsSoloedOut() const
+{
+    return m_soloMode && !m_current->Solo;
 }
 
 void RackRow::handleCommandMessage(int id)

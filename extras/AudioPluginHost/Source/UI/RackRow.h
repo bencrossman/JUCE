@@ -63,6 +63,7 @@ public:
     void textEditorTextChanged(TextEditor&) override;
     void SetSoloMode(bool mode);
     bool IsSolo() { return m_solo->getToggleState(); }
+    bool IsSoloedOut() const;
     void Filter(int samples, int sampleRate, MidiBuffer &midiBuffer) override;
     static void SetTempo(float tempo) { m_tempo = tempo; }
     void handleCommandMessage(int id) override;
