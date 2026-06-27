@@ -2163,12 +2163,12 @@
             <Zone DeviceID="-789407354" Program="20"></Zone>
         </Performance>
         <Performance ID="1187282638" Name="Money Money Money|In A">
-            <Zone DeviceID="-1973686393" Program="29" Volume="-3"></Zone>
+            <Zone DeviceID="-1973686393" Program="29" Volume="-9"></Zone>
             <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-5"></Zone>
             <Zone DeviceID="627145948" Program="0" Volume="-1"></Zone>
         </Performance>
         <Performance ID="1016986167" Name="Money Money Money|In Bbm!!!">
-            <Zone DeviceID="-1973686393" Program="29" Volume="-3" Transpose="1"></Zone>
+            <Zone DeviceID="-1973686393" Program="29" Volume="-9" Transpose="1"></Zone>
             <Zone DeviceID="-699955187" Bank="1" Program="47" Volume="-5" Transpose="1"></Zone>
             <Zone DeviceID="627145948" Program="0" Volume="-1" Transpose="1"></Zone>
         </Performance>
