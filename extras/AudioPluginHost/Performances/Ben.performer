@@ -2179,8 +2179,8 @@
         </Performance>
         <Performance ID="-989542333" Name="Moving on up|">
             <Zone DeviceID="-2048222836" Program="1" Volume="5" Transpose="36" HighKey="54"></Zone>
-            <Zone DeviceID="-2048222835" Program="0" NoteMode="1" Transpose="-12" LowKey="87"></Zone>
-            <Zone DeviceID="-985547765" Program="21" Volume="6" LowKey="55" HighKey="86"></Zone>
+            <Zone DeviceID="-2048222835" Program="0" NoteMode="1" Transpose="-12" LowKey="79"></Zone>
+            <Zone DeviceID="-985547765" Program="21" Volume="6" LowKey="55" HighKey="78"></Zone>
         </Performance>
         <Performance ID="146441954" Name="Mr Brightside|">
             <Zone DeviceID="-841590045" Program="13"></Zone>
@@ -2882,7 +2882,7 @@
         </Performance>
         <Performance ID="1211815352" Name="YMCA|">
             <Zone DeviceID="-2048222836" Program="2" NoteMode="4" Transpose="11" LowKey="60"></Zone>
-            <Zone DeviceID="-1202024641" Program="17" Transpose="23" HighKey="59"></Zone>
+            <Zone DeviceID="-1202024641" Program="17" Transpose="35" LowKey="22" HighKey="59"></Zone>
             <Zone DeviceID="-2048222835" Program="0" Volume="-3" NoteMode="4" HighKey="21">
                 <KeyMidiFiles Note="21">Midis/YMCA.mid</KeyMidiFiles>
             </Zone>

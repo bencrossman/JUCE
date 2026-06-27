@@ -859,6 +859,9 @@
     <ClCompile Include="..\..\Source\Performer.cpp">
       <Filter>Performer\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MidiFilePlayer.cpp">
+      <Filter>Performer\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClCompile>
@@ -3757,6 +3760,9 @@
       <Filter>Performer\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Performer.h">
+      <Filter>Performer\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiFilePlayer.h">
       <Filter>Performer\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
