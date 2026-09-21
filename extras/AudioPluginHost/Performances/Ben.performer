@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Root CurrentSetListID="1054719817">
+<Root CurrentSetListID="-713002213">
     <SetLists>
         <SetList ID="-40733610" Name="Bohemian Rhapsody">
             <Song ID="800911578" />
@@ -173,6 +173,24 @@
             <Song ID="1021559505" />
             <Song ID="-1585070218" />
         </SetList>
+        <SetList ID="-713002213" Name="Groove Doctor Bob / Blame It On The Boogie">
+            <Song ID="257212939" />
+            <Song ID="-1234003492" />
+            <Song ID="-1878073851" />
+            <Song ID="629533136" />
+            <Song ID="-347755421" />
+            <Song ID="-1969000667" />
+            <Song ID="-589323817" />
+            <Song ID="-2018337595" />
+            <Song ID="-1508606755" />
+            <Song ID="-61719265" />
+            <Song ID="535976933" />
+            <Song ID="-1454001586" />
+            <Song ID="-1068805014" />
+            <Song ID="508841460" />
+            <Song ID="-1627087528" />
+            <Song ID="-1963682449" />
+        </SetList>
     </SetLists>
     <Racks>
         <Rack ID="627145948" Name="Piano" PluginName="TruePianos x64">eJzFjsEKwjAMhjPw6GEHX0NQ8aqCE0H0IOgLlC66YpdK1w52mz6fHnwcbzZawTcwl/B/+fMnmaQ1hFrOsyK0ZLzcbyEZMUrg75VAF+ByFIo+up2xtqhRVMhglgZdo5be1hiXvuygjbGRtZG5wmJVRMZZzpOiI0D/8Zym7+xalMaTC4b7bfNlOUrR/ORf5dmvyCFVqsbJAKAXmK9w15Rn4Qp0Sk6GbA43rqXXTmXGspF92oh8LujE84UK5yiHNPKtcJL/68QfXw2ORMU=|eJxVUT1LA0EQnYuJ8SPqGbWws7KRYBQLmxhREYVIIkaiGITN3Zgs3u2FvdmDdOpPEkQQSxtRwYCFjT/Eztu4ITrFvp23b98MM422x0PK5z+txFAyNZweGR0bt6ezM7N1nwl1wRxSEmXVZcTq6KGPgnKC+VgLVYM6baxFKEMeiKpOziqeanJxRIywqlXZtV0ZlO0SDGLkz90ymDA4ZDBpMGVw2GBaH93MxOFqd3LqMF8rK1pYWV6Nq1QrNmSZ8lV52oIMwHWTcfH76aqocxk3z0LURNGO8wg9R8kIjXOfu/CCQPbbMxy1JIYtY6a9SAkumgC57veG3fOOmB8oQbHg7bXU51x0WOeP/43TVvuCUIQ8wkIeYDbmVIhHHb/NqIXEncKKFsc1bnzlEd8OpBZqnRcwd4uJS/2+w+NywtX99fgKI6c1GNvVybEgTh668bDnYRGWYB02YQ8O4BTOwYFbuIN7eIBHeIJneIF368Psob+QOfgX1tcPYb96Rw==</Rack>
@@ -267,6 +285,9 @@
         <Song ID="603238529" Name="Beds Are Burning">
             <Performance ID="-1066152518" />
         </Song>
+        <Song ID="-347755421" Name="Believe">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-1902089942" Name="Bent">
             <Performance ID="1172317043" />
         </Song>
@@ -327,6 +348,9 @@
         </Song>
         <Song ID="-2129661997" Name="Brown eyed girl">
             <Performance ID="-1893591430" />
+        </Song>
+        <Song ID="257212939" Name="Burning Love">
+            <Performance ID="-1862712331" />
         </Song>
         <Song ID="1083524302" Name="Busted">
             <Performance ID="-156313673" />
@@ -645,6 +669,9 @@
         <Song ID="1974458270" Name="I Touch Myself">
             <Performance ID="1957098501" />
         </Song>
+        <Song ID="508841460" Name="I Wanna Dance With Somebody">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-472499682" Name="I Want It All">
             <Performance ID="-1419315577" />
             <Performance ID="773092779" />
@@ -727,6 +754,9 @@
         </Song>
         <Song ID="-1070487912" Name="Is This Love">
             <Performance ID="-1893591430" />
+        </Song>
+        <Song ID="-1969000667" Name="It&apos;s Raining Men">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="1508606412" Name="Jailbreak">
             <Performance ID="325567451" />
@@ -893,11 +923,17 @@
         <Song ID="-529586836" Name="Mr Jones">
             <Performance ID="-1893591430" />
         </Song>
+        <Song ID="-1068805014" Name="Murder On The Dance Floor">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="1191735498" Name="Music">
             <Performance ID="-1777169755" />
         </Song>
         <Song ID="740917624" Name="My Sharona">
             <Performance ID="538273237" />
+        </Song>
+        <Song ID="535976933" Name="Never Gonna Give You Up">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="1274345564" Name="Never can say goodbye">
             <Performance ID="-1497732245" />
@@ -1124,6 +1160,9 @@
         <Song ID="737328479" Name="Stand By Me">
             <Performance ID="1957098501" />
         </Song>
+        <Song ID="-1878073851" Name="Straight Road Love">
+            <Performance ID="-1893591431" />
+        </Song>
         <Song ID="330877181" Name="Stuck In The Middle">
             <Performance ID="1270865452" />
         </Song>
@@ -1239,6 +1278,9 @@
         <Song ID="-1935234702" Name="Torn">
             <Performance ID="1969668934" />
         </Song>
+        <Song ID="-2018337595" Name="Tradegy">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="-1486070317" Name="Treat Her Right">
             <Performance ID="-335610154" />
         </Song>
@@ -1270,6 +1312,9 @@
         </Song>
         <Song ID="110743061" Name="Viva La Viva">
             <Performance ID="374554924" />
+        </Song>
+        <Song ID="-589323817" Name="Vogue">
+            <Performance ID="325567451" />
         </Song>
         <Song ID="-873508301" Name="Voulez-Vous">
             <Performance ID="-1211865371" />
@@ -1350,6 +1395,9 @@
             <Performance ID="-2067679946" />
             <Performance ID="3700740" />
         </Song>
+        <Song ID="-1234003492" Name="Why not (You only live once)">
+            <Performance ID="325567451" />
+        </Song>
         <Song ID="1696861196" Name="With Or Without You">
             <Performance ID="220236421" />
         </Song>
@@ -1369,6 +1417,9 @@
         </Song>
         <Song ID="-61719265" Name="Xanadu">
             <Performance ID="1988043787" />
+        </Song>
+        <Song ID="629533136" Name="Xtra Xtra (Read all about it)">
+            <Performance ID="522842224" />
         </Song>
         <Song ID="-597183157" Name="YMCA">
             <Performance ID="1211815352" />
@@ -2875,8 +2926,8 @@
             <Zone DeviceID="-789407354" Program="10" Volume="-3"></Zone>
         </Performance>
         <Performance ID="1988043787" Name="Xanadu|">
-            <Zone DeviceID="627145948" Program="4" NoteMode="4" Transpose="-12" LowKey="60"></Zone>
-            <Zone DeviceID="-2048222835" Program="0" Volume="-9" NoteMode="1" Transpose="24" HighKey="59"></Zone>
+            <Zone DeviceID="627145948" Program="4" NoteMode="4" Transpose="-15" LowKey="60"></Zone>
+            <Zone DeviceID="-2048222835" Program="0" Volume="-9" NoteMode="1" Transpose="21" HighKey="59"></Zone>
         </Performance>
         <Performance ID="1211815352" Name="YMCA|">
             <Zone DeviceID="-2048222836" Program="2" NoteMode="4" Transpose="11" LowKey="60"></Zone>

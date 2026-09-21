@@ -260,27 +260,6 @@ void RackRow::paint (juce::Graphics& g)
     //[/UserPaint]
 }
 
-void RackRow::paintOverChildren (juce::Graphics& g)
-{
-    DrawStateIndicators (g);
-
-    if (m_current && m_keyboard->isVisible())
-    {
-        g.setColour (Colour (0xffe67e22));
-        for (auto& keyMidiFile : m_current->KeyMidiFiles)
-        {
-            auto keyRect = m_keyboard->getRectangleForKey (keyMidiFile.Note);
-            keyRect.translate ((float) m_keyboard->getX(), (float) m_keyboard->getY());
-
-            if (! keyRect.isEmpty())
-            {
-                auto dot = keyRect.withSizeKeepingCentre (4.0f, 4.0f).withY (keyRect.getBottom() - 6.0f);
-                g.fillEllipse (dot);
-            }
-        }
-    }
-}
-
 void RackRow::resized()
 {
     //[UserPreResize] Add your own custom resize code here..
@@ -557,9 +536,6 @@ void RackRow::mouseDown (const juce::MouseEvent& e)
 
 void RackRow::mouseDrag (const juce::MouseEvent& e)
 {
-    if (e.mods.isRightButtonDown())
-        return;
-
     //[UserCode_mouseDrag] -- Add your code here...
     if (e.eventComponent == m_keyboard.get())
     {
