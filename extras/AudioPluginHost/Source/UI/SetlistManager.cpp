@@ -859,6 +859,158 @@ void SetlistManager::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 
+namespace
+{
+	template <typename T>
+	bool MoveItem (std::vector<T>& items, int from, int to)
+	{
+		if (from < 0 || from >= (int) items.size())
+			return false;
+
+		to = juce::jlimit (0, (int) items.size(), to);
+
+		if (to == from || to == from + 1)
+			return false;
+
+		auto value = std::move (items[(size_t) from]);
+		items.erase (items.begin() + from);
+
+		if (to > from)
+			--to;
+
+		items.insert (items.begin() + to, std::move (value));
+		return true;
+	}
+
+	int DraggedRow (const var& description, const String& prefix)
+	{
+		auto text = description.toString();
+		if (! text.startsWith (prefix))
+			return -1;
+
+		return text.fromFirstOccurrenceOf (prefix, false, false).getIntValue();
+	}
+}
+
+void SetlistManager::paintOverChildren (juce::Graphics& g)
+{
+	if (m_dropList == nullptr || m_dropInsertionIndex < 0)
+		return;
+
+	auto row = m_dropList->getRowPosition (m_dropInsertionIndex, true);
+	auto y = jlimit (m_dropList->getY(), m_dropList->getBottom(), m_dropList->getY() + row.getY());
+
+	g.setColour (Colours::white);
+	g.fillRect (m_dropList->getX() + 4, y - 1, m_dropList->getWidth() - 8, 2);
+}
+
+bool SetlistManager::isInterestedInDragSource (const DragAndDropTarget::SourceDetails& dragSourceDetails)
+{
+	if (dragSourceDetails.sourceComponent == m_setlist.get())
+		return DraggedRow (dragSourceDetails.description, "setlist-song:") >= 0;
+
+	if (dragSourceDetails.sourceComponent == m_performancesInSongList.get())
+		return DraggedRow (dragSourceDetails.description, "song-performance:") >= 0;
+
+	return false;
+}
+
+void SetlistManager::itemDragMove (const DragAndDropTarget::SourceDetails& dragSourceDetails)
+{
+	UpdateDropIndicator (dragSourceDetails);
+}
+
+void SetlistManager::itemDragExit (const DragAndDropTarget::SourceDetails&)
+{
+	ClearDropIndicator();
+}
+
+void SetlistManager::itemDropped (const DragAndDropTarget::SourceDetails& dragSourceDetails)
+{
+	ClearDropIndicator();
+
+	if (dragSourceDetails.sourceComponent == m_setlist.get())
+	{
+		if (m_setlistListModel->m_selectedSetlist == nullptr)
+			return;
+
+		auto pos = m_setlist->getLocalPoint (this, dragSourceDetails.localPosition);
+		if (! m_setlist->getLocalBounds().contains (pos))
+			return;
+
+		auto& songs = m_setlistListModel->m_selectedSetlist->Song;
+		auto& songPtrs = m_setlistListModel->m_selectedSetlist->SongPtr;
+		auto from = DraggedRow (dragSourceDetails.description, "setlist-song:");
+		auto to = m_setlist->getInsertionIndexForPosition (pos.x, pos.y);
+
+		if (songs.size() != songPtrs.size() || ! MoveItem (songs, from, to))
+			return;
+
+		MoveItem (songPtrs, from, to);
+		m_setlist->updateContent();
+		m_setlist->selectRow (to > from ? to - 1 : to);
+		return;
+	}
+
+	if (dragSourceDetails.sourceComponent != m_performancesInSongList.get()
+		|| m_selectedSongListModel->m_selectedSong == nullptr)
+		return;
+
+	auto pos = m_performancesInSongList->getLocalPoint (this, dragSourceDetails.localPosition);
+	if (! m_performancesInSongList->getLocalBounds().contains (pos))
+		return;
+
+	auto& performances = m_selectedSongListModel->m_selectedSong->Performance;
+	auto& performancePtrs = m_selectedSongListModel->m_selectedSong->PerformancePtr;
+	auto from = DraggedRow (dragSourceDetails.description, "song-performance:");
+	auto to = m_performancesInSongList->getInsertionIndexForPosition (pos.x, pos.y);
+
+	if (performances.size() != performancePtrs.size() || ! MoveItem (performances, from, to))
+		return;
+
+	MoveItem (performancePtrs, from, to);
+	m_performancesInSongList->updateContent();
+	m_performancesInSongList->selectRow (to > from ? to - 1 : to);
+}
+
+void SetlistManager::UpdateDropIndicator (const DragAndDropTarget::SourceDetails& dragSourceDetails)
+{
+	ListBox* list = nullptr;
+
+	if (dragSourceDetails.sourceComponent == m_setlist.get())
+		list = m_setlist.get();
+	else if (dragSourceDetails.sourceComponent == m_performancesInSongList.get())
+		list = m_performancesInSongList.get();
+
+	auto index = -1;
+
+	if (list != nullptr)
+	{
+		auto pos = list->getLocalPoint (this, dragSourceDetails.localPosition);
+		if (list->getLocalBounds().contains (pos))
+			index = list->getInsertionIndexForPosition (pos.x, pos.y);
+	}
+
+	auto* nextList = index >= 0 ? list : nullptr;
+
+	if (nextList != m_dropList || index != m_dropInsertionIndex)
+	{
+		m_dropList = nextList;
+		m_dropInsertionIndex = index;
+		repaint();
+	}
+}
+
+void SetlistManager::ClearDropIndicator()
+{
+	if (m_dropList == nullptr && m_dropInsertionIndex < 0)
+		return;
+
+	m_dropList = nullptr;
+	m_dropInsertionIndex = -1;
+	repaint();
+}
+
 void SetlistManager::SortSongs()
 {
 	auto &list = m_performer->Root.Songs.Song;

@@ -40,6 +40,16 @@ public:
 		m_onSelectedChanged();
 	}
 
+	var getDragSourceDescription (const SparseSet<int>& rowsToDescribe) override
+	{
+		if (rowsToDescribe.size() != 1 || m_selectedSong == nullptr)
+			return {};
+
+		return "song-performance:" + String (rowsToDescribe[0]);
+	}
+
+	bool mayDragToExternalWindows() const override { return false; }
+
 	void paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) override
 	{
 		auto list = m_selectedSong->PerformancePtr;
@@ -138,6 +148,16 @@ public:
 		m_onSelectedChanged();
 	}
 
+	var getDragSourceDescription (const SparseSet<int>& rowsToDescribe) override
+	{
+		if (rowsToDescribe.size() != 1 || m_selectedSetlist == nullptr)
+			return {};
+
+		return "setlist-song:" + String (rowsToDescribe[0]);
+	}
+
+	bool mayDragToExternalWindows() const override { return false; }
+
 	void paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) override
 	{
 		auto list = m_selectedSetlist->SongPtr;
@@ -167,7 +187,8 @@ public:
 */
 class SetlistManager  : public Component,
                         public juce::Button::Listener,
-                        public juce::ComboBox::Listener
+                        public juce::ComboBox::Listener,
+                        public juce::DragAndDropTarget
 {
 public:
     //==============================================================================
@@ -180,6 +201,12 @@ public:
 	Performer *m_performer = nullptr;
 	std::function<void(int,PerformanceType *)> m_onUsePerformance;
 	virtual void visibilityChanged();
+
+	void paintOverChildren (juce::Graphics& g) override;
+	bool isInterestedInDragSource (const DragAndDropTarget::SourceDetails& dragSourceDetails) override;
+	void itemDragMove (const DragAndDropTarget::SourceDetails& dragSourceDetails) override;
+	void itemDragExit (const DragAndDropTarget::SourceDetails& dragSourceDetails) override;
+	void itemDropped (const DragAndDropTarget::SourceDetails& dragSourceDetails) override;
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -200,6 +227,10 @@ private:
 	void Rename(std::string &str);
 	void SortSongs();
 	void SortPerformances();
+	void UpdateDropIndicator (const DragAndDropTarget::SourceDetails& dragSourceDetails);
+	void ClearDropIndicator();
+	int m_dropInsertionIndex = -1;
+	ListBox* m_dropList = nullptr;
     //[/UserVariables]
 
     //==============================================================================
